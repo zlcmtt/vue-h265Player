@@ -10,7 +10,7 @@ pnpm install zlcmtt/vue-h265Player
 ```
 
 ```sh
-import myVideo from "vue-h265Player";
+import myVideo from "video-player";
 ```
 
 ```sh
