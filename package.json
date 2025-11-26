@@ -1,0 +1,14 @@
+{
+  "name": "video-player",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "",
+  "description": "",
+  "main": "./dist/my-video-player.umd.js",
+  "module": "./dist/my-video-player.es.js",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  }
+}
