@@ -1,11 +1,11 @@
 import './main.css';
-import { ref as zt, onBeforeUnmount as ol, onMounted as xn, createElementBlock as Cn, openBlock as Ts, createElementVNode as kn, nextTick as ll, onUnmounted as hl, createBlock as dl, resolveDynamicComponent as ul, unref as cl } from "vue";
-const ks = (Ae, Qe) => {
-  const Ge = Ae.__vccOpts || Ae;
-  for (const [ve, Ie] of Qe)
-    Ge[ve] = Ie;
-  return Ge;
-}, Ss = "http://127.0.0.1:8080", Es = "aOacmzbW3VEqKeJB3nOsRyEPX6WppTvV", pl = {
+import { ref as zt, onBeforeUnmount as nl, onMounted as ol, createElementBlock as xn, openBlock as Ts, createElementVNode as kn, nextTick as ll, onBeforeMount as hl, onUnmounted as dl, createBlock as ul, resolveDynamicComponent as cl, unref as pl } from "vue";
+const ks = (Ae, Xe) => {
+  const Ve = Ae.__vccOpts || Ae;
+  for (const [_e, xe] of Xe)
+    Ve[_e] = xe;
+  return Ve;
+}, Ss = "http://127.0.0.1:8080", Es = "aOacmzbW3VEqKeJB3nOsRyEPX6WppTvV", fl = {
   __name: "jessibucaPlayer",
   props: {
     data: {
@@ -28,22 +28,22 @@ const ks = (Ae, Qe) => {
     isRoundPlay: Boolean,
     showAudioBtn: Boolean
   },
-  setup(Ae, { expose: Qe, emit: Ge }) {
-    const ve = Ae, Ie = zt(null), Rt = zt(null), pe = zt(null), Xe = zt(!1), Gt = zt(!1), _t = zt(!1), It = Ge, wt = zt(0), Ht = async () => {
+  setup(Ae, { expose: Xe, emit: Ve }) {
+    const _e = Ae, xe = zt(null), bt = zt(null), ce = zt(null), ze = zt(!1), Gt = zt(!1), wt = zt(!1), It = Ve, St = zt(0), Ht = async () => {
       try {
         await ll();
         let Ue = "";
-        (ve.isRoundPlay || ve.streamType == "1") && (Ue = ve.data?.img), pe.value = new JessibucaPro({
-          hasAudio: ve.showAudioBtn,
-          container: Ie.value,
+        (_e.isRoundPlay || _e.streamType == "1") && (Ue = _e.data?.img), ce.value = new JessibucaPro({
+          hasAudio: _e.showAudioBtn,
+          container: xe.value,
           decoder: "../../assets/js/jessibucaPlayer/decoder-pro.js",
           decoderAudio: "../../assets/js/jessibucaPlayer/decoder-pro-audio.js",
           videoBuffer: 2,
           // 缓存时长
           videoBufferDelay: 2,
           // 1000s
-          isResize: ve?.data?.isResize || !1,
-          isFlv: ve.data.url.indexOf("rtsp://") !== -1,
+          isResize: _e?.data?.isResize || !1,
+          isFlv: _e.data.url.indexOf("rtsp://") !== -1,
           text: "",
           loadingText: "",
           loadingIcon: !1,
@@ -58,7 +58,7 @@ const ks = (Ae, Qe) => {
           // 显示网速
           showPerformance: !1,
           // 显示性能
-          showPlaybackOperate: ve.streamType == "1",
+          showPlaybackOperate: _e.streamType == "1",
           operateBtns: {
             fullscreen: !0,
             screenshot: !0,
@@ -87,57 +87,57 @@ const ks = (Ae, Qe) => {
           forceNoOffscreen: !0,
           isNotMute: !1,
           supportHls265: !0
-        }), console.log(pe.value, " videoInstance.value"), pe.value.on("play", function() {
-          console.log("开始播放 play"), _t.value = !0, ve.data.isError = !1, ve.parentEmits("play");
-        }), pe.value.on("load", function() {
-          console.log("加载完成"), Xe.value = !0;
-        }), pe.value.on("error", (Se) => {
-          console.log("播放错误 error", Se), Gt.value = !0, ve.parentEmits("disconnect"), It("setStreams", {
-            ...ve.data,
-            img: ve.data?.img,
+        }), console.log(ce.value, " videoInstance.value"), ce.value.on("play", function() {
+          console.log("开始播放 play"), wt.value = !0, _e.data.isError = !1, _e.parentEmits("play");
+        }), ce.value.on("load", function() {
+          console.log("加载完成"), ze.value = !0;
+        }), ce.value.on("error", (Se) => {
+          console.log("播放错误 error", Se), Gt.value = !0, _e.parentEmits("disconnect"), It("setStreams", {
+            ..._e.data,
+            img: _e.data?.img,
             status: "error",
-            videoIndex: ve.videoIndex
-          }), ve.parentEmits("statusChange", {
+            videoIndex: _e.videoIndex
+          }), _e.parentEmits("statusChange", {
             status: "error",
-            videoIndex: ve.videoIndex,
-            img: ve.data?.img,
-            data: ve.data
-          }), Se === "fetchError" && !ve.data?.isError && ve.streamType == "0" && It("refreshItem", {
-            device: { ...ve.data, isError: !0 },
-            videoIndex: ve.videoIndex
+            videoIndex: _e.videoIndex,
+            img: _e.data?.img,
+            data: _e.data
+          }), Se === "fetchError" && !_e.data?.isError && _e.streamType == "0" && It("refreshItem", {
+            device: { ..._e.data, isError: !0 },
+            videoIndex: _e.videoIndex
           });
-        }), pe.value.on("websocketClose", function() {
-          console.log("websocketClose"), wt.value <= 3 && (wt.value += 1, St(ve.data.url, rt.stream, {
-            enable_audio: ve.showAudioBtn ? 1 : 0
+        }), ce.value.on("websocketClose", function() {
+          console.log("websocketClose"), St.value <= 3 && (St.value += 1, Et(_e.data.url, rt.stream, {
+            enable_audio: _e.showAudioBtn ? 1 : 0
           }));
         });
       } catch (Ue) {
         console.log(Ue, "err");
       }
-    }, St = async (Ue) => {
-      pe.value.play(Ue);
+    }, Et = async (Ue) => {
+      ce.value.play(Ue);
     };
     let rt = {};
-    const Et = () => {
-      pe.value && pe.value.destroy();
-    }, bt = zt(null), Tt = (Ue) => {
+    const Tt = () => {
+      ce.value && ce.value.destroy();
+    }, vt = zt(null), kt = (Ue) => {
       let Se = "";
-      if (!_t.value) {
+      if (!wt.value) {
         alert("视频暂无画面，请稍后截图");
         return;
       }
-      if (Ue && pe.value.screenshot(), bt.value.querySelector("video")) {
-        const Q = document.createElement("canvas"), N = bt.value.querySelector("video");
+      if (Ue && ce.value.screenshot(), vt.value.querySelector("video")) {
+        const Q = document.createElement("canvas"), N = vt.value.querySelector("video");
         Q.width = N.clientWidth, Q.height = N.clientHeight;
         var Y = Q.getContext("2d");
         Y.drawImage(N, 0, 0, Q.width, Q.height), Se = Q.toDataURL("image/png", 1);
-      } else bt.value.querySelector("canvas") && (Se = bt.value.querySelector("canvas").toDataURL("image/png", 1));
+      } else vt.value.querySelector("canvas") && (Se = vt.value.querySelector("canvas").toDataURL("image/png", 1));
       return Se;
-    }, Pt = () => (console.log(pe.value, "jessibuca实例start"), !pe.value || !pe.value.isPlaying() ? (alert("视频未开始播放，请稍后录制"), !1) : (pe.value.startRecord(), !0)), kt = (Ue) => {
-      console.log(pe.value, "jessibuca实例close"), pe.value && pe.value.isRecording() && (Ue ? pe.value.stopRecordAndSave() : (pe.value.player.emit("recordEnd"), pe.value.player.recorder._reset(), pe.value.player.emit("recording", !1)));
-    }, Vt = () => pe.value.isRecording();
-    ol(() => {
-      Et();
+    }, Pt = () => (console.log(ce.value, "jessibuca实例start"), !ce.value || !ce.value.isPlaying() ? (alert("视频未开始播放，请稍后录制"), !1) : (ce.value.startRecord(), !0)), xt = (Ue) => {
+      console.log(ce.value, "jessibuca实例close"), ce.value && ce.value.isRecording() && (Ue ? ce.value.stopRecordAndSave() : (ce.value.player.emit("recordEnd"), ce.value.player.recorder._reset(), ce.value.player.emit("recording", !1)));
+    }, Vt = () => ce.value.isRecording();
+    nl(() => {
+      Tt();
     });
     const Wt = (Ue, Se, Y) => {
       const Q = new URLSearchParams();
@@ -177,72 +177,72 @@ const ks = (Ae, Qe) => {
         });
       });
     };
-    return xn(async () => {
-      ve.data?.url && (await Ht(), ve.data.url.indexOf("rtsp://") !== -1 ? Wt(ve.data.url, (/* @__PURE__ */ new Date()).valueOf() + Math.random() * 100, {}).then(
+    return ol(async () => {
+      _e.data?.url && (await Ht(), _e.data.url.indexOf("rtsp://") !== -1 ? Wt(_e.data.url, (/* @__PURE__ */ new Date()).valueOf() + Math.random() * 100, {}).then(
         (Ue) => {
-          St(Ue);
+          Et(Ue);
         }
-      ) : St(ve.data?.url));
-    }), Qe({
-      screenShot: Tt,
+      ) : Et(_e.data?.url));
+    }), Xe({
+      screenShot: kt,
       startRecording: Pt,
       getRecording: Vt,
-      stopRecording: kt,
-      destroy: Et,
+      stopRecording: xt,
+      destroy: Tt,
       pause: () => {
-        pe.value.pause();
+        ce.value.pause();
       },
       pauseToPlay: () => {
-        pe.value.play();
+        ce.value.play();
       },
       cancelMute: () => {
-        pe.value.cancelMute();
+        ce.value.cancelMute();
         const Ue = { ...rt }.stream;
         rt = {
-          ...ve.data,
-          stream: (/* @__PURE__ */ new Date()).valueOf() + ve.data.deviceId
+          ..._e.data,
+          stream: (/* @__PURE__ */ new Date()).valueOf() + _e.data.deviceId
         }, Wt(rt.url, rt.stream, { enable_audio: 1 }).then(
           (Se) => {
             fetch(
               `${Ss}/index/api/delStreamProxy?secret=${Es}&key=__defaultVhost__/live/${Ue}`
-            ), pe.value.play(Se);
+            ), ce.value.play(Se);
           }
         );
       },
       mute: () => {
-        pe.value.mute();
+        ce.value.mute();
         const Ue = { ...rt }.stream;
         rt = {
-          ...ve.data,
-          stream: (/* @__PURE__ */ new Date()).valueOf() + ve.data.deviceId
+          ..._e.data,
+          stream: (/* @__PURE__ */ new Date()).valueOf() + _e.data.deviceId
         }, Wt(rt.url, rt.stream, { enable_audio: 0 }).then(
           (Se) => {
             fetch(
               `${Ss}/index/api/delStreamProxy?secret=${Es}&key=__defaultVhost__/live/${Ue}`
-            ), pe.value.play(Se);
+            ), ce.value.play(Se);
           }
         );
       }
-    }), (Ue, Se) => (Ts(), Cn("div", {
+    }), (Ue, Se) => (Ts(), xn("div", {
       class: "video-item",
       ref_key: "videoBox",
-      ref: Rt
+      ref: bt
     }, [
       kn("div", {
         ref_key: "videoWrapperRef",
-        ref: bt,
+        ref: vt,
         "element-loading-background": "rgba(122, 122, 122, 0)",
         class: "wrapper player-wrapper"
       }, [
         kn("div", {
           ref_key: "videoRef",
-          ref: Ie,
+          ref: xe,
           style: { width: "100%", height: "100%" }
         }, null, 512)
       ], 512)
     ], 512));
   }
-}, fl = /* @__PURE__ */ ks(pl, [["__scopeId", "data-v-acd97828"]]), ml = {
+}, ml = /* @__PURE__ */ ks(fl, [["__scopeId", "data-v-acd97828"]]), gl = {
   __name: "h265",
   props: {
     data: {
@@ -250,35 +250,45 @@ const ks = (Ae, Qe) => {
     }
   },
   setup(Ae) {
-    const Qe = Ae, Ge = zt(null);
-    let ve;
-    return xn(() => {
-      ve = new libde265.RawPlayer(Ge.value), ve.playback(Qe.data.url);
-    }), hl(() => {
-      ve && ve.stop();
-    }), (Ie, Rt) => (Ts(), Cn("canvas", {
+    function Xe(bt) {
+      return new Promise((ce) => {
+        const ze = document.createElement("script");
+        ze.type = "text/javascript", ze.src = bt, document.body.appendChild(ze), ze.addEventListener("load", () => {
+          ce();
+        });
+      });
+    }
+    const Ve = Ae, _e = zt(null);
+    let xe;
+    return hl(() => {
+      Xe("./libde265.min.js").then(() => {
+        xe = new libde265.RawPlayer(_e.value), xe.playback(Ve.data.url);
+      });
+    }), dl(() => {
+      xe && xe.stop();
+    }), (bt, ce) => (Ts(), xn("canvas", {
       ref_key: "videoRef",
-      ref: Ge
+      ref: _e
     }, null, 512));
   }
-}, gl = /* @__PURE__ */ ks(ml, [["__scopeId", "data-v-74e4a689"]]), yl = {
+}, yl = /* @__PURE__ */ ks(gl, [["__scopeId", "data-v-3dd1829b"]]), Al = {
   __name: "videoPlayer",
   props: {
     data: {
       type: Object,
       default: {
-        url: "https://ehome-dl.ctseelink.cn/oos/fileDownload?appKey=deviceCloud&timeStamp=1764120418541&version=v1.0&format=json&cid=2199&paras=7D82F1D4B015631E51CD14CCBCCFC8189CF49DA632A466CC7420FFE69EDFBA8B3C1D0EA4DC3A35395CAF2EDD5098E1C48503A7705E666A6A000B5293C43DFEF36FE9D9D4DA73A4014AFDA4C82404E91F845FEE021B77ABBBFCD617CEE41D7EB2E54A125757BCDCA22AED4BA14B6BCE32A788BBAB2E3FCC0E96508F54CF534F084C04FFCF887EAF329F5EB90B&appSignature=t5bbDxwx9Cr0JWBx2lbYtNNF0xs="
+        url: "https://ehome-dl.ctseelink.cn/oos/fileDownload?appKey=deviceCloud&timeStamp=1764137891224&version=v1.0&format=json&cid=2205&paras=38089BEB2B32B4C271D00431D1832243F0CCFB043C1F441B55A235D7305532F9D854CFEBF5D98F7353665ED5EC46845FCF3EE812E630F5C35C0B99AB8D8283B6BC2F97FFCABF81D1C03E3AD6D61B1C641B8CDF8AE898A34EEAF4E107110D2AE0B12B1C4ADFEE7F789208539D21878E3AE697CF6D657E121C33ACA9E55776AB2EEF347C718DE9726CED586116&appSignature=+mFfTg0ztS3jGZxYac+NSZgggwU="
       }
     }
   },
   setup(Ae) {
-    const Qe = Ae, Ge = Qe.data.url.indexOf(".flv") !== -1 || Qe.data.url.indexOf("rtsp://") !== -1 ? fl : gl;
-    return (ve, Ie) => (Ts(), dl(ul(cl(Ge)), {
-      data: Qe.data,
+    const Xe = Ae, Ve = Xe.data.url.indexOf(".flv") !== -1 || Xe.data.url.indexOf("rtsp://") !== -1 ? ml : yl;
+    return (_e, xe) => (Ts(), ul(cl(pl(Ve)), {
+      data: Xe.data,
       class: "videoPlayer"
     }, null, 8, ["data"]));
   }
-}, Al = /* @__PURE__ */ ks(yl, [["__scopeId", "data-v-e3943240"]]);
+}, bl = /* @__PURE__ */ ks(Al, [["__scopeId", "data-v-5f6ecb32"]]);
 (function(Ae) {
   typeof define == "function" && define.amd ? define(Ae) : Ae();
 })(function() {
@@ -313,16 +323,16 @@ const ks = (Ae, Qe) => {
       }), delete this.e;
     }
   }
-  const Qe = "fetch", Ge = "websocket", ve = "worker", Ie = "player", Rt = "playerAudio", pe = "playbackTF", Xe = "mp4", Gt = "webm", _t = "flv", It = "webTransport", wt = "nakedFlow", Ht = "fmp4", St = "mpeg4", rt = { flv: "FLV", m7s: "m7s", hls: "HLS", fmp4: "FMP4", mpeg4: "MPEG4", webrtc: "Webrtc", webTransport: "WebTransport", nakedFlow: "裸流" }, Et = "canvas", bt = "video", Tt = "debug", Pt = "warn", kt = "click", Vt = "mouseDownAndUp", Wt = { url: "", playbackConfig: {}, fullscreenWatermarkConfig: {}, playType: Ie, playbackForwardMaxRateDecodeIFrame: 4, playOptions: {}, isLive: !0, isMulti: !1, isCrypto: !1 }, ui = { playType: Ie, container: "", videoBuffer: 1e3, videoBufferDelay: 1e3, networkDelay: 1e4, isResize: !0, isFullResize: !1, isFlv: !1, isHls: !1, isFmp4: !1, isWebrtc: !1, isWebrtcForZLM: !1, isNakedFlow: !1, isMpeg4: !1, debug: !1, debugLevel: Pt, debugUuid: "", isMulti: !1, hotKey: !1, loadingTimeout: 10, heartTimeout: 10, timeout: 10, pageVisibilityHiddenTimeout: 300, loadingTimeoutReplay: !0, heartTimeoutReplay: !0, loadingTimeoutReplayTimes: 3, heartTimeoutReplayTimes: 3, heartTimeoutReplayUseLastFrameShow: !1, replayUseLastFrameShow: !1, supportDblclickFullscreen: !1, showBandwidth: !1, showPerformance: !1, mseCorrectTimeDuration: 20, keepScreenOn: !0, isNotMute: !1, hasAudio: !0, hasVideo: !0, operateBtns: { fullscreen: !1, screenshot: !1, play: !1, audio: !1, record: !1, ptz: !1, quality: !1, zoom: !1, close: !1, scale: !1, performance: !1, aiFace: !1, aiObject: !1, fullscreenFn: null, fullscreenExitFn: null, screenshotFn: null, playFn: null, pauseFn: null, recordFn: null, recordStopFn: null }, extendOperateBtns: [], contextmenuBtns: [], watermarkConfig: {}, controlAutoHide: !1, hasControl: !1, loadingIcon: !0, loadingText: "", background: "", backgroundLoadingShow: !1, loadingBackground: "", decoder: "decoder-pro.js", decoderAudio: "decoder-pro-audio.js", decoderWASM: "", isDecoderUseCDN: !1, url: "", rotate: 0, mirrorRotate: "none", playbackConfig: { playList: [], fps: "", showControl: !0, showRateBtn: !1, rateConfig: [], isCacheBeforeDecodeForFpsRender: !1, uiUsePlaybackPause: !1, isPlaybackPauseClearCache: !0, isUseFpsRender: !1, isUseLocalCalculateTime: !1, localOneFrameTimestamp: 40, supportWheel: !1 }, qualityConfig: [], defaultStreamQuality: "", scaleConfig: ["拉伸", "缩放", "正常"], forceNoOffscreen: !0, hiddenAutoPause: !1, protocol: 2, demuxType: _t, useWasm: !1, useWCS: !1, useSIMD: !0, wcsUseVideoRender: !0, wasmUseVideoRender: !0, mseUseCanvasRender: !1, hlsUseCanvasRender: !1, useMSE: !1, useOffscreen: !1, useWebGPU: !1, mseDecodeErrorReplay: !0, wcsDecodeErrorReplay: !0, wasmDecodeErrorReplay: !0, autoWasm: !0, webglAlignmentErrorReplay: !0, webglContextLostErrorReplay: !0, openWebglAlignment: !1, syncAudioAndVideo: !1, playbackDelayTime: 1e3, playbackFps: 25, playbackForwardMaxRateDecodeIFrame: 4, playbackCurrentTimeMove: !0, useVideoRender: !0, useCanvasRender: !1, networkDelayTimeoutReplay: !1, recordType: Xe, checkFirstIFrame: !0, nakedFlowFps: 25, audioEngine: null, isShowRecordingUI: !0, isShowZoomingUI: !0, useFaceDetector: !1, useObjectDetector: !1, ptzClickType: kt, ptzStopEmitDelay: 0.3, ptzZoomShow: !1, ptzApertureShow: !1, ptzFocusShow: !1, ptzMoreArrowShow: !1, weiXinInAndroidAudioBufferSize: 4800, isCrypto: !1, cryptoKey: "", cryptoIV: "", cryptoKeyUrl: "", autoResize: !1, useWebFullScreen: !1, ptsMaxDiff: 3600, aiFaceDetectWidth: 192, aiObjectDetectWidth: 192, videoRenderSupportScale: !0, mediaSourceTsIsMaxDiffReplay: !0, controlHtml: "", isH265: !1, supportLockScreenPlayAudio: !0, supportHls265: !0, isFmp4Private: !1 }, Zt = "init", ci = "initVideo", pi = "initAudio", Ue = "audioCode", Se = "videoCode", Y = "videoCodec", Q = "closeEnd", N = { fullscreen: "fullscreen$2", webFullscreen: "webFullscreen", decoderWorkerInit: "decoderWorkerInit", play: "play", playing: "playing", pause: "pause", mute: "mute", load: "load", loading: "loading", zooming: "zooming", videoInfo: "videoInfo", timeUpdate: "timeUpdate", audioInfo: "audioInfo", log: "log", error: "error", kBps: "kBps", timeout: "timeout", delayTimeout: "delayTimeout", delayTimeoutRetryEnd: "delayTimeoutRetryEnd", loadingTimeout: "loadingTimeout", loadingTimeoutRetryEnd: "loadingTimeoutRetryEnd", stats: "stats", performance: "performance", faceDetectActive: "faceDetectActive", objectDetectActive: "objectDetectActive", record: "record", recording: "recording", recordingTimestamp: "recordingTimestamp", recordStart: "recordStart", recordEnd: "recordEnd", recordCreateError: "recordCreateError", recordBlob: "recordBlob", buffer: "buffer", videoFrame: "videoFrame", start: "start", metadata: "metadata", resize: "resize", volumechange: "volumechange", destroy: "destroy", beforeDestroy: "beforeDestroy", streamEnd: "streamEnd", streamRate: "streamRate", streamAbps: "streamAbps", streamVbps: "streamVbps", streamDts: "streamDts", streamSuccess: "streamSuccess", streamMessage: "streamMessage", streamError: "streamError", streamStats: "streamStats", mseSourceOpen: "mseSourceOpen", mseSourceClose: "mseSourceClose", mseSourceended: "mseSourceended", mseSourceBufferError: "mseSourceBufferError", mseAddSourceBufferError: "mseAddSourceBufferError", mseSourceBufferBusy: "mseSourceBufferBusy", mseSourceBufferFull: "mseSourceBufferFull", videoWaiting: "videoWaiting", videoTimeUpdate: "videoTimeUpdate", videoSyncAudio: "videoSyncAudio", playToRenderTimes: "playToRenderTimes", playbackTime: "playbackTime", playbackTimestamp: "playbackTimestamp", playbackPrecision: "playbackPrecision", playbackJustTime: "playbackJustTime", playbackStats: "playbackStats", playbackSeek: "playbackSeek", playbackPause: "playbackPause", playbackPauseOrResume: "playbackPauseOrResume", playbackRateChange: "playbackRateChange", playbackPreRateChange: "playbackPreRateChange", ptz: "ptz", streamQualityChange: "streamQualityChange", visibilityChange: "visibilityChange", netBuf: "netBuf", close: "close", networkDelayTimeout: "networkDelayTimeout", togglePerformancePanel: "togglePerformancePanel", viewResizeChange: "viewResizeChange", flvDemuxBufferSizeTooLarge: "flvDemuxBufferSizeTooLarge", talkGetUserMediaSuccess: "talkGetUserMediaSuccess", talkGetUserMediaFail: "talkGetUserMediaFail", talkGetUserMediaTimeout: "talkGetUserMediaTimeout", talkStreamStart: "talkStreamStart", talkStreamOpen: "talkStreamOpen", talkStreamClose: "talkStreamClose", talkStreamError: "talkStreamError", talkStreamInactive: "talkStreamInactive", webrtcDisconnect: "webrtcDisconnect", webrtcFailed: "webrtcFailed", webrtcClosed: "webrtcClosed", crashLog: "crashLog", focus: "focus", blur: "blur", visibilityHiddenTimeout: "visibilityHiddenTimeout", websocketOpen: "websocketOpen", websocketClose: "websocketClose", websocketError: "websocketError", websocketMessage: "websocketMessage", aiObjectDetectorInfo: "aiObjectDetectorInfo", aiFaceDetector: "aiFaceDetector", playFailedAndPaused: "playFailedAndPaused", audioResumeState: "audioResumeState" }, ae = { load: N.load, timeUpdate: N.timeUpdate, videoInfo: N.videoInfo, audioInfo: N.audioInfo, error: N.error, kBps: N.kBps, start: N.start, timeout: N.timeout, loadingTimeout: N.loadingTimeout, loadingTimeoutRetryEnd: N.loadingTimeoutRetryEnd, delayTimeout: N.delayTimeout, delayTimeoutRetryEnd: N.delayTimeoutRetryEnd, fullscreen: "fullscreen", webFullscreen: N.webFullscreen, play: N.play, pause: N.pause, mute: N.mute, stats: N.stats, performance: N.performance, recordingTimestamp: N.recordingTimestamp, recordStart: N.recordStart, recordEnd: N.recordEnd, recordBlob: N.recordBlob, playToRenderTimes: N.playToRenderTimes, playbackSeek: N.playbackSeek, playbackStats: N.playbackStats, playbackTimestamp: N.playbackTimestamp, playbackPauseOrResume: N.playbackPauseOrResume, playbackPreRateChange: N.playbackPreRateChange, playbackRateChange: N.playbackRateChange, ptz: N.ptz, streamQualityChange: N.streamQualityChange, zooming: N.zooming, crashLog: N.crashLog, focus: N.focus, blur: N.blur, visibilityHiddenTimeout: N.visibilityHiddenTimeout, visibilityChange: N.visibilityChange, websocketOpen: N.websocketOpen, websocketClose: N.websocketClose, networkDelayTimeout: N.networkDelayTimeout, aiObjectDetectorInfo: N.aiObjectDetectorInfo, playFailedAndPaused: N.playFailedAndPaused, audioResumeState: N.audioResumeState }, oe = { talkStreamClose: N.talkStreamClose, talkStreamError: N.talkStreamError, talkStreamInactive: N.talkStreamInactive, talkGetUserMediaTimeout: N.talkGetUserMediaTimeout }, H = { playError: "playIsNotPauseOrUrlIsNull", fetchError: "fetchError", websocketError: "websocketError", webcodecsH265NotSupport: "webcodecsH265NotSupport", webcodecsDecodeError: "webcodecsDecodeError", webcodecsUnsupportedConfigurationError: "webcodecsUnsupportedConfigurationError", mediaSourceH265NotSupport: "mediaSourceH265NotSupport", mediaSourceDecoderConfigurationError: "mediaSourceDecoderConfigurationError", mediaSourceFull: N.mseSourceBufferFull, mseSourceBufferError: N.mseSourceBufferError, mseAddSourceBufferError: N.mseAddSourceBufferError, mediaSourceAppendBufferError: "mediaSourceAppendBufferError", mediaSourceBufferListLarge: "mediaSourceBufferListLarge", mediaSourceAppendBufferEndTimeout: "mediaSourceAppendBufferEndTimeout", mediaSourceTsIsMaxDiff: "mediaSourceTsIsMaxDiff", mediaSourceUseCanvasRenderPlayFailed: "mediaSourceUseCanvasRenderPlayFailed", wasmDecodeError: "wasmDecodeError", wasmUseVideoRenderError: "wasmUseVideoRenderError", hlsError: "hlsError", webrtcError: "webrtcError", webglAlignmentError: "webglAlignmentError", wasmWidthOrHeightChange: "wasmWidthOrHeightChange", mseWidthOrHeightChange: "mseWidthOrHeightChange", wcsWidthOrHeightChange: "wcsWidthOrHeightChange", tallWebsocketClosedByError: "tallWebsocketClosedByError", flvDemuxBufferSizeTooLarge: N.flvDemuxBufferSizeTooLarge, wasmDecodeVideoNoResponseError: "wasmDecodeVideoNoResponseError", audioChannelError: "audioChannelError", simdH264DecodeVideoWidthIsTooLarge: "simdH264DecodeVideoWidthIsTooLarge", webglContextLostError: "webglContextLostError" }, de = "notConnect", fe = "open", we = { download: "download", base64: "base64", blob: "blob" }, Te = "download", Pe = { 7: "H264(AVC)", 12: "H265(HEVC)", 99: "MPEG4" }, Fe = "H264(AVC)", qe = "H265(HEVC)", Ye = 10, Gi = { AAC: "AAC", ALAW: "ALAW(g711a)", MULAW: "MULAW(g711u)" }, xs = { 10: "AAC", 7: "ALAW", 8: "MULAW" }, Hi = 7, Vi = 8, Ln = 5, Dn = 6, Wi = 32, $i = 33, fi = 34, kr = "webcodecs", $t = "webgl", Kt = "webgpu", xr = "offscreen", Ki = "mse", Cs = 'video/mp4; codecs="avc1.64002A"', Ls = 'video/mp4; codecs="hev1.1.6.L123.b0"', qi = "oneHour", Ds = "halfHour", Rs = "tenMin", Yi = "fiveMin", mi = { oneHour: "one-hour", halfHour: "half-hour", tenMin: "ten-min", fiveMin: "five-min" }, gi = ["oneHour", "halfHour", "tenMin", "fiveMin"], Is = ["up", "right", "down", "left", "left-up", "right-up", "left-down", "right-down"], yi = "stop", ei = "fiStop", Ps = "zoomExpand", Bs = "zoomNarrow", Us = "apertureFar", Ms = "apertureNear", Fs = "focusFar", Os = "focusNear", Ji = "g711a", Cr = "g711u", xt = { png: "image/png", jpeg: "image/jpeg", webp: "image/webp" }, Ns = "canplay", js = "waiting", Qi = "timeupdate", zs = "ratechange", Rn = "hevc", Gs = "The user aborted a request", Hs = "AbortError", Vs = "AbortError", Xi = 0, In = 1, Ws = "worklet", Pn = { encType: Ji, packetType: "rtp", rtpSsrc: "0000000000", numberChannels: 1, sampleRate: 8e3, sampleBitsWidth: 16, debug: !1, debugLevel: Pt, testMicrophone: !1, audioBufferLength: 160, engine: Ws, checkGetUserMediaTimeout: !1, getUserMediaTimeout: 1e4 }, Ai = "worklet", ti = "script", Jt = "active", Bn = { name: "", index: 0, icon: "", iconHover: "", iconTitle: "", activeIcon: "", activeIconHover: "", activeIconTitle: "", click: null, activeClick: null }, Un = { content: "", click: null, index: 0 }, Mn = { container: "", maxSplit: 4, split: 1, supportDblclickContainerFullscreen: !0, style: { border: "#343434", borderSelect: "#FFCC00", background: "#000" } }, ii = { dblSelected: "multiDblSelected", selected: "multiSelected", mouseOver: "multiMouseover", mouseOut: "multiMouseout", mouseUp: "multiMouseup" }, ri = "3-1", si = "4-1", $s = "load-retry", Zi = "load-start";
+  const Xe = "fetch", Ve = "websocket", _e = "worker", xe = "player", bt = "playerAudio", ce = "playbackTF", ze = "mp4", Gt = "webm", wt = "flv", It = "webTransport", St = "nakedFlow", Ht = "fmp4", Et = "mpeg4", rt = { flv: "FLV", m7s: "m7s", hls: "HLS", fmp4: "FMP4", mpeg4: "MPEG4", webrtc: "Webrtc", webTransport: "WebTransport", nakedFlow: "裸流" }, Tt = "canvas", vt = "video", kt = "debug", Pt = "warn", xt = "click", Vt = "mouseDownAndUp", Wt = { url: "", playbackConfig: {}, fullscreenWatermarkConfig: {}, playType: xe, playbackForwardMaxRateDecodeIFrame: 4, playOptions: {}, isLive: !0, isMulti: !1, isCrypto: !1 }, ui = { playType: xe, container: "", videoBuffer: 1e3, videoBufferDelay: 1e3, networkDelay: 1e4, isResize: !0, isFullResize: !1, isFlv: !1, isHls: !1, isFmp4: !1, isWebrtc: !1, isWebrtcForZLM: !1, isNakedFlow: !1, isMpeg4: !1, debug: !1, debugLevel: Pt, debugUuid: "", isMulti: !1, hotKey: !1, loadingTimeout: 10, heartTimeout: 10, timeout: 10, pageVisibilityHiddenTimeout: 300, loadingTimeoutReplay: !0, heartTimeoutReplay: !0, loadingTimeoutReplayTimes: 3, heartTimeoutReplayTimes: 3, heartTimeoutReplayUseLastFrameShow: !1, replayUseLastFrameShow: !1, supportDblclickFullscreen: !1, showBandwidth: !1, showPerformance: !1, mseCorrectTimeDuration: 20, keepScreenOn: !0, isNotMute: !1, hasAudio: !0, hasVideo: !0, operateBtns: { fullscreen: !1, screenshot: !1, play: !1, audio: !1, record: !1, ptz: !1, quality: !1, zoom: !1, close: !1, scale: !1, performance: !1, aiFace: !1, aiObject: !1, fullscreenFn: null, fullscreenExitFn: null, screenshotFn: null, playFn: null, pauseFn: null, recordFn: null, recordStopFn: null }, extendOperateBtns: [], contextmenuBtns: [], watermarkConfig: {}, controlAutoHide: !1, hasControl: !1, loadingIcon: !0, loadingText: "", background: "", backgroundLoadingShow: !1, loadingBackground: "", decoder: "decoder-pro.js", decoderAudio: "decoder-pro-audio.js", decoderWASM: "", isDecoderUseCDN: !1, url: "", rotate: 0, mirrorRotate: "none", playbackConfig: { playList: [], fps: "", showControl: !0, showRateBtn: !1, rateConfig: [], isCacheBeforeDecodeForFpsRender: !1, uiUsePlaybackPause: !1, isPlaybackPauseClearCache: !0, isUseFpsRender: !1, isUseLocalCalculateTime: !1, localOneFrameTimestamp: 40, supportWheel: !1 }, qualityConfig: [], defaultStreamQuality: "", scaleConfig: ["拉伸", "缩放", "正常"], forceNoOffscreen: !0, hiddenAutoPause: !1, protocol: 2, demuxType: wt, useWasm: !1, useWCS: !1, useSIMD: !0, wcsUseVideoRender: !0, wasmUseVideoRender: !0, mseUseCanvasRender: !1, hlsUseCanvasRender: !1, useMSE: !1, useOffscreen: !1, useWebGPU: !1, mseDecodeErrorReplay: !0, wcsDecodeErrorReplay: !0, wasmDecodeErrorReplay: !0, autoWasm: !0, webglAlignmentErrorReplay: !0, webglContextLostErrorReplay: !0, openWebglAlignment: !1, syncAudioAndVideo: !1, playbackDelayTime: 1e3, playbackFps: 25, playbackForwardMaxRateDecodeIFrame: 4, playbackCurrentTimeMove: !0, useVideoRender: !0, useCanvasRender: !1, networkDelayTimeoutReplay: !1, recordType: ze, checkFirstIFrame: !0, nakedFlowFps: 25, audioEngine: null, isShowRecordingUI: !0, isShowZoomingUI: !0, useFaceDetector: !1, useObjectDetector: !1, ptzClickType: xt, ptzStopEmitDelay: 0.3, ptzZoomShow: !1, ptzApertureShow: !1, ptzFocusShow: !1, ptzMoreArrowShow: !1, weiXinInAndroidAudioBufferSize: 4800, isCrypto: !1, cryptoKey: "", cryptoIV: "", cryptoKeyUrl: "", autoResize: !1, useWebFullScreen: !1, ptsMaxDiff: 3600, aiFaceDetectWidth: 192, aiObjectDetectWidth: 192, videoRenderSupportScale: !0, mediaSourceTsIsMaxDiffReplay: !0, controlHtml: "", isH265: !1, supportLockScreenPlayAudio: !0, supportHls265: !0, isFmp4Private: !1 }, Zt = "init", ci = "initVideo", pi = "initAudio", Ue = "audioCode", Se = "videoCode", Y = "videoCodec", Q = "closeEnd", N = { fullscreen: "fullscreen$2", webFullscreen: "webFullscreen", decoderWorkerInit: "decoderWorkerInit", play: "play", playing: "playing", pause: "pause", mute: "mute", load: "load", loading: "loading", zooming: "zooming", videoInfo: "videoInfo", timeUpdate: "timeUpdate", audioInfo: "audioInfo", log: "log", error: "error", kBps: "kBps", timeout: "timeout", delayTimeout: "delayTimeout", delayTimeoutRetryEnd: "delayTimeoutRetryEnd", loadingTimeout: "loadingTimeout", loadingTimeoutRetryEnd: "loadingTimeoutRetryEnd", stats: "stats", performance: "performance", faceDetectActive: "faceDetectActive", objectDetectActive: "objectDetectActive", record: "record", recording: "recording", recordingTimestamp: "recordingTimestamp", recordStart: "recordStart", recordEnd: "recordEnd", recordCreateError: "recordCreateError", recordBlob: "recordBlob", buffer: "buffer", videoFrame: "videoFrame", start: "start", metadata: "metadata", resize: "resize", volumechange: "volumechange", destroy: "destroy", beforeDestroy: "beforeDestroy", streamEnd: "streamEnd", streamRate: "streamRate", streamAbps: "streamAbps", streamVbps: "streamVbps", streamDts: "streamDts", streamSuccess: "streamSuccess", streamMessage: "streamMessage", streamError: "streamError", streamStats: "streamStats", mseSourceOpen: "mseSourceOpen", mseSourceClose: "mseSourceClose", mseSourceended: "mseSourceended", mseSourceBufferError: "mseSourceBufferError", mseAddSourceBufferError: "mseAddSourceBufferError", mseSourceBufferBusy: "mseSourceBufferBusy", mseSourceBufferFull: "mseSourceBufferFull", videoWaiting: "videoWaiting", videoTimeUpdate: "videoTimeUpdate", videoSyncAudio: "videoSyncAudio", playToRenderTimes: "playToRenderTimes", playbackTime: "playbackTime", playbackTimestamp: "playbackTimestamp", playbackPrecision: "playbackPrecision", playbackJustTime: "playbackJustTime", playbackStats: "playbackStats", playbackSeek: "playbackSeek", playbackPause: "playbackPause", playbackPauseOrResume: "playbackPauseOrResume", playbackRateChange: "playbackRateChange", playbackPreRateChange: "playbackPreRateChange", ptz: "ptz", streamQualityChange: "streamQualityChange", visibilityChange: "visibilityChange", netBuf: "netBuf", close: "close", networkDelayTimeout: "networkDelayTimeout", togglePerformancePanel: "togglePerformancePanel", viewResizeChange: "viewResizeChange", flvDemuxBufferSizeTooLarge: "flvDemuxBufferSizeTooLarge", talkGetUserMediaSuccess: "talkGetUserMediaSuccess", talkGetUserMediaFail: "talkGetUserMediaFail", talkGetUserMediaTimeout: "talkGetUserMediaTimeout", talkStreamStart: "talkStreamStart", talkStreamOpen: "talkStreamOpen", talkStreamClose: "talkStreamClose", talkStreamError: "talkStreamError", talkStreamInactive: "talkStreamInactive", webrtcDisconnect: "webrtcDisconnect", webrtcFailed: "webrtcFailed", webrtcClosed: "webrtcClosed", crashLog: "crashLog", focus: "focus", blur: "blur", visibilityHiddenTimeout: "visibilityHiddenTimeout", websocketOpen: "websocketOpen", websocketClose: "websocketClose", websocketError: "websocketError", websocketMessage: "websocketMessage", aiObjectDetectorInfo: "aiObjectDetectorInfo", aiFaceDetector: "aiFaceDetector", playFailedAndPaused: "playFailedAndPaused", audioResumeState: "audioResumeState" }, ae = { load: N.load, timeUpdate: N.timeUpdate, videoInfo: N.videoInfo, audioInfo: N.audioInfo, error: N.error, kBps: N.kBps, start: N.start, timeout: N.timeout, loadingTimeout: N.loadingTimeout, loadingTimeoutRetryEnd: N.loadingTimeoutRetryEnd, delayTimeout: N.delayTimeout, delayTimeoutRetryEnd: N.delayTimeoutRetryEnd, fullscreen: "fullscreen", webFullscreen: N.webFullscreen, play: N.play, pause: N.pause, mute: N.mute, stats: N.stats, performance: N.performance, recordingTimestamp: N.recordingTimestamp, recordStart: N.recordStart, recordEnd: N.recordEnd, recordBlob: N.recordBlob, playToRenderTimes: N.playToRenderTimes, playbackSeek: N.playbackSeek, playbackStats: N.playbackStats, playbackTimestamp: N.playbackTimestamp, playbackPauseOrResume: N.playbackPauseOrResume, playbackPreRateChange: N.playbackPreRateChange, playbackRateChange: N.playbackRateChange, ptz: N.ptz, streamQualityChange: N.streamQualityChange, zooming: N.zooming, crashLog: N.crashLog, focus: N.focus, blur: N.blur, visibilityHiddenTimeout: N.visibilityHiddenTimeout, visibilityChange: N.visibilityChange, websocketOpen: N.websocketOpen, websocketClose: N.websocketClose, networkDelayTimeout: N.networkDelayTimeout, aiObjectDetectorInfo: N.aiObjectDetectorInfo, playFailedAndPaused: N.playFailedAndPaused, audioResumeState: N.audioResumeState }, oe = { talkStreamClose: N.talkStreamClose, talkStreamError: N.talkStreamError, talkStreamInactive: N.talkStreamInactive, talkGetUserMediaTimeout: N.talkGetUserMediaTimeout }, H = { playError: "playIsNotPauseOrUrlIsNull", fetchError: "fetchError", websocketError: "websocketError", webcodecsH265NotSupport: "webcodecsH265NotSupport", webcodecsDecodeError: "webcodecsDecodeError", webcodecsUnsupportedConfigurationError: "webcodecsUnsupportedConfigurationError", mediaSourceH265NotSupport: "mediaSourceH265NotSupport", mediaSourceDecoderConfigurationError: "mediaSourceDecoderConfigurationError", mediaSourceFull: N.mseSourceBufferFull, mseSourceBufferError: N.mseSourceBufferError, mseAddSourceBufferError: N.mseAddSourceBufferError, mediaSourceAppendBufferError: "mediaSourceAppendBufferError", mediaSourceBufferListLarge: "mediaSourceBufferListLarge", mediaSourceAppendBufferEndTimeout: "mediaSourceAppendBufferEndTimeout", mediaSourceTsIsMaxDiff: "mediaSourceTsIsMaxDiff", mediaSourceUseCanvasRenderPlayFailed: "mediaSourceUseCanvasRenderPlayFailed", wasmDecodeError: "wasmDecodeError", wasmUseVideoRenderError: "wasmUseVideoRenderError", hlsError: "hlsError", webrtcError: "webrtcError", webglAlignmentError: "webglAlignmentError", wasmWidthOrHeightChange: "wasmWidthOrHeightChange", mseWidthOrHeightChange: "mseWidthOrHeightChange", wcsWidthOrHeightChange: "wcsWidthOrHeightChange", tallWebsocketClosedByError: "tallWebsocketClosedByError", flvDemuxBufferSizeTooLarge: N.flvDemuxBufferSizeTooLarge, wasmDecodeVideoNoResponseError: "wasmDecodeVideoNoResponseError", audioChannelError: "audioChannelError", simdH264DecodeVideoWidthIsTooLarge: "simdH264DecodeVideoWidthIsTooLarge", webglContextLostError: "webglContextLostError" }, de = "notConnect", fe = "open", we = { download: "download", base64: "base64", blob: "blob" }, Te = "download", Pe = { 7: "H264(AVC)", 12: "H265(HEVC)", 99: "MPEG4" }, Fe = "H264(AVC)", Ye = "H265(HEVC)", Je = 10, Gi = { AAC: "AAC", ALAW: "ALAW(g711a)", MULAW: "MULAW(g711u)" }, xs = { 10: "AAC", 7: "ALAW", 8: "MULAW" }, Hi = 7, Vi = 8, Cn = 5, Ln = 6, Wi = 32, $i = 33, fi = 34, kr = "webcodecs", $t = "webgl", Kt = "webgpu", xr = "offscreen", Ki = "mse", Cs = 'video/mp4; codecs="avc1.64002A"', Ls = 'video/mp4; codecs="hev1.1.6.L123.b0"', qi = "oneHour", Ds = "halfHour", Rs = "tenMin", Yi = "fiveMin", mi = { oneHour: "one-hour", halfHour: "half-hour", tenMin: "ten-min", fiveMin: "five-min" }, gi = ["oneHour", "halfHour", "tenMin", "fiveMin"], Is = ["up", "right", "down", "left", "left-up", "right-up", "left-down", "right-down"], yi = "stop", ei = "fiStop", Ps = "zoomExpand", Bs = "zoomNarrow", Us = "apertureFar", Ms = "apertureNear", Fs = "focusFar", Os = "focusNear", Ji = "g711a", Cr = "g711u", Ct = { png: "image/png", jpeg: "image/jpeg", webp: "image/webp" }, Ns = "canplay", js = "waiting", Qi = "timeupdate", zs = "ratechange", Dn = "hevc", Gs = "The user aborted a request", Hs = "AbortError", Vs = "AbortError", Xi = 0, Rn = 1, Ws = "worklet", In = { encType: Ji, packetType: "rtp", rtpSsrc: "0000000000", numberChannels: 1, sampleRate: 8e3, sampleBitsWidth: 16, debug: !1, debugLevel: Pt, testMicrophone: !1, audioBufferLength: 160, engine: Ws, checkGetUserMediaTimeout: !1, getUserMediaTimeout: 1e4 }, Ai = "worklet", ti = "script", Jt = "active", Pn = { name: "", index: 0, icon: "", iconHover: "", iconTitle: "", activeIcon: "", activeIconHover: "", activeIconTitle: "", click: null, activeClick: null }, Bn = { content: "", click: null, index: 0 }, Un = { container: "", maxSplit: 4, split: 1, supportDblclickContainerFullscreen: !0, style: { border: "#343434", borderSelect: "#FFCC00", background: "#000" } }, ii = { dblSelected: "multiDblSelected", selected: "multiSelected", mouseOver: "multiMouseover", mouseOut: "multiMouseout", mouseUp: "multiMouseup" }, ri = "3-1", si = "4-1", $s = "load-retry", Zi = "load-start";
   class er {
     constructor(e) {
       this.log = function(i) {
-        if (e._opt.debug && e._opt.debugLevel == Tt) {
+        if (e._opt.debug && e._opt.debugLevel == kt) {
           for (var s = e._opt.debugUuid ? `[${e._opt.debugUuid}]` : "", u = arguments.length, c = new Array(1 < u ? u - 1 : 0), l = 1; l < u; l++) c[l - 1] = arguments[l];
           console.log(`JbPro${s}:[✅✅✅][${i}]`, ...c);
         }
       }, this.warn = function(i) {
-        if (e._opt.debug && (e._opt.debugLevel == Tt || e._opt.debugLevel == Pt)) {
+        if (e._opt.debug && (e._opt.debugLevel == kt || e._opt.debugLevel == Pt)) {
           for (var s = e._opt.debugUuid ? `[${e._opt.debugUuid}]` : "", u = arguments.length, c = new Array(1 < u ? u - 1 : 0), l = 1; l < u; l++) c[l - 1] = arguments[l];
           console.log(`JbPro${s}:[❗❗❗][${i}]`, ...c);
         }
@@ -381,10 +391,10 @@ const ks = (Ae, Qe) => {
     return new Uint8Array([175, 0, e << 3 | (14 & i) >> 1, (1 & i) << 7 | s << 3]);
   }
   function qs(D) {
-    return D[0] >> 4 === Ye && D[1] === Xi;
+    return D[0] >> 4 === Je && D[1] === Xi;
   }
   st.isEnabled;
-  const Ys = [96e3, 88200, 64e3, 48e3, 44100, 32e3, 24e3, 22050, 16e3, 12e3, 11025, 8e3, 7350], Fn = Ys;
+  const Ys = [96e3, 88200, 64e3, 48e3, 44100, 32e3, 24e3, 22050, 16e3, 12e3, 11025, 8e3, 7350], Mn = Ys;
   function Js(D, e) {
     return 1024 * (1 < arguments.length && e !== void 0 ? e : 9e4) / D;
   }
@@ -443,7 +453,7 @@ const ks = (Ae, Qe) => {
     }
   } catch {
   }
-  const On = '"6-25-2023"';
+  const Fn = '"6-25-2023"';
   function ht() {
     return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
   }
@@ -617,7 +627,7 @@ const ks = (Ae, Qe) => {
     return D = null, e;
   }
   function or(D) {
-    return _e(D.hasAudio) && (D.useMSE || D.useWCS && !D.useOffscreen);
+    return ve(D.hasAudio) && (D.useMSE || D.useWCS && !D.useOffscreen);
   }
   function ca(D) {
     return D = D.toString().trim().match(/^function\s*\w*\s*\([\w\s,]*\)\s*{([\w\W]*?)}$/)[1], D = new Blob([D], { type: "application/javascript" }), URL.createObjectURL(D);
@@ -658,12 +668,12 @@ const ks = (Ae, Qe) => {
     return oi(ui);
   }
   function ya(D) {
-    return D[0] >> 4 === In && D[1] === Xi;
+    return D[0] >> 4 === Rn && D[1] === Xi;
   }
-  function Ve(D) {
+  function We(D) {
     return D === !0 || D === "true";
   }
-  function _e(D) {
+  function ve(D) {
     return D !== !0 && D !== "true";
   }
   function Aa(D) {
@@ -791,7 +801,7 @@ const ks = (Ae, Qe) => {
       l.activeTexture(l.TEXTURE0), l.bindTexture(l.TEXTURE_2D, this._rgbatexture), l.texImage2D(l.TEXTURE_2D, 0, l.RGBA, l.RGBA, l.UNSIGNED_BYTE, c), this._buffers.positions = this._calRect(s, u, c.width, c.height, e, i), this._drawScene(e, i, !1);
     }
   }
-  class Nn {
+  class On {
     constructor(e) {
       this.gpu = e, this.pipeline = null, this.matrixGroupInfo = null, this.depthTexture = null, this.textureGroupInfo = null, this.hasInited = !1, this.buffers = this._initBuffer(), this._initPipeline().then((i) => {
         this.pipeline = i, this.matrixGroupInfo = this._initMatrixGroupInfo(), this.hasInited = !0;
@@ -1083,7 +1093,7 @@ const ks = (Ae, Qe) => {
           s('WebGPU "navigator.gpu.requestAdapter()" fail');
         }) : s("WebGPU not support!!");
       }).then((i) => {
-        this.webGPURender = new Nn(i), this.player.debug.log("CommonCanvasLoader", "webGPURender init success");
+        this.webGPURender = new On(i), this.player.debug.log("CommonCanvasLoader", "webGPURender init success");
       }).catch((i) => {
         this.player.debug.error("CommonCanvasLoader", `createWebGPUContext error is ${i} and next use webgl render`), this.renderType = $t, this._initContextGl();
       });
@@ -1094,8 +1104,8 @@ const ks = (Ae, Qe) => {
     screenshot(e, i, o, u) {
       e = e || be(), u = u || we.download;
       let c = 0.92;
-      !xt[i] && we[i] && (u = i, i = "png", o = void 0), typeof o == "string" && (u = o, o = void 0), o !== void 0 && (c = Number(o));
-      var l = xt[i] || xt.png, o = this.$videoElement.toDataURL(l, c);
+      !Ct[i] && we[i] && (u = i, i = "png", o = void 0), typeof o == "string" && (u = o, o = void 0), o !== void 0 && (c = Number(o));
+      var l = Ct[i] || Ct.png, o = this.$videoElement.toDataURL(l, c);
       if (u === we.base64) return o;
       {
         const f = ir(o);
@@ -1108,7 +1118,7 @@ const ks = (Ae, Qe) => {
     }
     screenshotWatermark(e) {
       return new Promise((i, s) => {
-        (e = (e = la(e) ? { filename: e } : e) || {}).width = this.videoInfo.width, e.height = this.videoInfo.height, e.filename = e.filename || be(), e.format = e.format ? xt[e.format] : xt.png, e.quality = Number(e.quality) || 0.92, e.type = e.type || we.download;
+        (e = (e = la(e) ? { filename: e } : e) || {}).width = this.videoInfo.width, e.height = this.videoInfo.height, e.filename = e.filename || be(), e.format = e.format ? Ct[e.format] : Ct.png, e.quality = Number(e.quality) || 0.92, e.type = e.type || we.download;
         const u = this.$videoElement.toDataURL(e.format, e.quality);
         oa(u, e).then((c) => {
           if (e.type === we.base64) i(u);
@@ -1155,7 +1165,7 @@ const ks = (Ae, Qe) => {
       return 25;
     }
     getType() {
-      return Et;
+      return Tt;
     }
     getCanvasType() {
       return this.renderType === Kt ? Kt : $t;
@@ -1301,7 +1311,7 @@ const ks = (Ae, Qe) => {
         var u = this.player._opt;
         let E = i, h = e;
         if (u.hasControl && !u.controlAutoHide) {
-          const r = u.playType === pe ? 48 : 38;
+          const r = u.playType === ce ? 48 : 38;
           ht() && this.player.fullscreen && u.useWebFullScreen ? h -= r : E -= r;
         }
         var c = u.rotate, l = (h - g) / 2, o = (E - T) / 2, f = (c !== 270 && c !== 90 || (g = s.height, T = s.width), h / g), _ = E / T;
@@ -1398,8 +1408,8 @@ const ks = (Ae, Qe) => {
       if (!this._canScreenshot()) return this.player.debug.warn("Video", "screenshot failed, video is not ready"), null;
       e = e || be(), u = u || we.download;
       let c = 0.92;
-      !xt[i] && we[i] && (u = i, i = "png", f = void 0), typeof f == "string" && (u = f, f = void 0), f !== void 0 && (c = Number(f));
-      var f = this.$videoElement, l = this.$canvasElement, o = (l.width = f.videoWidth, l.height = f.videoHeight, this.canvasContext.drawImage(f, 0, 0, l.width, l.height), xt[i] || xt.png), f = l.toDataURL(o, c);
+      !Ct[i] && we[i] && (u = i, i = "png", f = void 0), typeof f == "string" && (u = f, f = void 0), f !== void 0 && (c = Number(f));
+      var f = this.$videoElement, l = this.$canvasElement, o = (l.width = f.videoWidth, l.height = f.videoHeight, this.canvasContext.drawImage(f, 0, 0, l.width, l.height), Ct[i] || Ct.png), f = l.toDataURL(o, c);
       if (this.canvasContext.clearRect(0, 0, l.width, l.height), l.width = 0, l.height = 0, u === we.base64) return f;
       {
         const _ = ir(f);
@@ -1413,7 +1423,7 @@ const ks = (Ae, Qe) => {
     screenshotWatermark(e) {
       return new Promise((i, s) => {
         if (la(e) && (e = { filename: e }), !this._canScreenshot()) return this.player.debug.warn("Video", "screenshot failed, video is not ready"), s("screenshot failed, video is not ready");
-        var u = this.$videoElement, c = ((e = e || {}).width = u.videoWidth, e.height = u.videoHeight, e.filename = e.filename || be(), e.format = e.format ? xt[e.format] : xt.png, e.quality = Number(e.quality) || 0.92, e.type = e.type || we.download, this.$canvasElement);
+        var u = this.$videoElement, c = ((e = e || {}).width = u.videoWidth, e.height = u.videoHeight, e.filename = e.filename || be(), e.format = e.format ? Ct[e.format] : Ct.png, e.quality = Number(e.quality) || 0.92, e.type = e.type || we.download, this.$canvasElement);
         c.width = u.videoWidth, c.height = u.videoHeight, this.canvasContext.drawImage(u, 0, 0, c.width, c.height);
         const l = c.toDataURL(e.format, e.quality);
         this.canvasContext.clearRect(0, 0, c.width, c.height), c.width = 0, c.height = 0, oa(l, e).then((o) => {
@@ -1461,7 +1471,7 @@ const ks = (Ae, Qe) => {
       let e = this.player.width, i = this.player.height;
       const s = this.player._opt, u = s.rotate;
       if (s.hasControl && !s.controlAutoHide) {
-        const _ = s.playType === pe ? 48 : 38;
+        const _ = s.playType === ce ? 48 : 38;
         ht() && this.player.fullscreen && s.useWebFullScreen ? e -= _ : i -= _;
       }
       this.$videoElement.width = e, this.$videoElement.height = i, u !== 270 && u !== 90 || (this.$videoElement.width = i, this.$videoElement.height = e);
@@ -1469,10 +1479,10 @@ const ks = (Ae, Qe) => {
       s.mirrorRotate === "none" && u && (f += " rotate(" + u + "deg)"), s.mirrorRotate === "level" ? f += " rotateY(180deg)" : s.mirrorRotate === "vertical" && (f += " rotateX(180deg)"), this.player._opt.videoRenderSupportScale && (this.$videoElement.style.objectFit = o), this.$videoElement.style.transform = f, this.$videoElement.style.left = c + "px", this.$videoElement.style.top = l + "px";
     }
     getType() {
-      return bt;
+      return vt;
     }
     isPlaying() {
-      return this.$videoElement && _e(this.$videoElement.paused) && _e(this.$videoElement.ended) && this.$videoElement.playbackRate !== 0 && this.$videoElement.readyState !== 0;
+      return this.$videoElement && ve(this.$videoElement.paused) && ve(this.$videoElement.ended) && this.$videoElement.playbackRate !== 0 && this.$videoElement.readyState !== 0;
     }
     _canScreenshot() {
       return this.$videoElement && 2 <= this.$videoElement.readyState;
@@ -1493,7 +1503,7 @@ const ks = (Ae, Qe) => {
       return this.$videoElement && (e = ft(this.$videoElement.getVideoPlaybackQuality) ? { droppedVideoFrames: (i = this.$videoElement.getVideoPlaybackQuality()).droppedVideoFrames || i.corruptedVideoFrames, totalVideoFrames: i.totalVideoFrames, creationTime: i.creationTime } : { droppedVideoFrames: this.$videoElement.webkitDroppedFrameCount, totalVideoFrames: this.$videoElement.webkitDecodedFrameCount, creationTime: be() }) && (e.renderedVideoFrames = e.totalVideoFrames - e.droppedVideoFrames), e;
     }
   }
-  class jn extends Ta {
+  class Nn extends Ta {
     constructor(e) {
       super(e), this.controlHeight = 48, this.bufferList = [], this.playing = !1, this.playInterval = null, this.fps = 1, this.preFps = 1, this.streamFps = 0, this.playbackRate = 1, this._firstTimestamp = null, this._renderFps = 0, this._startfpsTime = null, this._startFpsTimestamp = null, this._hasCalcFps = !1, this.player.on(N.playbackPause, (i) => {
         i ? (this.pause(), this.player.playback.isPlaybackPauseClearCache && this.clear()) : this.resume();
@@ -1608,10 +1618,10 @@ const ks = (Ae, Qe) => {
       return new (pr.getLoaderFactory(e._opt))(e);
     }
     static getLoaderFactory(e) {
-      return e.useMSE ? e.mseUseCanvasRender ? cr : Si : e.isHls && _e(e.supportHls265) ? e.useCanvasRender ? cr : Si : e.isWebrtc ? Si : e.useWCS ? !e.useOffscreen && e.wcsUseVideoRender ? Si : cr : e.playType === pe ? jn : e.wasmUseVideoRender && !e.useOffscreen ? Si : cr;
+      return e.useMSE ? e.mseUseCanvasRender ? cr : Si : e.isHls && ve(e.supportHls265) ? e.useCanvasRender ? cr : Si : e.isWebrtc ? Si : e.useWCS ? !e.useOffscreen && e.wcsUseVideoRender ? Si : cr : e.playType === ce ? Nn : e.wasmUseVideoRender && !e.useOffscreen ? Si : cr;
     }
   }
-  class zn extends Ae {
+  class jn extends Ae {
     constructor(e) {
       super(), this.bufferList = [], this.player = e, this.$audio = null, this.scriptNode = null, this.workletProcessorNode = null, this.hasInitScriptNode = !1, this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48e3 }), this.gainNode = this.audioContext.createGain(), e = this.audioContext.createBufferSource(), e.buffer = this.audioContext.createBuffer(1, 1, 22050), e.connect(this.audioContext.destination), e.noteOn ? e.noteOn(0) : e.start(0), this.audioBufferSourceNode = e, this.mediaStreamAudioDestinationNode = this.audioContext.createMediaStreamDestination(), this.gainNode.gain.value = 0, this.playing = !1, this.audioSyncVideoOption = { diff: null }, this.audioInfo = { encType: "", channels: "", sampleRate: "" }, this.init = !1, this.hasAudio = !1, this.audioResumeStateTimeout = null, this.on(N.videoSyncAudio, (i) => {
         this.audioSyncVideoOption = i;
@@ -1689,7 +1699,7 @@ const ks = (Ae, Qe) => {
       return 0;
     }
   }
-  class Gn {
+  class zn {
     constructor(e, i, s, u) {
       this.player = e, this.audio = i, this.channel = s, this.bufferSize = u;
     }
@@ -1826,9 +1836,9 @@ const ks = (Ae, Qe) => {
       return this.prevSampleL = i[s + 2 * e - 2], this.prevSampleR = i[s + 2 * e - 1], o;
     }
   }
-  function Hn() {
+  function Gn() {
   }
-  class Vn extends class {
+  class Hn extends class {
     constructor(e) {
       this._pipe = e;
     }
@@ -1857,7 +1867,7 @@ const ks = (Ae, Qe) => {
     }
   } {
     constructor(e, i) {
-      var s = 2 < arguments.length && arguments[2] !== void 0 ? arguments[2] : Hn;
+      var s = 2 < arguments.length && arguments[2] !== void 0 ? arguments[2] : Gn;
       super(i), this.callback = s, this.sourceSound = e, this.historyBufferSize = 22050, this._sourcePosition = 0, this.outputBufferPosition = 0, this._position = 0;
     }
     get position() {
@@ -2041,9 +2051,9 @@ const ks = (Ae, Qe) => {
       (1 < this._rate ? (this.stretch.process(), this.transposer) : (this.transposer.process(), this.stretch)).process();
     }
   }
-  class Wn {
+  class Vn {
     constructor(e, i, s) {
-      this.player = e, this.audio = i, this.soundTouch = new Gr(), this.soundTouch.tempo = 1, this.soundTouch.rate = 1, this.filter = new Vn(s, this.soundTouch);
+      this.player = e, this.audio = i, this.soundTouch = new Gr(), this.soundTouch.tempo = 1, this.soundTouch.rate = 1, this.filter = new Hn(s, this.soundTouch);
     }
     setRate(e) {
       e !== this.soundTouch.rate && (this.soundTouch.tempo = e);
@@ -2057,7 +2067,7 @@ const ks = (Ae, Qe) => {
       this.soundTouch && (this.soundTouch.clear(), this.soundTouch = null), this.filter && (this.filter = null);
     }
   }
-  class Hr extends zn {
+  class Hr extends jn {
     constructor(e) {
       super(e), this.defaultPlaybackRate = 1, this.playbackRate = 1, this.rateProcessor = null, this.processor = null, this.scriptNodeInterval = null, this.engineType = this.getAutoAudioEngineType(), this.audioBufferSize = this.getAudioBufferSizeByType(), this.$audio = null, this._delayPlay = !1, this.eventListenList = [], this.player._opt.supportLockScreenPlayAudio && ni() && (this.$audio = document.createElement("audio"), Object.assign(this.$audio.style, { position: "absolute", left: "-100%", top: "-100%" }), (e.$container || document.body).appendChild(this.$audio), this._bindAudioProxy(), this.player.debug.log("AudioContext", "create audio element")), this.scriptStartTime = 0, this.player.debug.log("AudioContext", "init", `engineType: ${this.engineType}, audioBufferSize: ` + this.audioBufferSize);
     }
@@ -2067,7 +2077,7 @@ const ks = (Ae, Qe) => {
       }), this.eventListenList = []), this.$audio && (this.$audio.pause(), this.$audio.srcObject = null, this.$audio.parentNode && this.$audio.parentNode.removeChild(this.$audio), this.$audio = null), this.processor && (this.processor.destroy(), this.processor = null), this.rateProcessor && (this.rateProcessor.destroy(), this.rateProcessor = null), this.scriptNodeInterval && (clearInterval(this.scriptNodeInterval), this.scriptNodeInterval = null), this.defaultPlaybackRate = 1, this.playbackRate = 1, this.scriptStartTime = 0, this.audioBufferSize = 0, this.engineType = ti, this.player.debug.log("AudioContext", "destroy");
     }
     isAudioPlaying() {
-      return this.$audio && _e(this.$audio.paused) && _e(this.$audio.ended) && this.$audio.playbackRate !== 0 && this.$audio.readyState !== 0;
+      return this.$audio && ve(this.$audio.paused) && ve(this.$audio.ended) && this.$audio.playbackRate !== 0 && this.$audio.readyState !== 0;
     }
     _bindAudioProxy() {
       var e = this.player.events.proxy, e = e(this.$audio, "canplay", () => {
@@ -2102,7 +2112,7 @@ const ks = (Ae, Qe) => {
       return this.engineType === Jt;
     }
     initProcessor() {
-      this.processor = new Gn(this.player, this, this.audioInfo.channels, this.audioBufferSize), this.rateProcessor = new Wn(this.player, this, this.processor);
+      this.processor = new zn(this.player, this, this.audioInfo.channels, this.audioBufferSize), this.rateProcessor = new Vn(this.player, this, this.processor);
     }
     getAutoAudioEngineType() {
       let e = this.player._opt.audioEngine || ti;
@@ -2208,7 +2218,7 @@ const ks = (Ae, Qe) => {
       return (this.playbackRate === 1 ? this.processor : this.rateProcessor).provide(e);
     }
   }
-  class $n extends Ae {
+  class Wn extends Ae {
     constructor(e) {
       super(), this.player = e, this.$video = e.video.$videoElement, this.init = !1, this.player._opt.hlsUseCanvasRender && (this.$video = this.player.hlsDecoder.$videoElement), this.audioInfo = { encType: "", channels: "", sampleRate: "" }, this.player.debug.log("Audio", "init");
     }
@@ -2228,10 +2238,10 @@ const ks = (Ae, Qe) => {
       return !0;
     }
     get volume() {
-      return Ve(this.$video.muted) ? 0 : this.$video.volume;
+      return We(this.$video.muted) ? 0 : this.$video.volume;
     }
     get isMute() {
-      return this.$video.volume === 0 || Ve(this.$video.muted);
+      return this.$video.volume === 0 || We(this.$video.muted);
     }
     mute(e) {
       this.setVolume(e ? 0 : this.player.lastVolume || 0.5);
@@ -2257,7 +2267,7 @@ const ks = (Ae, Qe) => {
       return 0;
     }
   }
-  class Kn extends Hr {
+  class $n extends Hr {
     constructor(e) {
       super(e), this.delayTimeout = null, this.player.on(N.playbackPause, (i) => {
         this.listenPlaybackPause(i);
@@ -2279,7 +2289,7 @@ const ks = (Ae, Qe) => {
       e !== this.defaultPlaybackRate && this.rateProcessor && (this.player.debug.log("AudioPlaybackContext", "setRate", e), this.defaultPlaybackRate = e, this.updatePlaybackRate(e));
     }
   }
-  class qn extends Hr {
+  class Kn extends Hr {
     constructor(e) {
       super(e), this.TAG_NAME = "AudioPlayerLoader", this.player.debug.log(this.TAG_NAME, "init");
     }
@@ -2287,7 +2297,7 @@ const ks = (Ae, Qe) => {
       super.destroy(), this.player.debug.log(this.TAG_NAME, "destroy");
     }
     play(e, i) {
-      _e(this.playing) || super.play(e, i);
+      ve(this.playing) || super.play(e, i);
     }
     pause() {
       this.player.debug.log(this.TAG_NAME, "pause"), this.playing = !1, this.clear();
@@ -2301,10 +2311,10 @@ const ks = (Ae, Qe) => {
       return new (fr.getLoaderFactory(e._opt))(e);
     }
     static getLoaderFactory(e) {
-      return e.playType === pe ? Kn : e.playType === Rt ? qn : e.isHls && _e(e.supportHls265) || e.isWebrtc ? $n : Hr;
+      return e.playType === ce ? $n : e.playType === bt ? Kn : e.isHls && ve(e.supportHls265) || e.isWebrtc ? Wn : Hr;
     }
   }
-  class Yn extends Ae {
+  class qn extends Ae {
     constructor(e) {
       super(), this.player = e, this.playing = !1, this.abortController = new AbortController(), this.streamRate = Dr((i) => {
         e.emit(N.kBps, (i / 1024).toFixed(2));
@@ -2355,10 +2365,10 @@ const ks = (Ae, Qe) => {
       this.abortController && (this.abortController.abort(), this.abortController = null);
     }
     getStreamType() {
-      return Qe;
+      return Xe;
     }
   }
-  class Jn extends Ae {
+  class Yn extends Ae {
     constructor(e) {
       super(), this.player = e, this.socket = null, this.socketStatus = de, this.wsUrl = null, this.socketDestroyFnList = [], this.streamRate = Dr((i) => {
         e.emit(N.kBps, (i / 1024).toFixed(2));
@@ -2406,10 +2416,10 @@ const ks = (Ae, Qe) => {
       this._closeWebSocket(), this._createWebSocket();
     }
     getStreamType() {
-      return Ge;
+      return Ve;
     }
   }
-  class Qn extends Ae {
+  class Jn extends Ae {
     constructor(e) {
       super(), (this.player = e).debug.log("HlsStream", "init");
     }
@@ -2428,7 +2438,7 @@ const ks = (Ae, Qe) => {
       return "hls";
     }
   }
-  class Xn extends Ae {
+  class Qn extends Ae {
     constructor(e) {
       super(), this.player = e, this.webrctUrl = null, e.debug.log("WebrtcStream", "init");
     }
@@ -2447,7 +2457,7 @@ const ks = (Ae, Qe) => {
       return "webrtc";
     }
   }
-  class Zn extends Ae {
+  class Xn extends Ae {
     constructor(e) {
       super(), this.player = e, this.transport = null, this.wtUrl = null, this.streamRate = Dr((i) => {
         e.emit(N.kBps, (i / 1024).toFixed(2));
@@ -2507,7 +2517,7 @@ const ks = (Ae, Qe) => {
     }
     getStreamType() {
       var e = this.player._opt.protocol;
-      return ve + " " + (e === 2 ? Qe : Ge);
+      return _e + " " + (e === 2 ? Xe : Ve);
     }
   }
   class Vr {
@@ -2516,10 +2526,10 @@ const ks = (Ae, Qe) => {
     }
     static getLoaderFactory(e) {
       var { protocol: i, useWasm: s, playType: u } = e;
-      return i === 2 ? u === Rt || u !== Ie || s && !or(e) ? Da : Yn : i === 1 ? u === Rt || u !== Ie || s && !or(e) ? Da : Jn : i === 3 ? Qn : i === 4 ? Xn : i === 5 ? Zn : void 0;
+      return i === 2 ? u === bt || u !== xe || s && !or(e) ? Da : qn : i === 1 ? u === bt || u !== xe || s && !or(e) ? Da : Yn : i === 3 ? Jn : i === 4 ? Qn : i === 5 ? Xn : void 0;
     }
   }
-  var eo = tr(function(f) {
+  var Zn = tr(function(f) {
     function e(M, w) {
       if (!M) throw "First parameter is required.";
       w = new i(M, w = w || { type: "video" });
@@ -2550,8 +2560,8 @@ const ks = (Ae, Qe) => {
               typeof W.call == "function" ? W.call(R, ie) : W(ie);
             }
             w.autoWriteToDisk && G(function(me) {
-              var ce = {};
-              ce[w.type + "Blob"] = me, A.Store(ce);
+              var pe = {};
+              pe[w.type + "Blob"] = me, A.Store(pe);
             });
           } else typeof W.call == "function" ? W.call(R, "") : W("");
         }
@@ -2570,8 +2580,8 @@ const ks = (Ae, Qe) => {
           W(ne.target.result);
         }) : ((se = (function(ne) {
           try {
-            var me = _.createObjectURL(new Blob([ne.toString(), "this.onmessage =  function (eee) {" + ne.name + "(eee.data);}"], { type: "application/javascript" })), ce = new Worker(me);
-            return _.revokeObjectURL(me), ce;
+            var me = _.createObjectURL(new Blob([ne.toString(), "this.onmessage =  function (eee) {" + ne.name + "(eee.data);}"], { type: "application/javascript" })), pe = new Worker(me);
+            return _.revokeObjectURL(me), pe;
           } catch {
           }
         })(z)).onmessage = function(ne) {
@@ -2899,51 +2909,51 @@ const ks = (Ae, Qe) => {
         return !0;
       }
       function J(ye, Ee) {
-        function xe(Re, nt) {
-          var tt, We = Re.numberOfAudioChannels, Ne = Re.leftBuffers.slice(0), Dt = Re.rightBuffers.slice(0), $e = Re.sampleRate, lt = Re.internalInterleavedLength, Re = Re.desiredSampRate;
-          function yt(Je, vt, At) {
-            var Ke = Math.round(Je.length * (vt / At)), it = [], jt = Number((Je.length - 1) / (Ke - 1));
-            it[0] = Je[0];
-            for (var di, Tr = 1; Tr < Ke - 1; Tr++) {
+        function Ce(Ie, nt) {
+          var tt, $e = Ie.numberOfAudioChannels, Ne = Ie.leftBuffers.slice(0), Rt = Ie.rightBuffers.slice(0), Ke = Ie.sampleRate, lt = Ie.internalInterleavedLength, Ie = Ie.desiredSampRate;
+          function yt(Qe, _t, At) {
+            var qe = Math.round(Qe.length * (_t / At)), it = [], jt = Number((Qe.length - 1) / (qe - 1));
+            it[0] = Qe[0];
+            for (var di, Tr = 1; Tr < qe - 1; Tr++) {
               var _s = Tr * jt, Tn = Number(Math.floor(_s)).toFixed(), ws = Number(Math.ceil(_s)).toFixed();
-              it[Tr] = (di = Je[Tn], ws = Je[ws], di + (ws - di) * (_s - Tn));
+              it[Tr] = (di = Qe[Tn], ws = Qe[ws], di + (ws - di) * (_s - Tn));
             }
-            return it[Ke - 1] = Je[Je.length - 1], it;
+            return it[qe - 1] = Qe[Qe.length - 1], it;
           }
-          function ot(Je, vt) {
-            for (var At = new Float64Array(vt), Ke = 0, it = Je.length, jt = 0; jt < it; jt++) {
-              var di = Je[jt];
-              At.set(di, Ke), Ke += di.length;
+          function ot(Qe, _t) {
+            for (var At = new Float64Array(_t), qe = 0, it = Qe.length, jt = 0; jt < it; jt++) {
+              var di = Qe[jt];
+              At.set(di, qe), qe += di.length;
             }
             return At;
           }
-          function He(Je, vt, At) {
-            for (var Ke = At.length, it = 0; it < Ke; it++) Je.setUint8(vt + it, At.charCodeAt(it));
+          function He(Qe, _t, At) {
+            for (var qe = At.length, it = 0; it < qe; it++) Qe.setUint8(_t + it, At.charCodeAt(it));
           }
-          We === 2 && (Ne = ot(Ne, lt), Dt = ot(Dt, lt), Re) && (Ne = yt(Ne, Re, $e), Dt = yt(Dt, Re, $e)), We === 1 && (Ne = ot(Ne, lt), Re) && (Ne = yt(Ne, Re, $e)), Re && ($e = Re), We === 2 && (tt = (function(Je, vt) {
-            for (var At = Je.length + vt.length, Ke = new Float64Array(At), it = 0, jt = 0; jt < At; ) Ke[jt++] = Je[it], Ke[jt++] = vt[it], it++;
-            return Ke;
-          })(Ne, Dt));
-          var lt = (tt = We === 1 ? Ne : tt).length, Re = new ArrayBuffer(44 + 2 * lt), je = new DataView(Re);
-          He(je, 0, "RIFF"), je.setUint32(4, 36 + 2 * lt, !0), He(je, 8, "WAVE"), He(je, 12, "fmt "), je.setUint32(16, 16, !0), je.setUint16(20, 1, !0), je.setUint16(22, We, !0), je.setUint32(24, $e, !0), je.setUint32(28, $e * We * 2, !0), je.setUint16(32, 2 * We, !0), je.setUint16(34, 16, !0), He(je, 36, "data"), je.setUint32(40, 2 * lt, !0);
+          $e === 2 && (Ne = ot(Ne, lt), Rt = ot(Rt, lt), Ie) && (Ne = yt(Ne, Ie, Ke), Rt = yt(Rt, Ie, Ke)), $e === 1 && (Ne = ot(Ne, lt), Ie) && (Ne = yt(Ne, Ie, Ke)), Ie && (Ke = Ie), $e === 2 && (tt = (function(Qe, _t) {
+            for (var At = Qe.length + _t.length, qe = new Float64Array(At), it = 0, jt = 0; jt < At; ) qe[jt++] = Qe[it], qe[jt++] = _t[it], it++;
+            return qe;
+          })(Ne, Rt));
+          var lt = (tt = $e === 1 ? Ne : tt).length, Ie = new ArrayBuffer(44 + 2 * lt), je = new DataView(Ie);
+          He(je, 0, "RIFF"), je.setUint32(4, 36 + 2 * lt, !0), He(je, 8, "WAVE"), He(je, 12, "fmt "), je.setUint32(16, 16, !0), je.setUint16(20, 1, !0), je.setUint16(22, $e, !0), je.setUint32(24, Ke, !0), je.setUint32(28, Ke * $e * 2, !0), je.setUint16(32, 2 * $e, !0), je.setUint16(34, 16, !0), He(je, 36, "data"), je.setUint32(40, 2 * lt, !0);
           for (var Er = lt, ji = 44, zi = 0; zi < Er; zi++) je.setInt16(ji, 32767 * tt[zi], !0), ji += 2;
-          if (nt) return nt({ buffer: Re, view: je });
-          postMessage({ buffer: Re, view: je });
+          if (nt) return nt({ buffer: Ie, view: je });
+          postMessage({ buffer: Ie, view: je });
         }
-        var ke, Le, De;
-        ye.noWorker ? xe(ye, function(Oe) {
+        var ke, De, Re;
+        ye.noWorker ? Ce(ye, function(Oe) {
           Ee(Oe.buffer, Oe.view);
-        }) : (ke = xe, ke = _.createObjectURL(new Blob([ke.toString(), ";this.onmessage =  function (eee) {" + ke.name + "(eee.data);}"], { type: "application/javascript" })), (Le = new Worker(ke)).workerURL = ke, (De = Le).onmessage = function(Oe) {
-          Ee(Oe.data.buffer, Oe.data.view), _.revokeObjectURL(De.workerURL), De.terminate();
-        }, De.postMessage(ye));
+        }) : (ke = Ce, ke = _.createObjectURL(new Blob([ke.toString(), ";this.onmessage =  function (eee) {" + ke.name + "(eee.data);}"], { type: "application/javascript" })), (De = new Worker(ke)).workerURL = ke, (Re = De).onmessage = function(Oe) {
+          Ee(Oe.data.buffer, Oe.data.view), _.revokeObjectURL(Re.workerURL), Re.terminate();
+        }, Re.postMessage(ye));
       }
       w.leftChannel === !0 && ($ = 1), (!($ = w.numberOfAudioChannels === 1 ? 1 : $) || $ < 1) && ($ = 2), w.disableLogs || console.log("StereoAudioRecorder is set to record number of channels: " + $), w.checkForInactiveTracks === void 0 && (w.checkForInactiveTracks = !0), this.record = function() {
         if (q() === !1) throw "Please make sure MediaStream is active.";
-        ne(), ce = ie = !1, G = !0, w.timeSlice !== void 0 && ge();
+        ne(), pe = ie = !1, G = !0, w.timeSlice !== void 0 && ge();
       }, this.stop = function(ye) {
         ye = ye || function() {
-        }, G = !1, J({ desiredSampRate: V, sampleRate: se, numberOfAudioChannels: $, internalInterleavedLength: K, leftBuffers: j, rightBuffers: $ === 1 ? [] : z, noWorker: w.noWorker }, function(Ee, xe) {
-          O.blob = new Blob([xe], { type: "audio/wav" }), O.buffer = new ArrayBuffer(xe.buffer.byteLength), O.view = xe, O.sampleRate = V || se, O.bufferSize = X, O.length = K, ce = !1, ye && ye(O.blob);
+        }, G = !1, J({ desiredSampRate: V, sampleRate: se, numberOfAudioChannels: $, internalInterleavedLength: K, leftBuffers: j, rightBuffers: $ === 1 ? [] : z, noWorker: w.noWorker }, function(Ee, Ce) {
+          O.blob = new Blob([Ce], { type: "audio/wav" }), O.buffer = new ArrayBuffer(Ce.buffer.byteLength), O.view = Ce, O.sampleRate = V || se, O.bufferSize = X, O.length = K, pe = !1, ye && ye(O.blob);
         });
       }, (e.Storage = e.Storage === void 0 ? { AudioContextConstructor: null, AudioContext: window.AudioContext || window.webkitAudioContext } : e.Storage).AudioContextConstructor && e.Storage.AudioContextConstructor.state !== "closed" || (e.Storage.AudioContextConstructor = new e.Storage.AudioContext());
       var re = e.Storage.AudioContextConstructor, Z = re.createMediaStreamSource(M), W = [0, 256, 512, 1024, 2048, 4096, 8192, 16384], X = w.bufferSize === void 0 ? 4096 : w.bufferSize;
@@ -2955,7 +2965,7 @@ const ks = (Ae, Qe) => {
       Z.connect(R), w.bufferSize || (X = R.bufferSize);
       var se = w.sampleRate !== void 0 ? w.sampleRate : re.sampleRate || 44100, ie = ((se < 22050 || 96e3 < se) && !w.disableLogs && console.log("sample-rate must be under range 22050 and 96000."), w.disableLogs || w.desiredSampRate && console.log("Desired sample-rate: " + w.desiredSampRate), !1);
       function ne() {
-        j = [], K = 0, ie = G = ce = !(z = []), re = null, O.leftchannel = j, O.rightchannel = z, O.numberOfAudioChannels = $, O.desiredSampRate = V, O.sampleRate = se, O.recordingLength = K, le = { left: [], right: [], recordingLength: 0 };
+        j = [], K = 0, ie = G = pe = !(z = []), re = null, O.leftchannel = j, O.rightchannel = z, O.numberOfAudioChannels = $, O.desiredSampRate = V, O.sampleRate = se, O.recordingLength = K, le = { left: [], right: [], recordingLength: 0 };
       }
       function me() {
         R && (R.onaudioprocess = null, R.disconnect(), R = null), Z && (Z.disconnect(), Z = null), ne();
@@ -2968,11 +2978,11 @@ const ks = (Ae, Qe) => {
       }, this.clearRecordedData = function() {
         w.checkForInactiveTracks = !1, G && this.stop(me), me();
       }, this.name = "StereoAudioRecorder";
-      var ce = !(this.toString = function() {
+      var pe = !(this.toString = function() {
         return this.name;
       }), le = (R.onaudioprocess = function(ye) {
-        var Ee, xe;
-        ie || (q() === !1 && (w.disableLogs || console.log("MediaStream seems stopped."), R.disconnect(), G = !1), G ? (ce || (ce = !0, w.onAudioProcessStarted && w.onAudioProcessStarted(), w.initCallback && w.initCallback()), Ee = ye.inputBuffer.getChannelData(0), Ee = new Float32Array(Ee), j.push(Ee), $ === 2 && (ye = ye.inputBuffer.getChannelData(1), xe = new Float32Array(ye), z.push(xe)), K += X, O.recordingLength = K, w.timeSlice !== void 0 && (le.recordingLength += X, le.left.push(Ee), $ === 2) && le.right.push(xe)) : Z && (Z.disconnect(), Z = null));
+        var Ee, Ce;
+        ie || (q() === !1 && (w.disableLogs || console.log("MediaStream seems stopped."), R.disconnect(), G = !1), G ? (pe || (pe = !0, w.onAudioProcessStarted && w.onAudioProcessStarted(), w.initCallback && w.initCallback()), Ee = ye.inputBuffer.getChannelData(0), Ee = new Float32Array(Ee), j.push(Ee), $ === 2 && (ye = ye.inputBuffer.getChannelData(1), Ce = new Float32Array(ye), z.push(Ce)), K += X, O.recordingLength = K, w.timeSlice !== void 0 && (le.recordingLength += X, le.left.push(Ee), $ === 2) && le.right.push(Ce)) : Z && (Z.disconnect(), Z = null));
       }, re.createMediaStreamDestination ? R.connect(re.createMediaStreamDestination()) : R.connect(re.destination), this.leftchannel = j, this.rightchannel = z, this.numberOfAudioChannels = $, this.desiredSampRate = V, this.sampleRate = se, O.recordingLength = K, { left: [], right: [], recordingLength: 0 });
       function ge() {
         G && typeof w.ondataavailable == "function" && w.timeSlice !== void 0 && (le.left.length ? (J({ desiredSampRate: V, sampleRate: se, numberOfAudioChannels: $, internalInterleavedLength: le.recordingLength, leftBuffers: le.left, rightBuffers: $ === 1 ? [] : le.right }, function(ye, Ee) {
@@ -3062,31 +3072,31 @@ const ks = (Ae, Qe) => {
         }, O = !0;
         var re = this;
         setTimeout(function() {
-          var Z, W, X, se, ie, ne, me, ce, le, ge, ye, Ee, xe, ke, Le, De, Oe;
+          var Z, W, X, se, ie, ne, me, pe, le, ge, ye, Ee, Ce, ke, De, Re, Oe;
           Z = $.frames, W = -1, se = X = null, ie = function(nt) {
             $.frames = nt, w.advertisement && w.advertisement.length && ($.frames = w.advertisement.concat($.frames)), $.compile(function(tt) {
               re.blob = tt, re.blob.forEach && (re.blob = new Blob([], { type: "video/webm" })), J && J(re.blob);
             });
-          }, (ne = document.createElement("canvas")).width = V.width, ne.height = V.height, ce = ne.getContext("2d"), le = [], ge = W === -1, ye = W && 0 < W && W <= Z.length ? W : Z.length, Ee = Math.sqrt(Math.pow(255, 2) + Math.pow(255, 2) + Math.pow(255, 2)), xe = X && 0 <= X && X <= 1 ? X : 0, ke = se && 0 <= se && se <= 1 ? se : 0, Le = !1, De = -1, Oe = (me = { length: ye, functionToLoop: function(nt, tt) {
-            function We() {
-              !Le && $e - Ne <= $e * ke || (ge && (Le = !0), le.push(Z[tt])), nt();
+          }, (ne = document.createElement("canvas")).width = V.width, ne.height = V.height, pe = ne.getContext("2d"), le = [], ge = W === -1, ye = W && 0 < W && W <= Z.length ? W : Z.length, Ee = Math.sqrt(Math.pow(255, 2) + Math.pow(255, 2) + Math.pow(255, 2)), Ce = X && 0 <= X && X <= 1 ? X : 0, ke = se && 0 <= se && se <= 1 ? se : 0, De = !1, Re = -1, Oe = (me = { length: ye, functionToLoop: function(nt, tt) {
+            function $e() {
+              !De && Ke - Ne <= Ke * ke || (ge && (De = !0), le.push(Z[tt])), nt();
             }
-            var Ne, Dt, $e, yt;
-            Le ? We() : ((yt = new Image()).onload = function() {
-              ce.drawImage(yt, 0, 0, V.width, V.height);
-              var ot = ce.getImageData(0, 0, V.width, V.height);
-              Ne = 0, Dt = ot.data.length, $e = ot.data.length / 4;
-              for (var He = 0; He < Dt; He += 4) {
-                var lt = ot.data[He], Re = ot.data[He + 1], je = ot.data[He + 2];
-                Math.sqrt(Math.pow(+lt, 2) + Math.pow(+Re, 2) + Math.pow(+je, 2)) <= Ee * xe && Ne++;
+            var Ne, Rt, Ke, yt;
+            De ? $e() : ((yt = new Image()).onload = function() {
+              pe.drawImage(yt, 0, 0, V.width, V.height);
+              var ot = pe.getImageData(0, 0, V.width, V.height);
+              Ne = 0, Rt = ot.data.length, Ke = ot.data.length / 4;
+              for (var He = 0; He < Rt; He += 4) {
+                var lt = ot.data[He], Ie = ot.data[He + 1], je = ot.data[He + 2];
+                Math.sqrt(Math.pow(+lt, 2) + Math.pow(+Ie, 2) + Math.pow(+je, 2)) <= Ee * Ce && Ne++;
               }
-              We();
+              $e();
             }, yt.src = Z[tt].image);
           }, callback: function() {
             (le = le.concat(Z.slice(ye))).length <= 0 && le.push(Z[Z.length - 1]), ie(le);
           } }).length, (function nt() {
-            ++De !== Oe ? setTimeout(function() {
-              me.functionToLoop(nt, De);
+            ++Re !== Oe ? setTimeout(function() {
+              me.functionToLoop(nt, Re);
             }, 1) : me.callback();
           })();
         }, 10);
@@ -3164,8 +3174,8 @@ const ks = (Ae, Qe) => {
             return [{ data: Z, id: 231 }].concat(X.map(function(se) {
               var ie = (function(ne) {
                 var me = 0;
-                return me |= 128, 127 < ne.trackNum, [128 | ne.trackNum, ne.timecode >> 8, 255 & ne.timecode, me].map(function(ce) {
-                  return String.fromCharCode(ce);
+                return me |= 128, 127 < ne.trackNum, [128 | ne.trackNum, ne.timecode >> 8, 255 & ne.timecode, me].map(function(pe) {
+                  return String.fromCharCode(pe);
                 }).join("") + ne.frame;
               })({ frame: se.data.slice(4), trackNum: 1, timecode: Math.round(W) });
               return W += se.duration, { data: ie, id: 163 };
@@ -3707,20 +3717,20 @@ const ks = (Ae, Qe) => {
     return 31 & D[0];
   }
   function Pa(D) {
-    return D === Dn;
+    return D === Ln;
   }
   function Kr(D) {
     return (e = D) !== Hi && e !== Vi && !Pa(D);
     var e;
   }
   function Ba(D) {
-    return D === Ln;
+    return D === Cn;
   }
   const qr = (D) => {
     let e = D, i = e.byteLength, s = new Uint8Array(i), u = 0;
     for (let c = 0; c < i; c++) 2 <= c && e[c] === 3 && e[c - 1] === 0 && e[c - 2] === 0 || (s[u] = e[c], u++);
     return new Uint8Array(s.buffer, 0, u);
-  }, to = (D) => {
+  }, eo = (D) => {
     switch (D) {
       case 0:
         return "4:0:0";
@@ -3770,7 +3780,7 @@ const ks = (Ae, Qe) => {
         }
       }
     } while (!1);
-    return e.codecWidth = e.width || 1920, e.codecHeight = e.height || 1080, e.presentHeight = e.codecHeight, e.presentWidth = e.codecWidth, e.timescale = 1e3, e.refSampleDuration = 1e3 / 23976 * 1e3, e.videoType = Rn, e;
+    return e.codecWidth = e.width || 1920, e.codecHeight = e.height || 1080, e.presentHeight = e.codecHeight, e.presentWidth = e.codecWidth, e.timescale = 1e3, e.refSampleDuration = 1e3 / 23976 * 1e3, e.videoType = Dn, e;
   }
   function Ua(e) {
     var { vps: e, pps: i, sps: s } = e, u = { configurationVersion: 1 }, o = ((f) => (f = qr(f), f = new Ti(f), f.readByte(), f.readByte(), f.readBits(4), f.readBits(2), f.readBits(6), { num_temporal_layers: f.readBits(3) + 1, temporal_id_nested: f.readBool() }))(e), c = ((r) => {
@@ -3796,8 +3806,8 @@ const ks = (Ae, Qe) => {
           le === z && g.readUEG(), g.readBool(), g.readUEG();
           let ye = 0;
           for (let Ee = 0; Ee <= G; Ee++) {
-            let xe = g.readBool(), ke = !1;
-            xe || (ke = g.readBool()), (xe || ke) && ye++;
+            let Ce = g.readBool(), ke = !1;
+            Ce || (ke = g.readBool()), (Ce || ke) && ye++;
           }
           G = ye;
         } else {
@@ -3822,16 +3832,16 @@ const ks = (Ae, Qe) => {
           for (let Ee = 0; Ee <= t; Ee++) {
             var se = g.readBool();
             Z = se;
-            let xe = !1, ke = !1;
-            if ((xe = se ? xe : g.readBool()) ? g.readSEG() : ke = g.readBool(), ke || (cpbcnt = g.readUEG() + 1), le) for (let Le = 0; Le < 1; Le++) g.readUEG(), g.readUEG(), ye && (g.readUEG(), g.readUEG());
-            if (ge) for (let Le = 0; Le < 1; Le++) g.readUEG(), g.readUEG(), ye && (g.readUEG(), g.readUEG());
+            let Ce = !1, ke = !1;
+            if ((Ce = se ? Ce : g.readBool()) ? g.readSEG() : ke = g.readBool(), ke || (cpbcnt = g.readUEG() + 1), le) for (let De = 0; De < 1; De++) g.readUEG(), g.readUEG(), ye && (g.readUEG(), g.readUEG());
+            if (ge) for (let De = 0; De < 1; De++) g.readUEG(), g.readUEG(), ye && (g.readUEG(), g.readUEG());
           }
         }
         g.readBool() && (g.readBool(), g.readBool(), g.readBool(), q = g.readUEG(), g.readUEG(), g.readUEG(), g.readUEG(), g.readUEG());
       }
       g.readBool();
-      let ie = `hvc1.${a}.1.L${B}.B0`, ne = F, me = M, ce = 1;
-      return J !== 1 && re !== 1 && (ce = J / re), g.destroy(), g = null, { codec_mimetype: ie, level_string: (B / 30).toFixed(1), profile_idc: a, bit_depth: w + 8, ref_frames: 1, chroma_format: P, chroma_format_string: to(P), general_level_idc: B, general_profile_space: r, general_tier_flag: n, general_profile_idc: a, general_profile_compatibility_flags_1: d, general_profile_compatibility_flags_2: p, general_profile_compatibility_flags_3: m, general_profile_compatibility_flags_4: x, general_constraint_indicator_flags_1: b, general_constraint_indicator_flags_2: C, general_constraint_indicator_flags_3: v, general_constraint_indicator_flags_4: y, general_constraint_indicator_flags_5: S, general_constraint_indicator_flags_6: L, min_spatial_segmentation_idc: q, constant_frame_rate: 0, chroma_format_idc: P, bit_depth_luma_minus8: w, bit_depth_chroma_minus8: R, frame_rate: { fixed: Z, fps: X / W, fps_den: W, fps_num: X }, sar_ratio: { width: J, height: re }, codec_size: { width: ne, height: me }, present_size: { width: ne * ce, height: me } };
+      let ie = `hvc1.${a}.1.L${B}.B0`, ne = F, me = M, pe = 1;
+      return J !== 1 && re !== 1 && (pe = J / re), g.destroy(), g = null, { codec_mimetype: ie, level_string: (B / 30).toFixed(1), profile_idc: a, bit_depth: w + 8, ref_frames: 1, chroma_format: P, chroma_format_string: eo(P), general_level_idc: B, general_profile_space: r, general_tier_flag: n, general_profile_idc: a, general_profile_compatibility_flags_1: d, general_profile_compatibility_flags_2: p, general_profile_compatibility_flags_3: m, general_profile_compatibility_flags_4: x, general_constraint_indicator_flags_1: b, general_constraint_indicator_flags_2: C, general_constraint_indicator_flags_3: v, general_constraint_indicator_flags_4: y, general_constraint_indicator_flags_5: S, general_constraint_indicator_flags_6: L, min_spatial_segmentation_idc: q, constant_frame_rate: 0, chroma_format_idc: P, bit_depth_luma_minus8: w, bit_depth_chroma_minus8: R, frame_rate: { fixed: Z, fps: X / W, fps_den: W, fps_num: X }, sar_ratio: { width: J, height: re }, codec_size: { width: ne, height: me }, present_size: { width: ne * pe, height: me } };
     })(s), l = ((f) => {
       f = qr(f), f = new Ti(f), f.readByte(), f.readByte(), f.readUEG(), f.readUEG(), f.readBool(), f.readBool(), f.readBits(3), f.readBool(), f.readBool(), f.readUEG(), f.readUEG(), f.readSEG(), f.readBool(), f.readBool(), f.readBool() && f.readUEG(), f.readSEG(), f.readSEG(), f.readBool(), f.readBool(), f.readBool(), f.readBool();
       let _ = f.readBool(), g = f.readBool(), T = 1;
@@ -3916,7 +3926,7 @@ const ks = (Ae, Qe) => {
       s && (s.vps && (this.vps = s.vps), s.pps && (this.pps = s.pps), s.sps && (this.sps = s.sps), s.presentWidth && (this.metaInfo.presentWidth = s.presentWidth), s.presentHeight && (this.metaInfo.presentHeight = s.presentHeight), s.codecWidth && (this.metaInfo.codecWidth = s.codecWidth), s.codecHeight && (this.metaInfo.codecHeight = s.codecHeight), s.timescale && (this.metaInfo.timescale = s.timescale), s.refSampleDuration && (this.metaInfo.refSampleDuration = s.refSampleDuration), s.videoType) && (this.metaInfo.videoType = s.videoType);
     }
   }
-  class io extends Oa {
+  class to extends Oa {
     constructor(e) {
       super(e), this.totalByteLength = 0, this._startRecordingTimestamp = null, e.debug.log("RecorderRTC", "init");
     }
@@ -3946,7 +3956,7 @@ const ks = (Ae, Qe) => {
       }, disableLogs: !this.player._opt.debug };
       try {
         let s = null;
-        if (this.player.getRenderType() === Et ? s = this.player.video.$videoElement.captureStream(25) : this.player.video.mediaStream ? s = this.player.video.mediaStream : this.player.isOldHls() || this.player._opt.useMSE || this.player._opt.useWCS ? s = this.player.video.$videoElement.captureStream(25) : this.player._opt.isWebrtc && (s = this.player.webrtc.videoStream), s) {
+        if (this.player.getRenderType() === Tt ? s = this.player.video.$videoElement.captureStream(25) : this.player.video.mediaStream ? s = this.player.video.mediaStream : this.player.isOldHls() || this.player._opt.useMSE || this.player._opt.useWCS ? s = this.player.video.$videoElement.captureStream(25) : this.player._opt.isWebrtc && (s = this.player.webrtc.videoStream), s) {
           if (this.player.audio && this.player.audio.mediaStreamAudioDestinationNode && this.player.audio.mediaStreamAudioDestinationNode.stream && !this.player.audio.isStateSuspended() && this.player.audio.hasAudio && this.player._opt.hasAudio) {
             const u = this.player.audio.mediaStreamAudioDestinationNode.stream;
             if (0 < u.getAudioTracks().length) {
@@ -3954,7 +3964,7 @@ const ks = (Ae, Qe) => {
               c && c.enabled && s.addTrack(c);
             }
           }
-          this.recorder = eo(s, i);
+          this.recorder = Zn(s, i);
         } else e.error("RecorderRTC", "startRecord error and can not create stream"), this.emit(N.recordCreateError);
       } catch (s) {
         e.error("RecorderRTC", "startRecord error", s), this.emit(N.recordCreateError);
@@ -4165,7 +4175,7 @@ const ks = (Ae, Qe) => {
     }
   }
   ee.init();
-  class ro extends Oa {
+  class io extends Oa {
     constructor(e) {
       super(e), this.tagName = "recorderMP4", this.totalDuration = 0, this.totalByteLength = 0, this.bufferList = [], this.cacheTrack = {}, this.sequenceNumber = 0, e.debug.log(this.tagName, "init");
     }
@@ -4213,7 +4223,7 @@ const ks = (Ae, Qe) => {
       return this.totalDuration / 1e3;
     }
     getType() {
-      return Xe;
+      return ze;
     }
     getToTalByteLength() {
       return this.totalByteLength;
@@ -4227,7 +4237,7 @@ const ks = (Ae, Qe) => {
         else {
           s();
           {
-            s = (this.fileName || be()) + "." + Xe;
+            s = (this.fileName || be()) + "." + ze;
             let c = window.URL.createObjectURL(u), l = window.document.createElement("a");
             l.download = s, l.href = c, s = window.document.createEvent("MouseEvents"), s.initEvent("click", !0, !0), l.dispatchEvent(s), setTimeout(() => {
               window.URL.revokeObjectURL(c);
@@ -4243,14 +4253,14 @@ const ks = (Ae, Qe) => {
       return new (Jr.getLoaderFactory(e._opt))(e);
     }
     static getLoaderFactory(e) {
-      return e.recordType === Xe && (e.useWasm || e.useMSE || e.useWCS) ? ro : io;
+      return e.recordType === ze && (e.useWasm || e.useMSE || e.useWCS) ? io : to;
     }
   }
   class Na {
     constructor(e) {
       this.player = e, this.destroyResolve = null;
       let i = e._opt.decoder;
-      if ((i = _e(this.player._opt.useWasm) ? e._opt.decoderAudio : i).indexOf("http") === 0 && this.player._opt.isDecoderUseCDN) {
+      if ((i = ve(this.player._opt.useWasm) ? e._opt.decoderAudio : i).indexOf("http") === 0 && this.player._opt.isDecoderUseCDN) {
         const s = new Blob([`importScripts("${i}")`], { type: "application/javascript" });
         i = window.URL.createObjectURL(s);
       }
@@ -4288,28 +4298,28 @@ const ks = (Ae, Qe) => {
             e.log("decoderWorker", "onmessage:", Ue, s.code), this.player.audio && this.player.audio.updateAudioInfo({ encTypeCode: s.code });
             break;
           case ci:
-            e.log("decoderWorker", "onmessage:", ci, `width:${s.w},height:` + s.h), this.player.video.updateVideoInfo({ width: s.w, height: s.h }), this.player._opt.openWebglAlignment || s.w / 2 % 4 == 0 || this.player.getRenderType() !== Et ? (this.player.video.initCanvasViewSize(), this.player._opt.playType === pe && (this.player.video.initFps(), this.player.video.initVideoDelay())) : this.player.emit(H.webglAlignmentError);
+            e.log("decoderWorker", "onmessage:", ci, `width:${s.w},height:` + s.h), this.player.video.updateVideoInfo({ width: s.w, height: s.h }), this.player._opt.openWebglAlignment || s.w / 2 % 4 == 0 || this.player.getRenderType() !== Tt ? (this.player.video.initCanvasViewSize(), this.player._opt.playType === ce && (this.player.video.initFps(), this.player.video.initVideoDelay())) : this.player.emit(H.webglAlignmentError);
             break;
           case pi:
-            e.log("decoderWorker", "onmessage:", pi, `channels:${s.channels},sampleRate:` + s.sampleRate), 2 < s.channels ? this.player.emitError(H.audioChannelError, `audio channel is ${s.channels}, max is 2`) : this.player.audio && (this.player.audio.updateAudioInfo(s), this.player._opt.playType === Ie ? this.player.audio.initScriptNode() : this.player._opt.playType === pe && this.player.audio.initScriptNodeDelay());
+            e.log("decoderWorker", "onmessage:", pi, `channels:${s.channels},sampleRate:` + s.sampleRate), 2 < s.channels ? this.player.emitError(H.audioChannelError, `audio channel is ${s.channels}, max is 2`) : this.player.audio && (this.player.audio.updateAudioInfo(s), this.player._opt.playType === xe ? this.player.audio.initScriptNode() : this.player._opt.playType === ce && this.player.audio.initScriptNodeDelay());
             break;
           case "render":
-            if (this.player.video) if (this.player._opt.playType === Ie) {
-              if (_e(this.player.video.getHasInit())) return void e.warn("decoderWorker", "onmessage render but video has not init");
+            if (this.player.video) if (this.player._opt.playType === xe) {
+              if (ve(this.player.video.getHasInit())) return void e.warn("decoderWorker", "onmessage render but video has not init");
               this.player.video.render(s), this.player.handleRender(), this.player.emit(N.timeUpdate, s.ts), this.player.updateStats({ dfps: !0, buf: s.delay }), this.player._times.videoStart || (this.player._times.videoStart = be(), this.player.handlePlayToRenderTimes());
-            } else this.player._opt.playType === pe && (this.player.updateStats({ dfps: !0 }), _e(this.player.playbackPause) ? (this.player.playback.isUseLocalCalculateTime && this.player.playback.increaseLocalTimestamp(), this.player.playback.isUseFpsRender ? this.player.video.pushData(s) : this.player.video.render$2(s)) : !this.player.playback.isPlaybackPauseClearCache && this.player.playback.isCacheBeforeDecodeForFpsRender && this.player.playback.isUseFpsRender && this.player.video.pushData(s));
+            } else this.player._opt.playType === ce && (this.player.updateStats({ dfps: !0 }), ve(this.player.playbackPause) ? (this.player.playback.isUseLocalCalculateTime && this.player.playback.increaseLocalTimestamp(), this.player.playback.isUseFpsRender ? this.player.video.pushData(s) : this.player.video.render$2(s)) : !this.player.playback.isPlaybackPauseClearCache && this.player.playback.isCacheBeforeDecodeForFpsRender && this.player.playback.isUseFpsRender && this.player.video.pushData(s));
             else e.warn("decoderWorker", "onmessage render but video is null");
             break;
           case "videoNalu":
-            this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === Xe && this.player.recorder.handleAddNaluTrack(s.buffer, s.isIFrame, s.ts, s.cts);
+            this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === ze && this.player.recorder.handleAddNaluTrack(s.buffer, s.isIFrame, s.ts, s.cts);
             break;
           case "playAudio":
-            this.player.audio ? (this.player.playing && this.player.audio || !this.player.video) && (this.player._opt.hasVideo || this.player.handleRender(), this.player._opt.playType === Ie || this.player._opt.playType === pe && (_e(this.player.playbackPause) || !this.player.playback.isPlaybackPauseClearCache && this.player.playback.isCacheBeforeDecodeForFpsRender && this.player.playback.isUseFpsRender)) && this.player.audio.play(s.buffer, s.ts) : e.warn("decoderWorker", "onmessage playAudio but audio is null");
+            this.player.audio ? (this.player.playing && this.player.audio || !this.player.video) && (this.player._opt.hasVideo || this.player.handleRender(), this.player._opt.playType === xe || this.player._opt.playType === ce && (ve(this.player.playbackPause) || !this.player.playback.isPlaybackPauseClearCache && this.player.playback.isCacheBeforeDecodeForFpsRender && this.player.playback.isUseFpsRender)) && this.player.audio.play(s.buffer, s.ts) : e.warn("decoderWorker", "onmessage playAudio but audio is null");
             break;
           case "workerFetch":
             if (s.type === N.streamSuccess) this.player.stream ? this.player.stream.emit(N.streamSuccess) : e.warn("decoderWorker", "onmessage and workerFetch response stream success but stream is null");
             else if (s.type === N.streamRate) this.player.emit(N.kBps, (s.value / 1024).toFixed(2));
-            else if (s.type === N.streamEnd) this.player ? (s.value === Ge && this.player.emit(N.websocketClose), this.player.stream ? this.player.stream.emit(N.streamEnd) : e && e.warn("decoderWorker", "onmessage and workerFetch response stream end but player.stream is null")) : e && e.warn("decoderWorker", "onmessage and workerFetch response stream end but player is null");
+            else if (s.type === N.streamEnd) this.player ? (s.value === Ve && this.player.emit(N.websocketClose), this.player.stream ? this.player.stream.emit(N.streamEnd) : e && e.warn("decoderWorker", "onmessage and workerFetch response stream end but player.stream is null")) : e && e.warn("decoderWorker", "onmessage and workerFetch response stream end but player is null");
             else if (s.type === H.websocketError) this.player && this.player.stream ? this.player.stream.emit(H.websocketError, s.value) : e && e.warn("decoderWorker", "onmessage and workerFetch response websocket error but stream is null");
             else if (s.type === H.fetchError) this.player && this.player.stream ? this.player.stream.emit(H.fetchError, s.value) : e && e.warn("decoderWorker", "onmessage and workerFetch response fetch error but stream is null");
             else if (s.type === N.streamAbps) this.player.updateStats({ abps: s.value });
@@ -4353,7 +4363,7 @@ const ks = (Ae, Qe) => {
       this.decoderWorker.postMessage({ cmd: "init", opt: JSON.stringify(e) }), this.player._opt.isCrypto && (this.updateWorkConfig({ key: "cryptoKey", value: this.player._opt.cryptoKey }), this.updateWorkConfig({ key: "cryptoIV", value: this.player._opt.cryptoIV }));
     }
     decodeVideo(e, i, s) {
-      this.player._opt.playType === Ie ? this.player.isUseHls265() ? this._decodeVideoNoDelay(e, i, s) : this._decodeVideo(e, i, s) : this.player._opt.playType === pe && (this.player.video.rate >= this.player._opt.playbackForwardMaxRateDecodeIFrame ? s && (this.player.debug.log("decoderWorker", `current rate is ${this.player.video.rate},only decode i frame`), this._decodeVideoNoDelay(e, i, s)) : this.player.video.rate === 1 ? this._decodeVideo(e, i, s) : this._decodeVideoNoDelay(e, i, s));
+      this.player._opt.playType === xe ? this.player.isUseHls265() ? this._decodeVideoNoDelay(e, i, s) : this._decodeVideo(e, i, s) : this.player._opt.playType === ce && (this.player.video.rate >= this.player._opt.playbackForwardMaxRateDecodeIFrame ? s && (this.player.debug.log("decoderWorker", `current rate is ${this.player.video.rate},only decode i frame`), this._decodeVideoNoDelay(e, i, s)) : this.player.video.rate === 1 ? this._decodeVideo(e, i, s) : this._decodeVideoNoDelay(e, i, s));
     }
     _decodeVideo(e, i, s) {
       i = { type: 2, ts: Math.max(i, 0), isIFrame: s }, this.decoderWorker.postMessage({ cmd: "decode", buffer: e, options: i }, [e.buffer]);
@@ -4362,7 +4372,7 @@ const ks = (Ae, Qe) => {
       this.decoderWorker.postMessage({ cmd: "videoDecode", buffer: e, ts: Math.max(i, 0), isIFrame: s }, [e.buffer]);
     }
     decodeAudio(e, i) {
-      this.player._opt.playType === Ie ? this.player._opt.useWCS || this.player._opt.useMSE || this.player.isUseHls265() ? this._decodeAudioNoDelay(e, i) : this._decodeAudio(e, i) : this.player._opt.playType === pe && (this.player.video.rate === 1 ? this._decodeAudio(e, i) : this._decodeAudioNoDelay(e, i));
+      this.player._opt.playType === xe ? this.player._opt.useWCS || this.player._opt.useMSE || this.player.isUseHls265() ? this._decodeAudioNoDelay(e, i) : this._decodeAudio(e, i) : this.player._opt.playType === ce && (this.player.video.rate === 1 ? this._decodeAudio(e, i) : this._decodeAudioNoDelay(e, i));
     }
     _decodeAudio(e, i) {
       i = { type: 1, ts: Math.max(i, 0) }, this.decoderWorker.postMessage({ cmd: "decode", buffer: e, options: i }, [e.buffer]);
@@ -4423,7 +4433,7 @@ const ks = (Ae, Qe) => {
     }
     _loop() {
       let e;
-      const i = this.player._opt.videoBuffer, s = this.player._opt.videoBufferDelay, u = this.player._opt.playType === Ie;
+      const i = this.player._opt.videoBuffer, s = this.player._opt.videoBufferDelay, u = this.player._opt.playType === xe;
       if (this.bufferList.length) if (this.isPushDropping) this.player.debug.warn("CommonDemux", "_loop isPushDropping is true and bufferList length is " + this.bufferList.length);
       else if (this.player._opt.useMSE && this.player.mseDecoder && this.player.mseDecoder.getSourceBufferUpdating()) this.player.debug.warn("CommonDemux", "_loop getSourceBufferUpdating is true and bufferList length is " + this.bufferList.length);
       else if (this.dropping) {
@@ -4436,7 +4446,7 @@ const ks = (Ae, Qe) => {
     }
     _doDecode(e, i, s, u) {
       var c = this.player, l = { ts: s, cts: 4 < arguments.length && arguments[4] !== void 0 ? arguments[4] : 0, type: i, isIFrame: !1 };
-      i === 2 && c._opt.playType === Ie && this.calcNetworkDelay(s), c._opt.useWCS && !c._opt.useOffscreen || c._opt.useMSE ? (i === 2 && (l.isIFrame = u), this.pushBuffer(e, l)) : i === 2 ? c.decoderWorker && c.decoderWorker.decodeVideo(e, s, u) : i === 1 && c._opt.hasAudio && c.decoderWorker && c.decoderWorker.decodeAudio(e, s);
+      i === 2 && c._opt.playType === xe && this.calcNetworkDelay(s), c._opt.useWCS && !c._opt.useOffscreen || c._opt.useMSE ? (i === 2 && (l.isIFrame = u), this.pushBuffer(e, l)) : i === 2 ? c.decoderWorker && c.decoderWorker.decodeVideo(e, s, u) : i === 1 && c._opt.hasAudio && c.decoderWorker && c.decoderWorker.decodeAudio(e, s);
     }
     _doDecodeByHls(e, i, s, u) {
       var c = 4 < arguments.length && arguments[4] !== void 0 ? arguments[4] : 0, l = this.player, { webcodecsDecoder: o, mseDecoder: f } = l;
@@ -4450,7 +4460,7 @@ const ks = (Ae, Qe) => {
       e.type === 1 ? i._opt.hasAudio && i.decoderWorker && i.decoderWorker.decodeAudio(e.payload, e.ts) : e.type === 2 && (i._opt.useWCS && !i._opt.useOffscreen ? s.decodeVideo(e.payload, e.ts, e.isIFrame, e.cts) : i._opt.useMSE && u.decodeVideo(e.payload, e.ts, e.isIFrame, e.cts));
     }
     pushBuffer(e, i) {
-      const s = this.player._opt.videoBuffer, u = this.player._opt.videoBufferDelay, c = this.player._opt.playType === Ie;
+      const s = this.player._opt.videoBuffer, u = this.player._opt.videoBufferDelay, c = this.player._opt.playType === xe;
       if (i.type === 1 && qs(e)) this.player.debug.log("CommonDemux", `pushBuffer audio ts is ${i.ts}, isAacCodecPacket is ` + qs(e)), this._doDecoderDecode({ ts: i.ts, payload: e, type: 1 });
       else {
         if (0 < this.preTimestampDuration && 0 < this.preTimestamp && i.type === 2) {
@@ -4477,7 +4487,7 @@ const ks = (Ae, Qe) => {
     dropBuffer$2() {
       if (0 < this.bufferList.length) {
         this.isPushDropping = !0;
-        let u = this.bufferList.findIndex((c) => Ve(c.isIFrame) && c.type === 2);
+        let u = this.bufferList.findIndex((c) => We(c.isIFrame) && c.type === 2);
         if (this.isAllIframeInBufferList()) for (let c = 0; c < this.bufferList.length; c++) {
           var e = this.bufferList[c], e = this.getDelayNotUpdateDelay(e.ts);
           if (e >= this.getNotDroppingDelayTs()) {
@@ -4496,7 +4506,7 @@ const ks = (Ae, Qe) => {
     }
     calcNetworkDelay(e) {
       var i, s, u;
-      this.player.isDemuxDecodeFirstIIframeInit() && 0 < e && (this.bufferStartDts === null ? (this.bufferStartDts = e, this.bufferStartLocalTs = be()) : e < this.bufferStartDts && (this.player.debug.warn("CommonDemux", `calcNetworkDelay dts is ${e} and bufferStartDts is ` + this.bufferStartDts), this.bufferStartDts = e, this.bufferStartLocalTs = be()), (u = (i = e - this.bufferStartDts) < (s = be() - this.bufferStartLocalTs) ? s - i : 0) > this.player._opt.networkDelay && this.player._opt.playType === Ie && (this.player.debug.warn("CommonDemux", `delay is more than networkDelay and now dts:${e},start dts is ${this.bufferStartDts}, vs start is ${i},local diff is ${s} ,delay is ${u}, _opt.networkDelay is ` + this.player._opt.networkDelay), this.player.emit(N.networkDelayTimeout, u)), this.player.updateStats({ netBuf: u }));
+      this.player.isDemuxDecodeFirstIIframeInit() && 0 < e && (this.bufferStartDts === null ? (this.bufferStartDts = e, this.bufferStartLocalTs = be()) : e < this.bufferStartDts && (this.player.debug.warn("CommonDemux", `calcNetworkDelay dts is ${e} and bufferStartDts is ` + this.bufferStartDts), this.bufferStartDts = e, this.bufferStartLocalTs = be()), (u = (i = e - this.bufferStartDts) < (s = be() - this.bufferStartLocalTs) ? s - i : 0) > this.player._opt.networkDelay && this.player._opt.playType === xe && (this.player.debug.warn("CommonDemux", `delay is more than networkDelay and now dts:${e},start dts is ${this.bufferStartDts}, vs start is ${i},local diff is ${s} ,delay is ${u}, _opt.networkDelay is ` + this.player._opt.networkDelay), this.player.emit(N.networkDelayTimeout, u)), this.player.updateStats({ netBuf: u }));
     }
     calcIframeIntervalTimestamp(e) {
       var i;
@@ -4654,7 +4664,7 @@ const ks = (Ae, Qe) => {
     }
   }
   yr.U32 = Qr, yr.U16 = Xr, yr.U8 = Zr;
-  var Ar, ja = "application/json, text/javascript", za = "text/html", so = /^(?:text|application)\/xml/i, ao = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, no = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/, oo = /^\s*$/, es = {}, ts = {}, Ga = "", ki = { type: "GET", beforeSend: Mt, success: Mt, error: Mt, complete: Mt, context: null, xhr: function() {
+  var Ar, ja = "application/json, text/javascript", za = "text/html", ro = /^(?:text|application)\/xml/i, so = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, ao = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/, no = /^\s*$/, es = {}, ts = {}, Ga = "", ki = { type: "GET", beforeSend: Mt, success: Mt, error: Mt, complete: Mt, context: null, xhr: function() {
     return new window.XMLHttpRequest();
   }, accepts: { json: ja, xml: "application/xml, text/xml", html: za, text: "text/plain", "*": "*/".concat("*") }, crossDomain: !1, timeout: 0, username: null, password: null, processData: !0, promise: Mt, contentType: "application/x-www-form-urlencoded; charset=UTF-8" };
   function Mt() {
@@ -4671,7 +4681,7 @@ const ks = (Ae, Qe) => {
     } catch {
       s.promise = { resolve: Mt, reject: Mt };
     }
-    var c, l, o, f, _, g = no.exec(window.location.href.toLowerCase()) || [], T = (s.url = ((D || s.url || window.location.href) + "").replace(/#.*$/, "").replace(/^\/\//, g[1] + "//"), s.url), E = (s.crossDomain || (s.crossDomain = /^([\w-]+:)?\/\/([^\/]+)/.test(s.url) && RegExp.$2 !== window.location.href), s.dataType);
+    var c, l, o, f, _, g = ao.exec(window.location.href.toLowerCase()) || [], T = (s.url = ((D || s.url || window.location.href) + "").replace(/#.*$/, "").replace(/^\/\//, g[1] + "//"), s.url), E = (s.crossDomain || (s.crossDomain = /^([\w-]+:)?\/\/([^\/]+)/.test(s.url) && RegExp.$2 !== window.location.href), s.dataType);
     if (E === "jsonp") return /=\?/.test(s.url) || (g = (s.jsonp || "callback") + "=?", s.url = is(s.url, g)), o = (c = s).jsonpCallback || "jsonp" + ss(), f = window.document.createElement("script"), _ = { abort: function() {
       o in window && (window[o] = Mt);
     } }, g = window.document.getElementsByTagName("head")[0] || window.document.documentElement, f.onerror = function(d) {
@@ -4694,9 +4704,9 @@ const ks = (Ae, Qe) => {
         clearTimeout(t);
         var d, p = !1;
         if (200 <= r.status && r.status < 300 || r.status === 304) {
-          Ga = r.getAllResponseHeaders(), s.ifModified && ((m = Wa("Last-Modified")) && (es[T] = m), m = Wa("etag")) && (ts[T] = m), E = E || (m = r.getResponseHeader("content-type")) && (m === za ? "html" : m === ja ? "json" : so.test(m) && "xml") || "text", d = r.responseText;
+          Ga = r.getAllResponseHeaders(), s.ifModified && ((m = Wa("Last-Modified")) && (es[T] = m), m = Wa("etag")) && (ts[T] = m), E = E || (m = r.getResponseHeader("content-type")) && (m === za ? "html" : m === ja ? "json" : ro.test(m) && "xml") || "text", d = r.responseText;
           try {
-            E === "xml" ? d = r.responseXML : E === "json" && (d = oo.test(d) ? null : JSON.parse(d));
+            E === "xml" ? d = r.responseXML : E === "json" && (d = no.test(d) ? null : JSON.parse(d));
           } catch (x) {
             p = x;
           }
@@ -4731,7 +4741,7 @@ const ks = (Ae, Qe) => {
   function Wa(D) {
     var e;
     if (!Ar) {
-      for (Ar = {}; e = ao.exec(Ga); ) Ar[e[1].toLowerCase()] = e[2];
+      for (Ar = {}; e = so.exec(Ga); ) Ar[e[1].toLowerCase()] = e[2];
       e = Ar[D.toLowerCase()];
     }
     return e === null ? null : e;
@@ -4812,7 +4822,7 @@ const ks = (Ae, Qe) => {
       e.push(ns[(240 & s) >> 4] + ns[15 & s]);
     }
     return e.join("");
-  } }), lo = { 16: 10, 24: 12, 32: 14 }, ho = [1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145], gt = [99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22], br = [82, 9, 106, 213, 48, 54, 165, 56, 191, 64, 163, 158, 129, 243, 215, 251, 124, 227, 57, 130, 155, 47, 255, 135, 52, 142, 67, 68, 196, 222, 233, 203, 84, 123, 148, 50, 166, 194, 35, 61, 238, 76, 149, 11, 66, 250, 195, 78, 8, 46, 161, 102, 40, 217, 36, 178, 118, 91, 162, 73, 109, 139, 209, 37, 114, 248, 246, 100, 134, 104, 152, 22, 212, 164, 92, 204, 93, 101, 182, 146, 108, 112, 72, 80, 253, 237, 185, 218, 94, 21, 70, 87, 167, 141, 157, 132, 144, 216, 171, 0, 140, 188, 211, 10, 247, 228, 88, 5, 184, 179, 69, 6, 208, 44, 30, 143, 202, 63, 15, 2, 193, 175, 189, 3, 1, 19, 138, 107, 58, 145, 17, 65, 79, 103, 220, 234, 151, 242, 207, 206, 240, 180, 230, 115, 150, 172, 116, 34, 231, 173, 53, 133, 226, 249, 55, 232, 28, 117, 223, 110, 71, 241, 26, 113, 29, 41, 197, 137, 111, 183, 98, 14, 170, 24, 190, 27, 252, 86, 62, 75, 198, 210, 121, 32, 154, 219, 192, 254, 120, 205, 90, 244, 31, 221, 168, 51, 136, 7, 199, 49, 177, 18, 16, 89, 39, 128, 236, 95, 96, 81, 127, 169, 25, 181, 74, 13, 45, 229, 122, 159, 147, 201, 156, 239, 160, 224, 59, 77, 174, 42, 245, 176, 200, 235, 187, 60, 131, 83, 153, 97, 23, 43, 4, 126, 186, 119, 214, 38, 225, 105, 20, 99, 85, 33, 12, 125], uo = [3328402341, 4168907908, 4000806809, 4135287693, 4294111757, 3597364157, 3731845041, 2445657428, 1613770832, 33620227, 3462883241, 1445669757, 3892248089, 3050821474, 1303096294, 3967186586, 2412431941, 528646813, 2311702848, 4202528135, 4026202645, 2992200171, 2387036105, 4226871307, 1101901292, 3017069671, 1604494077, 1169141738, 597466303, 1403299063, 3832705686, 2613100635, 1974974402, 3791519004, 1033081774, 1277568618, 1815492186, 2118074177, 4126668546, 2211236943, 1748251740, 1369810420, 3521504564, 4193382664, 3799085459, 2883115123, 1647391059, 706024767, 134480908, 2512897874, 1176707941, 2646852446, 806885416, 932615841, 168101135, 798661301, 235341577, 605164086, 461406363, 3756188221, 3454790438, 1311188841, 2142417613, 3933566367, 302582043, 495158174, 1479289972, 874125870, 907746093, 3698224818, 3025820398, 1537253627, 2756858614, 1983593293, 3084310113, 2108928974, 1378429307, 3722699582, 1580150641, 327451799, 2790478837, 3117535592, 0, 3253595436, 1075847264, 3825007647, 2041688520, 3059440621, 3563743934, 2378943302, 1740553945, 1916352843, 2487896798, 2555137236, 2958579944, 2244988746, 3151024235, 3320835882, 1336584933, 3992714006, 2252555205, 2588757463, 1714631509, 293963156, 2319795663, 3925473552, 67240454, 4269768577, 2689618160, 2017213508, 631218106, 1269344483, 2723238387, 1571005438, 2151694528, 93294474, 1066570413, 563977660, 1882732616, 4059428100, 1673313503, 2008463041, 2950355573, 1109467491, 537923632, 3858759450, 4260623118, 3218264685, 2177748300, 403442708, 638784309, 3287084079, 3193921505, 899127202, 2286175436, 773265209, 2479146071, 1437050866, 4236148354, 2050833735, 3362022572, 3126681063, 840505643, 3866325909, 3227541664, 427917720, 2655997905, 2749160575, 1143087718, 1412049534, 999329963, 193497219, 2353415882, 3354324521, 1807268051, 672404540, 2816401017, 3160301282, 369822493, 2916866934, 3688947771, 1681011286, 1949973070, 336202270, 2454276571, 201721354, 1210328172, 3093060836, 2680341085, 3184776046, 1135389935, 3294782118, 965841320, 831886756, 3554993207, 4068047243, 3588745010, 2345191491, 1849112409, 3664604599, 26054028, 2983581028, 2622377682, 1235855840, 3630984372, 2891339514, 4092916743, 3488279077, 3395642799, 4101667470, 1202630377, 268961816, 1874508501, 4034427016, 1243948399, 1546530418, 941366308, 1470539505, 1941222599, 2546386513, 3421038627, 2715671932, 3899946140, 1042226977, 2521517021, 1639824860, 227249030, 260737669, 3765465232, 2084453954, 1907733956, 3429263018, 2420656344, 100860677, 4160157185, 470683154, 3261161891, 1781871967, 2924959737, 1773779408, 394692241, 2579611992, 974986535, 664706745, 3655459128, 3958962195, 731420851, 571543859, 3530123707, 2849626480, 126783113, 865375399, 765172662, 1008606754, 361203602, 3387549984, 2278477385, 2857719295, 1344809080, 2782912378, 59542671, 1503764984, 160008576, 437062935, 1707065306, 3622233649, 2218934982, 3496503480, 2185314755, 697932208, 1512910199, 504303377, 2075177163, 2824099068, 1841019862, 739644986], co = [2781242211, 2230877308, 2582542199, 2381740923, 234877682, 3184946027, 2984144751, 1418839493, 1348481072, 50462977, 2848876391, 2102799147, 434634494, 1656084439, 3863849899, 2599188086, 1167051466, 2636087938, 1082771913, 2281340285, 368048890, 3954334041, 3381544775, 201060592, 3963727277, 1739838676, 4250903202, 3930435503, 3206782108, 4149453988, 2531553906, 1536934080, 3262494647, 484572669, 2923271059, 1783375398, 1517041206, 1098792767, 49674231, 1334037708, 1550332980, 4098991525, 886171109, 150598129, 2481090929, 1940642008, 1398944049, 1059722517, 201851908, 1385547719, 1699095331, 1587397571, 674240536, 2704774806, 252314885, 3039795866, 151914247, 908333586, 2602270848, 1038082786, 651029483, 1766729511, 3447698098, 2682942837, 454166793, 2652734339, 1951935532, 775166490, 758520603, 3000790638, 4004797018, 4217086112, 4137964114, 1299594043, 1639438038, 3464344499, 2068982057, 1054729187, 1901997871, 2534638724, 4121318227, 1757008337, 0, 750906861, 1614815264, 535035132, 3363418545, 3988151131, 3201591914, 1183697867, 3647454910, 1265776953, 3734260298, 3566750796, 3903871064, 1250283471, 1807470800, 717615087, 3847203498, 384695291, 3313910595, 3617213773, 1432761139, 2484176261, 3481945413, 283769337, 100925954, 2180939647, 4037038160, 1148730428, 3123027871, 3813386408, 4087501137, 4267549603, 3229630528, 2315620239, 2906624658, 3156319645, 1215313976, 82966005, 3747855548, 3245848246, 1974459098, 1665278241, 807407632, 451280895, 251524083, 1841287890, 1283575245, 337120268, 891687699, 801369324, 3787349855, 2721421207, 3431482436, 959321879, 1469301956, 4065699751, 2197585534, 1199193405, 2898814052, 3887750493, 724703513, 2514908019, 2696962144, 2551808385, 3516813135, 2141445340, 1715741218, 2119445034, 2872807568, 2198571144, 3398190662, 700968686, 3547052216, 1009259540, 2041044702, 3803995742, 487983883, 1991105499, 1004265696, 1449407026, 1316239930, 504629770, 3683797321, 168560134, 1816667172, 3837287516, 1570751170, 1857934291, 4014189740, 2797888098, 2822345105, 2754712981, 936633572, 2347923833, 852879335, 1133234376, 1500395319, 3084545389, 2348912013, 1689376213, 3533459022, 3762923945, 3034082412, 4205598294, 133428468, 634383082, 2949277029, 2398386810, 3913789102, 403703816, 3580869306, 2297460856, 1867130149, 1918643758, 607656988, 4049053350, 3346248884, 1368901318, 600565992, 2090982877, 2632479860, 557719327, 3717614411, 3697393085, 2249034635, 2232388234, 2430627952, 1115438654, 3295786421, 2865522278, 3633334344, 84280067, 33027830, 303828494, 2747425121, 1600795957, 4188952407, 3496589753, 2434238086, 1486471617, 658119965, 3106381470, 953803233, 334231800, 3005978776, 857870609, 3151128937, 1890179545, 2298973838, 2805175444, 3056442267, 574365214, 2450884487, 550103529, 1233637070, 4289353045, 2018519080, 2057691103, 2399374476, 4166623649, 2148108681, 387583245, 3664101311, 836232934, 3330556482, 3100665960, 3280093505, 2955516313, 2002398509, 287182607, 3413881008, 4238890068, 3597515707, 975967766], po = [1671808611, 2089089148, 2006576759, 2072901243, 4061003762, 1807603307, 1873927791, 3310653893, 810573872, 16974337, 1739181671, 729634347, 4263110654, 3613570519, 2883997099, 1989864566, 3393556426, 2191335298, 3376449993, 2106063485, 4195741690, 1508618841, 1204391495, 4027317232, 2917941677, 3563566036, 2734514082, 2951366063, 2629772188, 2767672228, 1922491506, 3227229120, 3082974647, 4246528509, 2477669779, 644500518, 911895606, 1061256767, 4144166391, 3427763148, 878471220, 2784252325, 3845444069, 4043897329, 1905517169, 3631459288, 827548209, 356461077, 67897348, 3344078279, 593839651, 3277757891, 405286936, 2527147926, 84871685, 2595565466, 118033927, 305538066, 2157648768, 3795705826, 3945188843, 661212711, 2999812018, 1973414517, 152769033, 2208177539, 745822252, 439235610, 455947803, 1857215598, 1525593178, 2700827552, 1391895634, 994932283, 3596728278, 3016654259, 695947817, 3812548067, 795958831, 2224493444, 1408607827, 3513301457, 0, 3979133421, 543178784, 4229948412, 2982705585, 1542305371, 1790891114, 3410398667, 3201918910, 961245753, 1256100938, 1289001036, 1491644504, 3477767631, 3496721360, 4012557807, 2867154858, 4212583931, 1137018435, 1305975373, 861234739, 2241073541, 1171229253, 4178635257, 33948674, 2139225727, 1357946960, 1011120188, 2679776671, 2833468328, 1374921297, 2751356323, 1086357568, 2408187279, 2460827538, 2646352285, 944271416, 4110742005, 3168756668, 3066132406, 3665145818, 560153121, 271589392, 4279952895, 4077846003, 3530407890, 3444343245, 202643468, 322250259, 3962553324, 1608629855, 2543990167, 1154254916, 389623319, 3294073796, 2817676711, 2122513534, 1028094525, 1689045092, 1575467613, 422261273, 1939203699, 1621147744, 2174228865, 1339137615, 3699352540, 577127458, 712922154, 2427141008, 2290289544, 1187679302, 3995715566, 3100863416, 339486740, 3732514782, 1591917662, 186455563, 3681988059, 3762019296, 844522546, 978220090, 169743370, 1239126601, 101321734, 611076132, 1558493276, 3260915650, 3547250131, 2901361580, 1655096418, 2443721105, 2510565781, 3828863972, 2039214713, 3878868455, 3359869896, 928607799, 1840765549, 2374762893, 3580146133, 1322425422, 2850048425, 1823791212, 1459268694, 4094161908, 3928346602, 1706019429, 2056189050, 2934523822, 135794696, 3134549946, 2022240376, 628050469, 779246638, 472135708, 2800834470, 3032970164, 3327236038, 3894660072, 3715932637, 1956440180, 522272287, 1272813131, 3185336765, 2340818315, 2323976074, 1888542832, 1044544574, 3049550261, 1722469478, 1222152264, 50660867, 4127324150, 236067854, 1638122081, 895445557, 1475980887, 3117443513, 2257655686, 3243809217, 489110045, 2662934430, 3778599393, 4162055160, 2561878936, 288563729, 1773916777, 3648039385, 2391345038, 2493985684, 2612407707, 505560094, 2274497927, 3911240169, 3460925390, 1442818645, 678973480, 3749357023, 2358182796, 2717407649, 2306869641, 219617805, 3218761151, 3862026214, 1120306242, 1756942440, 1103331905, 2578459033, 762796589, 252780047, 2966125488, 1425844308, 3151392187, 372911126], fo = [1667474886, 2088535288, 2004326894, 2071694838, 4075949567, 1802223062, 1869591006, 3318043793, 808472672, 16843522, 1734846926, 724270422, 4278065639, 3621216949, 2880169549, 1987484396, 3402253711, 2189597983, 3385409673, 2105378810, 4210693615, 1499065266, 1195886990, 4042263547, 2913856577, 3570689971, 2728590687, 2947541573, 2627518243, 2762274643, 1920112356, 3233831835, 3082273397, 4261223649, 2475929149, 640051788, 909531756, 1061110142, 4160160501, 3435941763, 875846760, 2779116625, 3857003729, 4059105529, 1903268834, 3638064043, 825316194, 353713962, 67374088, 3351728789, 589522246, 3284360861, 404236336, 2526454071, 84217610, 2593830191, 117901582, 303183396, 2155911963, 3806477791, 3958056653, 656894286, 2998062463, 1970642922, 151591698, 2206440989, 741110872, 437923380, 454765878, 1852748508, 1515908788, 2694904667, 1381168804, 993742198, 3604373943, 3014905469, 690584402, 3823320797, 791638366, 2223281939, 1398011302, 3520161977, 0, 3991743681, 538992704, 4244381667, 2981218425, 1532751286, 1785380564, 3419096717, 3200178535, 960056178, 1246420628, 1280103576, 1482221744, 3486468741, 3503319995, 4025428677, 2863326543, 4227536621, 1128514950, 1296947098, 859002214, 2240123921, 1162203018, 4193849577, 33687044, 2139062782, 1347481760, 1010582648, 2678045221, 2829640523, 1364325282, 2745433693, 1077985408, 2408548869, 2459086143, 2644360225, 943212656, 4126475505, 3166494563, 3065430391, 3671750063, 555836226, 269496352, 4294908645, 4092792573, 3537006015, 3452783745, 202118168, 320025894, 3974901699, 1600119230, 2543297077, 1145359496, 387397934, 3301201811, 2812801621, 2122220284, 1027426170, 1684319432, 1566435258, 421079858, 1936954854, 1616945344, 2172753945, 1330631070, 3705438115, 572679748, 707427924, 2425400123, 2290647819, 1179044492, 4008585671, 3099120491, 336870440, 3739122087, 1583276732, 185277718, 3688593069, 3772791771, 842159716, 976899700, 168435220, 1229577106, 101059084, 606366792, 1549591736, 3267517855, 3553849021, 2897014595, 1650632388, 2442242105, 2509612081, 3840161747, 2038008818, 3890688725, 3368567691, 926374254, 1835907034, 2374863873, 3587531953, 1313788572, 2846482505, 1819063512, 1448540844, 4109633523, 3941213647, 1701162954, 2054852340, 2930698567, 134748176, 3132806511, 2021165296, 623210314, 774795868, 471606328, 2795958615, 3031746419, 3334885783, 3907527627, 3722280097, 1953799400, 522133822, 1263263126, 3183336545, 2341176845, 2324333839, 1886425312, 1044267644, 3048588401, 1718004428, 1212733584, 50529542, 4143317495, 235803164, 1633788866, 892690282, 1465383342, 3115962473, 2256965911, 3250673817, 488449850, 2661202215, 3789633753, 4177007595, 2560144171, 286339874, 1768537042, 3654906025, 2391705863, 2492770099, 2610673197, 505291324, 2273808917, 3924369609, 3469625735, 1431699370, 673740880, 3755965093, 2358021891, 2711746649, 2307489801, 218961690, 3217021541, 3873845719, 1111672452, 1751693520, 1094828930, 2576986153, 757954394, 252645662, 2964376443, 1414855848, 3149649517, 370555436], mo = [1374988112, 2118214995, 437757123, 975658646, 1001089995, 530400753, 2902087851, 1273168787, 540080725, 2910219766, 2295101073, 4110568485, 1340463100, 3307916247, 641025152, 3043140495, 3736164937, 632953703, 1172967064, 1576976609, 3274667266, 2169303058, 2370213795, 1809054150, 59727847, 361929877, 3211623147, 2505202138, 3569255213, 1484005843, 1239443753, 2395588676, 1975683434, 4102977912, 2572697195, 666464733, 3202437046, 4035489047, 3374361702, 2110667444, 1675577880, 3843699074, 2538681184, 1649639237, 2976151520, 3144396420, 4269907996, 4178062228, 1883793496, 2403728665, 2497604743, 1383856311, 2876494627, 1917518562, 3810496343, 1716890410, 3001755655, 800440835, 2261089178, 3543599269, 807962610, 599762354, 33778362, 3977675356, 2328828971, 2809771154, 4077384432, 1315562145, 1708848333, 101039829, 3509871135, 3299278474, 875451293, 2733856160, 92987698, 2767645557, 193195065, 1080094634, 1584504582, 3178106961, 1042385657, 2531067453, 3711829422, 1306967366, 2438237621, 1908694277, 67556463, 1615861247, 429456164, 3602770327, 2302690252, 1742315127, 2968011453, 126454664, 3877198648, 2043211483, 2709260871, 2084704233, 4169408201, 0, 159417987, 841739592, 504459436, 1817866830, 4245618683, 260388950, 1034867998, 908933415, 168810852, 1750902305, 2606453969, 607530554, 202008497, 2472011535, 3035535058, 463180190, 2160117071, 1641816226, 1517767529, 470948374, 3801332234, 3231722213, 1008918595, 303765277, 235474187, 4069246893, 766945465, 337553864, 1475418501, 2943682380, 4003061179, 2743034109, 4144047775, 1551037884, 1147550661, 1543208500, 2336434550, 3408119516, 3069049960, 3102011747, 3610369226, 1113818384, 328671808, 2227573024, 2236228733, 3535486456, 2935566865, 3341394285, 496906059, 3702665459, 226906860, 2009195472, 733156972, 2842737049, 294930682, 1206477858, 2835123396, 2700099354, 1451044056, 573804783, 2269728455, 3644379585, 2362090238, 2564033334, 2801107407, 2776292904, 3669462566, 1068351396, 742039012, 1350078989, 1784663195, 1417561698, 4136440770, 2430122216, 775550814, 2193862645, 2673705150, 1775276924, 1876241833, 3475313331, 3366754619, 270040487, 3902563182, 3678124923, 3441850377, 1851332852, 3969562369, 2203032232, 3868552805, 2868897406, 566021896, 4011190502, 3135740889, 1248802510, 3936291284, 699432150, 832877231, 708780849, 3332740144, 899835584, 1951317047, 4236429990, 3767586992, 866637845, 4043610186, 1106041591, 2144161806, 395441711, 1984812685, 1139781709, 3433712980, 3835036895, 2664543715, 1282050075, 3240894392, 1181045119, 2640243204, 25965917, 4203181171, 4211818798, 3009879386, 2463879762, 3910161971, 1842759443, 2597806476, 933301370, 1509430414, 3943906441, 3467192302, 3076639029, 3776767469, 2051518780, 2631065433, 1441952575, 404016761, 1942435775, 1408749034, 1610459739, 3745345300, 2017778566, 3400528769, 3110650942, 941896748, 3265478751, 371049330, 3168937228, 675039627, 4279080257, 967311729, 135050206, 3635733660, 1683407248, 2076935265, 3576870512, 1215061108, 3501741890], go = [1347548327, 1400783205, 3273267108, 2520393566, 3409685355, 4045380933, 2880240216, 2471224067, 1428173050, 4138563181, 2441661558, 636813900, 4233094615, 3620022987, 2149987652, 2411029155, 1239331162, 1730525723, 2554718734, 3781033664, 46346101, 310463728, 2743944855, 3328955385, 3875770207, 2501218972, 3955191162, 3667219033, 768917123, 3545789473, 692707433, 1150208456, 1786102409, 2029293177, 1805211710, 3710368113, 3065962831, 401639597, 1724457132, 3028143674, 409198410, 2196052529, 1620529459, 1164071807, 3769721975, 2226875310, 486441376, 2499348523, 1483753576, 428819965, 2274680428, 3075636216, 598438867, 3799141122, 1474502543, 711349675, 129166120, 53458370, 2592523643, 2782082824, 4063242375, 2988687269, 3120694122, 1559041666, 730517276, 2460449204, 4042459122, 2706270690, 3446004468, 3573941694, 533804130, 2328143614, 2637442643, 2695033685, 839224033, 1973745387, 957055980, 2856345839, 106852767, 1371368976, 4181598602, 1033297158, 2933734917, 1179510461, 3046200461, 91341917, 1862534868, 4284502037, 605657339, 2547432937, 3431546947, 2003294622, 3182487618, 2282195339, 954669403, 3682191598, 1201765386, 3917234703, 3388507166, 0, 2198438022, 1211247597, 2887651696, 1315723890, 4227665663, 1443857720, 507358933, 657861945, 1678381017, 560487590, 3516619604, 975451694, 2970356327, 261314535, 3535072918, 2652609425, 1333838021, 2724322336, 1767536459, 370938394, 182621114, 3854606378, 1128014560, 487725847, 185469197, 2918353863, 3106780840, 3356761769, 2237133081, 1286567175, 3152976349, 4255350624, 2683765030, 3160175349, 3309594171, 878443390, 1988838185, 3704300486, 1756818940, 1673061617, 3403100636, 272786309, 1075025698, 545572369, 2105887268, 4174560061, 296679730, 1841768865, 1260232239, 4091327024, 3960309330, 3497509347, 1814803222, 2578018489, 4195456072, 575138148, 3299409036, 446754879, 3629546796, 4011996048, 3347532110, 3252238545, 4270639778, 915985419, 3483825537, 681933534, 651868046, 2755636671, 3828103837, 223377554, 2607439820, 1649704518, 3270937875, 3901806776, 1580087799, 4118987695, 3198115200, 2087309459, 2842678573, 3016697106, 1003007129, 2802849917, 1860738147, 2077965243, 164439672, 4100872472, 32283319, 2827177882, 1709610350, 2125135846, 136428751, 3874428392, 3652904859, 3460984630, 3572145929, 3593056380, 2939266226, 824852259, 818324884, 3224740454, 930369212, 2801566410, 2967507152, 355706840, 1257309336, 4148292826, 243256656, 790073846, 2373340630, 1296297904, 1422699085, 3756299780, 3818836405, 457992840, 3099667487, 2135319889, 77422314, 1560382517, 1945798516, 788204353, 1521706781, 1385356242, 870912086, 325965383, 2358957921, 2050466060, 2388260884, 2313884476, 4006521127, 901210569, 3990953189, 1014646705, 1503449823, 1062597235, 2031621326, 3212035895, 3931371469, 1533017514, 350174575, 2256028891, 2177544179, 1052338372, 741876788, 1606591296, 1914052035, 213705253, 2334669897, 1107234197, 1899603969, 3725069491, 2631447780, 2422494913, 1635502980, 1893020342, 1950903388, 1120974935], yo = [2807058932, 1699970625, 2764249623, 1586903591, 1808481195, 1173430173, 1487645946, 59984867, 4199882800, 1844882806, 1989249228, 1277555970, 3623636965, 3419915562, 1149249077, 2744104290, 1514790577, 459744698, 244860394, 3235995134, 1963115311, 4027744588, 2544078150, 4190530515, 1608975247, 2627016082, 2062270317, 1507497298, 2200818878, 567498868, 1764313568, 3359936201, 2305455554, 2037970062, 1047239e3, 1910319033, 1337376481, 2904027272, 2892417312, 984907214, 1243112415, 830661914, 861968209, 2135253587, 2011214180, 2927934315, 2686254721, 731183368, 1750626376, 4246310725, 1820824798, 4172763771, 3542330227, 48394827, 2404901663, 2871682645, 671593195, 3254988725, 2073724613, 145085239, 2280796200, 2779915199, 1790575107, 2187128086, 472615631, 3029510009, 4075877127, 3802222185, 4107101658, 3201631749, 1646252340, 4270507174, 1402811438, 1436590835, 3778151818, 3950355702, 3963161475, 4020912224, 2667994737, 273792366, 2331590177, 104699613, 95345982, 3175501286, 2377486676, 1560637892, 3564045318, 369057872, 4213447064, 3919042237, 1137477952, 2658625497, 1119727848, 2340947849, 1530455833, 4007360968, 172466556, 266959938, 516552836, 0, 2256734592, 3980931627, 1890328081, 1917742170, 4294704398, 945164165, 3575528878, 958871085, 3647212047, 2787207260, 1423022939, 775562294, 1739656202, 3876557655, 2530391278, 2443058075, 3310321856, 547512796, 1265195639, 437656594, 3121275539, 719700128, 3762502690, 387781147, 218828297, 3350065803, 2830708150, 2848461854, 428169201, 122466165, 3720081049, 1627235199, 648017665, 4122762354, 1002783846, 2117360635, 695634755, 3336358691, 4234721005, 4049844452, 3704280881, 2232435299, 574624663, 287343814, 612205898, 1039717051, 840019705, 2708326185, 793451934, 821288114, 1391201670, 3822090177, 376187827, 3113855344, 1224348052, 1679968233, 2361698556, 1058709744, 752375421, 2431590963, 1321699145, 3519142200, 2734591178, 188127444, 2177869557, 3727205754, 2384911031, 3215212461, 2648976442, 2450346104, 3432737375, 1180849278, 331544205, 3102249176, 4150144569, 2952102595, 2159976285, 2474404304, 766078933, 313773861, 2570832044, 2108100632, 1668212892, 3145456443, 2013908262, 418672217, 3070356634, 2594734927, 1852171925, 3867060991, 3473416636, 3907448597, 2614737639, 919489135, 164948639, 2094410160, 2997825956, 590424639, 2486224549, 1723872674, 3157750862, 3399941250, 3501252752, 3625268135, 2555048196, 3673637356, 1343127501, 4130281361, 3599595085, 2957853679, 1297403050, 81781910, 3051593425, 2283490410, 532201772, 1367295589, 3926170974, 895287692, 1953757831, 1093597963, 492483431, 3528626907, 1446242576, 1192455638, 1636604631, 209336225, 344873464, 1015671571, 669961897, 3375740769, 3857572124, 2973530695, 3747192018, 1933530610, 3464042516, 935293895, 3454686199, 2858115069, 1863638845, 3683022916, 4085369519, 3292445032, 875313188, 1080017571, 3279033885, 621591778, 1233856572, 2504130317, 24197544, 3017672716, 3835484340, 3247465558, 2220981195, 3060847922, 1551124588, 1463996600], Ao = [4104605777, 1097159550, 396673818, 660510266, 2875968315, 2638606623, 4200115116, 3808662347, 821712160, 1986918061, 3430322568, 38544885, 3856137295, 718002117, 893681702, 1654886325, 2975484382, 3122358053, 3926825029, 4274053469, 796197571, 1290801793, 1184342925, 3556361835, 2405426947, 2459735317, 1836772287, 1381620373, 3196267988, 1948373848, 3764988233, 3385345166, 3263785589, 2390325492, 1480485785, 3111247143, 3780097726, 2293045232, 548169417, 3459953789, 3746175075, 439452389, 1362321559, 1400849762, 1685577905, 1806599355, 2174754046, 137073913, 1214797936, 1174215055, 3731654548, 2079897426, 1943217067, 1258480242, 529487843, 1437280870, 3945269170, 3049390895, 3313212038, 923313619, 679998e3, 3215307299, 57326082, 377642221, 3474729866, 2041877159, 133361907, 1776460110, 3673476453, 96392454, 878845905, 2801699524, 777231668, 4082475170, 2330014213, 4142626212, 2213296395, 1626319424, 1906247262, 1846563261, 562755902, 3708173718, 1040559837, 3871163981, 1418573201, 3294430577, 114585348, 1343618912, 2566595609, 3186202582, 1078185097, 3651041127, 3896688048, 2307622919, 425408743, 3371096953, 2081048481, 1108339068, 2216610296, 0, 2156299017, 736970802, 292596766, 1517440620, 251657213, 2235061775, 2933202493, 758720310, 265905162, 1554391400, 1532285339, 908999204, 174567692, 1474760595, 4002861748, 2610011675, 3234156416, 3693126241, 2001430874, 303699484, 2478443234, 2687165888, 585122620, 454499602, 151849742, 2345119218, 3064510765, 514443284, 4044981591, 1963412655, 2581445614, 2137062819, 19308535, 1928707164, 1715193156, 4219352155, 1126790795, 600235211, 3992742070, 3841024952, 836553431, 1669664834, 2535604243, 3323011204, 1243905413, 3141400786, 4180808110, 698445255, 2653899549, 2989552604, 2253581325, 3252932727, 3004591147, 1891211689, 2487810577, 3915653703, 4237083816, 4030667424, 2100090966, 865136418, 1229899655, 953270745, 3399679628, 3557504664, 4118925222, 2061379749, 3079546586, 2915017791, 983426092, 2022837584, 1607244650, 2118541908, 2366882550, 3635996816, 972512814, 3283088770, 1568718495, 3499326569, 3576539503, 621982671, 2895723464, 410887952, 2623762152, 1002142683, 645401037, 1494807662, 2595684844, 1335535747, 2507040230, 4293295786, 3167684641, 367585007, 3885750714, 1865862730, 2668221674, 2960971305, 2763173681, 1059270954, 2777952454, 2724642869, 1320957812, 2194319100, 2429595872, 2815956275, 77089521, 3973773121, 3444575871, 2448830231, 1305906550, 4021308739, 2857194700, 2516901860, 3518358430, 1787304780, 740276417, 1699839814, 1592394909, 2352307457, 2272556026, 188821243, 1729977011, 3687994002, 274084841, 3594982253, 3613494426, 2701949495, 4162096729, 322734571, 2837966542, 1640576439, 484830689, 1202797690, 3537852828, 4067639125, 349075736, 3342319475, 4157467219, 4255800159, 1030690015, 1155237496, 2951971274, 1757691577, 607398968, 2738905026, 499347990, 3794078908, 1011452712, 227885567, 2818666809, 213114376, 3034881240, 1455525988, 3414450555, 850817237, 1817998408, 3092726480], bo = [0, 235474187, 470948374, 303765277, 941896748, 908933415, 607530554, 708780849, 1883793496, 2118214995, 1817866830, 1649639237, 1215061108, 1181045119, 1417561698, 1517767529, 3767586992, 4003061179, 4236429990, 4069246893, 3635733660, 3602770327, 3299278474, 3400528769, 2430122216, 2664543715, 2362090238, 2193862645, 2835123396, 2801107407, 3035535058, 3135740889, 3678124923, 3576870512, 3341394285, 3374361702, 3810496343, 3977675356, 4279080257, 4043610186, 2876494627, 2776292904, 3076639029, 3110650942, 2472011535, 2640243204, 2403728665, 2169303058, 1001089995, 899835584, 666464733, 699432150, 59727847, 226906860, 530400753, 294930682, 1273168787, 1172967064, 1475418501, 1509430414, 1942435775, 2110667444, 1876241833, 1641816226, 2910219766, 2743034109, 2976151520, 3211623147, 2505202138, 2606453969, 2302690252, 2269728455, 3711829422, 3543599269, 3240894392, 3475313331, 3843699074, 3943906441, 4178062228, 4144047775, 1306967366, 1139781709, 1374988112, 1610459739, 1975683434, 2076935265, 1775276924, 1742315127, 1034867998, 866637845, 566021896, 800440835, 92987698, 193195065, 429456164, 395441711, 1984812685, 2017778566, 1784663195, 1683407248, 1315562145, 1080094634, 1383856311, 1551037884, 101039829, 135050206, 437757123, 337553864, 1042385657, 807962610, 573804783, 742039012, 2531067453, 2564033334, 2328828971, 2227573024, 2935566865, 2700099354, 3001755655, 3168937228, 3868552805, 3902563182, 4203181171, 4102977912, 3736164937, 3501741890, 3265478751, 3433712980, 1106041591, 1340463100, 1576976609, 1408749034, 2043211483, 2009195472, 1708848333, 1809054150, 832877231, 1068351396, 766945465, 599762354, 159417987, 126454664, 361929877, 463180190, 2709260871, 2943682380, 3178106961, 3009879386, 2572697195, 2538681184, 2236228733, 2336434550, 3509871135, 3745345300, 3441850377, 3274667266, 3910161971, 3877198648, 4110568485, 4211818798, 2597806476, 2497604743, 2261089178, 2295101073, 2733856160, 2902087851, 3202437046, 2968011453, 3936291284, 3835036895, 4136440770, 4169408201, 3535486456, 3702665459, 3467192302, 3231722213, 2051518780, 1951317047, 1716890410, 1750902305, 1113818384, 1282050075, 1584504582, 1350078989, 168810852, 67556463, 371049330, 404016761, 841739592, 1008918595, 775550814, 540080725, 3969562369, 3801332234, 4035489047, 4269907996, 3569255213, 3669462566, 3366754619, 3332740144, 2631065433, 2463879762, 2160117071, 2395588676, 2767645557, 2868897406, 3102011747, 3069049960, 202008497, 33778362, 270040487, 504459436, 875451293, 975658646, 675039627, 641025152, 2084704233, 1917518562, 1615861247, 1851332852, 1147550661, 1248802510, 1484005843, 1451044056, 933301370, 967311729, 733156972, 632953703, 260388950, 25965917, 328671808, 496906059, 1206477858, 1239443753, 1543208500, 1441952575, 2144161806, 1908694277, 1675577880, 1842759443, 3610369226, 3644379585, 3408119516, 3307916247, 4011190502, 3776767469, 4077384432, 4245618683, 2809771154, 2842737049, 3144396420, 3043140495, 2673705150, 2438237621, 2203032232, 2370213795], vo = [0, 185469197, 370938394, 487725847, 741876788, 657861945, 975451694, 824852259, 1483753576, 1400783205, 1315723890, 1164071807, 1950903388, 2135319889, 1649704518, 1767536459, 2967507152, 3152976349, 2801566410, 2918353863, 2631447780, 2547432937, 2328143614, 2177544179, 3901806776, 3818836405, 4270639778, 4118987695, 3299409036, 3483825537, 3535072918, 3652904859, 2077965243, 1893020342, 1841768865, 1724457132, 1474502543, 1559041666, 1107234197, 1257309336, 598438867, 681933534, 901210569, 1052338372, 261314535, 77422314, 428819965, 310463728, 3409685355, 3224740454, 3710368113, 3593056380, 3875770207, 3960309330, 4045380933, 4195456072, 2471224067, 2554718734, 2237133081, 2388260884, 3212035895, 3028143674, 2842678573, 2724322336, 4138563181, 4255350624, 3769721975, 3955191162, 3667219033, 3516619604, 3431546947, 3347532110, 2933734917, 2782082824, 3099667487, 3016697106, 2196052529, 2313884476, 2499348523, 2683765030, 1179510461, 1296297904, 1347548327, 1533017514, 1786102409, 1635502980, 2087309459, 2003294622, 507358933, 355706840, 136428751, 53458370, 839224033, 957055980, 605657339, 790073846, 2373340630, 2256028891, 2607439820, 2422494913, 2706270690, 2856345839, 3075636216, 3160175349, 3573941694, 3725069491, 3273267108, 3356761769, 4181598602, 4063242375, 4011996048, 3828103837, 1033297158, 915985419, 730517276, 545572369, 296679730, 446754879, 129166120, 213705253, 1709610350, 1860738147, 1945798516, 2029293177, 1239331162, 1120974935, 1606591296, 1422699085, 4148292826, 4233094615, 3781033664, 3931371469, 3682191598, 3497509347, 3446004468, 3328955385, 2939266226, 2755636671, 3106780840, 2988687269, 2198438022, 2282195339, 2501218972, 2652609425, 1201765386, 1286567175, 1371368976, 1521706781, 1805211710, 1620529459, 2105887268, 1988838185, 533804130, 350174575, 164439672, 46346101, 870912086, 954669403, 636813900, 788204353, 2358957921, 2274680428, 2592523643, 2441661558, 2695033685, 2880240216, 3065962831, 3182487618, 3572145929, 3756299780, 3270937875, 3388507166, 4174560061, 4091327024, 4006521127, 3854606378, 1014646705, 930369212, 711349675, 560487590, 272786309, 457992840, 106852767, 223377554, 1678381017, 1862534868, 1914052035, 2031621326, 1211247597, 1128014560, 1580087799, 1428173050, 32283319, 182621114, 401639597, 486441376, 768917123, 651868046, 1003007129, 818324884, 1503449823, 1385356242, 1333838021, 1150208456, 1973745387, 2125135846, 1673061617, 1756818940, 2970356327, 3120694122, 2802849917, 2887651696, 2637442643, 2520393566, 2334669897, 2149987652, 3917234703, 3799141122, 4284502037, 4100872472, 3309594171, 3460984630, 3545789473, 3629546796, 2050466060, 1899603969, 1814803222, 1730525723, 1443857720, 1560382517, 1075025698, 1260232239, 575138148, 692707433, 878443390, 1062597235, 243256656, 91341917, 409198410, 325965383, 3403100636, 3252238545, 3704300486, 3620022987, 3874428392, 3990953189, 4042459122, 4227665663, 2460449204, 2578018489, 2226875310, 2411029155, 3198115200, 3046200461, 2827177882, 2743944855], _o = [0, 218828297, 437656594, 387781147, 875313188, 958871085, 775562294, 590424639, 1750626376, 1699970625, 1917742170, 2135253587, 1551124588, 1367295589, 1180849278, 1265195639, 3501252752, 3720081049, 3399941250, 3350065803, 3835484340, 3919042237, 4270507174, 4085369519, 3102249176, 3051593425, 2734591178, 2952102595, 2361698556, 2177869557, 2530391278, 2614737639, 3145456443, 3060847922, 2708326185, 2892417312, 2404901663, 2187128086, 2504130317, 2555048196, 3542330227, 3727205754, 3375740769, 3292445032, 3876557655, 3926170974, 4246310725, 4027744588, 1808481195, 1723872674, 1910319033, 2094410160, 1608975247, 1391201670, 1173430173, 1224348052, 59984867, 244860394, 428169201, 344873464, 935293895, 984907214, 766078933, 547512796, 1844882806, 1627235199, 2011214180, 2062270317, 1507497298, 1423022939, 1137477952, 1321699145, 95345982, 145085239, 532201772, 313773861, 830661914, 1015671571, 731183368, 648017665, 3175501286, 2957853679, 2807058932, 2858115069, 2305455554, 2220981195, 2474404304, 2658625497, 3575528878, 3625268135, 3473416636, 3254988725, 3778151818, 3963161475, 4213447064, 4130281361, 3599595085, 3683022916, 3432737375, 3247465558, 3802222185, 4020912224, 4172763771, 4122762354, 3201631749, 3017672716, 2764249623, 2848461854, 2331590177, 2280796200, 2431590963, 2648976442, 104699613, 188127444, 472615631, 287343814, 840019705, 1058709744, 671593195, 621591778, 1852171925, 1668212892, 1953757831, 2037970062, 1514790577, 1463996600, 1080017571, 1297403050, 3673637356, 3623636965, 3235995134, 3454686199, 4007360968, 3822090177, 4107101658, 4190530515, 2997825956, 3215212461, 2830708150, 2779915199, 2256734592, 2340947849, 2627016082, 2443058075, 172466556, 122466165, 273792366, 492483431, 1047239e3, 861968209, 612205898, 695634755, 1646252340, 1863638845, 2013908262, 1963115311, 1446242576, 1530455833, 1277555970, 1093597963, 1636604631, 1820824798, 2073724613, 1989249228, 1436590835, 1487645946, 1337376481, 1119727848, 164948639, 81781910, 331544205, 516552836, 1039717051, 821288114, 669961897, 719700128, 2973530695, 3157750862, 2871682645, 2787207260, 2232435299, 2283490410, 2667994737, 2450346104, 3647212047, 3564045318, 3279033885, 3464042516, 3980931627, 3762502690, 4150144569, 4199882800, 3070356634, 3121275539, 2904027272, 2686254721, 2200818878, 2384911031, 2570832044, 2486224549, 3747192018, 3528626907, 3310321856, 3359936201, 3950355702, 3867060991, 4049844452, 4234721005, 1739656202, 1790575107, 2108100632, 1890328081, 1402811438, 1586903591, 1233856572, 1149249077, 266959938, 48394827, 369057872, 418672217, 1002783846, 919489135, 567498868, 752375421, 209336225, 24197544, 376187827, 459744698, 945164165, 895287692, 574624663, 793451934, 1679968233, 1764313568, 2117360635, 1933530610, 1343127501, 1560637892, 1243112415, 1192455638, 3704280881, 3519142200, 3336358691, 3419915562, 3907448597, 3857572124, 4075877127, 4294704398, 3029510009, 3113855344, 2927934315, 2744104290, 2159976285, 2377486676, 2594734927, 2544078150], wo = [0, 151849742, 303699484, 454499602, 607398968, 758720310, 908999204, 1059270954, 1214797936, 1097159550, 1517440620, 1400849762, 1817998408, 1699839814, 2118541908, 2001430874, 2429595872, 2581445614, 2194319100, 2345119218, 3034881240, 3186202582, 2801699524, 2951971274, 3635996816, 3518358430, 3399679628, 3283088770, 4237083816, 4118925222, 4002861748, 3885750714, 1002142683, 850817237, 698445255, 548169417, 529487843, 377642221, 227885567, 77089521, 1943217067, 2061379749, 1640576439, 1757691577, 1474760595, 1592394909, 1174215055, 1290801793, 2875968315, 2724642869, 3111247143, 2960971305, 2405426947, 2253581325, 2638606623, 2487810577, 3808662347, 3926825029, 4044981591, 4162096729, 3342319475, 3459953789, 3576539503, 3693126241, 1986918061, 2137062819, 1685577905, 1836772287, 1381620373, 1532285339, 1078185097, 1229899655, 1040559837, 923313619, 740276417, 621982671, 439452389, 322734571, 137073913, 19308535, 3871163981, 4021308739, 4104605777, 4255800159, 3263785589, 3414450555, 3499326569, 3651041127, 2933202493, 2815956275, 3167684641, 3049390895, 2330014213, 2213296395, 2566595609, 2448830231, 1305906550, 1155237496, 1607244650, 1455525988, 1776460110, 1626319424, 2079897426, 1928707164, 96392454, 213114376, 396673818, 514443284, 562755902, 679998e3, 865136418, 983426092, 3708173718, 3557504664, 3474729866, 3323011204, 4180808110, 4030667424, 3945269170, 3794078908, 2507040230, 2623762152, 2272556026, 2390325492, 2975484382, 3092726480, 2738905026, 2857194700, 3973773121, 3856137295, 4274053469, 4157467219, 3371096953, 3252932727, 3673476453, 3556361835, 2763173681, 2915017791, 3064510765, 3215307299, 2156299017, 2307622919, 2459735317, 2610011675, 2081048481, 1963412655, 1846563261, 1729977011, 1480485785, 1362321559, 1243905413, 1126790795, 878845905, 1030690015, 645401037, 796197571, 274084841, 425408743, 38544885, 188821243, 3613494426, 3731654548, 3313212038, 3430322568, 4082475170, 4200115116, 3780097726, 3896688048, 2668221674, 2516901860, 2366882550, 2216610296, 3141400786, 2989552604, 2837966542, 2687165888, 1202797690, 1320957812, 1437280870, 1554391400, 1669664834, 1787304780, 1906247262, 2022837584, 265905162, 114585348, 499347990, 349075736, 736970802, 585122620, 972512814, 821712160, 2595684844, 2478443234, 2293045232, 2174754046, 3196267988, 3079546586, 2895723464, 2777952454, 3537852828, 3687994002, 3234156416, 3385345166, 4142626212, 4293295786, 3841024952, 3992742070, 174567692, 57326082, 410887952, 292596766, 777231668, 660510266, 1011452712, 893681702, 1108339068, 1258480242, 1343618912, 1494807662, 1715193156, 1865862730, 1948373848, 2100090966, 2701949495, 2818666809, 3004591147, 3122358053, 2235061775, 2352307457, 2535604243, 2653899549, 3915653703, 3764988233, 4219352155, 4067639125, 3444575871, 3294430577, 3746175075, 3594982253, 836553431, 953270745, 600235211, 718002117, 367585007, 484830689, 133361907, 251657213, 2041877159, 1891211689, 1806599355, 1654886325, 1568718495, 1418573201, 1335535747, 1184342925];
+  } }), oo = { 16: 10, 24: 12, 32: 14 }, lo = [1, 2, 4, 8, 16, 32, 64, 128, 27, 54, 108, 216, 171, 77, 154, 47, 94, 188, 99, 198, 151, 53, 106, 212, 179, 125, 250, 239, 197, 145], gt = [99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22], br = [82, 9, 106, 213, 48, 54, 165, 56, 191, 64, 163, 158, 129, 243, 215, 251, 124, 227, 57, 130, 155, 47, 255, 135, 52, 142, 67, 68, 196, 222, 233, 203, 84, 123, 148, 50, 166, 194, 35, 61, 238, 76, 149, 11, 66, 250, 195, 78, 8, 46, 161, 102, 40, 217, 36, 178, 118, 91, 162, 73, 109, 139, 209, 37, 114, 248, 246, 100, 134, 104, 152, 22, 212, 164, 92, 204, 93, 101, 182, 146, 108, 112, 72, 80, 253, 237, 185, 218, 94, 21, 70, 87, 167, 141, 157, 132, 144, 216, 171, 0, 140, 188, 211, 10, 247, 228, 88, 5, 184, 179, 69, 6, 208, 44, 30, 143, 202, 63, 15, 2, 193, 175, 189, 3, 1, 19, 138, 107, 58, 145, 17, 65, 79, 103, 220, 234, 151, 242, 207, 206, 240, 180, 230, 115, 150, 172, 116, 34, 231, 173, 53, 133, 226, 249, 55, 232, 28, 117, 223, 110, 71, 241, 26, 113, 29, 41, 197, 137, 111, 183, 98, 14, 170, 24, 190, 27, 252, 86, 62, 75, 198, 210, 121, 32, 154, 219, 192, 254, 120, 205, 90, 244, 31, 221, 168, 51, 136, 7, 199, 49, 177, 18, 16, 89, 39, 128, 236, 95, 96, 81, 127, 169, 25, 181, 74, 13, 45, 229, 122, 159, 147, 201, 156, 239, 160, 224, 59, 77, 174, 42, 245, 176, 200, 235, 187, 60, 131, 83, 153, 97, 23, 43, 4, 126, 186, 119, 214, 38, 225, 105, 20, 99, 85, 33, 12, 125], ho = [3328402341, 4168907908, 4000806809, 4135287693, 4294111757, 3597364157, 3731845041, 2445657428, 1613770832, 33620227, 3462883241, 1445669757, 3892248089, 3050821474, 1303096294, 3967186586, 2412431941, 528646813, 2311702848, 4202528135, 4026202645, 2992200171, 2387036105, 4226871307, 1101901292, 3017069671, 1604494077, 1169141738, 597466303, 1403299063, 3832705686, 2613100635, 1974974402, 3791519004, 1033081774, 1277568618, 1815492186, 2118074177, 4126668546, 2211236943, 1748251740, 1369810420, 3521504564, 4193382664, 3799085459, 2883115123, 1647391059, 706024767, 134480908, 2512897874, 1176707941, 2646852446, 806885416, 932615841, 168101135, 798661301, 235341577, 605164086, 461406363, 3756188221, 3454790438, 1311188841, 2142417613, 3933566367, 302582043, 495158174, 1479289972, 874125870, 907746093, 3698224818, 3025820398, 1537253627, 2756858614, 1983593293, 3084310113, 2108928974, 1378429307, 3722699582, 1580150641, 327451799, 2790478837, 3117535592, 0, 3253595436, 1075847264, 3825007647, 2041688520, 3059440621, 3563743934, 2378943302, 1740553945, 1916352843, 2487896798, 2555137236, 2958579944, 2244988746, 3151024235, 3320835882, 1336584933, 3992714006, 2252555205, 2588757463, 1714631509, 293963156, 2319795663, 3925473552, 67240454, 4269768577, 2689618160, 2017213508, 631218106, 1269344483, 2723238387, 1571005438, 2151694528, 93294474, 1066570413, 563977660, 1882732616, 4059428100, 1673313503, 2008463041, 2950355573, 1109467491, 537923632, 3858759450, 4260623118, 3218264685, 2177748300, 403442708, 638784309, 3287084079, 3193921505, 899127202, 2286175436, 773265209, 2479146071, 1437050866, 4236148354, 2050833735, 3362022572, 3126681063, 840505643, 3866325909, 3227541664, 427917720, 2655997905, 2749160575, 1143087718, 1412049534, 999329963, 193497219, 2353415882, 3354324521, 1807268051, 672404540, 2816401017, 3160301282, 369822493, 2916866934, 3688947771, 1681011286, 1949973070, 336202270, 2454276571, 201721354, 1210328172, 3093060836, 2680341085, 3184776046, 1135389935, 3294782118, 965841320, 831886756, 3554993207, 4068047243, 3588745010, 2345191491, 1849112409, 3664604599, 26054028, 2983581028, 2622377682, 1235855840, 3630984372, 2891339514, 4092916743, 3488279077, 3395642799, 4101667470, 1202630377, 268961816, 1874508501, 4034427016, 1243948399, 1546530418, 941366308, 1470539505, 1941222599, 2546386513, 3421038627, 2715671932, 3899946140, 1042226977, 2521517021, 1639824860, 227249030, 260737669, 3765465232, 2084453954, 1907733956, 3429263018, 2420656344, 100860677, 4160157185, 470683154, 3261161891, 1781871967, 2924959737, 1773779408, 394692241, 2579611992, 974986535, 664706745, 3655459128, 3958962195, 731420851, 571543859, 3530123707, 2849626480, 126783113, 865375399, 765172662, 1008606754, 361203602, 3387549984, 2278477385, 2857719295, 1344809080, 2782912378, 59542671, 1503764984, 160008576, 437062935, 1707065306, 3622233649, 2218934982, 3496503480, 2185314755, 697932208, 1512910199, 504303377, 2075177163, 2824099068, 1841019862, 739644986], uo = [2781242211, 2230877308, 2582542199, 2381740923, 234877682, 3184946027, 2984144751, 1418839493, 1348481072, 50462977, 2848876391, 2102799147, 434634494, 1656084439, 3863849899, 2599188086, 1167051466, 2636087938, 1082771913, 2281340285, 368048890, 3954334041, 3381544775, 201060592, 3963727277, 1739838676, 4250903202, 3930435503, 3206782108, 4149453988, 2531553906, 1536934080, 3262494647, 484572669, 2923271059, 1783375398, 1517041206, 1098792767, 49674231, 1334037708, 1550332980, 4098991525, 886171109, 150598129, 2481090929, 1940642008, 1398944049, 1059722517, 201851908, 1385547719, 1699095331, 1587397571, 674240536, 2704774806, 252314885, 3039795866, 151914247, 908333586, 2602270848, 1038082786, 651029483, 1766729511, 3447698098, 2682942837, 454166793, 2652734339, 1951935532, 775166490, 758520603, 3000790638, 4004797018, 4217086112, 4137964114, 1299594043, 1639438038, 3464344499, 2068982057, 1054729187, 1901997871, 2534638724, 4121318227, 1757008337, 0, 750906861, 1614815264, 535035132, 3363418545, 3988151131, 3201591914, 1183697867, 3647454910, 1265776953, 3734260298, 3566750796, 3903871064, 1250283471, 1807470800, 717615087, 3847203498, 384695291, 3313910595, 3617213773, 1432761139, 2484176261, 3481945413, 283769337, 100925954, 2180939647, 4037038160, 1148730428, 3123027871, 3813386408, 4087501137, 4267549603, 3229630528, 2315620239, 2906624658, 3156319645, 1215313976, 82966005, 3747855548, 3245848246, 1974459098, 1665278241, 807407632, 451280895, 251524083, 1841287890, 1283575245, 337120268, 891687699, 801369324, 3787349855, 2721421207, 3431482436, 959321879, 1469301956, 4065699751, 2197585534, 1199193405, 2898814052, 3887750493, 724703513, 2514908019, 2696962144, 2551808385, 3516813135, 2141445340, 1715741218, 2119445034, 2872807568, 2198571144, 3398190662, 700968686, 3547052216, 1009259540, 2041044702, 3803995742, 487983883, 1991105499, 1004265696, 1449407026, 1316239930, 504629770, 3683797321, 168560134, 1816667172, 3837287516, 1570751170, 1857934291, 4014189740, 2797888098, 2822345105, 2754712981, 936633572, 2347923833, 852879335, 1133234376, 1500395319, 3084545389, 2348912013, 1689376213, 3533459022, 3762923945, 3034082412, 4205598294, 133428468, 634383082, 2949277029, 2398386810, 3913789102, 403703816, 3580869306, 2297460856, 1867130149, 1918643758, 607656988, 4049053350, 3346248884, 1368901318, 600565992, 2090982877, 2632479860, 557719327, 3717614411, 3697393085, 2249034635, 2232388234, 2430627952, 1115438654, 3295786421, 2865522278, 3633334344, 84280067, 33027830, 303828494, 2747425121, 1600795957, 4188952407, 3496589753, 2434238086, 1486471617, 658119965, 3106381470, 953803233, 334231800, 3005978776, 857870609, 3151128937, 1890179545, 2298973838, 2805175444, 3056442267, 574365214, 2450884487, 550103529, 1233637070, 4289353045, 2018519080, 2057691103, 2399374476, 4166623649, 2148108681, 387583245, 3664101311, 836232934, 3330556482, 3100665960, 3280093505, 2955516313, 2002398509, 287182607, 3413881008, 4238890068, 3597515707, 975967766], co = [1671808611, 2089089148, 2006576759, 2072901243, 4061003762, 1807603307, 1873927791, 3310653893, 810573872, 16974337, 1739181671, 729634347, 4263110654, 3613570519, 2883997099, 1989864566, 3393556426, 2191335298, 3376449993, 2106063485, 4195741690, 1508618841, 1204391495, 4027317232, 2917941677, 3563566036, 2734514082, 2951366063, 2629772188, 2767672228, 1922491506, 3227229120, 3082974647, 4246528509, 2477669779, 644500518, 911895606, 1061256767, 4144166391, 3427763148, 878471220, 2784252325, 3845444069, 4043897329, 1905517169, 3631459288, 827548209, 356461077, 67897348, 3344078279, 593839651, 3277757891, 405286936, 2527147926, 84871685, 2595565466, 118033927, 305538066, 2157648768, 3795705826, 3945188843, 661212711, 2999812018, 1973414517, 152769033, 2208177539, 745822252, 439235610, 455947803, 1857215598, 1525593178, 2700827552, 1391895634, 994932283, 3596728278, 3016654259, 695947817, 3812548067, 795958831, 2224493444, 1408607827, 3513301457, 0, 3979133421, 543178784, 4229948412, 2982705585, 1542305371, 1790891114, 3410398667, 3201918910, 961245753, 1256100938, 1289001036, 1491644504, 3477767631, 3496721360, 4012557807, 2867154858, 4212583931, 1137018435, 1305975373, 861234739, 2241073541, 1171229253, 4178635257, 33948674, 2139225727, 1357946960, 1011120188, 2679776671, 2833468328, 1374921297, 2751356323, 1086357568, 2408187279, 2460827538, 2646352285, 944271416, 4110742005, 3168756668, 3066132406, 3665145818, 560153121, 271589392, 4279952895, 4077846003, 3530407890, 3444343245, 202643468, 322250259, 3962553324, 1608629855, 2543990167, 1154254916, 389623319, 3294073796, 2817676711, 2122513534, 1028094525, 1689045092, 1575467613, 422261273, 1939203699, 1621147744, 2174228865, 1339137615, 3699352540, 577127458, 712922154, 2427141008, 2290289544, 1187679302, 3995715566, 3100863416, 339486740, 3732514782, 1591917662, 186455563, 3681988059, 3762019296, 844522546, 978220090, 169743370, 1239126601, 101321734, 611076132, 1558493276, 3260915650, 3547250131, 2901361580, 1655096418, 2443721105, 2510565781, 3828863972, 2039214713, 3878868455, 3359869896, 928607799, 1840765549, 2374762893, 3580146133, 1322425422, 2850048425, 1823791212, 1459268694, 4094161908, 3928346602, 1706019429, 2056189050, 2934523822, 135794696, 3134549946, 2022240376, 628050469, 779246638, 472135708, 2800834470, 3032970164, 3327236038, 3894660072, 3715932637, 1956440180, 522272287, 1272813131, 3185336765, 2340818315, 2323976074, 1888542832, 1044544574, 3049550261, 1722469478, 1222152264, 50660867, 4127324150, 236067854, 1638122081, 895445557, 1475980887, 3117443513, 2257655686, 3243809217, 489110045, 2662934430, 3778599393, 4162055160, 2561878936, 288563729, 1773916777, 3648039385, 2391345038, 2493985684, 2612407707, 505560094, 2274497927, 3911240169, 3460925390, 1442818645, 678973480, 3749357023, 2358182796, 2717407649, 2306869641, 219617805, 3218761151, 3862026214, 1120306242, 1756942440, 1103331905, 2578459033, 762796589, 252780047, 2966125488, 1425844308, 3151392187, 372911126], po = [1667474886, 2088535288, 2004326894, 2071694838, 4075949567, 1802223062, 1869591006, 3318043793, 808472672, 16843522, 1734846926, 724270422, 4278065639, 3621216949, 2880169549, 1987484396, 3402253711, 2189597983, 3385409673, 2105378810, 4210693615, 1499065266, 1195886990, 4042263547, 2913856577, 3570689971, 2728590687, 2947541573, 2627518243, 2762274643, 1920112356, 3233831835, 3082273397, 4261223649, 2475929149, 640051788, 909531756, 1061110142, 4160160501, 3435941763, 875846760, 2779116625, 3857003729, 4059105529, 1903268834, 3638064043, 825316194, 353713962, 67374088, 3351728789, 589522246, 3284360861, 404236336, 2526454071, 84217610, 2593830191, 117901582, 303183396, 2155911963, 3806477791, 3958056653, 656894286, 2998062463, 1970642922, 151591698, 2206440989, 741110872, 437923380, 454765878, 1852748508, 1515908788, 2694904667, 1381168804, 993742198, 3604373943, 3014905469, 690584402, 3823320797, 791638366, 2223281939, 1398011302, 3520161977, 0, 3991743681, 538992704, 4244381667, 2981218425, 1532751286, 1785380564, 3419096717, 3200178535, 960056178, 1246420628, 1280103576, 1482221744, 3486468741, 3503319995, 4025428677, 2863326543, 4227536621, 1128514950, 1296947098, 859002214, 2240123921, 1162203018, 4193849577, 33687044, 2139062782, 1347481760, 1010582648, 2678045221, 2829640523, 1364325282, 2745433693, 1077985408, 2408548869, 2459086143, 2644360225, 943212656, 4126475505, 3166494563, 3065430391, 3671750063, 555836226, 269496352, 4294908645, 4092792573, 3537006015, 3452783745, 202118168, 320025894, 3974901699, 1600119230, 2543297077, 1145359496, 387397934, 3301201811, 2812801621, 2122220284, 1027426170, 1684319432, 1566435258, 421079858, 1936954854, 1616945344, 2172753945, 1330631070, 3705438115, 572679748, 707427924, 2425400123, 2290647819, 1179044492, 4008585671, 3099120491, 336870440, 3739122087, 1583276732, 185277718, 3688593069, 3772791771, 842159716, 976899700, 168435220, 1229577106, 101059084, 606366792, 1549591736, 3267517855, 3553849021, 2897014595, 1650632388, 2442242105, 2509612081, 3840161747, 2038008818, 3890688725, 3368567691, 926374254, 1835907034, 2374863873, 3587531953, 1313788572, 2846482505, 1819063512, 1448540844, 4109633523, 3941213647, 1701162954, 2054852340, 2930698567, 134748176, 3132806511, 2021165296, 623210314, 774795868, 471606328, 2795958615, 3031746419, 3334885783, 3907527627, 3722280097, 1953799400, 522133822, 1263263126, 3183336545, 2341176845, 2324333839, 1886425312, 1044267644, 3048588401, 1718004428, 1212733584, 50529542, 4143317495, 235803164, 1633788866, 892690282, 1465383342, 3115962473, 2256965911, 3250673817, 488449850, 2661202215, 3789633753, 4177007595, 2560144171, 286339874, 1768537042, 3654906025, 2391705863, 2492770099, 2610673197, 505291324, 2273808917, 3924369609, 3469625735, 1431699370, 673740880, 3755965093, 2358021891, 2711746649, 2307489801, 218961690, 3217021541, 3873845719, 1111672452, 1751693520, 1094828930, 2576986153, 757954394, 252645662, 2964376443, 1414855848, 3149649517, 370555436], fo = [1374988112, 2118214995, 437757123, 975658646, 1001089995, 530400753, 2902087851, 1273168787, 540080725, 2910219766, 2295101073, 4110568485, 1340463100, 3307916247, 641025152, 3043140495, 3736164937, 632953703, 1172967064, 1576976609, 3274667266, 2169303058, 2370213795, 1809054150, 59727847, 361929877, 3211623147, 2505202138, 3569255213, 1484005843, 1239443753, 2395588676, 1975683434, 4102977912, 2572697195, 666464733, 3202437046, 4035489047, 3374361702, 2110667444, 1675577880, 3843699074, 2538681184, 1649639237, 2976151520, 3144396420, 4269907996, 4178062228, 1883793496, 2403728665, 2497604743, 1383856311, 2876494627, 1917518562, 3810496343, 1716890410, 3001755655, 800440835, 2261089178, 3543599269, 807962610, 599762354, 33778362, 3977675356, 2328828971, 2809771154, 4077384432, 1315562145, 1708848333, 101039829, 3509871135, 3299278474, 875451293, 2733856160, 92987698, 2767645557, 193195065, 1080094634, 1584504582, 3178106961, 1042385657, 2531067453, 3711829422, 1306967366, 2438237621, 1908694277, 67556463, 1615861247, 429456164, 3602770327, 2302690252, 1742315127, 2968011453, 126454664, 3877198648, 2043211483, 2709260871, 2084704233, 4169408201, 0, 159417987, 841739592, 504459436, 1817866830, 4245618683, 260388950, 1034867998, 908933415, 168810852, 1750902305, 2606453969, 607530554, 202008497, 2472011535, 3035535058, 463180190, 2160117071, 1641816226, 1517767529, 470948374, 3801332234, 3231722213, 1008918595, 303765277, 235474187, 4069246893, 766945465, 337553864, 1475418501, 2943682380, 4003061179, 2743034109, 4144047775, 1551037884, 1147550661, 1543208500, 2336434550, 3408119516, 3069049960, 3102011747, 3610369226, 1113818384, 328671808, 2227573024, 2236228733, 3535486456, 2935566865, 3341394285, 496906059, 3702665459, 226906860, 2009195472, 733156972, 2842737049, 294930682, 1206477858, 2835123396, 2700099354, 1451044056, 573804783, 2269728455, 3644379585, 2362090238, 2564033334, 2801107407, 2776292904, 3669462566, 1068351396, 742039012, 1350078989, 1784663195, 1417561698, 4136440770, 2430122216, 775550814, 2193862645, 2673705150, 1775276924, 1876241833, 3475313331, 3366754619, 270040487, 3902563182, 3678124923, 3441850377, 1851332852, 3969562369, 2203032232, 3868552805, 2868897406, 566021896, 4011190502, 3135740889, 1248802510, 3936291284, 699432150, 832877231, 708780849, 3332740144, 899835584, 1951317047, 4236429990, 3767586992, 866637845, 4043610186, 1106041591, 2144161806, 395441711, 1984812685, 1139781709, 3433712980, 3835036895, 2664543715, 1282050075, 3240894392, 1181045119, 2640243204, 25965917, 4203181171, 4211818798, 3009879386, 2463879762, 3910161971, 1842759443, 2597806476, 933301370, 1509430414, 3943906441, 3467192302, 3076639029, 3776767469, 2051518780, 2631065433, 1441952575, 404016761, 1942435775, 1408749034, 1610459739, 3745345300, 2017778566, 3400528769, 3110650942, 941896748, 3265478751, 371049330, 3168937228, 675039627, 4279080257, 967311729, 135050206, 3635733660, 1683407248, 2076935265, 3576870512, 1215061108, 3501741890], mo = [1347548327, 1400783205, 3273267108, 2520393566, 3409685355, 4045380933, 2880240216, 2471224067, 1428173050, 4138563181, 2441661558, 636813900, 4233094615, 3620022987, 2149987652, 2411029155, 1239331162, 1730525723, 2554718734, 3781033664, 46346101, 310463728, 2743944855, 3328955385, 3875770207, 2501218972, 3955191162, 3667219033, 768917123, 3545789473, 692707433, 1150208456, 1786102409, 2029293177, 1805211710, 3710368113, 3065962831, 401639597, 1724457132, 3028143674, 409198410, 2196052529, 1620529459, 1164071807, 3769721975, 2226875310, 486441376, 2499348523, 1483753576, 428819965, 2274680428, 3075636216, 598438867, 3799141122, 1474502543, 711349675, 129166120, 53458370, 2592523643, 2782082824, 4063242375, 2988687269, 3120694122, 1559041666, 730517276, 2460449204, 4042459122, 2706270690, 3446004468, 3573941694, 533804130, 2328143614, 2637442643, 2695033685, 839224033, 1973745387, 957055980, 2856345839, 106852767, 1371368976, 4181598602, 1033297158, 2933734917, 1179510461, 3046200461, 91341917, 1862534868, 4284502037, 605657339, 2547432937, 3431546947, 2003294622, 3182487618, 2282195339, 954669403, 3682191598, 1201765386, 3917234703, 3388507166, 0, 2198438022, 1211247597, 2887651696, 1315723890, 4227665663, 1443857720, 507358933, 657861945, 1678381017, 560487590, 3516619604, 975451694, 2970356327, 261314535, 3535072918, 2652609425, 1333838021, 2724322336, 1767536459, 370938394, 182621114, 3854606378, 1128014560, 487725847, 185469197, 2918353863, 3106780840, 3356761769, 2237133081, 1286567175, 3152976349, 4255350624, 2683765030, 3160175349, 3309594171, 878443390, 1988838185, 3704300486, 1756818940, 1673061617, 3403100636, 272786309, 1075025698, 545572369, 2105887268, 4174560061, 296679730, 1841768865, 1260232239, 4091327024, 3960309330, 3497509347, 1814803222, 2578018489, 4195456072, 575138148, 3299409036, 446754879, 3629546796, 4011996048, 3347532110, 3252238545, 4270639778, 915985419, 3483825537, 681933534, 651868046, 2755636671, 3828103837, 223377554, 2607439820, 1649704518, 3270937875, 3901806776, 1580087799, 4118987695, 3198115200, 2087309459, 2842678573, 3016697106, 1003007129, 2802849917, 1860738147, 2077965243, 164439672, 4100872472, 32283319, 2827177882, 1709610350, 2125135846, 136428751, 3874428392, 3652904859, 3460984630, 3572145929, 3593056380, 2939266226, 824852259, 818324884, 3224740454, 930369212, 2801566410, 2967507152, 355706840, 1257309336, 4148292826, 243256656, 790073846, 2373340630, 1296297904, 1422699085, 3756299780, 3818836405, 457992840, 3099667487, 2135319889, 77422314, 1560382517, 1945798516, 788204353, 1521706781, 1385356242, 870912086, 325965383, 2358957921, 2050466060, 2388260884, 2313884476, 4006521127, 901210569, 3990953189, 1014646705, 1503449823, 1062597235, 2031621326, 3212035895, 3931371469, 1533017514, 350174575, 2256028891, 2177544179, 1052338372, 741876788, 1606591296, 1914052035, 213705253, 2334669897, 1107234197, 1899603969, 3725069491, 2631447780, 2422494913, 1635502980, 1893020342, 1950903388, 1120974935], go = [2807058932, 1699970625, 2764249623, 1586903591, 1808481195, 1173430173, 1487645946, 59984867, 4199882800, 1844882806, 1989249228, 1277555970, 3623636965, 3419915562, 1149249077, 2744104290, 1514790577, 459744698, 244860394, 3235995134, 1963115311, 4027744588, 2544078150, 4190530515, 1608975247, 2627016082, 2062270317, 1507497298, 2200818878, 567498868, 1764313568, 3359936201, 2305455554, 2037970062, 1047239e3, 1910319033, 1337376481, 2904027272, 2892417312, 984907214, 1243112415, 830661914, 861968209, 2135253587, 2011214180, 2927934315, 2686254721, 731183368, 1750626376, 4246310725, 1820824798, 4172763771, 3542330227, 48394827, 2404901663, 2871682645, 671593195, 3254988725, 2073724613, 145085239, 2280796200, 2779915199, 1790575107, 2187128086, 472615631, 3029510009, 4075877127, 3802222185, 4107101658, 3201631749, 1646252340, 4270507174, 1402811438, 1436590835, 3778151818, 3950355702, 3963161475, 4020912224, 2667994737, 273792366, 2331590177, 104699613, 95345982, 3175501286, 2377486676, 1560637892, 3564045318, 369057872, 4213447064, 3919042237, 1137477952, 2658625497, 1119727848, 2340947849, 1530455833, 4007360968, 172466556, 266959938, 516552836, 0, 2256734592, 3980931627, 1890328081, 1917742170, 4294704398, 945164165, 3575528878, 958871085, 3647212047, 2787207260, 1423022939, 775562294, 1739656202, 3876557655, 2530391278, 2443058075, 3310321856, 547512796, 1265195639, 437656594, 3121275539, 719700128, 3762502690, 387781147, 218828297, 3350065803, 2830708150, 2848461854, 428169201, 122466165, 3720081049, 1627235199, 648017665, 4122762354, 1002783846, 2117360635, 695634755, 3336358691, 4234721005, 4049844452, 3704280881, 2232435299, 574624663, 287343814, 612205898, 1039717051, 840019705, 2708326185, 793451934, 821288114, 1391201670, 3822090177, 376187827, 3113855344, 1224348052, 1679968233, 2361698556, 1058709744, 752375421, 2431590963, 1321699145, 3519142200, 2734591178, 188127444, 2177869557, 3727205754, 2384911031, 3215212461, 2648976442, 2450346104, 3432737375, 1180849278, 331544205, 3102249176, 4150144569, 2952102595, 2159976285, 2474404304, 766078933, 313773861, 2570832044, 2108100632, 1668212892, 3145456443, 2013908262, 418672217, 3070356634, 2594734927, 1852171925, 3867060991, 3473416636, 3907448597, 2614737639, 919489135, 164948639, 2094410160, 2997825956, 590424639, 2486224549, 1723872674, 3157750862, 3399941250, 3501252752, 3625268135, 2555048196, 3673637356, 1343127501, 4130281361, 3599595085, 2957853679, 1297403050, 81781910, 3051593425, 2283490410, 532201772, 1367295589, 3926170974, 895287692, 1953757831, 1093597963, 492483431, 3528626907, 1446242576, 1192455638, 1636604631, 209336225, 344873464, 1015671571, 669961897, 3375740769, 3857572124, 2973530695, 3747192018, 1933530610, 3464042516, 935293895, 3454686199, 2858115069, 1863638845, 3683022916, 4085369519, 3292445032, 875313188, 1080017571, 3279033885, 621591778, 1233856572, 2504130317, 24197544, 3017672716, 3835484340, 3247465558, 2220981195, 3060847922, 1551124588, 1463996600], yo = [4104605777, 1097159550, 396673818, 660510266, 2875968315, 2638606623, 4200115116, 3808662347, 821712160, 1986918061, 3430322568, 38544885, 3856137295, 718002117, 893681702, 1654886325, 2975484382, 3122358053, 3926825029, 4274053469, 796197571, 1290801793, 1184342925, 3556361835, 2405426947, 2459735317, 1836772287, 1381620373, 3196267988, 1948373848, 3764988233, 3385345166, 3263785589, 2390325492, 1480485785, 3111247143, 3780097726, 2293045232, 548169417, 3459953789, 3746175075, 439452389, 1362321559, 1400849762, 1685577905, 1806599355, 2174754046, 137073913, 1214797936, 1174215055, 3731654548, 2079897426, 1943217067, 1258480242, 529487843, 1437280870, 3945269170, 3049390895, 3313212038, 923313619, 679998e3, 3215307299, 57326082, 377642221, 3474729866, 2041877159, 133361907, 1776460110, 3673476453, 96392454, 878845905, 2801699524, 777231668, 4082475170, 2330014213, 4142626212, 2213296395, 1626319424, 1906247262, 1846563261, 562755902, 3708173718, 1040559837, 3871163981, 1418573201, 3294430577, 114585348, 1343618912, 2566595609, 3186202582, 1078185097, 3651041127, 3896688048, 2307622919, 425408743, 3371096953, 2081048481, 1108339068, 2216610296, 0, 2156299017, 736970802, 292596766, 1517440620, 251657213, 2235061775, 2933202493, 758720310, 265905162, 1554391400, 1532285339, 908999204, 174567692, 1474760595, 4002861748, 2610011675, 3234156416, 3693126241, 2001430874, 303699484, 2478443234, 2687165888, 585122620, 454499602, 151849742, 2345119218, 3064510765, 514443284, 4044981591, 1963412655, 2581445614, 2137062819, 19308535, 1928707164, 1715193156, 4219352155, 1126790795, 600235211, 3992742070, 3841024952, 836553431, 1669664834, 2535604243, 3323011204, 1243905413, 3141400786, 4180808110, 698445255, 2653899549, 2989552604, 2253581325, 3252932727, 3004591147, 1891211689, 2487810577, 3915653703, 4237083816, 4030667424, 2100090966, 865136418, 1229899655, 953270745, 3399679628, 3557504664, 4118925222, 2061379749, 3079546586, 2915017791, 983426092, 2022837584, 1607244650, 2118541908, 2366882550, 3635996816, 972512814, 3283088770, 1568718495, 3499326569, 3576539503, 621982671, 2895723464, 410887952, 2623762152, 1002142683, 645401037, 1494807662, 2595684844, 1335535747, 2507040230, 4293295786, 3167684641, 367585007, 3885750714, 1865862730, 2668221674, 2960971305, 2763173681, 1059270954, 2777952454, 2724642869, 1320957812, 2194319100, 2429595872, 2815956275, 77089521, 3973773121, 3444575871, 2448830231, 1305906550, 4021308739, 2857194700, 2516901860, 3518358430, 1787304780, 740276417, 1699839814, 1592394909, 2352307457, 2272556026, 188821243, 1729977011, 3687994002, 274084841, 3594982253, 3613494426, 2701949495, 4162096729, 322734571, 2837966542, 1640576439, 484830689, 1202797690, 3537852828, 4067639125, 349075736, 3342319475, 4157467219, 4255800159, 1030690015, 1155237496, 2951971274, 1757691577, 607398968, 2738905026, 499347990, 3794078908, 1011452712, 227885567, 2818666809, 213114376, 3034881240, 1455525988, 3414450555, 850817237, 1817998408, 3092726480], Ao = [0, 235474187, 470948374, 303765277, 941896748, 908933415, 607530554, 708780849, 1883793496, 2118214995, 1817866830, 1649639237, 1215061108, 1181045119, 1417561698, 1517767529, 3767586992, 4003061179, 4236429990, 4069246893, 3635733660, 3602770327, 3299278474, 3400528769, 2430122216, 2664543715, 2362090238, 2193862645, 2835123396, 2801107407, 3035535058, 3135740889, 3678124923, 3576870512, 3341394285, 3374361702, 3810496343, 3977675356, 4279080257, 4043610186, 2876494627, 2776292904, 3076639029, 3110650942, 2472011535, 2640243204, 2403728665, 2169303058, 1001089995, 899835584, 666464733, 699432150, 59727847, 226906860, 530400753, 294930682, 1273168787, 1172967064, 1475418501, 1509430414, 1942435775, 2110667444, 1876241833, 1641816226, 2910219766, 2743034109, 2976151520, 3211623147, 2505202138, 2606453969, 2302690252, 2269728455, 3711829422, 3543599269, 3240894392, 3475313331, 3843699074, 3943906441, 4178062228, 4144047775, 1306967366, 1139781709, 1374988112, 1610459739, 1975683434, 2076935265, 1775276924, 1742315127, 1034867998, 866637845, 566021896, 800440835, 92987698, 193195065, 429456164, 395441711, 1984812685, 2017778566, 1784663195, 1683407248, 1315562145, 1080094634, 1383856311, 1551037884, 101039829, 135050206, 437757123, 337553864, 1042385657, 807962610, 573804783, 742039012, 2531067453, 2564033334, 2328828971, 2227573024, 2935566865, 2700099354, 3001755655, 3168937228, 3868552805, 3902563182, 4203181171, 4102977912, 3736164937, 3501741890, 3265478751, 3433712980, 1106041591, 1340463100, 1576976609, 1408749034, 2043211483, 2009195472, 1708848333, 1809054150, 832877231, 1068351396, 766945465, 599762354, 159417987, 126454664, 361929877, 463180190, 2709260871, 2943682380, 3178106961, 3009879386, 2572697195, 2538681184, 2236228733, 2336434550, 3509871135, 3745345300, 3441850377, 3274667266, 3910161971, 3877198648, 4110568485, 4211818798, 2597806476, 2497604743, 2261089178, 2295101073, 2733856160, 2902087851, 3202437046, 2968011453, 3936291284, 3835036895, 4136440770, 4169408201, 3535486456, 3702665459, 3467192302, 3231722213, 2051518780, 1951317047, 1716890410, 1750902305, 1113818384, 1282050075, 1584504582, 1350078989, 168810852, 67556463, 371049330, 404016761, 841739592, 1008918595, 775550814, 540080725, 3969562369, 3801332234, 4035489047, 4269907996, 3569255213, 3669462566, 3366754619, 3332740144, 2631065433, 2463879762, 2160117071, 2395588676, 2767645557, 2868897406, 3102011747, 3069049960, 202008497, 33778362, 270040487, 504459436, 875451293, 975658646, 675039627, 641025152, 2084704233, 1917518562, 1615861247, 1851332852, 1147550661, 1248802510, 1484005843, 1451044056, 933301370, 967311729, 733156972, 632953703, 260388950, 25965917, 328671808, 496906059, 1206477858, 1239443753, 1543208500, 1441952575, 2144161806, 1908694277, 1675577880, 1842759443, 3610369226, 3644379585, 3408119516, 3307916247, 4011190502, 3776767469, 4077384432, 4245618683, 2809771154, 2842737049, 3144396420, 3043140495, 2673705150, 2438237621, 2203032232, 2370213795], bo = [0, 185469197, 370938394, 487725847, 741876788, 657861945, 975451694, 824852259, 1483753576, 1400783205, 1315723890, 1164071807, 1950903388, 2135319889, 1649704518, 1767536459, 2967507152, 3152976349, 2801566410, 2918353863, 2631447780, 2547432937, 2328143614, 2177544179, 3901806776, 3818836405, 4270639778, 4118987695, 3299409036, 3483825537, 3535072918, 3652904859, 2077965243, 1893020342, 1841768865, 1724457132, 1474502543, 1559041666, 1107234197, 1257309336, 598438867, 681933534, 901210569, 1052338372, 261314535, 77422314, 428819965, 310463728, 3409685355, 3224740454, 3710368113, 3593056380, 3875770207, 3960309330, 4045380933, 4195456072, 2471224067, 2554718734, 2237133081, 2388260884, 3212035895, 3028143674, 2842678573, 2724322336, 4138563181, 4255350624, 3769721975, 3955191162, 3667219033, 3516619604, 3431546947, 3347532110, 2933734917, 2782082824, 3099667487, 3016697106, 2196052529, 2313884476, 2499348523, 2683765030, 1179510461, 1296297904, 1347548327, 1533017514, 1786102409, 1635502980, 2087309459, 2003294622, 507358933, 355706840, 136428751, 53458370, 839224033, 957055980, 605657339, 790073846, 2373340630, 2256028891, 2607439820, 2422494913, 2706270690, 2856345839, 3075636216, 3160175349, 3573941694, 3725069491, 3273267108, 3356761769, 4181598602, 4063242375, 4011996048, 3828103837, 1033297158, 915985419, 730517276, 545572369, 296679730, 446754879, 129166120, 213705253, 1709610350, 1860738147, 1945798516, 2029293177, 1239331162, 1120974935, 1606591296, 1422699085, 4148292826, 4233094615, 3781033664, 3931371469, 3682191598, 3497509347, 3446004468, 3328955385, 2939266226, 2755636671, 3106780840, 2988687269, 2198438022, 2282195339, 2501218972, 2652609425, 1201765386, 1286567175, 1371368976, 1521706781, 1805211710, 1620529459, 2105887268, 1988838185, 533804130, 350174575, 164439672, 46346101, 870912086, 954669403, 636813900, 788204353, 2358957921, 2274680428, 2592523643, 2441661558, 2695033685, 2880240216, 3065962831, 3182487618, 3572145929, 3756299780, 3270937875, 3388507166, 4174560061, 4091327024, 4006521127, 3854606378, 1014646705, 930369212, 711349675, 560487590, 272786309, 457992840, 106852767, 223377554, 1678381017, 1862534868, 1914052035, 2031621326, 1211247597, 1128014560, 1580087799, 1428173050, 32283319, 182621114, 401639597, 486441376, 768917123, 651868046, 1003007129, 818324884, 1503449823, 1385356242, 1333838021, 1150208456, 1973745387, 2125135846, 1673061617, 1756818940, 2970356327, 3120694122, 2802849917, 2887651696, 2637442643, 2520393566, 2334669897, 2149987652, 3917234703, 3799141122, 4284502037, 4100872472, 3309594171, 3460984630, 3545789473, 3629546796, 2050466060, 1899603969, 1814803222, 1730525723, 1443857720, 1560382517, 1075025698, 1260232239, 575138148, 692707433, 878443390, 1062597235, 243256656, 91341917, 409198410, 325965383, 3403100636, 3252238545, 3704300486, 3620022987, 3874428392, 3990953189, 4042459122, 4227665663, 2460449204, 2578018489, 2226875310, 2411029155, 3198115200, 3046200461, 2827177882, 2743944855], vo = [0, 218828297, 437656594, 387781147, 875313188, 958871085, 775562294, 590424639, 1750626376, 1699970625, 1917742170, 2135253587, 1551124588, 1367295589, 1180849278, 1265195639, 3501252752, 3720081049, 3399941250, 3350065803, 3835484340, 3919042237, 4270507174, 4085369519, 3102249176, 3051593425, 2734591178, 2952102595, 2361698556, 2177869557, 2530391278, 2614737639, 3145456443, 3060847922, 2708326185, 2892417312, 2404901663, 2187128086, 2504130317, 2555048196, 3542330227, 3727205754, 3375740769, 3292445032, 3876557655, 3926170974, 4246310725, 4027744588, 1808481195, 1723872674, 1910319033, 2094410160, 1608975247, 1391201670, 1173430173, 1224348052, 59984867, 244860394, 428169201, 344873464, 935293895, 984907214, 766078933, 547512796, 1844882806, 1627235199, 2011214180, 2062270317, 1507497298, 1423022939, 1137477952, 1321699145, 95345982, 145085239, 532201772, 313773861, 830661914, 1015671571, 731183368, 648017665, 3175501286, 2957853679, 2807058932, 2858115069, 2305455554, 2220981195, 2474404304, 2658625497, 3575528878, 3625268135, 3473416636, 3254988725, 3778151818, 3963161475, 4213447064, 4130281361, 3599595085, 3683022916, 3432737375, 3247465558, 3802222185, 4020912224, 4172763771, 4122762354, 3201631749, 3017672716, 2764249623, 2848461854, 2331590177, 2280796200, 2431590963, 2648976442, 104699613, 188127444, 472615631, 287343814, 840019705, 1058709744, 671593195, 621591778, 1852171925, 1668212892, 1953757831, 2037970062, 1514790577, 1463996600, 1080017571, 1297403050, 3673637356, 3623636965, 3235995134, 3454686199, 4007360968, 3822090177, 4107101658, 4190530515, 2997825956, 3215212461, 2830708150, 2779915199, 2256734592, 2340947849, 2627016082, 2443058075, 172466556, 122466165, 273792366, 492483431, 1047239e3, 861968209, 612205898, 695634755, 1646252340, 1863638845, 2013908262, 1963115311, 1446242576, 1530455833, 1277555970, 1093597963, 1636604631, 1820824798, 2073724613, 1989249228, 1436590835, 1487645946, 1337376481, 1119727848, 164948639, 81781910, 331544205, 516552836, 1039717051, 821288114, 669961897, 719700128, 2973530695, 3157750862, 2871682645, 2787207260, 2232435299, 2283490410, 2667994737, 2450346104, 3647212047, 3564045318, 3279033885, 3464042516, 3980931627, 3762502690, 4150144569, 4199882800, 3070356634, 3121275539, 2904027272, 2686254721, 2200818878, 2384911031, 2570832044, 2486224549, 3747192018, 3528626907, 3310321856, 3359936201, 3950355702, 3867060991, 4049844452, 4234721005, 1739656202, 1790575107, 2108100632, 1890328081, 1402811438, 1586903591, 1233856572, 1149249077, 266959938, 48394827, 369057872, 418672217, 1002783846, 919489135, 567498868, 752375421, 209336225, 24197544, 376187827, 459744698, 945164165, 895287692, 574624663, 793451934, 1679968233, 1764313568, 2117360635, 1933530610, 1343127501, 1560637892, 1243112415, 1192455638, 3704280881, 3519142200, 3336358691, 3419915562, 3907448597, 3857572124, 4075877127, 4294704398, 3029510009, 3113855344, 2927934315, 2744104290, 2159976285, 2377486676, 2594734927, 2544078150], _o = [0, 151849742, 303699484, 454499602, 607398968, 758720310, 908999204, 1059270954, 1214797936, 1097159550, 1517440620, 1400849762, 1817998408, 1699839814, 2118541908, 2001430874, 2429595872, 2581445614, 2194319100, 2345119218, 3034881240, 3186202582, 2801699524, 2951971274, 3635996816, 3518358430, 3399679628, 3283088770, 4237083816, 4118925222, 4002861748, 3885750714, 1002142683, 850817237, 698445255, 548169417, 529487843, 377642221, 227885567, 77089521, 1943217067, 2061379749, 1640576439, 1757691577, 1474760595, 1592394909, 1174215055, 1290801793, 2875968315, 2724642869, 3111247143, 2960971305, 2405426947, 2253581325, 2638606623, 2487810577, 3808662347, 3926825029, 4044981591, 4162096729, 3342319475, 3459953789, 3576539503, 3693126241, 1986918061, 2137062819, 1685577905, 1836772287, 1381620373, 1532285339, 1078185097, 1229899655, 1040559837, 923313619, 740276417, 621982671, 439452389, 322734571, 137073913, 19308535, 3871163981, 4021308739, 4104605777, 4255800159, 3263785589, 3414450555, 3499326569, 3651041127, 2933202493, 2815956275, 3167684641, 3049390895, 2330014213, 2213296395, 2566595609, 2448830231, 1305906550, 1155237496, 1607244650, 1455525988, 1776460110, 1626319424, 2079897426, 1928707164, 96392454, 213114376, 396673818, 514443284, 562755902, 679998e3, 865136418, 983426092, 3708173718, 3557504664, 3474729866, 3323011204, 4180808110, 4030667424, 3945269170, 3794078908, 2507040230, 2623762152, 2272556026, 2390325492, 2975484382, 3092726480, 2738905026, 2857194700, 3973773121, 3856137295, 4274053469, 4157467219, 3371096953, 3252932727, 3673476453, 3556361835, 2763173681, 2915017791, 3064510765, 3215307299, 2156299017, 2307622919, 2459735317, 2610011675, 2081048481, 1963412655, 1846563261, 1729977011, 1480485785, 1362321559, 1243905413, 1126790795, 878845905, 1030690015, 645401037, 796197571, 274084841, 425408743, 38544885, 188821243, 3613494426, 3731654548, 3313212038, 3430322568, 4082475170, 4200115116, 3780097726, 3896688048, 2668221674, 2516901860, 2366882550, 2216610296, 3141400786, 2989552604, 2837966542, 2687165888, 1202797690, 1320957812, 1437280870, 1554391400, 1669664834, 1787304780, 1906247262, 2022837584, 265905162, 114585348, 499347990, 349075736, 736970802, 585122620, 972512814, 821712160, 2595684844, 2478443234, 2293045232, 2174754046, 3196267988, 3079546586, 2895723464, 2777952454, 3537852828, 3687994002, 3234156416, 3385345166, 4142626212, 4293295786, 3841024952, 3992742070, 174567692, 57326082, 410887952, 292596766, 777231668, 660510266, 1011452712, 893681702, 1108339068, 1258480242, 1343618912, 1494807662, 1715193156, 1865862730, 1948373848, 2100090966, 2701949495, 2818666809, 3004591147, 3122358053, 2235061775, 2352307457, 2535604243, 2653899549, 3915653703, 3764988233, 4219352155, 4067639125, 3444575871, 3294430577, 3746175075, 3594982253, 836553431, 953270745, 600235211, 718002117, 367585007, 484830689, 133361907, 251657213, 2041877159, 1891211689, 1806599355, 1654886325, 1568718495, 1418573201, 1335535747, 1184342925];
   function os(D) {
     for (var e = [], i = 0; i < D.length; i += 4) e.push(D[i] << 24 | D[i + 1] << 16 | D[i + 2] << 8 | D[i + 3]);
     return e;
@@ -4821,25 +4831,25 @@ const ks = (Ae, Qe) => {
     if (!(this instanceof Ot)) throw Error("AES must be instanitated with `new`");
     Object.defineProperty(this, "key", { value: dt(D, !0) }), this._prepare();
   }, ls = (Ot.prototype._prepare = function() {
-    var D = lo[this.key.length];
+    var D = oo[this.key.length];
     if (D == null) throw new Error("invalid key size (must be 16, 24 or 32 bytes)");
     this._Ke = [], this._Kd = [];
     for (var e = 0; e <= D; e++) this._Ke.push([0, 0, 0, 0]), this._Kd.push([0, 0, 0, 0]);
     for (var i, s = 4 * (D + 1), u = this.key.length / 4, c = os(this.key), e = 0; e < u; e++) this._Ke[i = e >> 2][e % 4] = c[e], this._Kd[D - i][e % 4] = c[e];
     for (var l, o = 0, f = u; f < s; ) {
-      if (l = c[u - 1], c[0] ^= gt[l >> 16 & 255] << 24 ^ gt[l >> 8 & 255] << 16 ^ gt[255 & l] << 8 ^ gt[l >> 24 & 255] ^ ho[o] << 24, o += 1, u != 8) for (e = 1; e < u; e++) c[e] ^= c[e - 1];
+      if (l = c[u - 1], c[0] ^= gt[l >> 16 & 255] << 24 ^ gt[l >> 8 & 255] << 16 ^ gt[255 & l] << 8 ^ gt[l >> 24 & 255] ^ lo[o] << 24, o += 1, u != 8) for (e = 1; e < u; e++) c[e] ^= c[e - 1];
       else {
         for (e = 1; e < u / 2; e++) c[e] ^= c[e - 1];
         for (l = c[u / 2 - 1], c[u / 2] ^= gt[255 & l] ^ gt[l >> 8 & 255] << 8 ^ gt[l >> 16 & 255] << 16 ^ gt[l >> 24 & 255] << 24, e = u / 2 + 1; e < u; e++) c[e] ^= c[e - 1];
       }
       for (e = 0; e < u && f < s; ) this._Ke[_ = f >> 2][g = f % 4] = c[e], this._Kd[D - _][g] = c[e++], f++;
     }
-    for (var _ = 1; _ < D; _++) for (var g = 0; g < 4; g++) l = this._Kd[_][g], this._Kd[_][g] = bo[l >> 24 & 255] ^ vo[l >> 16 & 255] ^ _o[l >> 8 & 255] ^ wo[255 & l];
+    for (var _ = 1; _ < D; _++) for (var g = 0; g < 4; g++) l = this._Kd[_][g], this._Kd[_][g] = Ao[l >> 24 & 255] ^ bo[l >> 16 & 255] ^ vo[l >> 8 & 255] ^ _o[255 & l];
   }, Ot.prototype.encrypt = function(D) {
     if (D.length != 16) throw new Error("invalid plaintext size (must be 16 bytes)");
     for (var e = this._Ke.length - 1, i = [0, 0, 0, 0], s = os(D), u = 0; u < 4; u++) s[u] ^= this._Ke[0][u];
     for (var c = 1; c < e; c++) {
-      for (u = 0; u < 4; u++) i[u] = uo[s[u] >> 24 & 255] ^ co[s[(u + 1) % 4] >> 16 & 255] ^ po[s[(u + 2) % 4] >> 8 & 255] ^ fo[255 & s[(u + 3) % 4]] ^ this._Ke[c][u];
+      for (u = 0; u < 4; u++) i[u] = ho[s[u] >> 24 & 255] ^ uo[s[(u + 1) % 4] >> 16 & 255] ^ co[s[(u + 2) % 4] >> 8 & 255] ^ po[255 & s[(u + 3) % 4]] ^ this._Ke[c][u];
       s = i.slice();
     }
     for (var l, o = at(16), u = 0; u < 4; u++) l = this._Ke[e][u], o[4 * u] = 255 & (gt[s[u] >> 24 & 255] ^ l >> 24), o[4 * u + 1] = 255 & (gt[s[(u + 1) % 4] >> 16 & 255] ^ l >> 16), o[4 * u + 2] = 255 & (gt[s[(u + 2) % 4] >> 8 & 255] ^ l >> 8), o[4 * u + 3] = 255 & (gt[255 & s[(u + 3) % 4]] ^ l);
@@ -4848,7 +4858,7 @@ const ks = (Ae, Qe) => {
     if (D.length != 16) throw new Error("invalid ciphertext size (must be 16 bytes)");
     for (var e = this._Kd.length - 1, i = [0, 0, 0, 0], s = os(D), u = 0; u < 4; u++) s[u] ^= this._Kd[0][u];
     for (var c = 1; c < e; c++) {
-      for (u = 0; u < 4; u++) i[u] = mo[s[u] >> 24 & 255] ^ go[s[(u + 3) % 4] >> 16 & 255] ^ yo[s[(u + 2) % 4] >> 8 & 255] ^ Ao[255 & s[(u + 1) % 4]] ^ this._Kd[c][u];
+      for (u = 0; u < 4; u++) i[u] = fo[s[u] >> 24 & 255] ^ mo[s[(u + 3) % 4] >> 16 & 255] ^ go[s[(u + 2) % 4] >> 8 & 255] ^ yo[255 & s[(u + 1) % 4]] ^ this._Kd[c][u];
       s = i.slice();
     }
     for (var l, o = at(16), u = 0; u < 4; u++) l = this._Kd[e][u], o[4 * u] = 255 & (br[s[u] >> 24 & 255] ^ l >> 24), o[4 * u + 1] = 255 & (br[s[(u + 3) % 4] >> 16 & 255] ^ l >> 16), o[4 * u + 2] = 255 & (br[s[(u + 2) % 4] >> 8 & 255] ^ l >> 8), o[4 * u + 3] = 255 & (br[255 & s[(u + 1) % 4]] ^ l);
@@ -5007,7 +5017,7 @@ const ks = (Ae, Qe) => {
       return e = this.input && this.input.buffer ? this.input.buffer.byteLength : e;
     }
   }
-  class So extends Qt {
+  class wo extends Qt {
     constructor(e) {
       super(e), e.debug.log("M7sDemux", "init");
     }
@@ -5032,7 +5042,7 @@ const ks = (Ae, Qe) => {
       }
     }
   }
-  class Eo extends Ja {
+  class So extends Ja {
     constructor(e) {
       super(e), e.debug.log("WebTransportDemux", "init");
     }
@@ -5040,7 +5050,7 @@ const ks = (Ae, Qe) => {
       this.player.debug.log("WebTransportDemux", "destroy"), super.destroy();
     }
   }
-  class To extends Qt {
+  class Eo extends Qt {
     TAG_NAME = "NakedFlowDemux";
     constructor(e) {
       super(e), this.lastBuf = null, this.vps = null, this.sps = null, this.pps = null, this.streamVideoType = null, this.streamAudioType = null, this.tempNaluBufferList = new Uint8Array(0), this.localDts = 0, this.isSendSeqHeader = !1, this.isSendAACSeqHeader = !1, e.debug.log(this.TAG_NAME, "init");
@@ -5117,7 +5127,7 @@ const ks = (Ae, Qe) => {
       const i = new Uint8Array(e);
       if (this.streamVideoType || (this.streamVideoType = (function(s) {
         let u = null, c = 31 & s[0];
-        return u = (u = c !== Hi && c !== Vi ? u : Fe) || (c = (126 & s[0]) >> 1) !== Wi && c !== $i && c !== fi ? u : qe;
+        return u = (u = c !== Hi && c !== Vi ? u : Fe) || (c = (126 & s[0]) >> 1) !== Wi && c !== $i && c !== fi ? u : Ye;
       })(i)), this.streamVideoType === Fe) {
         const s = this.handleAddNaluStartCode(i), u = this.extractNALu(s);
         if (u.length === 0) this.player.debug.warn(this.TAG_NAME, "handleVideoNalu", "naluList.length === 0");
@@ -5139,7 +5149,7 @@ const ks = (Ae, Qe) => {
             this.handleVideoH264Nalu(o);
           });
         }
-      } else this.streamVideoType === qe ? Yr(i) === fi ? this.extractH265PPS(i) : this.handleVideoH265Nalu(i) : this.player.debug.error(this.TAG_NAME, " this.streamVideoType is null");
+      } else this.streamVideoType === Ye ? Yr(i) === fi ? this.extractH265PPS(i) : this.handleVideoH265Nalu(i) : this.player.debug.error(this.TAG_NAME, " this.streamVideoType is null");
     }
     extractH264PPS(e) {
       e = this.handleAddNaluStartCode(e), this.extractNALu(e).forEach((i) => {
@@ -5245,7 +5255,7 @@ const ks = (Ae, Qe) => {
       return e = this.lastBuf ? this.lastBuf.byteLength : e;
     }
   }
-  class ko extends Qt {
+  class To extends Qt {
     constructor(e) {
       super(e), (this.player = e).debug.log("EmptyDemux", "init");
     }
@@ -7203,7 +7213,7 @@ const ks = (Ae, Qe) => {
     return e.every((u, c) => u === s[c]);
   }
   ut.Log, ut.MP4BoxStream, ut.DataStream, ut.MultiBufferStream, ut.MPEG4DescriptorParser, ut.BoxParser, ut.XMLSubtitlein4Parser, ut.Textin4Parser, ut.ISOFile, ut.createFile;
-  class xo {
+  class ko {
     constructor() {
       this.s = null, this.a = null, this.l = 0, this.c = 0, this.u = 1 / 0, this.A = !1, this.d = !1, this.r = 4194304, this.n = new Uint8Array([30, 158, 90, 33, 244, 57, 83, 165, 2, 70, 35, 87, 215, 231, 226, 108]), this.t = this.n.slice().reverse();
     }
@@ -7262,7 +7272,7 @@ const ks = (Ae, Qe) => {
   class Za extends Qt {
     TAG_NAME = "Fmp4Loader";
     constructor(e) {
-      super(e), this.player = e, this.mp4Box = ut.createFile(), this.tempFmp4List = [], this.offset = 0, this.videoTrackId = null, this.audioTrackId = null, this.isHevc = !1, this.transportDescarmber = null, this.player._opt.isFmp4Private && (this.transportDescarmber = new xo()), this._listenMp4Box(), e.debug.log(this.TAG_NAME, "init");
+      super(e), this.player = e, this.mp4Box = ut.createFile(), this.tempFmp4List = [], this.offset = 0, this.videoTrackId = null, this.audioTrackId = null, this.isHevc = !1, this.transportDescarmber = null, this.player._opt.isFmp4Private && (this.transportDescarmber = new ko()), this._listenMp4Box(), e.debug.log(this.TAG_NAME, "init");
     }
     destroy() {
       this.mp4Box && (this.mp4Box.flush(), this.mp4Box = null), this.transportDescarmber && (this.transportDescarmber.destroy(), this.transportDescarmber = null), this.tempFmp4List = [], this.offset = 0, this.videoTrackId = null, this.audioTrackId = null, this.isHevc = !1, this.player.debug.log(this.TAG_NAME, "destroy");
@@ -7280,7 +7290,7 @@ const ks = (Ae, Qe) => {
       }
       if (s) {
         this.audioTrackId = s.id;
-        const l = s.audio || {}, o = Fn.indexOf(l.sample_rate), f = s.codec.replace("mp4a.40.", "");
+        const l = s.audio || {}, o = Mn.indexOf(l.sample_rate), f = s.codec.replace("mp4a.40.", "");
         this.mp4Box.setExtractionOptions(s.id);
         var u = { profile: parseInt(f, 10), sampleRate: o, channel: l.channel_count }, c = Ks(u);
         this.player.debug.log(this.TAG_NAME, "aacADTSHeader", c, "config", u), this._doDecodeByFmp4(c, 1, 0, !1, 0);
@@ -7325,7 +7335,7 @@ const ks = (Ae, Qe) => {
       i.href = e, i.download = be() + ".fmp4", i.click(), URL.revokeObjectURL(e);
     }
   }
-  class Co extends Qt {
+  class xo extends Qt {
     LOG_NAME = "Mpeg4Loader";
     constructor(e) {
       super(e), this.player = e, this.player.debug.log(this.LOG_NAME, "init");
@@ -7339,7 +7349,7 @@ const ks = (Ae, Qe) => {
       return new (us.getLoaderFactory(e._opt.demuxType))(e);
     }
     static getLoaderFactory(e) {
-      return e === "m7s" ? So : e === _t ? Ja : e === It ? Eo : e === wt ? To : e === Ht ? Za : e === St ? Co : ko;
+      return e === "m7s" ? wo : e === wt ? Ja : e === It ? So : e === St ? Eo : e === Ht ? Za : e === Et ? xo : To;
     }
   }
   class en extends Ae {
@@ -7379,7 +7389,7 @@ const ks = (Ae, Qe) => {
           let o = !1, f = (/* @__PURE__ */ new Date()).getTime();
           this.prevTimestamp || (this.prevTimestamp = f, o = !0);
           var c = f - this.prevTimestamp, c = (((this.decodeDiffTimestamp = c) < 5 || 500 < c) && !o && this.player.debug.warn("Webcodecs", "decodeVideo diff time is ", c), e.slice(5)), l = new EncodedVideoChunk({ data: c, timestamp: i, type: s ? "key" : "delta" });
-          this.player.emit(N.timeUpdate, i), this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === Xe && this.player.recorder.handleAddNaluTrack(c, s, i, u);
+          this.player.emit(N.timeUpdate, i), this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === ze && this.player.recorder.handleAddNaluTrack(c, s, i, u);
           try {
             if (this.isDecodeStateClosed()) return void this.player.debug.warn("Webcodecs", "VideoDecoder isDecodeStateClosed true");
             this.decoder.decode(l);
@@ -7404,7 +7414,7 @@ const ks = (Ae, Qe) => {
               k.length < 2 && (k = "0" + k), E += k;
             }
             return { codec: E, description: g };
-          })(_) : o == 12 && ((c = _).subarray(1, 4), f = { codec: "hev1.1.6.L120.90", description: c }), this.player.recorder && this.player._opt.recordType === Xe && this.player.recorder.initMetaData(e, o), this.player.debug.log("Webcodecs", "decodeVideo and webcodecs configure");
+          })(_) : o == 12 && ((c = _).subarray(1, 4), f = { codec: "hev1.1.6.L120.90", description: c }), this.player.recorder && this.player._opt.recordType === ze && this.player.recorder.initMetaData(e, o), this.player.debug.log("Webcodecs", "decodeVideo and webcodecs configure");
           try {
             this.decoder.configure(f), this.hasInit = !0;
           } catch (g) {
@@ -7454,7 +7464,7 @@ const ks = (Ae, Qe) => {
       k && c.$playbackTimeListOne.insertAdjacentHTML("beforeend", k), t && c.$playbackTimeListSecond.insertAdjacentHTML("beforeend", t), (T += 1) < g && (c.rafId = window.requestAnimationFrame(h));
     })();
   }
-  function Lo(D, e) {
+  function Co(D, e) {
     _r((function(i) {
       var s, u, c, l = 0 < arguments.length && i !== void 0 ? i : [], o = [], f = (l[0] || {}).startTimestamp;
       for (let g = 0; g < 1440; g++) {
@@ -7476,7 +7486,7 @@ const ks = (Ae, Qe) => {
       return i;
     })(), e);
   }
-  var Do = (D, e) => {
+  var Lo = (D, e) => {
     const i = D.events.proxy, s = document.createElement("object");
     s.setAttribute("aria-hidden", "true"), s.setAttribute("tabindex", -1), s.type = "text/html", s.data = "about:blank", ue(s, { display: "block", position: "absolute", top: "0", left: "0", height: "100%", width: "100%", overflow: "hidden", pointerEvents: "none", zIndex: "-1" });
     let u = D.width, c = D.height;
@@ -7492,12 +7502,12 @@ const ks = (Ae, Qe) => {
       var k, t, r;
       (k = D.volume) === 0 ? (ue(e.$volumeOn, "display", "none"), ue(e.$volumeOff, "display", "flex"), ue(e.$volumeHandle, "top", "48px")) : e.$volumeHandle && e.$volumePanel && (t = Xs(e.$volumePanel, "height") || 60, r = Xs(e.$volumeHandle, "height"), ue(e.$volumeHandle, "top", t - (t - r) * k - r + "px"), ue(e.$volumeOn, "display", "flex"), ue(e.$volumeOff, "display", "none")), e.$volumePanelText && (e.$volumePanelText.innerHTML = parseInt(100 * k));
     }), D.on(N.loading, (k) => {
-      ue(e.$loading, "display", k ? "flex" : "none"), (_e(D._opt.backgroundLoadingShow) && Ve(k) || _e(k)) && ue(e.$poster, "display", "none"), k && ue(e.$playBig, "display", "none"), ht() || k || (e.$loadingBgImage.width = 0, e.$loadingBgImage.height = 0, e.$loadingBgImage.src = "", ue(e.$loadingBg, "display", "none"));
+      ue(e.$loading, "display", k ? "flex" : "none"), (ve(D._opt.backgroundLoadingShow) && We(k) || ve(k)) && ue(e.$poster, "display", "none"), k && ue(e.$playBig, "display", "none"), ht() || k || (e.$loadingBgImage.width = 0, e.$loadingBgImage.height = 0, e.$loadingBgImage.src = "", ue(e.$loadingBg, "display", "none"));
     }), (k) => {
       D.fullscreen && Ut(k) !== D.$container || f();
     }), f = (k) => {
       k = sa(k) ? k : D.fullscreen, ue(e.$fullscreenExit, "display", k ? "flex" : "none"), ue(e.$fullscreen, "display", k ? "none" : "flex");
-    }, _ = () => D._opt.playType === pe && D._opt.playbackConfig.showControl, g = (k) => {
+    }, _ = () => D._opt.playType === ce && D._opt.playbackConfig.showControl, g = (k) => {
       ht() && e.$controls && D._opt.useWebFullScreen && setTimeout(() => {
         if (D.fullscreen) {
           const n = _() ? 48 : 38;
@@ -7564,7 +7574,7 @@ const ks = (Ae, Qe) => {
         e.$playbackTimeScroll.classList.remove(mi.oneHour, mi.halfHour, mi.fiveMin, mi.tenMin), e.$playbackTimeScroll.classList.add(mi[n]), e.rafId && (window.cancelAnimationFrame(e.rafId), e.rafId = null), e.changePercisitionInterval && (clearTimeout(e.changePercisitionInterval), e.changePercisitionInterval = null), e.$playbackTimeListOne.innerHTML = "", e.$playbackTimeListSecond.innerHTML = "", e.changePercisitionInterval = setTimeout(() => {
           switch (e.$playbackTimeListOne.innerHTML = "", e.$playbackTimeListSecond.innerHTML = "", n) {
             case qi:
-              Lo(a, e);
+              Co(a, e);
               break;
             case Ds:
               p = e, _r((function(m) {
@@ -7705,7 +7715,7 @@ const ks = (Ae, Qe) => {
     }
     D.on(N.stats, function() {
       var k, t, r, n, a, d, p, m, x, b, C, v, y, S, L, B, A, I, U, P = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : {};
-      D._opt.showPerformance ? (ue(e.$performancePanel, "display", "block"), e.$performancePanel.innerHTML = "", U = On, k = window.performance && window.performance.memory ? window.performance.memory : null, t = D.video && D.video.videoInfo || {}, r = D.audio && D.audio.audioInfo || {}, n = D._times || {}, a = D.getRenderType(), d = D.getCanvasRenderType(), p = D.getDecodeType(), m = D.getDemuxType(), x = D.getStreamType(), b = D.getAudioEngineType(), y = D.getRecordingDuration(), S = D.getRecordingByteLength(), C = D.isAudioPlaybackRateSpeed(), v = D.videoIframeIntervalTs, y = Br(y), S = sr(S), L = D.isPlayback() ? "录播" : "直播", B = P.isDropping, A = D.control ? D.control.kbpsShow : "0 KB/s", I = D.getVideoPlaybackQuality(), U = `
+      D._opt.showPerformance ? (ue(e.$performancePanel, "display", "block"), e.$performancePanel.innerHTML = "", U = Fn, k = window.performance && window.performance.memory ? window.performance.memory : null, t = D.video && D.video.videoInfo || {}, r = D.audio && D.audio.audioInfo || {}, n = D._times || {}, a = D.getRenderType(), d = D.getCanvasRenderType(), p = D.getDecodeType(), m = D.getDemuxType(), x = D.getStreamType(), b = D.getAudioEngineType(), y = D.getRecordingDuration(), S = D.getRecordingByteLength(), C = D.isAudioPlaybackRateSpeed(), v = D.videoIframeIntervalTs, y = Br(y), S = sr(S), L = D.isPlayback() ? "录播" : "直播", B = P.isDropping, A = D.control ? D.control.kbpsShow : "0 KB/s", I = D.getVideoPlaybackQuality(), U = `
                 <div class="jessibuca-performance-item">
                     <span>版本 ${U}</span>
                 </div>
@@ -7750,7 +7760,7 @@ const ks = (Ae, Qe) => {
                 <div class="jessibuca-performance-item">
                     <span>渲染组件 ${a}</span>
                 </div>
-                ${a === Et ? `
+                ${a === Tt ? `
                     <div class="jessibuca-performance-item">
                         <span>渲染引擎 ${d}</span>
                     </div>
@@ -7969,18 +7979,18 @@ const ks = (Ae, Qe) => {
   function rn(D, e) {
     e instanceof Element ? D.appendChild(e) : D.insertAdjacentHTML("beforeend", String(e)), D.lastElementChild || D.lastChild;
   }
-  function ze(D, e, i) {
+  function Ge(D, e, i) {
     D.style[e] = i;
   }
   function sn(D, e) {
     return D.composedPath && -1 < D.composedPath().indexOf(e);
   }
-  function Ct(D) {
+  function Lt(D) {
     let e = !1;
     return D && D.parentNode && (D.parentNode.removeChild(D), e = !0), e;
   }
   tn('@keyframes rotation{0%{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(1turn)}}@keyframes magentaPulse{0%{background-color:#630030;-webkit-box-shadow:0 0 9px #333}50%{background-color:#a9014b;-webkit-box-shadow:0 0 18px #a9014b}to{background-color:#630030;-webkit-box-shadow:0 0 9px #333}}.jessibuca-container .jessibuca-icon{cursor:pointer;width:16px;height:16px;display:inline-block}.jessibuca-container .jessibuca-ptz-controls{position:absolute;width:156px;height:156px;visibility:hidden;opacity:0;border-radius:78px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAE4BAMAAAA9UfJZAAAAMFBMVEUAAABHcEy0tLRZWVmysrKoqKi1tbWvr6+2traBgYG1tbWWlpa1tbW1tbVUVFS1tbVGCHqkAAAAD3RSTlMzAO9U3LSWySp3aZcVRDUDw823AAAJYUlEQVR42u3d32sbVxYH8EPHxgg/lBsa7SBkukmpSbwLI2KbEPpgZ5MQtwmM0wRMmgdhP6RgEuwlSVnYlmGMYaEvMU1KKX4QNq0pocVmm7CYfRBaQguFpbgPKRSC/4V2LGliO+bulWKrkvVrftyZ+WbxeTRG+nDnnnNmRjP3EpMR6tMH18du/0Xj1tGz5+9cf/DUlPKx5PsTkr8s3eZ1cX7ym1zkuI/f1wTFunNt9fP+FIno7/98/tFY+Y8ffBUlLrmkl2Cr96guTv27BMxP5iLCqUvi68+tpqhJKPNXBH3SjACnfimm/7Wmsl3fI/FP75lh457oPH+1Da3M+1T8481QcT0T7UetevR618LDPdH4hTlyHLGH3LoZEk6d4PlvyVW8pfNeMwzcDwa/kCKXoTzk9tfB455o1mXyEIOa+0PrFvcFt+fIU8QM/k6guOQifzNFHkN5l/flgsOJVHibfMR9l2nhBqem+VXyFZ/xghkMTp3il8lnDPKiGQROhs2lzjEuKcVW1uWk4ybk2Eq63pxk3CK/RZLiJO+Ti/vZXw3ZX1E+kon7jv+JJMY/+Q15uIRWIKmRthZk4VTDTsnFKYZtSsItWiskObq1Pjm4f8gqIrUF5W8ycAl+nAKIT/iCf1zSKFAgkW4/7drifrLmgsHF2k87alvhblFAcbJttWuDU/VtCiyyedMXbjGfCg6n6H1+cHE+TQFGFx/3jksa2xRoZO2cZ9xsUJn6e8aOeMX1aGco4Biw1jzilm0KPNJb3nBxvhI8rrtVTlCLK5ptCiEyBS+474POhr2c+NA9Lqm/QaHEiXzONW42yN5Q2ydG3OLU4MvI7+XEdImbCWvgSkN3zB1O1YYptOhoNnRNcDM2hRjGMTc4VZsOE9fVZOioyYyjUKPJrKPGNW44XFxX41rXEPc4vFTdS9iLTnFJ4wyFHAO2U1zcSoWNU7RLDnFTb1DocaLoDJfgc+HjYo3uTjTArW9TBJHdcYJTtdEocJ0NCnE97nGBIon0RQc4YzgaXIfdHhdBHdmrJuNtceubFFFkdtrhVG0lKlx3XUrsxz22KbIwLrbBTQ1Hhxsotsb18FR0OIWvtcT9Z5sijOyfW+KM6ShxXXYrXMJKRYlTtIUWuLubFGlknrXAGaPR4jrt5riERRFH7XGtwc1sRo3LHGuKi/qo7j+uhJOr9flKMBW4QR2uxk1NR4/rKjbGRdpXG/bXKtxrAEdVHNfTDXHLf0TAvbLVCJfU5hBwMSvXABfPE0To4w1wP25i4DLPG+CmRjFwncV6nIpQSF4UE7MOd7hAIJG+VIe7u4GCG3pWh0uPouA6C/txMFOuetIR3JSrmnQEN+WqJh2BVbmaSreLS+JMudKky9Xg4jYBRXq8BndoEwmXOVKDWx5GwnVs1eD0OSRcLF+N67EIKrS1Klx8GwuXHa/C/biBhRt6XoVbnsbCdW1V4bDyoZIRZZwKlg8iI8wKLl5Aw73oEWXcoQ003NCRCm59GA3XsVPBTa2g4bqLFZyWQsMp1h6uJ09woa/t4tCaV6WBEWSy7qYrQSbrbroS2MVNzUUOAXbWSnel0sU+AUbpsl/gEjYizlgo4w5vI+Kyl8o4xEryopYI3N1hRFzHszJueRQR17lVxqXnEHGxQhmHd06yd15CgBcQlcsIYokCJi69IHDxbUycOGki9toGJm7otMC9/ism7tXfBA6zBperMIHW4HIVJsDrwsrVIYE2CNEibIHDbBDlFkFJ0AYhWkSOemxUnLFGqN2r1L8ItXuV+hfFN1FxmXH6wwYqbuivdAgXd4RQ+36p8xNq3y91flqfRsV17dD6KCquc4eWcXFbtLyCiusu0hQ0bg4VFytSGhdXICOFilNs0nFx+QOcZ5xGsGEd4DzjOC6OH+A847QD3P9jtuJ2CGjcQeP3gYM+2YQ+TYe+wMG+NETGQd+OgL6RA30LDPrm4eu/ouJe/Q37hjX0rX7oH0mgf16C/mEO+idN6B+DoX9Gx34AAfrRDeiHXqAfF0Lt/OUHrVAfUcucRn+4D/qxSOgHSqEfxcV+iBn68W/EV3AqD85Dv3IA/bIG9GsumC8IaSb+q1XYL6VBv84H/SIk9Cuk0C/fQr+2jP3CN/Sr8tCLDEAvzwC9sAX0kiDYi6lAL0MDvYAP9NJH0ItGYS+3Bb1QGVaP2LfEG/TieNDLCmIvyAi9lCX0IqDQy6diLzwLvWQv9GLH0MtER76rRqWxPgdemtwYf9kWdYdeDh97IwHoLRigN6/A3vYDesMU6K1msDfpgd7eiOmjSEf1ZdpSC3ozMuht3LA3wIPeOjDSTRdfKb7M21VCb/QJvUUq9uay0NvyYm9oHFFKdDvaChp6E23s7cehN25nh5G3vE8aZ8LGDdjMIY49zoc9dPpFx7ikHnIh7sjnHOPYTMj36oxjzDlO1UI9Xe9oUICb49iMDTBwzXCqFuKsG2gycM1wYtaFlrCK3mTgmuJU7UzkA9cUx2bDGjpFH2FucUk9pA57onGNa4lj31uhnJzEtA+ZexxLh3KpkykwL7g4D+GUuJuPe8Kx5RCuJtJbzBuuJ/hyMmCtecSx2aBzIqaNMK+4pBHwtU7WznnGiZwI9Oykq1U2tMWxxSD7hKL3MT84VQ/wwGbzpi8c+47fCsp2kt9g/nDsp6AyNqb1Mb+4pBFQKU7bpm8cS/DjQdg+aXT/wTWOzfLL8m2DfITJwLFFS/oZQHf7CecQpxq25GqnGO0nnEMcS2iSq13WWmCycKLaHZebDDeYPBz7mb8tz3aff8Rk4tiivJQd5H1MLo5NyNIN8t6cbJw6ZV2WYys6tTnHCZ2MsRM2k8nHSdG5srnBMTXNr/qzfcYLLmyucEyd8FdR7vNeNzZ3OJZc5G967mTKu7wvx4LDMfYFtz2efMYM/o7LL3OLY080byVlULNusqBx7AeDX3B9aJWH3P6aBY8rpUX+W3e2t3SXqeAZVzq0/JyLmRe7wt0fUs849t8Jzv/u8Ngq/+K8d42FhxODp/P8VQc85VPxjzc9folXHFO/1Lh1rc3BjT0S//SeycLGCd6Sxvm51abDp8xf4dyaNL1/gw+caBhLuvj6O6v36mWn5scEPe+H5hMn4uP3hUEAr63e6y+PYX//qflHY+U/fvCVzw/3ixPD98vSbV4X5ye/yfn+aP+4MvDpg+tjZ4+K8bKOnr1z/cFTU8rH/g92biFxn2S73AAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%;transition:visibility .3s,opacity .3s;right:43px;bottom:135px}.jessibuca-container .jessibuca-ptz-controls.jessibuca-ptz-controls-show{visibility:visible;opacity:1}.jessibuca-container .jessibuca-ptz-bg-active{visibility:hidden;opacity:0;width:156px;height:156px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAE4CAMAAAD4oR9YAAAAM1BMVEX///////////////////////////9HcEz///////////////////////////////////85yRS0AAAAEXRSTlO5DCgVgZBxAK2fQDRkBR5XTPLKM/gAABnnSURBVHja7F0Jkqs6DGQPO9z/tD8Jq6WWbCCvIjKfzAGmulrW3ooedr6ui+M4TdP++SXPr1l/SdL3aRrHhv7ZyA5qb9xe0L3Am+DrkzeCL/BeX908MezTuPsfOArdgl3KsZuhq99fk/Tx3waum+ByAHua5QbYilkzY1aP728YhrH5InrfBa57OLAtVjpRbYaumex04dq4APeC7vnVSfo/45bXLe33jGscMx3f0A1vyg3t69e2dRL/NeA6wrgdcCvjyPM2U25mXDt9xVD3f/qN0yi3Mm6P20S54vlXtGPS/R3GPSbYOsC4ZAvmJtiaGiL3Zlzx/Ht+Y/KXTJXbqmaqe9za1VYn3N7YpX/OVGev2qduOLIiB7xqOzGuWCiXFVmWtU3368A5lkqeOJI21I5XXaORxVRnxmUTdNnY/4U3riNvHMJts9XRtdXVUttipdzrK/4x7UyY6sK4Gbo+nU21T1zKcd9AGJetlMvyLKvj3zXVfeqQElMljINx3MK4xVQ3xj2Ry7N/6CiMOIfYyVUXWxUyBx7HuZRbcHt9bf/Lb9zsHlzKzabauJaK47iVcC7jJujS33/joKkmxDnM4QiJ4xDjZuT+DXQW3jgxV012qcPuiePhCGfchlv1/P0D6Czmqmuq2gPGkbIS8Q4ZsNU3dGP3Y2+cW1RyKpkrbAnwqhi3iXHFHrU3bFVV5c3vBsCsOALjkXErAW85F3rjFvBm5Kos+TngCOXYG7fA1ojFER7GPUHbmer0tfGPANeROM6pjvDMQSkrsWQ1d564Fbr61964TvSqDa6O0ELmAtvGuc2rrpQrn/aa/qCpYq+6mSpOVhnjWBy38u2JXFl9yL8acg6CV3Ur5yxVZfW4AsRxG+XKssz6n3njVMYR4Eg8sj1yi3tgtroxrpyhG38gc+h8PYddPQ551dVQW5jju2/cG7kXdB946Uy9cbDnQOpxuCCHcq5dHDcht8D2/K67VxPNGtLJd7qDTcgb1zLGbXEcY9z0Fd39GReTzIH1B/2lcxrGTYxjXnXyqxNyef8zpipVlfDsyCCmDkuumhGvWq6W+vyisqxvDJwwOxJQO6fNmjaQcRt0ZdR2dwWOFZViuculNWtgBZjk+DNq1cq45y+Lf5NxE25B3oEyLueFJWqtT+Ciqr8r48jsCAyAG+2Na53MAdQxX16VhHEL4Z7Ilc2dGad28pskaULiEdDlyijjdqa6gBeNtwSu63AnP3V6NUnAG9cu1RHOuL2hVi5qr6+9Za4qV0dCGcfCEfDIufWRFbsZvKy7KeNgW7XHvRqxWfOGLhO6XCrjoiiPb/rGdZ75uGRfj9u3B1sWAEtdLuxVF/Cq9HaMe4A4TptkZYwLqI44rmGDbUe5E8hZcg54zquRbHXu5NN6HKuO7N84YqwbdGV/Q8YF5arUN7CJTNLkgplD5T5xG+OOI2ehAhxv00ocOlpWwhHwljns5uNg6bxCb9wbueSupip6VTnj2jGudSvnOeqrVo6h7vl2nHM2K8AkV1WyfDYDvHUcWF+1VBl3EDlLKdc2dQ6aNbhXw2eAt14Nf+MqFse5rDuS8tucHUmhqaJppYF6B8440h7E8cjhqMTiLtcaAL+ga9jWZb35hpbHceyNI9WRSmHcE7n4jqbqTp2D2nnzgm154mB1hJQy1cwBIpd3twCOrjnEoDsoTZ2jepybb2VKrhpx3zB92Z29Khpl1ZN8MHWzJV1CdYQHJEeqTMbqcfEMW+obLBwES83w7AgvY0YlMNT3N96GcXEHGQdxG2t3CQ5kDkoFeO8esHd4fc193jinAtxvXhUN3Ywz5VAFGM3cENfgVM4x5YICYRumqu5yIVMdJuhaLXMAFWBKOIhbWFBiO44Dg4Usxx/cCrDyxqESMIYuu4lX1fYcGnVaaVmtKXZxHOzW5Bvfqtk3iLAFuVaLew4HluDUzIH1VYMZF+AgLMZxcAYY1uNYBTgrwPDIaqxOQ1p540IchBFTJW9c2ofNAO99Q+sYaugbJ35Vd4sKsPbGqVM33KsWmdpXLeXqufsVNwhH8FyhOh8n74foKb5WVDr0zFky1Rgt+iaJZyJTWErKMynpqsqgVy4q0xv0VTvZq0pJPq5jzn41zzzVET0aCYjmTO05OLaaBEwWqhvSenUkKtVw5P0N96mOpNr2YCPuh4AJCGEAoioDver7628Sx8WAcU2i1eM259AWhZBzuQEJieN07JR6sCHgXoSLnepI7yo9NqgCLE5A6K4hjHGKsVqK49JYEGyBg4XIq2b7FREUx5Xu2LkXOtmz2pJBW5sOqdjJF3sOjHG5fz7OT7n8DtURwjjPtBKtx7VLOa6Q4zh5Wkn8xhvU4xbG9al/s2bAbxwYkJO7XCGME43VIuMc56Dnqi7hpPE4cVopBLnibozTp5X4DHAQ49iwfsCX3IhxYFoJB8C0y7Xr1iwBSZXDulIUjF11G6+qr5aPALlCmTrfyWfQzCEK49xoPMnnjFMaq3QlX9tzQPuq0QFbLeNbMU6cHRn3Sb60HwJ6NXAhKQi61nzpPAbtQaY8jUUgQnRHSodxZSjjoig161W7HePIRGZDJzJHQXiEzE4DpRtSjotCHzkUkhj2qqJi4V54T1S6cWwVp/nhjAP1JQuDhbs4TtFW0spKTgW4UHJVFv4GQpcZA64jkt1xDNS8lDEv9Y3z5KpRGY4biIINMC7e2lxKNFJDqUfQquGZA2yrHoINUM7G6ZX1iVM2RKDUI08dssVUfduDRyI5QDkbFWCnscrWVWV1/RZ2uaRc9UyKL1LO0r7q1qwBm761WsmEUjdge9ApAB9iHHWslq4kMalHTbHQieO0zXKljHmIc4XdOE695yCpsg7eOE7t5B/4Uqv1uDSGKhDYq0r6yQWYj5NnRw5BNxjOHJAKRJB+nJqr4jcuOki4qOzs5qrgulSDJzJHUcyrCNMdOc44ty5nel815KDZ4HTypeoILAEfZJxbCjYkSpVKgZx/IpOfXgnarDkKXWIrHAm7kiTqxw1er+oQzg2Bj32FTcYJ2kpCIx9PK2XMq1ZCz+EM46LYZK4qaCsdmo+TqiOV5FWPITdYLZ2jOqYa/6LN8kJSZT1dxkSTJEYKmZ2/OuI5aIYYh+UzKn3TN9A9mLjL1cl6LexKkqof575xVJWVx3HRefdgUbGQNGs2U2Ul4HYQ60o+HeBzjCtt9VXVqXMpc3DEzh2NzEJSnr7OuG35wUTpPGjqXN3lQgdE0AWRA2sOHls1eO2yh/uqWM1LbUgvQzeatOhR5NZM39QIBNyQbviBVajYItbOYa56knCbrRrUj0vxTn5QVQlOnUtdrjKKztuqpbMEJ27WtCG3BzX9uMPfYqsmlW7SPnRfFeSqwTrAp9641VZtXi1PlX1VN44THzlvPe4k45aZLys9h+7cvuqsAqEpBAm6I9HJN24pZ9oIRzp5XzVUsVCZOnd0Ry4zbu52GdMBDn7j+NVyYXaEneW6+sbNrQcjtwdJCTh4WmlrSLcF3axRZ4AvMC6zxjj9annty1X9M8BoefBMQGKudB5UjnMnMltQV1JuD5JK5jnGTUU52zeke+4cfMJ7ygxwSZuDJ6EbzDEuZF+VNLnczCETlPdkdf3Tj5yhAHhNVdV9VXgJGV9JyqWjjRdS1fWRs6vmRctK1KuiLD/b22q2KyvlWJT1HOPeo3IWqyNwlwtrxJNrlwW69ZNr0qKnoBsfNrWVcH+w9gzIFXxDeisr5cxSrzCusFVWkpVukH7coF/0zQRt0a2QGZ1HLrfAuIfDOL/uiLOTz9UMMiTmtXMOVXmxW/P+OqM6wPBKEmLcbuiGMw4lq9cmIPbewa5iIb3LdYxxKHMouYDcSeRqcxd9+dS5VFWCGZd3e9DtR5+21dbYRd/1EAaagUC6IzDLV7YHj4pSKbmDkZRLnmRNcHeQ3azZdvLJ9qCUOVyhXGVmQUSpx9GWAzNW6Y0DmYMzrbTeHjzxxTeI41zktugXtQezAsRxon7caUt9VZZMMQ7pAPMnjnTyB5lxJHPgU+enGTeajONUHWB46wfW41jmAE79nHerNiYyFeXpBu/keycyM8983CWv+sxWLe2rsgpwH7qRxPuqb7pl6IKe61RPYpcbvefQy3e58LSSbwY4B071CuNKk31VtswlTyuJ+6oZuss1h3HVCTEDluZb7Ks6prqrjijlOLTLxRlXUhng85RLo+77por7qp5c1fUN8I1Tbw9eqce9ArkvA6eqxOOr5UQGgrdVC1l5GszHnYSuNsC4OKgeF6au73S5Mt983IU3bvwqcN3jAe9y9VgkvvHPskp7DuI9h7PfYOGNw3EcH7rx91XRPbNPT2TOEbCNNw7uJOGhG+naD8+5PG/cJcI9gYu/CxuYVuqd+6reHbgBWqrvavlV5LLvAqfdc6AFYElcyW1IS0eScqg7ch65/MvABXW5ElWvZXDiOL2Tz3VHzn7Vt4F7iNuDobMjwp7DUh3hfKs+EQCbAs43O9KgG9KDrK6vMe5qIPdd4NS7XFLi4NxzADf0eEPa8aqX1lV35REjb5zac1geuYVwtfjGbTmXsJH0qf7g14Hz9xzE9iD0qigewTv5F71qaeKNwz0HXI+jb5zLODABQWaAP+MbXA2SbxdH9KlzMjw9jvAUMr72o6363hQ4VyQ+lU+vkH70ALVFM2cnP8f1uOojhLPgVZnWI7y9Enjtcr+TT/qDJdj0LW9tqlgFQtUdYQfNQupxnHE3dw5aripmDgOcOt90gHOpOvKRF85EOCJKPSrVEa/y9D9QLDQEXKco3UiqVPtdrjZIIxNuSEeX+qomc9U+3S/WUIUgvD2o7nJ9UnfECnAPWQUiSOu8HYKERz6oO2IDuE7THcHOATIO9xzQhnT1IcblVhjnagRp8QjZVw1gHOFb9ZnSuY1OvutVe3/86w4Be7XOc6GvetsuF47jAq5dElFWn9a5oJF5YUDOBHCdds9BzRw2xrWy1jl946qrC6tfb0i7uWoKZ0eaoJs1e8LR+6pQPy66GMiNhqaV4ljbc/DqjrTC1fL8n/RVa0ummiI1r0a/yyUPT2dcXBR08s9Cl9gVpdKvEvgO00LB7qta585g4eP7jIuDxEXdaSV87TID91WdiUx67uf011lkHBTea/R6HN1XhTdr0AmROw9Pd1h5euurJvxKEh2e9uyrfnYn38q4vnp7cLchXXuVbtxdLoFx1UVtpWnv0uLNGudquTCROXj2HHI6riRK791zJakjIxDKRGatMI5fu8z81y4vzU5bE2yJmYLyFsc1jaythPcc+CW4j2grGVi71GTQgnLV1tFrQduDUj3uWvwb27p2Sefjel/PAXXy+QywoFh4IZKrTF67lC6I1H6NTHEGOBeWB88LoVm6dimoGaxO1a+RiafOpX3V8r7yGayOuZfPgGsOQhy3V4Fgew7wSlJ5hXG1aY1Msj2IK8B0BAK8cYIIxBXG9bZuD6ZUlCqk5zC0x/Yczh9YtSVK9ZA3pAN6Dqq6vnAo9ANx3Ndl0LazXPK0kq/n4J06F+45XMkc7Ajv0Sy/VzZrpAsiLUnyhZ38fQX4vOqIOXX9o9cutRlgfZfrSuZgTVxU9KrKPQdQOgd3CZB7OO9VzcnZ4pYDHddnkoVSrprlAXe5ynN5gxF1/Vi7ocenp7XdcueJyxSt8wtjhRYku2EcB3Hb1LxqHMb9192VJTmuw7DxSsfxdv/Tvn7TSceiAEpylqYnH/lWsWBRXABMVLHQ8B4cjvWUfN1xTYU6wJEqqy7y1ynBEIGt8ycqBxe2BGh3JEt3hO3HtXjm0KFJ/kHIOTDCmEUM2RFMH9ygn8N+WoNmDpcLZEgfFuz2pQPMKof7eHBME0RsxAVX3OFS1Y/Zj77jtGQ34nLRWjVeHtFF/pOIc2EvRdf1m/2UKy11s+8qtXzmAKQMhiNNTDefqiWtFIlkQqEbNJFuO7g6oqr84p8PC710IxN0R0bK5VIFV2svTx9CnCPTxspm1iiGiBKeptmh26tAYOXpp+y3HSGuqUwnONzIZN7bRAdYp4bDZpee5qq5OsAKcdTQISjykUjmM/aq3lRZK3rH6a5SOMmPZw5BQ47yQ05rvm3NVVXhkLCs0YqF2EN60A4iw8Ev1dtcNXvmsGK+qukh/QIRtEHE06cK1fXtKRfLqoTLRadcw8Ev1ZkTXBXzVdkdt5k1PvtQo/24I604520lvq0EFAvxXLXlytPHpjUXcRU4tTuiJvkx4EbugxHojrRJTn4p5jY3gcspucLQKW0lVnNhFQhF5ir+VhsvgZsN/Tji9cOcVybD6wcOuQ5MuXpxirhyt0tTea9NTPKLEVf7CdzMaZdZbpd0Pw6LZ1wiN7PhWGpwk1Uz/BzQDsSEnOB6vXT+cLscntoB3sQZ4qiaV/qOixjSJYgrBNwwu0OcSYKzzbe1ExwYrF6InFdpVp3EG+IIJSlsnWv9uEQ/DrMH497IcOgt4hNxC9vXv2b5ElhU32fuuF78IQ4r3XyreV3NST5V86K16uG6YRF3iIt1gJscxRbgE9oG88E2oa5fdMu14h9x5pZX2I9DuaGn+nGXmOdw6PHrvh+X9OWagGdNbzCkI5uk7NhpwHliSDf2sIY4wQHl6ZysWvoaqcUz4hLyGUrsfF85QIZIvASsh1zZsYsA54qTDyuHSAViM7wH+x6NarDWeRHiFpHT3HE1g5zldsk6wEDOdiiwJejFJeKYvaqtWEhFqShfFSkWHikaPHZH0qJUxEOvnK9a4CE9ibvACVQsbMLKwWTWGP6qMeKOAW6o3AWOXHHZ/TiD55BGXHZW3UScfqqPVdbGMjSLa1VVcRG+KmRI53fOOxGnn2piedpgSK9GB5h0MssBVzsM3AwdfXPuuFh3ZGLaonBUk3/J9eIfcXDmcC1RLEwotgTvuDzIDY3LwM1z0kMam/1gjcyWjQePq7VscjrE2YuFxNHMLFWB1vlwKDO4rlX1tj7ROidZNc1XzZJPZh/q73O5BPBVo90R5PaTyKqYPVhcdK3iGXHxJB8RRLT14KZYl1FW7RJa5zkf6uw2cJJ8x5kbmcDsx+yO6NglQreInO+Oy9oBNry348qh2M5hFTkH4sysihA3WXNVvAIciQSVtH2d745kdZUYQ9pa1o8QNxzLqO4m+eFcNRk6BLmWiHZ3gK+a+FZH8Y444q9qbuuTmcMLlad7Ee+Iq9gOcNJ7cFqZDjCXOs98AV9m8Y84OFitI7fLK0VcwHPoqZ+Dks+wPtRhEf+IS4kZ1ElqOZrW3CBH+ar2O24U34GT8rmqntWsif24jjFrrCtuEjkD4qC2kpqrjrQ9cpDLZXlIt+I+cEl/VernsB7Zj9PTQZIYKjkX4iCz5go7mYpZY2qdI77qH+M9MtRyGsQZXC5rrzBWnt77OQCNzKB2YIi7ipwDcZXJ5YJS54p32UM/h84WAmZZdZMTBE435LLt3sm2foajbyqtTnKCwCkVCFMlHnKSpkhev4UdYHDHke5IK2cIXKACYbuWm7UqVp7uzDsOI66bzxE4ogKBZg5ZtWqCIR2+4wDiLtl2s84m+VW8ra+YNXZ3BHaA4VwVvn8vjcipEJezr8/UDOgOMDeYYv24ZGXvtzuS0Y9jO8AT3QHmnPzhz9G4OZs5QKIvFgJW40FYqraAWRP4OQSRK4qbM55Dxpeqd4B/uiNTmj1oVg5ZhZbvKZdi1mBHMyIuanPydXdk97GW4U28GZqFSjdL8h2nkgN+x7E7bo+40rj50AHOkTq3NYIQ4tpolRXKi36/Q0rj5m2uWkV81ZS6/hRvK/XRyIHRHIby95v/d1y9WEk1lmW1uVx4XekWua4SOSHiKuZnZu3HYXV9yh6EPIc74NojBuQe9uMqUz+ujp4jI+2dt6w7Qp3ghuw+krNaNctBrwYqaNB7MHgAdyk/h5K+pdfx4GzusoafKujHRR3gDu/HhfpxfxF3lTMGbrZtCdB+XIi4KDegmQPagbh1zsufIY4QV2ltJcVXDTn5EeKKuFyqcmgrOWng9g05pZG5RFvnd8SNtDuiPKRbw9H3/ztumkVOjrg5ra2kEIe7IxBx4e7IA3DjMwf3eMfhh9xovH/73dZ5n9cBHrpFzhs4hbhgB5iqeaH5IGDWtCazZuhnOXHg5jmdVX9mDte0u9TjAQz9HB6Iu4zPHt2v7kgNe+cb3FbqeVa9qBfw39C1jZw9cMBDmr7jwqHDylzL+5Sfw2V9wcn9Iy5qZFoTaZRV9b7+k1nB55Sr2gEOaysFiFO+tCSrhqsj2yzyjyAu3lYCHnojyap85gAdfV9wu3l+x2V0R36INSvWAUbvuMvzydRprWogTmfVO+AI4uB+XF/JvxK4UHekMZRucHdkQhsQvdqPuwGurV95cl+LhUR3hPfjTN5lkFa78bUH97StdEdcOJC277h0bvgO24ty6RkQV5OtG5Pn0GIy19S8/OCeKofojlu47gjVT+4/EjZvdu9grnq1uVxAB1il1beEzRtBJJQICv1VMeKU93a0OzItbzq5k90RgLhl+XGCqy3ERdYrO0fftXnb2T3VqjfE5aigMbf3YANirN54co93XMjJT20rhWteP5Hrr/NbT+7xjoPMctOzJkqq6/Luk3u84+7vuGUBSzeBweoE3yPTm8Hm444LiA5gyMXuuJU56G3NR07uAXHVwwo5fgBTf1Xo2rjVnzq7r6yK1LwSr5HHHTdt9fy5k5/R7XLcJdX7FbeOy2dP7trPweQ57FRZx7r6+Mndq3ldEzrAY938ysl9uiQ1cJNVa2SO16X6tZP/dj8uDqJW2VfM/O/ftf7FmPkK3OMZ3MAu8G3T6ytiTTU7OK8jxMlfuN1idg/X91/9VUZ81WOVo8P+Bw+0DogP6NDPAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-up{transform:rotate(-90deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-left{transform:rotate(180deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-down{transform:rotate(90deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-left-up{transform:rotate(-135deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-right-up{transform:rotate(-45deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-left-down{transform:rotate(135deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-right-down{transform:rotate(45deg)}.jessibuca-container .jessibuca-ptz-bg-active.jessibuca-ptz-bg-active-show{visibility:visible;opacity:1}.jessibuca-container .jessibuca-ptz-control{position:absolute;left:53px;top:53px;width:50px;height:50px;background:#fff;border-radius:50%;transition:left .3s,top .3s}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-left{left:33px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-up{top:33px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-right{left:73px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-down{top:73px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-left-up{top:39px;left:39px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-left-down{left:39px;top:67px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-right-up{top:39px;left:67px}.jessibuca-container .jessibuca-ptz-control.jessibuca-ptz-control-right-down{top:67px;left:67px}.jessibuca-container .jessibuca-ptz-icon{position:relative}.jessibuca-container .jessibuca-ptz-icon:hover .icon-title-tips{visibility:visible;opacity:1}.jessibuca-container .jessibuca-ptz-btns{display:block;position:absolute;left:0;top:156px;width:156px;box-sizing:border-box;padding:0 30px}.jessibuca-container .jessibuca-ptz-btns .jessibuca-ptz-btn{display:flex;justify-content:space-between}.jessibuca-container .jessibuca-ptz-expand .jessibuca-ptz-expand-icon{display:inline-block;width:28px;height:28px;cursor:pointer;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAANlBMVEVfX19fX19fX19fX19fX19fX19fX19HcExfX19fX19fX1/////Pz8+oqKjCwsKhoaHn5+eWlpaOqTaDAAAAC3RSTlP/3CaKxwJiAELtp4ri/s4AAACuSURBVCjPfZPREoUgCERXBdPRyv7/Z6/Z1aQp9oWJMyYLiKUrOIpAJBdGCldgbzBkPM/QEoTI3jBEPBRDhwEvChe08Q1Ge0ImvIq4Qj8ljrLdH77CyQPWlCdHC0Q1e9rmmuC+oQN9Q4LwcQg40L6eyqm0uEpXSUqe3fKpkkqL+Y/o+07SrahNEO0T0LBsvOitf4xsLqiNTB32wtqaVKosGLO2mhUrS93+PZ4D99wPqzMJVcbEyA8AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-expand:hover .jessibuca-ptz-expand-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAM1BMVEVHcEyZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZn////i4uLZ2dnIyMjExMS8vLy+iXNeAAAACnRSTlMAYomLxwEm9+NCLo6DKwAAALNJREFUKM99k9kWgyAMRIMmEMLm/39tKaVKFJkXl3sYJ4sAXeQ3ZOcYd0+gRYblFBuFLYoS2ot5lpvYn8zJQ65TO2GVNmdCmQq/qczw4gjpejD14BgmhziEIvCjVRlPioftHW6A7xBB1a8CCUMvsuSqEkPM7eZX6h8GrQ67bYpNIbRL6rb4/k2EfVXKsgmqfQrW9qnGq96a28jGQG1ky2HXpVysyYyeDIhWq7le6ua9P36HD6+2GRi8iBZBAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-narrow .jessibuca-ptz-narrow-icon{display:inline-block;width:28px;height:28px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAM1BMVEVHcExfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX1/9/f2/v7/y8vLUObqxAAAADXRSTlMA3IrE6SZi9wI+y0gNXAn3CgAAAI5JREFUKM+Fk1kOwyAMBQ04bJHT3P+0JVUMNMWv8zvSk1cipfjAKXHwhR7k6KTjYp7dVuWLug1XWB5wz96T/JD2O3Phmv0k5ypL6lVVFIPYpLOka5WKSSFvS0/BloHYlkza5HkMzrvVLo8ZlRr7mtFYWBBsBQ4BjC//GTxcGVw2PpOVHQ6fJj7qS4936OoN2K4e5yE6N1UAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%;cursor:pointer}.jessibuca-container .jessibuca-ptz-narrow:hover .jessibuca-ptz-narrow-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcBAMAAACAI8KnAAAAJ1BMVEVHcEyZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZn+/v7X19ckk9ihAAAACnRSTlMA9+NCAsuKJsRiPv/2GwAAAJlJREFUGNNjYAAC5gxFoTYDBijw1FoFBIumQHjsUavAYGkBmGu0CgqUwRqlYNyFIO2Fq+BAnIGBJQrBXerAwLkKCUxgYELmKjBYIXMXM2Qhc5cxdCFzVzBoIXMXMYAcsRsMdgEdgs4FKT4DBqdAitGMQrMIzRkojlRB9wKaB9G8z+CMGjgshjCuMCjoWNxRAxYt2KGRYgJiAQAnZcjElaB/xwAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-aperture-far .jessibuca-ptz-aperture-icon{display:inline-block;width:28px;height:28px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAASFBMVEVHcExfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX1////9fX1+kpKRzc3ODg4PFxcW1tbXW1tbk5OT29vaVlZVmZmZ8vCMFAAAADHRSTlMAxGJ5Mssm9+NCiYtiH91SAAABAklEQVQoz41T7Q6DIAyEJQooUL55/zddhVazzZjdHyqXXo8DhWCYTWqltNyN+MZLuxP69UGti/vAsl6c0e4L+tQ2yv1AEbvecMhO5cXdYhk+6aO3WGrNAMwentlMz/ZAKIlNoRsqY2wtFWu9t8wasc0iYVN0LkQfrG1zbxNyrIBcntOQrH1Ukkb60QcxYF1xMA2dh8zWj6ZDsLCsIrL4Ds5Hm9FMbCEROWUB0COaLXEIZJKV7CKybGO7UuxjxY2C/TkMbxboKBQCxgMN6MCJQ6Ch/QjOZg/B13LGx8FDTe3IFvl+Bc9XBi3UWoex68qeL/vxmdyxyvz3NJ8f9dDef36HN7koIK2LjxB0AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%;cursor:pointer}.jessibuca-container .jessibuca-ptz-aperture-far:hover .jessibuca-ptz-aperture-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAOVBMVEVHcEyZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZn+/v6cnJzr6+u/v7+xsbGlpaXNzc3b29vqh7uRAAAAC3RSTlMAyRjKA59J/3PzPhe1wxwAAAD2SURBVCjPjZPrssMgCIR1mkYtisD7P+zBCyZpM5mzv5hs0M8VnZvaok9BlXzc3FXbO5z0vtifFC5Kn8OL4UfxwVvuHm61d5Z0b6ZGZZwZpQAUosWsjVZntVS1sH3ZFo1IRVYfGXgx+VGwNkkIVbhq9/jm3cAhaNv1Uk3IA8mNn7D3kbQeWK3TLH2jCthrDFcTMwUWaKiClc9mJtJWhS3SF5BpJqMQW1b3xwnkDahMoHYomkeJRgSENA/MFsKML7fgoCBVbGvM+Cx4JcKWbWHKK/h1ZYS1Jy/nK3u8bB3KhzG5deMxtfv3aO7/Heq+9ms8h9fxHP4AHzAWU9zlWNgAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-aperture-near .jessibuca-ptz-aperture-icon{display:inline-block;width:28px;height:28px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAQlBMVEVHcExfX19fX19fX19fX19fX19fX19fX19fX19fX19fX1////9fX1+FhYWbm5vz8/Nzc3OwsLDi4uLDw8PW1tZmZmYgm6a+AAAAC3RSTlMAYmOLx4kn9+NCIVJiPGAAAAD+SURBVCjPjVPttoMgDMOJAqOU8uH7v+qKFN2c597lF5LTJg1VqQG3aGuM1bNTV0wWDtjpg3pq+IB+npyzcIE9ejsDXzDCrjccs+tOariF3n2OLyw5xko0vh9MDjNb9Q0hp2GK3cixlIApe4/JD9appR8SFxWAUFLg6n63iB1irnY1Jv0mlrok7nUdcZRa1YeshxBA9iijChlxI6iZEaBgSEL2tkRcymPGGJpqlbZ6uDg0WR/F0DwuMpxDkYwiIXA8hO2uMJdGCCK6teB8RQoY8xGfevQjxYQt25qoRwDT25MRBjZ7GtP/P/afa3LHmrflXa+ruf661Hvv+et3eAF6Fh3v+sSUGgAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%;cursor:pointer}.jessibuca-container .jessibuca-ptz-aperture-near:hover .jessibuca-ptz-aperture-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAM1BMVEWZmZmZmZmZmZmZmZmZmZmZmZmZmZlHcEyZmZmZmZn///+qqqq9vb3z8/PMzMzo6Oja2tpXGg+mAAAACnRSTlP/JomLxwJiAONCr+rW2wAAAOtJREFUKM99U9sWhCAInEpLBS///7WLEWy7p9O8qEzCMBIOQ15DAlLYsoegS9yFMKQ93skl4Adh+ZI54Q8pG5nxgKzkgkcsk4zhmQxRyN1OPHqtncjOu5AuppcJ6s1EHTA1YzC3Wgq3YmzGqpsmlwZAo7F8oLEVKoeE6+TbSxK0JJ/3FLOwFnUxzXuoltYDDMLoAlmYXLAWIrkqbdZKs+q4KBfkNV1uwGaBim9TdLWS3R7iGRvCNTPB7JvGlc5EXK8cKbrxooint73RzXh7Msl6Oj/uT/b62O9j8sj6gMXX0Xwf6jP3Zr9DtNAHTYMMXrXSK0YAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-focus-far .jessibuca-ptz-focus-icon{display:inline-block;width:28px;height:28px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAPFBMVEVHcExfX19fX19fX19fX19fX19fX19fX19fX19fX19fX1////92dnbs7OyFhYWjo6Pe3t7Ly8uxsbG8vLyG+Q0EAAAAC3RSTlMAiWJjx9wm/0Lti7mfpe0AAADaSURBVCjPfVMJDoQgDERFC/bg8P9/XUSO6CqTqA0TptNDpSrMpC2A1btRT8wrNKzzjdo03KC3zhkLD9imbeAFhd3sG2kvZQ2v0NknfGBJZKkhBM9MxOxDKBV1N4iHi0TRHYjN01Qi7/kK2PtyNDU7DAEJgDAAN0u1jsQEFEkcVVmrqjeXrkWRmC67eqbgG7bJyvkQSQkvUvec7szpek6t9ubWJSK/uJVSm+APzHKCh++DWWuH4plQKNYOpfappcjy2VvJn9744cjGwx6uyXjBxqs5Xuqsvf/9Dj8rLhRg+bQ5VAAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%;cursor:pointer}.jessibuca-container .jessibuca-ptz-focus-far:hover .jessibuca-ptz-focus-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAOVBMVEWZmZmZmZmZmZmZmZmZmZmZmZmZmZlHcEyZmZmZmZmZmZn///+xsbGoqKjt7e309PTExMTQ0NDe3t774OlGAAAAC3RSTlP/itxixwImAELtp8B2gZgAAADmSURBVCjPjZMLjsUgCEVpq60G8Lf/xQ62gvNeOmZuUiWeKHC1cKnC5iJAdFuwJXgmf+xg2g//G54OPuTOCUOEL8WgMMCLwgPP+Abj2aF38CrnBR7whw6Bo4fWUk7MMrQ2OrpAq0GspTLLgKg1wTailNITZA0EaTkZGjIAY5NwlATah5CGRMJYj50tFtlWiapsLvAPRdtL/WOmET7QzZyl5ywzp7NWsjBJ1odsragJqeJ9HGFNZoLaJw71hMTm0O7NeDE1Z6YsU5rGL69sedmXXz0ToW8PzA/oV09T8OJR32fb7+B17Qe3WwtC9PVbHAAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-focus-near .jessibuca-ptz-focus-icon{display:inline-block;width:28px;height:28px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAARVBMVEVHcExfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX1/////t7e2dnZ3W1tbGxsa3t7eDg4Oqqqri4uKTk5NImu/5AAAADXRSTlMAYieJ3MvE/0Lti4oh87zNagAAAOtJREFUKM+NU1sOwyAMY30FtoWS8Lj/UZe2gWpVh2aJH1wcO0mNqbDj4gDc8rLmiscEDdPji3rP8IX5fXLWwQWuaVu4gbKDuyPdsJMz3GLefcIPbJ6PDCEAFDlUAJiORM3NigQFAXAFlqOeRhWJyFFIHxNGvRrN0mp470U++3axGM2RAmXcXqKnkDSN0a9WIk5Sa01MpDXBQAdVtrA8lBhFnnKpsmoo5VBrhszV0KuJ5N2tP92O50iQjpzcctravoihdoi0Q1NrfN56m0VWzFBoje+OrD/s7pr0F0yUr6s5/LvUu/bz+B2ep+IHdMIV2SUZfCsAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%;cursor:pointer}.jessibuca-container .jessibuca-ptz-focus-near:hover .jessibuca-ptz-focus-icon{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAQlBMVEVHcEyZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZn////c3Nz09PTp6enR0dHFxcW7u7uwsLAUKT0cAAAADXRSTlMA3IrE6WIm9wI+y0gNQZpqdwAAAOdJREFUKM99U9GShCAMQ8BF3Cmlpfz/r15dAe88l8zwQiQkoRrTEa3zIXhno7lhWxcYWNbtN/fa4Q/218VFDzf4of0O8A/h3TQfOGU/ytsOj9gPVyt8warkmYEQQAgABYDxTKROz88koS6AVIB1fRCNbSI1cVUy15Jq27LGjTtyzipPeWw40/IXQkrHyZSRmqw3LaQgctFNKYzYyGACfEXossLMojFEj7J0WfdwJ3dD9uY2X25tL0Hj45mTR87Y66u9IQFsDS1bL57o7JbUDNIofvpk08eej8kTe3Hz0ZwP9UFfv8OgfgBUByCEUZhYtAAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-ptz-arrow{cursor:pointer;position:absolute;width:0;height:0}.jessibuca-container .jessibuca-ptz-arrow-up{left:71px;top:15px;border:7px solid transparent;border-bottom:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-right{top:71px;right:15px;border:7px solid transparent;border-left:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-left{left:15px;top:71px;border:7px solid transparent;border-right:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-down{left:71px;bottom:15px;border:7px solid transparent;border-top:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-left-up{transform:rotate(45deg);left:32px;top:33px;border:7px solid transparent;border-right:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-right-up{transform:rotate(-45deg);right:32px;top:33px;border:7px solid transparent;border-left:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-left-down{transform:rotate(45deg);left:32px;bottom:33px;border:7px solid transparent;border-top:10px solid #fff}.jessibuca-container .jessibuca-ptz-arrow-right-down{transform:rotate(-45deg);right:32px;bottom:33px;border:7px solid transparent;border-top:10px solid #fff}.jessibuca-container .jessibuca-loading-bg{display:none;position:absolute;z-index:10;left:0;top:0;right:0;bottom:0;height:100%;width:100%;background-position:50%;background-repeat:no-repeat;background-size:contain;pointer-events:none}.jessibuca-container .jessibuca-loading-bg img{width:100%;height:100%}.jessibuca-container .jessibuca-poster{position:absolute;z-index:10;left:0;top:0;right:0;bottom:0;height:100%;width:100%;background-position:50%;background-repeat:no-repeat;background-size:contain;pointer-events:none}.jessibuca-container .jessibuca-play-big{position:absolute;display:none;height:100%;width:100%;background:rgba(0,0,0,.4)}.jessibuca-container .jessibuca-play-big:after{cursor:pointer;content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;width:48px;height:48px;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAIVBMVEVHcEzMzMzMzMzNzc3MzMzPz8/Nzc3MzMzMzMzMzMzMzMzLVn6fAAAACnRSTlMA+duduRUwSGSD8toSsAAAAI9JREFUOMvV07ENgzAQhWG3lLSp6MwCViYIRSpG8AiM4FWMaPymDBKESMF/cQ0S136F353vnLuo3gp1kOYEoCXW4LFKIZAnqAXYICeASoAdzgG+cApwgF4EfwF+oDkCqIwA6gnyAKA8AaizQhsBAjzuqUHofInGIQbjRxXjMrTJuHDestR4Bng4eGrN0929PqNfzC6h06weAAAAAElFTkSuQmCC");background-repeat:no-repeat;background-position:50%}.jessibuca-container .jessibuca-play-big:hover:after{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJFBMVEVHcEz///////////////////////////////////////////8Uel1nAAAAC3RSTlMA+rbVFUecgC7rYhEEz+4AAACbSURBVDjL1dMhDsJAEIXhdeiGpKYWQVKDWc8ReojFc4ReAlPFFQazad7lIGkb0jK/WEPSsZ+YN5mZEP5UrZIP0vgE0Kv3oPlIJlAk8AJM4ASYwAkww2+ABfQg0ImgugPYsfNBVl99kA0AsjOArAPQpRTGHiBB8whxM0y+3skXNltsvMYriIWrpWPA80mFJ5qL3gAfB1/tcAt7rzdiV+HEgs1oBgAAAABJRU5ErkJggg==")}.jessibuca-container .jessibuca-recording{display:none;position:absolute;left:50%;top:0;padding:0 3px;transform:translateX(-50%);justify-content:space-around;align-items:center;width:95px;height:20px;background:#000;opacity:1;border-radius:0 0 8px 8px;z-index:1}.jessibuca-container .jessibuca-recording .jessibuca-recording-red-point{width:8px;height:8px;background:#ff1f1f;border-radius:50%;animation:magentaPulse 1s linear infinite}.jessibuca-container .jessibuca-recording .jessibuca-recording-time{font-size:14px;font-weight:500;color:#ddd}.jessibuca-container .jessibuca-recording .jessibuca-icon-recordStop{width:16px;height:16px;cursor:pointer}.jessibuca-container .jessibuca-zoom-controls{display:none;position:absolute;left:50%;top:0;padding:0 3px;transform:translateX(-50%);justify-content:space-around;align-items:center;width:150px;height:30px;background:#000;opacity:1;border-radius:0 0 8px 8px;z-index:1}.jessibuca-container .jessibuca-zoom-controls .jessibuca-zoom-narrow{width:16px;height:16px;cursor:pointer}.jessibuca-container .jessibuca-zoom-controls .jessibuca-zoom-tips{font-size:14px;font-weight:500;color:#ddd}.jessibuca-container .jessibuca-zoom-controls .jessibuca-zoom-expand,.jessibuca-container .jessibuca-zoom-controls .jessibuca-zoom-stop2{width:16px;height:16px;cursor:pointer}.jessibuca-container .jessibuca-loading{display:none;flex-direction:column;justify-content:center;align-items:center;position:absolute;z-index:20;left:0;top:0;right:0;bottom:0;width:100%;height:100%;pointer-events:none}.jessibuca-container .jessibuca-loading-text{line-height:20px;font-size:13px;color:#fff;margin-top:10px}.jessibuca-container .jessibuca-controls{background-color:#161616;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;position:absolute;z-index:40;left:0;right:0;bottom:0;height:38px;width:100%;padding-left:13px;padding-right:13px;font-size:14px;color:#fff;opacity:0;visibility:hidden;transition:all .2s ease-in-out;-webkit-user-select:none;user-select:none;transition:width .5s ease-in}.jessibuca-container .jessibuca-controls .jessibuca-controls-item{position:relative;display:flex;justify-content:center;padding:0 8px}.jessibuca-container .jessibuca-controls .jessibuca-controls-item:hover .icon-title-tips{visibility:visible;opacity:1}.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-face,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-face-active,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-fullscreen,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-fullscreen-exit,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-icon-audio,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-microphone-close,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-pause,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-performance,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-performance-active,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-play,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-ptz,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-ptz-active,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-quality-menu,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-record,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-record-stop,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-scale-menu,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-screenshot,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-speed-menu,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-template-menu,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-volume,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-zoom,.jessibuca-container .jessibuca-controls .jessibuca-controls-item.jessibuca-zoom-stop{display:none}.jessibuca-container .jessibuca-controls .jessibuca-controls-item-html{position:relative;display:none;justify-content:center}.jessibuca-container .jessibuca-controls .jessibuca-icon-audio,.jessibuca-container .jessibuca-controls .jessibuca-icon-mute{z-index:1}.jessibuca-container .jessibuca-controls .jessibuca-controls-bottom{display:flex;justify-content:space-between;height:100%}.jessibuca-container .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-left,.jessibuca-container .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-right{display:flex;align-items:center}.jessibuca-container.jessibuca-controls-show .jessibuca-controls{opacity:1;visibility:visible}.jessibuca-container.jessibuca-controls-show-auto-hide .jessibuca-controls{opacity:.8;visibility:visible;display:none}.jessibuca-container.jessibuca-hide-cursor *{cursor:none!important}.jessibuca-container .jessibuca-icon-loading{width:50px;height:50px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8BAMAAADI0sRBAAAAIVBMVEVHcEx4eHh4eHh4eHh4eHh3d3d4eHh4eHh4eHh4eHh4eHiqaCaRAAAACnRSTlMAikwX3CxpwZ7zIGi5xgAAAZ9JREFUOMt9lb9Lw0AUx2Njqm4iGEqmEnBxslKUdhJctFMVcW5wKZ0CLpJJQRw6iVqQbg3FtPdX+l5+XHJ3796bQj557773fe8ujtOI+6jz5p84dHjTkYD4+RhT9CIRZWRPJr1bChnbY532GhT4oUpbI6HEuqvgIH9544dh9J4/rpr0Ms8oV3zMNT7X1MXSmaznzfHjM4n72moe5n8ryYrW9rKRvgf0S93JA7yKa9lbzUg3keJb8OVCtwkrFmoO4MnsAuj5rGqnZg+GZXUXkl9NjEui9n3YA9XgpMgakLXz6ujMTIgrCkPVv0Jil8KgKQN/wRN69hLcb1vrbR2nQkxwiZTGQ5Teb7TO8PUaS8Q03sE+zkjP8qbjzgJtEhRbV4gnlkOFeM7hDYNdxPbiYFvKSHN6L2NmY5WzMYPtplZdTxncRvn2sI+DHIoug22jWMaA12Y7BrXzrG8BX32XPMDKWVzw1bdMOnH1KNqNi8toqn7JGumZnStXLi0e4tcP6R3I635Nc/mzsMxl9aux9b78UVmn2pve8u6eR50j9c0/ywzyVl5+z84AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%;animation:rotation 1s linear infinite}.jessibuca-container .jessibuca-icon-screenshot{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJFBMVEVHcEzMzMzMzMzMzMzMzMzNzc3MzMzMzMzNzc3Nzc3MzMzMzMwv5ahDAAAAC3RSTlMAW+8S2UGVwyyZnOTRhEMAAAEfSURBVDjLzZKxbsJADIYdBQpsSCyVMlXAdEuQYGKpWFk6dWHJgsQ7sMDSpUv3PgITAQT0f7ly57ucQ45KXRAZot+/89k+X4ju9KzL4XOhlm3pR0enYrWViSRPXQIQSASkRSkIJEFRimYCuQAHSW89IOv6SH5TCsuAj68Ab1wDzqkAzqoC7AUAPtgsABgkBBgkCJiNHehGok//KRVsHqd+3Dj1/vukt3AH/Jj05s5/AmyZhFVWXDls44iVvfQWkCvgxU6g9ZdJfCLvjJbYaT3GvjOY4mQSG3SJGjhr/Y1Xohp+TGKqqzexZ/1GVGdNCitt6R8zVvb9d+JmKdl8o5sPWbtxT6zFuJcDQtk92MNmYiXHquYlZlVt1j4P6cd7fgHFW7Nhqu29TwAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-screenshot:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAALVBMVEVHcEz////////////////////////////////////////////////////////NXt0CAAAADnRSTlMAWe+X2TINXUYZvctoYyuS2NgAAAEVSURBVDjLzZKhDsJADIZLCAsEg8WgEGCWGSwCgZxB4MgEAonB8wQEXoBH4BEWXgPJgEBG0mdgR3u77raRYAgnlq+9+/t3TQF+dKbZcJXSYSnzlViT457lRScKmBqILSFA3GoO8S4E+Ex5JiSJ4CbVdyOQdZNomX9D4dl+ko3NC8vFFmhPy8FIsi0ZlwLBW/LY5BxYYreUSgoFAEmhB5Rc9OCbUoXmTmDadQKTn4y6A/XTaoSKdb6KyGU6RJ7eHgpb3ABinAoil303xB6vQnRahNhXvMdre+fzOgxVrokX4jHAnBh8PALU8Eq8BqgTg/vePF8tpuPy9/NFaalSc273RizarYqfkswjifNMQ/TyTGMv4v87L+ks5gqDbc9OAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-play{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAIVBMVEVHcEzMzMzMzMzNzc3MzMzPz8/Nzc3MzMzMzMzMzMzMzMzLVn6fAAAACnRSTlMA+duduRUwSGSD8toSsAAAAI9JREFUOMvV07ENgzAQhWG3lLSp6MwCViYIRSpG8AiM4FWMaPymDBKESMF/cQ0S136F353vnLuo3gp1kOYEoCXW4LFKIZAnqAXYICeASoAdzgG+cApwgF4EfwF+oDkCqIwA6gnyAKA8AaizQhsBAjzuqUHofInGIQbjRxXjMrTJuHDestR4Bng4eGrN0929PqNfzC6h06weAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-play:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJFBMVEVHcEz///////////////////////////////////////////8Uel1nAAAAC3RSTlMA+rbVFUecgC7rYhEEz+4AAACbSURBVDjL1dMhDsJAEIXhdeiGpKYWQVKDWc8ReojFc4ReAlPFFQazad7lIGkb0jK/WEPSsZ+YN5mZEP5UrZIP0vgE0Kv3oPlIJlAk8AJM4ASYwAkww2+ABfQg0ImgugPYsfNBVl99kA0AsjOArAPQpRTGHiBB8whxM0y+3skXNltsvMYriIWrpWPA80mFJ5qL3gAfB1/tcAt7rzdiV+HEgs1oBgAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-pause{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAFVBMVEVHcEzMzMzHx8fMzMzMzMzOzs7MzMz4IlKVAAAABnRSTlMA6xIU1hVqIuOVAAAAMUlEQVQ4y2NgGFYgLS3RAEQziQFZoxKjEqMSaBJpEAkgIw1ZQlBQRAEs4QhkDeIMDgAWx1gMHyIL4wAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-pause:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAFVBMVEVHcEz///////////////////////+3ygHaAAAABnRSTlMA7OgSFBXMmAA4AAAAM0lEQVQ4y2NgGFYgLS3JAUQzi6WlJY5KjEqMSqBJpEEkgIw0ZAklJSUDsISikpLQIM7gAJjhWp6XcaOxAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-record{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAHlBMVEVHcEzGxsbMzMzMzMzLy8vMzMzMzMzNzc3MzMzMzMxEZ/aQAAAACXRSTlMADPKKKeBxlV6neZ4mAAAArUlEQVQ4y2NgGDZgJhpowCURAJeYpIQENJEkCgWRgCeShAGyjfgl2EqwS7BFToZJiLg4ICTEImdOh0pwRM6cDJcIjpw5E6aDFeh8B5gECBCUYAkKCoMbNXNSOlyCgUEQ4apJJmxIEkjOVWFgxi4RgEsikGQJnEYp4pLA6VxUDyJLIAUJcRLIwY7qXKSIQvOHWCQODzKIleBPPjgTHM4kijNR48oGkajiYUMykwMAAfmZhUjBISQAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-record:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJ1BMVEVHcEz///////////////////////////////////////////////8NopmKAAAADHRSTlMA8gyMLeRw1x2DBpWGN2QDAAAAt0lEQVQ4y2NgGDbgDBpIwCVRAJc4KIgEZM4EwCU2KSEBHySJCcg29iBJGCBLgHUs24FdYlnNYZiESksDXKJALebMaagES8yZw3CJypgzZ2A6WIHOd4BJgABMgh2XBEtpaBjcqDMHs+ESDFyLEK46aMGGkEB2rgQDJ3aJAFwSUSRL4DQKp+VHcTkXxYMoEkhBQpwEcrCjSCBHFJo/1GIO408MOJMPzgSHM4niTNS4skENqnjYkMzkAEgzyFpeX6L3AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-recordStop{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAOVBMVEVHcEz///////////////////////////////////////////////////////////////////////99PJZNAAAAEnRSTlMAMPndsnZj1CSYPcmL6wsdoU80pOJLAAABu0lEQVRIx5VV26KEIAhMA++p9f8fezatFDPr8LSrjMxwiWlqzRuMYKW0ENH46c3WuGyVLXEduuO83UyK59fl1jX5EEUXD9DOaSh43XEP5zUIdZ4pAecTofVnWSt3ip4rx7N61vjnY1D30CpH4QQR8vsP+RA5Rs3KpjfMU/pMim/LgbvH7DF2F8sU0owqapKLqgnhuGWwImUagn2zhUX6WQQoYkXG9WxSAJd700/ygsCpAoliaDsPiG48GM1X5Ft/06sfp8DrDE+3DpekWjxM6366fgEcnklC+AIIWYQmPEeAaUmjFOnhCLDfxZRH+w1gU5b/DYjfNcyJ0p7dxX8B+FwxQVtvAGB5ig0d5gFA5KbzS91hI8CenvlHflfN/XvzJQnxbBEko1gbvVnPii+FadSVRUEaYylQfJtpLB+aRG4LY/80yKdUbCraM0lozGR4ewZ0Wtnj1iC7hjWKNnjYmR62W15cLlL3+2pyMR09jccyuyUrHKsvthc5xsY1iWJ0Xk3t+2XP7AnWwrAQmBH6asXubmL1Z5Lz6o992jWiu9lnMSiQsK27FS9NxhCumZgB2fTBPFsFolhZr5B/D3o9sJAI6skAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-recordStop:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAMFBMVEVHcEwimP0imPwimP8imPwimP0imPsimP0imfsimPwimP0imPwimf8imPwimPwimPxLmg1rAAAAD3RSTlMA15sisGUvdz3szYwMT8H+hDJEAAABx0lEQVQ4y3WUO08CQRCADxBQchBiMDE24KswFlw0Wtig/oHzUWglJBZWio3GDjUxlhhrEzT+ABMrO2iptLLVRluDggI+xtmdXW73LkxxNzvfzuzszNwZhhDzdOxqaPGgYrgkOgFczh90ezAJQmpL2v6OHYnqk2aWxOTtAnu/O/Y5XNZXmTZjo3ot7aESwLdFeqAM0MoJkMf9ltwVQJ9PcQN0UFIJogvdJgLQVFMsAlxyBaPmVBDCE8W7qd+2SDsx0q4OwhSrCG134W54jDfKLjDNxaL8/9AAMM/solptRnoALBbwEPWYrOEzLnrZsTGoMW+fBHG2SiLPUNI6KMOH8QS/XsCMBYQekIEv7NGZF/Rht2yqmA4i3UG9O0iTqgMfhirDhRdU8XJZqqEO8tDAqje8IIt1r+I5HmBjfD9AxQ1MgJQRpc6GJRALHOAS1WRlhMs4VaSFzwIWzCUF3op71kdNsNs/FDCuA58YqCQl7IhN3WbDnlLtfjnuON515WM17c7w41QPOuBIzDT5wqi0T4ESGV3gjtTjkuPATwHoX9+cPRlmmvJ57YAir2qKy459QL/UhrS/uAu3xf8KiX3DI+b22t6jc9F/qfaum9E1pJ4AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-fullscreen{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAALVBMVEVHcEzMzMzOzs7Pz8/MzMzMzMzNzc3MzMzMzMzMzMzMzMzMzMzNzc3MzMzMzMxdHBitAAAADnRSTlMA8AwGYt0aUcg+til5kgmZywUAAAGWSURBVDjL1VM9SwNBEB12IcGkMagxNktQSZFCYimIJAqKpZ3Vco3YBYs0NkKQgBg4ECtLFSFVCGgQrERBsLayPE0Ip7n5De73BdKLTrE3ezPvze6+GYDfsAQKy/Rz0i/OZJjY9XREuohTKulS+ZFGiADfyZXU5uHktI44VH5apDx554aXwJqloiIwiEsStAjCAsRNF1jCmGqa4Vc+BvS4JkjwzyPE6xiwzsxxeTbZxqjkANSWZFkoIj5bQBl4aBDfkPDNpeRRialB+SRAFz8UU1sAaEUjSCDoJ7iukZJ1V+c01bFczM1pWaa+a0Rp7MHn4V8Z1R9vLLCv9WjKdVFfk77JP+bZdz35YAfKXx6KhKp93abUYVbrj49g9aAYSuFCLbPUwzdCsYEWTloXgw1oGwQbENeuKwxzXhxwAADRMFd+zzRc6AAASY6RH8VjUHaXTrlOpDgCUP3gelc01e2d+f16cWbnQ46BGCRNVsWAWQJVw2xGfUXVv2k1OsLfazXqblzS99u1FwKFvBJioXBY2+r82U75Ab7O0ypVV0wKAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-fullscreen:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAANlBMVEVHcEz///////////////////////////////////////////////////////////////////+GUsxbAAAAEXRSTlMA3clDHfdfDQbsVG00u4Cqkr04dRsAAAGaSURBVEjH7VXLdsQgCPUBAROdjP//s1UTDUxsz3TRTc+wC94bHsLVmP9hkE8LIdvgupt2tFhcpy2CMZyVxNePEoqDp4hwEGz5PTqWoZNzLrmD9riltBEYzzpZQ8bweXy56Qy6Tivsp5JQYtawuMH3eJlSxIJtdSSa4xer4lMB89pK23mKrwjZVpsRzLq35vEE3+r26h6w5EKppcp3fP2lIpTPWJvoXoobeNI1sM3haHvx56tu2sdElJ54GbnPQ7RZ1sCpl8qPEMXBNQ8vN82jNbzLCPzGSDOZj/2Bqd19R1rELIEbDFrUJfKYdlALbDuDMko/hz7t8DqtCfr8h1Vt4rn7eh/6Ph37ch20aW8McsfGCOXzcr+GOlQG1rJ2HSHUDO/4Mu01qVAqTCpCJfgZ3phTS2pKm5aZOMUbs7Q6nk6L8UzRh6W78jH+gD/VRxHokPuNgUGTaPPR+zDR1mrlvcGgwkAVacSbeoN4Z0rb5/6XLrW/2GTLk2NhXHRKzrqAt9cD4rr4ddvae0NAYgOICdZyvPj4UYRf2BdfbB8iWvnTUwAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-fullscreenExit{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAG1BMVEVHcEzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMxi4XDRAAAACHRSTlMAf3WqJmy+7azWNnMAAADNSURBVDjLxZQ9E4IwDIaLfMzCOTDSOz07OjLir5CR0dmJFVHIzzZtnMzbOzcyZHnuaXpJWmO2ji4GhpAzzZeQzw8FKCj1pMHss9OgpwsGOS0YGOcVUMPsfBVkmJoVCBJW0FFB6SFIaMKAlRGDnEiDkuM00lP3SmL6H5QSh+iIr9ZWVWntUV9Z4qWbHAWrhcUYNLC4Wwm3xb1r2mOQYoVn2EKFAVb81KHiQQq6L3vSUoMBUmSzgCKbVeiL3eTp3Odf8H1sxRAZZNZt/Vt8AHcPQbiQQVF+AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-fullscreenExit:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJ1BMVEVHcEz///////////////////////////////////////////////8NopmKAAAADHRSTlMAe4Fzh7MZbKPtN8gpX19xAAAA3klEQVQ4y8XUIQ7CQBAF0CWhKQHDGtQKQFcURUgqEARBED0Aoqp3IKnoATAEW8MNOACmhQYKcyi6uyjmr+aLqXj56bSbVoh/J3HBxcw0ZfA2c3FiQLGeQcWh1lOVDDJTAeCbCgAR6QqCDj0xCEU5Bl2BIALKMwhdKjGILRUYfCIOEynlvABANk64M5jabJxHfJY2I76yzYu/ZCc0s1WbNYAQ3jxqwMoGHoqWGHpUQajEgcYYcKWFtjLE4FGJQewoxODRDQOqKPPcHl9sfzSXa/0L349tEDsOsp/8+2/xAY+BZBY9KhM5AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-audio{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAIVBMVEVHcEzKysrMzMzMzMzMzMzMzMzMzMzMzMzMzMzNzc3MzMz8gU00AAAACnRSTlMAL0jMZKt96hGJsSKv1QAAAJ9JREFUOMvN078KQFAYBfCbJEw2q6SUyWxTnsJT2JTJ6D38Gb6n5PpT6BwbuaNfTnz3fEp9fZwAP7czD0MsGCzBYJcEYsGwBEHQQRB0EII1CMAWdAOzyJUvJ4jyDVyZVHKGpj9guEI2IuhaDFadYnCkIm9I+kPgn8t+kI7kOsT72HcwQnJR9Gofy8DrwwtHK8pLzdeALg5fNb6cdJ1fOjOGYrl5CLFcggAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-audio:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAJ1BMVEVHcEz///////////////////////////////////////////////8NopmKAAAADHRSTlMAL0TQf2frEaZYt8E+idL4AAAAnUlEQVQ4y2NgoDdgUcAuzr4Hh4TaGQHsBp3BLsG+BoeE2hnsEkCDsEqADMIqATIImwTYICwSEIPQJFhnBjKInUGSUA2CSPCcOcIwB1ki5xRM4iiDDrKEzQlsEuUF2CVY0jbgkDhjMLQkEkj0IM4gQQ1EHMHOOXMiakRpTiQQtXgTA+7kgzvB4UyiuBM17myAM+Pgzmq4MyfO7EwjAAAEf+BAxqI/agAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-mute{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAMFBMVEVHcEzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMztXryaAAAAD3RSTlMAHd4P7ztyiy1OnKhdx7uY2gyAAAAB8ElEQVQ4y72Uu0vDQBzHE45C3SJFaSGjUEiRpJRCBifXokkpSv0DfOBrEKxUUSoFH9ClFAUfU7c4OARRCs5WjThIsJuDlLo4ldvPe8SYxGyCt1zgw+dev+8vHPcvYybvfCR2OgUv2CoLdI62bUn3gq5UJxOomZofXPUNrIChJRklfcDSiKK2bYQ6PiCaREk0EQoYPFYa3F73F+DGsBJLmAjBAMBKakG15KAxqIhd2KuK5reRccBDNbqGJhfSlnNc/kBh4OY+vaoR5QrRC0afKgxMrKdXNKI8yxRENpyd+i0VA6wMm5IOBmORCwfAFjGwolofevbuPrvpGhRgpVaqiJflrLuUQQFRToS9l894EMDe7q6yL7/G5wMATc5mQCiAvQo3HAbwLtyYHQZgTxhohgGUa/CP12EA16W2/Ou4ZEj1dNG9oPMkZGiwJWQ8j+huPoJy9Z/XHTfUFSbAURveCtE5px5vs7hQDKS25FSDn2KR5Up1/lRmIHne7BvKd82LMRJbSjr5M40lmaYZ5/PRpiCpizjJyk+CwOGOzACLpSdz02QxkiuRhd8dNOwkV7zl2YX1mcySKJrQiPkXY9klSt6rkJPRwIlmzrcWSGyzHuTb11V/N0y/S6SdwdCR4m/47OIN7XOQCfwJwHGp8IcfyRdBLEZK4Uxp6wAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-mute:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAP1BMVEVHcEz///////////////////////////////////////////////////////////////////////////////9KjZoYAAAAFHRSTlMAbk2o8o0P5TsGnVojFi/XHcV9urLaq0oAAAIQSURBVEjH3ZZZkqswDEXxLM8T+1/rkw0BuwM0f131+IvDyZVk6SrL8p88QCHp8UAnWmoWoG8AwQRN4/vOiqwUuwWqiob646MMhEW+KnMLMIXffgiZoODBusb7kCzjByF7OOszkOyp4amJ7fWVPwCN6BpyWRypvANPCvi7u4aTXe13YI+KkYA5bMRTSMlLnSyGwisSH40B0FJOrKVB6iAw2U7sGgPgQ/DTPQjitCOZT4Q6gWCtGwGFbSM34ENUNSpAKTACmC31rnRgJwjDdkFAJpfkAsZcAJvCSVQB2FaWWKdB/ATMAHwIUYL21lRBZRDiC5AnsBHBUqxEyaraFMoz0AnvHNa6xDWS34FGgNf6PYAEZoCt+BroUWFVbeb5HbCqSvB2cToyca+Adjlycdawt0C/HeyScl1W/w3gsU3aAd7JF8AuAN6isr7NAogXAFeq59Ec7ifAm49hF8wCMWfVNXAeCAkjEGuBr6R5ZGJzBrl4gGniBME+w8aMMyCsNZtfaemnmYaAQ6I3Rz0fnDhHJxc93Vrr7sHWjP3XRtTba2L3EkdFVaPC6YmXxKI9DGF1YPLdiwfD2r37cL5nDVw+uKzU5K27hsXCXPtyC2uyyl0D0p2TY7VaIvFYWU0Dm8TdOXmrVp52HG4lU4K/N38PpS/Kw70dbmb/sC0WCcQwNNzzjrzUj7veUyIIyL/4m/EP8V829O8zh5EAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-ptz{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAM1BMVEVHcEzMzMzMzMzMzMzMzMzMzMzNzc3MzMzNzc3MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMxDm1AzAAAAEXRSTlMAHqw+E8It/gjxc03jhGDTlgAjE2kAAAI6SURBVEjHpVbZkoQgDBwg3Of/f+12gtfMbK1Yy4NampCju4Ov1y8ruNyyo9fyCibVlNW6vUu29GpWQwTVdPTernqwffHex0WP4Nro3k+PrMKCvew/PcZ95aoNsY9yua+cGxTZsnf2K7ch4CAdGnWwYx/5LgKZCgxGdrhH3BeqNmnwviFXPZbQJmcM25HJ5n7/Pczr2QqksMJfO7BJOHLKLWFdMiL1QXYRwFagMklb4GB1zS7s8Le3fqH7Q28tVLkKdIzeaOJB2OKtY8KfTQCUa4++dNsLbrqpTR7xguHGt8hfg8P+seuaEkNdBjahzOD7g1cHP21SL2LtMNBKMdTRJjffTX1wVgrsEb1ITJU6QknwYJAcQky2cE02NbzPp70KyKggtpu9xM7Ik+CBIqY+8FrYyRUkrs+MEm1TG6tG9LZxNDNFGDue63TYGgIHqUUcuNhvhyZtn5LnlDq3Juxa4noCuX0scErOpNMDCrVcHPCS5rFGuQR9KZpxnB6CQ0ZO+AIBcTPk3UdbTx1L7jLEEHsMW7ZYm8NlIFyxn8+xdL7MURYEhzd5k2N2TabxIAORwC2r00QQfNSgrnqTJfh7cDmDu9ggtV0EZFr7kGu4KAxtNDln406TLwF9iZCIwn9EfjPuncRHYm5x3NfK3cFAS5kWxljSnTFlPHBAUFg5HsCCVOd9cdwXq+027un2QJlMjqISJutCDceRtTTuT4+1Q3HWHR8cu0fh9sGvADTYH9iLah/9nPz5+/MDJnQfoIVoAnQAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-ptz:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAQlBMVEVHcEz////////////////////////////////////////////////////////////////////////////////////1bZCPAAAAFXRSTlMAeVoYDS1pBiPv4/g6lkzO2qSxvoixscijAAACi0lEQVRIx51W2ZLcIAwcLnPf+P9/NS2wp5xkq0ziF3ZRC3R0i/l8fvi04oxx89n+RBi1sqB38TKw7lw7lNzDa3U0e57bHhJ4d567HlqGC08eLAj9Gv8XD4/OwtsdhlfCW2s9LfWtuNrMhG1uLWP17Xh14LF4m8dx1OJ9jkm85YCYch5JzDVy81on3MFYkpTNYGmHHloYI+aqlNhlh5ZSvmH1AyBUwPcMX+u/clW3XYvA2YgRGXyZIZX6PXv0l3GlV9Jp9FKcK7mytJIg8xEeBdaBtV4P8tAixexnp73tY7ZBkrk9WEL8t7ZUDqtIA3jXa8sODSeUVqw5aztT+g4QeNAgM0PGTA0+EmfVeUvU0CEW4hX+lt/zseE7jJKDSmi0EUKBhr7EAMKPvNjOA9Fz4Yk/CFgcGRSdkYOHCLRxQfzKRN5SB/b5Ot8SzzQiKqcb6ipFdCfi1JI84OBdxzarhJ8RkpxHOQszl7bpn0GpmnXq6R4OfTkwwlyUWzeQg7rSLNhNUzEUEqJF3DMHeeXgqRIaYwHimLKipK8hMZOYVfJ5oKtIFSgXk5z4KcNx3GOIPGYfPigh9YGHBNQKVKbZhxMnqq+OHfWBHARZfWm1dnfSXfJuXInplse8wy39zkisdQ5kuLY+Bpc5hwGiH8Mx1rE24DFaLqXkfrNVkjk+8JPTPF0bUw+R9MCVuA8ks/xDyF/9orMqpBQeiob5RbIbmv7/TxvoX1Oqa914TsYg7QUWx8Y7R89JQY8mY6Dat1G5GARuMOgYHY9cbL1vNvc++fk67olLk4nrQSl7457OPqdeKn+vEwm4LPzW87DyXvqIyei9znHS+cZz9SxV+Qf8nNbjn37NkDx4+PmCXzHOLUMtjgmUAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-ptzActive{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAANlBMVEVHcEwgmv8imPwimPwhmP8imP8imPwimPwmmf8imPwimPwhmP0imPwimPwimPwimPsimP0imPoLqfILAAAAEnRSTlMADprCJBnU/gXwh3LiUKxAXjJ/ELXKAAACbklEQVRIx5VW2bbjIAwLa1jM9v8/O7Iht+09MwPlpS2VwLZkJ9f1lxVG1joPdZ0u1ZIxurhv8DH6dMpQI5t439GAEc7xYPgTRnAtV7plReRhd5kDP8+fd+wzt70yPhIJzWT7/6DCJCAYLReZPMIuJC4pClSktHqbNpJO1aTmmAme3cvtWs9NSfq52CPhnJNjlbVHwgmWSWGHeQHcKFjj7fygwidf2fa4mbVOuladcnsoDn9/CKKAWf6HEtpANiJvUp9Fgr0SvocPP/sqjOCK9ktpyCAo4Kt/d4n4/6baseNKAt5XrauPN1A4ZLAd30RUI4kNfELVx+yd3lrXYIg1Bp/B/dGs5N8mPsJoVyiwkofQSlm+K9aiwmoQMDoI4wefoK/rhkESrSuV+BR2i6HZH9juLzxCtBmn6rFmB66gNJQwBOSxncT/N3FAlxAoLQfJDy2+6rMLI3aznl9fhOcGSdZzoNhex2K3TXJEVe3M4Zb6QhHuJc5BWakYIqqietcPw6FK+EHofUHRqtLEQ5X8dKVENXXgEpLOpcjwkFI30YFVHE8fyx2ShZJ/ydTKlZwZ4BCOv/af9uMi0DILe4kieynScgPbhai+DRDckTT6N6zJpI3HMghM3BMg+q9pHmwrbR0Q0D5wc0JHPy0E5Ur7Nf3Rk68LnR0NHfO28/T5P4cNr+uLFR7eEdiNxvMRbd5Onlqsis4iIVdme4di3akWOz+3T0aUnFWHa8QZrO51NO69MeLPafrNuBenxel/3d21j8k/jyxf+75OQabFxOtuT94G3Lpjzb0zBn2Dl0ep/waPidQ/p/XB60Dp7e8F/QO7WSJg4zEzdwAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-ptzActive:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAANlBMVEVHcExru/9ru/9qu/9ru/9ru/9ru/9ru/9svP9ruv9ru/9ru/9ru/9ru/9ru/9ru/9ru/9ru/+3uxEqAAAAEnRSTlMA5q0cR/PC/ggSKtN5OIhaa5izIOiAAAACV0lEQVRIx5VW2ZLjMAiMToNu/f/PboNsJ5PaKWv8kKRkWkDTQF6v/zyUfO+JX9sP1dKKd/v2acQcm992kbo1R4il7iHIif0BRNtCUOozH4cikAdt2YfjRLTnzN15/8I85wFCI2xDzlnyMLO7R0aFoTzbFGB+jIkYLkyePvmW8d2fs2ZfZuv8It9s6zvV5uSr2LmKb9oVh37QvpjYOcf8fcO3Cb1jGqOU0SvTTd6X2KUBLgKdLzaiDtE2n+isTh8/+AX7E6/Vh/NNSyfVm10RXIe1nxXRapmsDQB7SMnkmE0IxgqvUn0jteEf1T2CHXgr0gjZllGk1HoJL7lD7fRpD20CgJcwQ6EdSh3lLK0zVfuqz2WvPlPJh7HqnCQ4MysxoAYQE0vHub/toRuqzRy5pEUvbg62MzlJQn1MHBe1x7WSAddpNDSN1c9wRMhKfi2jrICwAIsQvHkD7Al41bOrBNC1Y7QdmSg15LDokGETJB/imxYJKfmFMDqI3FjUkDS3NSEDjBaxknRYSb+4nj4kC43W2OKrkqGB8jV2Fq03YiWbhHQTpUV1mMHXWYf8HlNX7ZUQRC6iwBAIK0r0ILr1UxqKsPattAkhwSIiMl76bT/Ft/TbTy2jHQoM7Cz9isHVMb6GILl0H4DGivbw7xNc8rAtiJn3O/qvD6JT/wgs7Y370ZSdWmbZWEKiG1lXImldW7Q1jGMbZW9tUVKZmGjjGvf+EXAqzWiX5OfFSHVp/zjbfGPc3whdcbTF67V2N1e79qYMru2/AnzVYFsdWFt/+nOypv8vQvoHou4gOtSrG5EAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-performance{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURUdwTM7OzszMzM3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3NzW8hQDoAAAAMdFJOUwC/gO8ra6tUQNmVEKtAA1gAAAE4SURBVDjLzZMhT8RAEIWnpS3tXcWdQ6wgOJIKfFdUICv6AyruB5w4EuSJCwRXgUBWkGArLsEi6JVuaZkfxawguSWz/p7azLdtdt97C3ASagp+PpeXPDjHVx7McMWDCBc8qPCZB4m44YFIeOBh+ckCf9z+sCCYqi8WvA/5Nwu26cfA+JRBs4h7WmX/tr9AXcQHAPdgzEPZh5idTQBOZ3zyiModISKQGxZ7dd85E0SKfMGjM7vXeI/5AE5LvrwpcK9IOrQYB5BlCsFIvjzgrkaSjsBZbmC9XsGsAxfn8gKXpL9sSlnQFBwFTTuaKWXgI5Ar+sfHTrW6DUDO+2jEEtCNQ9wL6gNujMvvdFS3eugxGT51fBXxTvF1wLLngbT0BGphKalAy0MQ3Z4Ha2V7UoMFJKkFVAWcvH4B0OJfd9YsTl0AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-performance:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTP///////////////////////////////////////////////////////////////8/RimEAAAAQdFJOUwD2qdfrViyAwW2XORBGtSCsD6SyAAABN0lEQVRIx+2VzQ7DIAyDYfxToH7/p10CbQ+T2s33Rb1MijM3/qDG/EurolD9zSNRggBU0hFelMABmenfADhGkJDhGUFGgiX6I1AAQlDgZK/td8ELtQORiTmIq42I2bYdCD8NjzPmYQxO+rbn2S5qzEUF6YjkgcJude56X3s0SoL7LRAeylyaVPiFq0Jyx230mpeXmXVOHssRbhackhCq25Sny++xcBW1n6Snqw6BTgrqRP6kzfDcgmRLGonDWSf2OecwB491dOrEVZpNsxiyiHzWJ0Z+BbBwzaoWVb49HrqVfSkxHen7WNznLhzl8xpQlT3E9oHUtYaufB+7NY9g9ctbjFfj/h1DwXUrzDltMn1Ql9M814EQWPLmEBg4R7JSzpFQxTmSBMkLvJKOhFHfKEEnv3L/+qw3DuMPzAFH9pIAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-performanceActive{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTBGW2xKV2hKW3BKW2xGW3BKW2xGW3BGW2xKW2xKV3RGW2xGW2xGW3BKW2+P2IvgAAAAOdFJOUwC/gCvzq1RAleURc9VmrA9rXAAAAT9JREFUOMvNkzFLw1AUhU+SxtTahnZyC+IsIeAenDuE/oJQcS/FTYTi6hKcHYpDZ/EXBME95BeURpM0Me39Db4Mgk/u23umcL8kvHfOucBBKEr5eW95xoMjeuBBlyY86NOQBwt654HrPPHAca/YuUHrDQsG9eybBWa1+GLBqvS3LJiNX0vGJw/R0N6LJ+/f6x9I3uwG0D+luRU0FnmdCtBy6ZM7KvQdjgXwJYuNZVNrFfqF8IX+nFm/oBvyS2iZ8OWxgH4u1IZmU4kgfoa5E77c0jwhoTYCbTRFGE7QrXFCveCURkK/2cRBCp2gFYiyWk7Jw4AgXOmQZMAqa9uAeCP+JsViihtb9OKIPtBUuvy8jeqyHRpMhvc5X0W6Lvg60HrPg0DREySOoqQJKRbByRWbExaqlSoVwB0rwCLFwesHquttxhcsa64AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-performanceActive:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURUdwTH3G63zE6n3G7H3F633G7H3F633G633F7H3F7HvG7H3G7H3F6xOzy+EAAAAMdFJOUwC/hKbvK0BT2XURZct0z00AAAE3SURBVDjLzZMhU8NAEIX3LiSUNqI1qBMMChFRgYxAd07E4CI6HQwzEUXgKjC4CH5ABAKJyA+oaHqBJO3+KPaYYSZh9nyfyuyXu7l77x3ASSgu+flYX/HgHOc8kC4wwikPMnzhQaTueKAiHvi43bFg0m4OLPBM9sWCjyb9ZsHm8NkwPiUQT8MjfSX/fn+F/C3syJf9YB7oLsDkjIaiHix5QCNbGBmAFPve+3lXi/0viLB3ZnmDz5g2ICry5daAvCbZhSE2oIsFeC35ssJljiQbgZitIY7nIGu4wLG+xBnpL5tClxQhCANR1Q5TSmCCQK7YjftOVbYNUOxot0EsHl0uwHdFfcD14PJLG9W9HfpMho81X0V8MnwdcHvkgS4cBcqVo6QKHQ9B1a6XY1zAcSiIFg6QlXDy+gEd714RcAqEowAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-face{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURUdwTL+/v76+vsDAwL+/v7+/v7+/v8DAwL+/v7+/v96T4QgAAAAJdFJOUwBAgSCbs9hZap+hQJoAAADvSURBVDjLY2AYRkAJCAygbEZBQUEBKJtpJhDAOJpA9kSYxESgKphuIaBuhASqyYzESjC2hDRilQBZ64BFgm2qMLPYNCwSkQpAwlMBWYIRzJsKYrKCxZSRncKSDFYzBSNY2MD2MqRhSFgqgClPAwwJBxwSbAk4jGKZDCKZp2JIsEOcOx0ztjQDYL5ENwsYJKrTsMSvGSgepzVg2pE5qSikPRPT8sopBuDod0ATZ54JsbZyBrJgAVAp1Ax2oPXMykjxYQaLA2CMoERUZQDMrgBUCc8CKIdzAvHJhyQJpLQLSu0TCaV2lPwBSu0KQy+LAwBuJj5UbruNggAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-face:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURUdwTP///////////////////////////////////////////////w2imYoAAAAMdFJOUwBAgBvfrFmcw4wrbtGliFoAAAD2SURBVDjLY2AYRkAJCAygbEZBQUEBKJvpDBDAODpA9kGYxEGgKphuIaBuhASqyYzESjBu79yIVWIP0NoCLBIsR4WZJY5gkYiZACRqFJAlGMG8EyAmK1hMGdkp7M4gkus4RrCwBIApFwwJmwlgqsYAQ6IAIrEAwygHHEaxngJbfhRDgg0sxHoMM7Z0AmC+RAPsJ4S5NE5gid8VoHg8sgHTDh/PzM60HkzLc44bgKMf3RKuMwoQ+dNIgswJDAycUDPYjhgwMCsjxYcJLA6AMYISUTkBMLsaUCVqEqAcngPEJx+SJJDSLii1HySU2lHyByi1Kwy9LA4AqflRBKNSA88AAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-faceActive{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAhUExURUdwTBCT2xKV2hGY2hKW2xGW2xGW2xGW2xKX3BGX3BKW23povfoAAAAKdFJOUwBAgRybs9hZLG6hrV9tAAAA80lEQVQ4y2NgGEZACQgMoGxGQUFBASibaRUQwDhaQPZCmMRCoCqYbiGgboQEqsmMxEowTgmZiFViFtBaBywSbEuFmcWWYZGIUgASXgrIEoxg3lIQkxUspozsFJZkEMmxBCNY2MD2MqRhSFgpgCkvAwwJBxwSbAk4jGJZAbZ8KYYEO8S5yzFjSysA5kt0s5YKc6guwxK/baB4XDYB045Vi4pCyrMwLa9aYgCOfgc0cY5VEGurViIJMhcAlULNYF9mwMCsjBQfZrA4AMYISkRVBcDsCkCV8CqAcrgWEJ98SJJASrug1L6QUGpHyR+g1K4w9LI4ALk0RHtSETFcAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-faceActive:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAhUExURUdwTHzD63zE6n7H7H3F7H3F633G63zF7H3G7H3F7H3F68TinBIAAAAKdFJOUwBAgR+Z31ipwW4yAjb9AAAA+UlEQVQ4y2NgGEZACQgMoGxGQUFBASibaRUQwDhaQPZCmMRCoCqYbiGgboQEqsmMxEowTmmZiFViFtBaBywSrMuFmSWWYpGoUgASXgrIEowgHtsKEJMDLKaM7BSWYLCaJRjBwloAploxJKwUwJSXAYYE2KUMVRgSrAFgKhTDKPbFIJJ5OYYEG1iIfRlmbGkVwHyJBlhWCDNrrMASvxageFw6AdOOqKCklrQuTMuzlhiAo98BTZx5FcTarJXIgglApVBr2ZYaMDArI8WHKSwOgDGCElFZBTC7GlAlvBKgHK4FxCcfkiSQ0i4otS8klNpR8gcotSsMvSwOAIs+RIlIrewIAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-zoom{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURUdwTMDAwL+/v7+/v7+/v76+vr+/v7+/v7+/v7+/v7+/v7+/vxtcv/AAAAALdFJOUwBVdZCpGdZE7C3B0wnY6AAAAV9JREFUOMt1lDtPwzAQx20ghGwVsHVJhQRDlsywWKqEULsw8FhRJ2iWiglGGJvFCw8xIVVCSEwkKU25L4ftpOHs2Cclsu7v370smxCLecRh+xOH8Ja5kGEs/6dtYf1XONcWZurbwwRCQjYZ9l7uHAPAOBHpI1QC/QSY9g84ldmnAn7Z3htwsfZnvSe54eJd5hlcC7gccxTwSETZEr5+714vLRdfkFraVNtetXLpR7ha+mkHCV1Y/q8ZOW8AgDkecsIaAEIcGbIGyLUq4KcBYl0o7QAB4FZACBMrQKpaJOCZQqyAIhgayYEpgD1DZghXCvBTNJFKmCvgzmhcCEsBwMjSRx6BslYftRX0JLYKrAsLqzDC54EFMwvy58QhMM8hFNq0UpwET+sLC9/4BmEBTytyRCIbDoAEiR1Qp1dbRxfoyv9g3ogaKVuXhVZZbtqX6Ez6H23PxG4CM259QDwt/h8ABfK8nDqSAAAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-zoom:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTP///////////////////////////////////////////////////////////////8/RimEAAAAQdFJOUwCCyreU7KZVRCDaZnETLwj6WaYVAAABUUlEQVRIx5WV2Q6EIAxFoVBWxf7/184AOnGUsvTBqDmXrqRCzNou1kwGtyZIQNuiD0P6evWTURFUMtIoPO+iVoGIZPkMqkdKA0jZgoJ6suQc2EoiGBldOoQ9HSDk5+GTs1Fqo9IlcEpvNv3qv0MBhSalIFSv3+MCJCY8fUaCxasycrMu9dp5VTUhubXZ6CqsAvn66ZAsx+e8fON37oT3bZ4aiRU0kDlavGSrQI95HPBZACt8FuCL16IruBVkzBeBW+CLYHvyfiDQd96IpHpOMqP++fAq9VMQ7rwrM5+6gjwG/3y/D/m8ylPYpvpAeqO7DfvwMPO9D6jnBabG56YFZx77fEjD+9AyLdYEhp8nxoNh5wmJtfY8AS+wzIZZrJNcC4h3wV8IH1p87Iyfnc6XVaAd7ICHAsebw97zgDSxZ/yvViiPuYUfTe650knM2+7Ywz9yOCklzohLOwAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-zoomStop{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTP///////////////////////////////////////////////////////////////8/RimEAAAAQdFJOUwDjmTC6Y0KBVakX8s8iC3JYR1wyAAABVUlEQVRIx62V2baFIAiGcwJRS97/aU/Zbtht0VzrcJOuvl/AAabpXy1RF0F/m2h2PX5mzucEuO9gMon1MY7KlG8w4LImC1XFQmxDGVkm1DYpXi0qS1gXTEGzKoqNS1ajAxPqJDikFLcFS+aukYJffRfXnAj9kYUXFVi86wzzPjuCFRXBwS3KaC/Pt02Ww7uf1jz3BVYtX/OsyDQFDn7yswPXb+Ovs39eJJWwxrOXV4thgC+//QBf/uMAXwAa4AuRBvgdWR58CB2B+eaRG5e8QO7Jn2sIAvzhbdsDnXzev8q0BengGXv8EciH3y1CY5++yI/BRNx82g/La7lc7b0Am/tUC6n3HoZ4SbDyy5BgzSNivV6wbPXeIPOpHlOU+CjkTQKvQOpXdRdJvn+5xttWQa4EZUOzluonT6+q72X6Zb0+T/lNhQd7hg9vm8LWUhW5gT4iN7c/0ZUo8Q3AttYAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-zoomStop:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAqUExURUdwTBKV2hGW2xKW2xKW2xKW2xGV3BGW2xGW3BGX2xKW3BKW2xCX2xKW2yDN61kAAAANdFJOUwCAVKxm3T/DmhrxKw97YQBGAAABaklEQVQ4y2NgIA6wGqCLMCqAqV4HdIm9F0Ek22UMM9hiG4AkVzQDA+cmx+YyJJnDlw8wMNQaNpfevbu0QgxJgrN3JQPD3VvhjU57kESnOZqvvXuJgcEXxVFMEkDt1w11gZYwoVgue3d5SzaQSgCydZG1TMkBU8vBuq9guBcqNBNDgj0GQrMEb0CVYEmA2ViANRQZ795tQPZduADciXcVUNSthGu4hGrAJawagBIXsWoAClzGqgEocRWrBqDIrQNQDTPRXZ8A0cB41wBNQgGiQfbubTQJAagGDB0GIA0OsnevbkCTCADiu4J374ahW34JqAEIbiXMRJOAgkvMKJYgJBx6717AKiF4F4eOu+jxgQCXGHBIKPDgkBC8JYCURJDtQHYWN4oEcvpZiyR+C9lZtkgSKKG1CyGOGrxItleixjrcLFBWRAYcMIkG9NQMiY67N7AlcxAQwMwA6SBxM2xZQ3jtVRPsRQ83sg8ACMIUxzzE8wsAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-close{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURUdwTM3Nzc7Ozs7Ozs3Nzc3NzcrKys3Nzc3Nzc3NzePZJxkAAAAJdFJOUwCtKdPBGAmNTt3jdDcAAADfSURBVDjL1dOxDoIwEADQgwR07GTCZtI/IGHgAzBhM9EPkMTB0Y3V0ZXIcn/rtRR6pefgSKeSu3ellyvA9lZ/5F9p/3K7PZY8oPG5BD6MpPUSgIITzdIStifAshjRQV1PCFT8TxaicTzzwEwINOEdHVmDmcTAkRhMhMAp7iQRjcMtDhCp8SA1v0ARGIIK/gnkv0p1OBTS4QRUIpE7DiYYXTBrzcld3JIrAarXrps4AVNwRSZgExoJmIyAaAdsShUMn/JF2fh4YEkpAcgvnuwYCIb6EbbbP4PsDfLD2dD6Av1qTvAQlzUTAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-close:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURUdwTP///////////////////////////////////8kBMKEAAAAJdFJOUwCt0igUwJdJePGbgLgAAADcSURBVDjL1ZMxEoIwFESTCaOWFDapqeicnAALTiANnaWlnVewDTMW/7b+aCAb8jkAVIHN2/lsNkrt73lf8M08nnF1pAYFR/dFmAAx7SIoi4iDbRrWDMAuQFzmmxAGbjjJgjj6dCjMCAND/o8RWQMzUgIRKYE/wsC5TJIRR74rBUZaqqXwLZEXT0WTDGwLW1aavJWQir9qadw++NgykWoMNtcykh8Q5EECgr5C+jjpGjHjPGhPU5eVzyfPJitfnUyhPg6ywMKZ7BygcYcsPCj1Kc8uXYPqpeSLs6PnC4w8S+8OJ9MLAAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-narrow{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAzUExURUdwTP///////////////////////////////////////////////////////////////8/RimEAAAAQdFJOUwAyqXf5Hu1TZxDRmrxFjN7ZJa7NAAABXElEQVRIx92VS5KFIAxFgfALoLL/1XaVKPBCQteb9KAzM3Ik3FyiUv8rQqo0MsrL0VQmfJDWa1/5OPn1x1hxFWNMsv3ZsN/vJZy6ZVzoJWam/rcemA+pXwQWoLQXSZN8fAiaDy1dxKMlkvZsdiaIuC3pWPmgKccAIDToYk5x6ykahpF209B3i2sBtAic6wlHRRhHQJhrOghQOAeWyTaRAM1h9ELcq9AuInYVqMXzMBqwO2QC3IU7y5X0+MLYKa44nSFQlR5foxvxYVlN+3CIfbhvhUcKGHE42NX6G7O+do0rYHYbVGTuAz+BCjcHMn9zh/M8stsySp3CoAn8PHFFHJjPl2qa3jiYrBXY7tzIGRwi6mg+nbgQs++8t+tQDnyDNrEQev2fVJt3hIoE8dl1AYXWHrkzvkScJRdHizsiAASNtEk7S/NtXUbs70RSXxKgviPKFz99bVIB9SfxA8uZLAsxki39AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-narrow:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURUdwTMzMzMzMzM3NzczMzM7Ozs3NzczMzMzMzMzMzMzMzMzMzMzMzH6OaiEAAAAMdFJOUwBv7U2hEB4zt9NZixFhg1cAAAF+SURBVDjLY2CgF+CacwYKXFHEWXtg4mcOLUCWKDqDAKeRxJnBIhounWDaASFRAzJiO5CR5QNkHUHYoAPkioKZ7CAZAZgEB5AzHcpmBLKPwyRszpw5gWzsSRgbaNIEFIfAXAxkJiBcsgeh7MyZg0hu50RYcuaMAqqnTsMlNiAHgw7c9jNnCpAl9sCtPHMISEQJgoAwxPUGUAmgL9h1IEHYAPYJ1L2g0OGEhi3QfTHwQAFJMCECPQhFggUqAfRCDkIC5DwnSPwJoNhxKICBgS0NBEDuXAN3Ptx5EOADVgiRcEBOGIhIOHPmGJIEIyJMkeMJ7I2jiPhASkw9CJN9kKKZgfsM3G6QZoS79iClH+YzCPsyQL5EVnVmMpgVDQ7kwzAJcEDNNgsNXwINfAOEZ0FASQeWsA8jeQoVwLVUwoVUULUwrISJJ6xB1cJgDcpshxoDGLhgEQYDbIaCUqUMkPhAziRIGRUkcRJbFl6DS4LrDGoyR9HSgFWC3bORnFIEAI39IME59Pz6AAAAAElFTkSuQmCC") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-expand{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAtUExURUdwTM3NzczMzMzMzMzMzMzMzMvLy8vLy8zMzMzMzMzMzMzMzMzMzMzMzMzMzAmiiJAAAAAOdFJOUwAqre7XQBoOxWGeiHNRIXj5WAAAAcNJREFUOMu1VLtKQ0EQ3Ygx5FEIPhpFVLAIaNAUPkACWliGYGEpMWKjIKktJGBjIWIhiAgSRGwESWkhwcpGEAUtRJCYmBjFzDc4szv7uCpYOcXd2T07u2fOzF4h/jLf01H/xdzP9a4koFWi2W/rs8A26UXWwNiEu+5PWADyDnDorMOrPSwo7x186DjYJm/GAM84q+9JzkUKMRnQtkv2Y+j3MtCM/pTeFcHJO/s3nguJCM/QG7MMKaRggBSN99NyJ97ypoEPmSVAjsZ1gE8NyB0hgBcaw4Ywq9AEUKUxgEenGUi5EXTJjgIqdGlnBqCxkFb0FS2o42cXSOFEHPfM69yhzLKQIbEepieIbVgDNSEWXSDiAKsGwKNadA0L7lGUz/LmBia2uaXKk+c80p48iro6nE+IMxdY31sGcq4kPlMQK16NN5S1iJQ6EZNKIKmGKZS8bCUqp9jEw0J7VVtaPInFJdGU8NLObGMhT11MITJua9DT6ONuJWlGNdBGIg0R9271fFp1j0oFx0+vj1nJER3SDl4zIYGYs1h0Q4JJA5z43RCLDKi8cvYZntNy/Er1KpSch7j0uH+X1VKUfv1J+I1a/2xf3OKDpNnEfRYAAAAASUVORK5CYII=") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-icon-expand:hover{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA5UExURUdwTP///////////////////////////////////////////////////////////////////////308lk0AAAASdFJOUwBFnl8nDsur9hnq2jeLum17VecmAZgAAAGgSURBVEjH1VbZdsUgCIz7boz//7Fto3FBzLk9fSpvUUdgGDDH8WfjV6JKqZC8+eR0kLmZVky8H/cxA7PpBSJoRsyy3XliM24UP8/y1iQW1tljUIl479mQvlv5utptAzE8NMTC5kPkCdZV3VAA4OpFfHGdKoJhCTixJ0NPe7pki9eo3hbGtbLkOwXSqY6ueQgI6PXxN11dASWAEwL6DRQ4LIlLABgEUGIg3UWJycyAvl89DBRHyOxIG+emeLgMNxNRYQLUCJnLWj9lzzqKzsJY7fbloVDjoJw4AUrOYZH2HZXRgKYGSJ8DSkgGdl3YhlThhkoZC8pFGWt1CWzVH0rMsa10jTTNhWMvAAlKf4CUoDT40hFACgF8K5jzAdR4cxVmtX9LZWmgLngTFIMNb5EZQNAWVcgUIHmPoOhkesbPCY+bOs+XAeEedfp5xjxSsXBY8qcJsiKtlZIbHhe+RWQbaUqBylmGK8Lld1sQQuEHbdAbxHFhTqhprK8IccLAFRnrJLGXLkjdnqLTgMrir53xF2OMcLFq4Rf/B0RjQvin9gVLNDmYNA/hrAAAAABJRU5ErkJggg==") no-repeat 50%;background-size:100% 100%}.jessibuca-container .jessibuca-menu-icon-text,.jessibuca-container .jessibuca-quality-icon-text,.jessibuca-container .jessibuca-scale-icon-text,.jessibuca-container .jessibuca-speed-icon-text{font-size:14px;min-width:30px;height:20px;line-height:20px;cursor:pointer;text-align:center}.jessibuca-container .jessibuca-speed{font-size:14px;color:#fff}.jessibuca-container .jessibuca-menu-list,.jessibuca-container .jessibuca-quality-menu-list,.jessibuca-container .jessibuca-scale-menu-list,.jessibuca-container .jessibuca-speed-menu-list{position:absolute;left:50%;bottom:100%;visibility:hidden;opacity:0;transform:translateX(-50%);transition:visibility .3s,opacity .3s;background-color:rgba(0,0,0,.5);border-radius:4px;overflow:hidden;width:max-content}.jessibuca-container .jessibuca-menu-list.jessibuca-menu-shown,.jessibuca-container .jessibuca-menu-list.jessibuca-quality-menu-shown,.jessibuca-container .jessibuca-menu-list.jessibuca-scale-menu-shown,.jessibuca-container .jessibuca-menu-list.jessibuca-speed-menu-shown,.jessibuca-container .jessibuca-quality-menu-list.jessibuca-menu-shown,.jessibuca-container .jessibuca-quality-menu-list.jessibuca-quality-menu-shown,.jessibuca-container .jessibuca-quality-menu-list.jessibuca-scale-menu-shown,.jessibuca-container .jessibuca-quality-menu-list.jessibuca-speed-menu-shown,.jessibuca-container .jessibuca-scale-menu-list.jessibuca-menu-shown,.jessibuca-container .jessibuca-scale-menu-list.jessibuca-quality-menu-shown,.jessibuca-container .jessibuca-scale-menu-list.jessibuca-scale-menu-shown,.jessibuca-container .jessibuca-scale-menu-list.jessibuca-speed-menu-shown,.jessibuca-container .jessibuca-speed-menu-list.jessibuca-menu-shown,.jessibuca-container .jessibuca-speed-menu-list.jessibuca-quality-menu-shown,.jessibuca-container .jessibuca-speed-menu-list.jessibuca-scale-menu-shown,.jessibuca-container .jessibuca-speed-menu-list.jessibuca-speed-menu-shown{visibility:visible;opacity:1}.jessibuca-container .icon-title-tips{pointer-events:none;position:absolute;left:50%;bottom:100%;visibility:hidden;opacity:0;transform:translateX(-50%);transition:visibility .3s ease 0s,opacity .3s ease 0s;background-color:rgba(0,0,0,.5);border-radius:4px}.jessibuca-container .icon-title{display:inline-block;padding:5px 10px;font-size:12px;white-space:nowrap;color:#fff}.jessibuca-container .jessibuca-quality-menu{padding:8px 0}.jessibuca-container .jessibuca-menu-item,.jessibuca-container .jessibuca-quality-menu-item,.jessibuca-container .jessibuca-scale-menu-item,.jessibuca-container .jessibuca-speed-menu-item{display:block;height:25px;line-height:25px;margin:0;padding:0 10px;cursor:pointer;font-size:14px;text-align:center;width:50px;color:hsla(0,0%,100%,.5);transition:color .3s,background-color .3s}.jessibuca-container .jessibuca-menu-item:hover,.jessibuca-container .jessibuca-quality-menu-item:hover,.jessibuca-container .jessibuca-scale-menu-item:hover,.jessibuca-container .jessibuca-speed-menu-item:hover{background-color:hsla(0,0%,100%,.2)}.jessibuca-container .jessibuca-menu-item:focus,.jessibuca-container .jessibuca-quality-menu-item:focus,.jessibuca-container .jessibuca-scale-menu-item:focus,.jessibuca-container .jessibuca-speed-menu-item:focus{outline:none}.jessibuca-container .jessibuca-menu-item.jessibuca-menu-item-active,.jessibuca-container .jessibuca-menu-item.jessibuca-quality-menu-item-active,.jessibuca-container .jessibuca-menu-item.jessibuca-scale-menu-item-active,.jessibuca-container .jessibuca-menu-item.jessibuca-speed-menu-item-active,.jessibuca-container .jessibuca-quality-menu-item.jessibuca-menu-item-active,.jessibuca-container .jessibuca-quality-menu-item.jessibuca-quality-menu-item-active,.jessibuca-container .jessibuca-quality-menu-item.jessibuca-scale-menu-item-active,.jessibuca-container .jessibuca-quality-menu-item.jessibuca-speed-menu-item-active,.jessibuca-container .jessibuca-scale-menu-item.jessibuca-menu-item-active,.jessibuca-container .jessibuca-scale-menu-item.jessibuca-quality-menu-item-active,.jessibuca-container .jessibuca-scale-menu-item.jessibuca-scale-menu-item-active,.jessibuca-container .jessibuca-scale-menu-item.jessibuca-speed-menu-item-active,.jessibuca-container .jessibuca-speed-menu-item.jessibuca-menu-item-active,.jessibuca-container .jessibuca-speed-menu-item.jessibuca-quality-menu-item-active,.jessibuca-container .jessibuca-speed-menu-item.jessibuca-scale-menu-item-active,.jessibuca-container .jessibuca-speed-menu-item.jessibuca-speed-menu-item-active{color:#2298fc}.jessibuca-container .jessibuca-volume-panel-wrap{position:absolute;left:50%;bottom:100%;visibility:hidden;opacity:0;transform:translateX(-50%) translateY(22%);transition:visibility .3s,opacity .3s;background-color:rgba(0,0,0,.5);border-radius:4px;height:120px;width:50px;overflow:hidden}.jessibuca-container .jessibuca-volume-panel-wrap.jessibuca-volume-panel-wrap-show{visibility:visible;opacity:1}.jessibuca-container .jessibuca-volume-panel{cursor:pointer;position:absolute;top:21px;height:60px;width:50px;overflow:hidden}.jessibuca-container .jessibuca-volume-panel-text{position:absolute;left:0;top:0;width:50px;height:20px;line-height:20px;text-align:center;color:#fff;font-size:12px}.jessibuca-container .jessibuca-volume-panel-handle{position:absolute;top:48px;left:50%;width:12px;height:12px;border-radius:12px;margin-left:-6px;background:#fff}.jessibuca-container .jessibuca-volume-panel-handle:before{bottom:-54px;background:#fff}.jessibuca-container .jessibuca-volume-panel-handle:after{bottom:6px;background:hsla(0,0%,100%,.2)}.jessibuca-container .jessibuca-volume-panel-handle:after,.jessibuca-container .jessibuca-volume-panel-handle:before{content:"";position:absolute;display:block;left:50%;width:3px;margin-left:-1px;height:60px}.jessibuca-container.jessibuca-fullscreen-web .jessibuca-controls{width:100vh}.jessibuca-container.jessibuca-fullscreen-web .jessibuca-play-big:after{transform:translate(-50%,-50%) rotate(270deg)}.jessibuca-container.jessibuca-fullscreen-web .jessibuca-loading{flex-direction:row}.jessibuca-container.jessibuca-fullscreen-web .jessibuca-loading-text{transform:rotate(270deg)}.jessibuca-container .jessibuca-contextmenus{display:none;flex-direction:column;position:absolute;z-index:120;left:10px;top:10px;min-width:200px;padding:5px 0;background-color:rgba(0,0,0,.9);border-radius:3px}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu{cursor:pointer;font-size:12px;display:block;color:#fff;padding:10px 15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 2px rgba(0,0,0,.5);border-bottom:1px solid hsla(0,0%,100%,.1)}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu a{color:#fff;text-decoration:none}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu span{display:inline-block;padding:0 7px}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu span.art-current,.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu span:hover{color:var(--theme)}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu:hover{background-color:hsla(0,0%,100%,.1)}.jessibuca-container .jessibuca-contextmenus .jessibuca-contextmenu:last-child{border-bottom:none}.jessibuca-container.jessibuca-contextmenus-show .jessibuca-contextmenus{display:flex}.jessibuca-container-playback .jessibuca-controls{height:48px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center{flex:1;display:flex;box-sizing:border-box;justify-content:space-between;font-size:12px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time{box-sizing:border-box;flex:1;position:relative;height:100%}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-inner{width:300px;height:100%;overflow-y:hidden;overflow-x:auto}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-current-time{position:absolute;left:0;top:0;height:15px;width:1px;background-color:red;text-align:center;z-index:1}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-current-time-text{position:absolute;box-sizing:border-box;padding:0 5px;width:60px;left:-25px;top:15px;border:1px solid red;height:15px;line-height:15px;cursor:move;background-color:#fff;color:#000;-webkit-user-select:none;user-select:none}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll{position:relative;width:1440px;margin:0 auto}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll.one-hour{width:1440px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll.half-hour{width:2880px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll.ten-min{width:8640px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll.five-min{width:17280px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-scroll.one-min{width:86400px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-time-list{position:relative;background-color:#ccc;height:48px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-day{height:100%;overflow:hidden}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-one-wrap{height:8px;z-index:1}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-second-wrap{height:25px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-controls-playback-btns{display:flex;align-items:center}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute-one,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-second-one{float:left;width:1px;height:8px;margin:0;cursor:default;position:relative;z-index:1}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute-one.active,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-second-one.active{background-color:orange;cursor:pointer}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute-one.start,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-second-one.start{background-color:#999}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute-one:hover .jessibuca-playback-time-title-tips,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-second-one:hover .jessibuca-playback-time-title-tips{visibility:visible;opacity:1}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-title-tips{pointer-events:none;position:absolute;left:0;top:100%;visibility:hidden;opacity:0;transform:translateX(13%);transition:visibility .3s ease 0s,opacity .3s ease 0s;background-color:#000;border-radius:4px;z-index:1}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-title-tips.jessibuca-playback-time-title-tips-left{transform:translateX(-100%)}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-title-tips .jessibuca-playback-time-title{display:inline-block;padding:2px 5px;font-size:12px;white-space:nowrap;color:#fff}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-hour,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute{float:left;position:relative;width:60px;box-sizing:border-box;border-top:1px solid #999;-webkit-user-select:none;user-select:none;text-align:left;height:25px;line-height:25px}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-hour:first-child,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute:first-child{border-left:0}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-hour:first-child .jessibuca-playback-time-hour-text,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute:first-child .jessibuca-playback-time-hour-text{left:0}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-hour:after,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute:after{content:"";position:absolute;left:0;top:-8px;width:1px;height:14px;background-color:#999}.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-hour-text,.jessibuca-container-playback .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-center .jessibuca-playback-time-minute-text{position:absolute;left:-13px}.jessibuca-container-playback .jessibuca-playback-expand.disabled .jessibuca-icon-expand,.jessibuca-container-playback .jessibuca-playback-narrow.disabled .jessibuca-icon-narrow{cursor:no-drop}.jessibuca-container-playback.jessibuca-fullscreen-web .jessibuca-controls .jessibuca-controls-bottom .jessibuca-controls-playback-time-inner{overflow-y:auto}.jessibuca-zoom-control{cursor:grab}.jessibuca-performance-panel{position:absolute;box-sizing:border-box;z-index:10000;left:0;top:0;padding:5px;font-size:10px;background:rgba(0,0,0,.2);color:#fff;max-height:100%;overflow-y:auto;display:none}.jessibuca-performance-panel .jessibuca-performance-item{display:flex;align-items:center;margin-top:3px;color:#fff}.jessibuca-performance-panel .jessibuca-performance-item-block{height:10px}');
-  class Ro {
+  class Do {
     constructor(e) {
       this.player = e, this.extendBtnList = [], f = this, (o = e)._opt.hasControl && o._opt.controlAutoHide ? o.$container.classList.add("jessibuca-controls-show-auto-hide") : o.$container.classList.add("jessibuca-controls-show"), _ = o._opt, g = _.operateBtns, T = `
         <div class="jessibuca-controls-center">
@@ -8104,10 +8114,10 @@ const ks = (Ae, Qe) => {
                             ${_.showBandwidth ? '<div class="jessibuca-controls-item jessibuca-speed"></div>' : ""}
                             <div class="jessibuca-controls-item-html">${_.controlHtml}</div>
                         </div>
-                        ${_.playType === pe && _.playbackConfig.showControl ? T : ""}
+                        ${_.playType === ce && _.playbackConfig.showControl ? T : ""}
 
                         <div class="jessibuca-controls-right">
-                            ${_.playType === pe && _.playbackConfig.showRateBtn ? `
+                            ${_.playType === ce && _.playbackConfig.showRateBtn ? `
                                  <div class="jessibuca-controls-item-wrap">
                                     <div class="jessibuca-controls-item jessibuca-speed-menu">
                                         <div class="jessibuca-speed-icon-text"></div>
@@ -8162,7 +8172,7 @@ const ks = (Ae, Qe) => {
              <div class="jessibuca-contextmenus"></div>
         `), Object.defineProperty(f, "$poster", { value: o.$container.querySelector(".jessibuca-poster") }), Object.defineProperty(f, "$loadingBg", { value: o.$container.querySelector(".jessibuca-loading-bg") }), Object.defineProperty(f, "$loadingBgImage", { value: o.$container.querySelector(".jessibuca-loading-bg-image") }), Object.defineProperty(f, "$loading", { value: o.$container.querySelector(".jessibuca-loading") }), Object.defineProperty(f, "$play", { value: o.$container.querySelector(".jessibuca-play") }), Object.defineProperty(f, "$playBig", { value: o.$container.querySelector(".jessibuca-play-big") }), Object.defineProperty(f, "$recording", { value: o.$container.querySelector(".jessibuca-recording") }), Object.defineProperty(f, "$recordingTime", { value: o.$container.querySelector(".jessibuca-recording-time") }), Object.defineProperty(f, "$recordingStop", { value: o.$container.querySelector(".jessibuca-recording-stop") }), Object.defineProperty(f, "$pause", { value: o.$container.querySelector(".jessibuca-pause") }), Object.defineProperty(f, "$controls", { value: o.$container.querySelector(".jessibuca-controls") }), Object.defineProperty(f, "$controlsInner", { value: o.$container.querySelector(".jessibuca-controls-bottom") }), Object.defineProperty(f, "$controlsLeft", { value: o.$container.querySelector(".jessibuca-controls-left") }), Object.defineProperty(f, "$controlsRight", { value: o.$container.querySelector(".jessibuca-controls-right") }), Object.defineProperty(f, "$volume", { value: o.$container.querySelector(".jessibuca-volume") }), Object.defineProperty(f, "$volumePanelWrap", { value: o.$container.querySelector(".jessibuca-volume-panel-wrap") }), Object.defineProperty(f, "$volumePanelText", { value: o.$container.querySelector(".jessibuca-volume-panel-text") }), Object.defineProperty(f, "$volumePanel", { value: o.$container.querySelector(".jessibuca-volume-panel") }), Object.defineProperty(f, "$volumeHandle", { value: o.$container.querySelector(".jessibuca-volume-panel-handle") }), Object.defineProperty(f, "$volumeOn", { value: o.$container.querySelector(".jessibuca-icon-audio") }), Object.defineProperty(f, "$volumeOff", { value: o.$container.querySelector(".jessibuca-icon-mute") }), Object.defineProperty(f, "$fullscreen", { value: o.$container.querySelector(".jessibuca-fullscreen") }), Object.defineProperty(f, "$fullscreenExit", { value: o.$container.querySelector(".jessibuca-fullscreen-exit") }), Object.defineProperty(f, "$record", { value: o.$container.querySelector(".jessibuca-record") }), Object.defineProperty(f, "$recordStop", { value: o.$container.querySelector(".jessibuca-record-stop") }), Object.defineProperty(f, "$screenshot", { value: o.$container.querySelector(".jessibuca-screenshot") }), Object.defineProperty(f, "$speed", { value: o.$container.querySelector(".jessibuca-speed") }), Object.defineProperty(f, "$controlHtml", { value: o.$container.querySelector(".jessibuca-controls-item-html") }), Object.defineProperty(f, "$playbackTime", { value: o.$container.querySelector(".jessibuca-controls-playback-time") }), Object.defineProperty(f, "$playbackTimeInner", { value: o.$container.querySelector(".jessibuca-controls-playback-time-inner") }), Object.defineProperty(f, "$playbackTimeScroll", { value: o.$container.querySelector(".jessibuca-controls-playback-time-scroll") }), Object.defineProperty(f, "$playbackTimeList", { value: o.$container.querySelector(".jessibuca-controls-playback-time-list") }), Object.defineProperty(f, "$playbackTimeListOne", { value: o.$container.querySelector(".jessibuca-playback-time-one-wrap") }), Object.defineProperty(f, "$playbackTimeListSecond", { value: o.$container.querySelector(".jessibuca-playback-time-second-wrap") }), Object.defineProperty(f, "$playbackCurrentTime", { value: o.$container.querySelector(".jessibuca-controls-playback-current-time") }), Object.defineProperty(f, "$playbackCurrentTimeText", { value: o.$container.querySelector(".jessibuca-controls-playback-current-time-text") }), Object.defineProperty(f, "$controlsPlaybackBtns", { value: o.$container.querySelector(".jessibuca-controls-playback-btns") }), Object.defineProperty(f, "$playbackNarrow", { value: o.$container.querySelector(".jessibuca-playback-narrow") }), Object.defineProperty(f, "$playbackExpand", { value: o.$container.querySelector(".jessibuca-playback-expand") }), Object.defineProperty(f, "$ptz", { value: o.$container.querySelector(".jessibuca-ptz") }), Object.defineProperty(f, "$ptzActive", { value: o.$container.querySelector(".jessibuca-ptz-active") }), Object.defineProperty(f, "$ptzControl", { value: o.$container.querySelector(".jessibuca-ptz-controls") }), Object.defineProperty(f, "$ptzBgActive", { value: o.$container.querySelector(".jessibuca-ptz-bg-active") }), Object.defineProperty(f, "$ptzControlCircular", { value: o.$container.querySelector(".jessibuca-ptz-control") }), Object.defineProperty(f, "$ptzArrows", { value: o.$container.querySelectorAll(".jessibuca-ptz-arrow") }), Object.defineProperty(f, "$ptzExpand", { value: o.$container.querySelector(".jessibuca-ptz-expand") }), Object.defineProperty(f, "$ptzNarrow", { value: o.$container.querySelector(".jessibuca-ptz-narrow") }), Object.defineProperty(f, "$ptzApertureFar", { value: o.$container.querySelector(".jessibuca-ptz-aperture-far") }), Object.defineProperty(f, "$ptzApertureNear", { value: o.$container.querySelector(".jessibuca-ptz-aperture-near") }), Object.defineProperty(f, "$ptzFocusFar", { value: o.$container.querySelector(".jessibuca-ptz-focus-far") }), Object.defineProperty(f, "$ptzFocusNear", { value: o.$container.querySelector(".jessibuca-ptz-focus-near") }), Object.defineProperty(f, "$qualityText", { value: o.$container.querySelector(".jessibuca-quality-icon-text") }), Object.defineProperty(f, "$qualityMenu", { value: o.$container.querySelector(".jessibuca-quality-menu") }), Object.defineProperty(f, "$qualityMenuList", { value: o.$container.querySelector(".jessibuca-quality-menu-list") }), Object.defineProperty(f, "$scaleText", { value: o.$container.querySelector(".jessibuca-scale-icon-text") }), Object.defineProperty(f, "$scaleMenu", { value: o.$container.querySelector(".jessibuca-scale-menu") }), Object.defineProperty(f, "$scaleMenuList", { value: o.$container.querySelector(".jessibuca-scale-menu-list") }), Object.defineProperty(f, "$zoom", { value: o.$container.querySelector(".jessibuca-zoom") }), Object.defineProperty(f, "$zoomStop", { value: o.$container.querySelector(".jessibuca-zoom-stop") }), Object.defineProperty(f, "$zoomNarrow", { value: o.$container.querySelector(".jessibuca-zoom-narrow") }), Object.defineProperty(f, "$zoomExpand", { value: o.$container.querySelector(".jessibuca-zoom-expand") }), Object.defineProperty(f, "$zoomStop2", { value: o.$container.querySelector(".jessibuca-zoom-stop2") }), Object.defineProperty(f, "$close", { value: o.$container.querySelector(".jessibuca-close") }), Object.defineProperty(f, "$zoomControls", { value: o.$container.querySelector(".jessibuca-zoom-controls") }), Object.defineProperty(f, "$performancePanel", { value: o.$container.querySelector(".jessibuca-performance-panel") }), Object.defineProperty(f, "$performance", { value: o.$container.querySelector(".jessibuca-performance") }), Object.defineProperty(f, "$performanceActive", { value: o.$container.querySelector(".jessibuca-performance-active") }), Object.defineProperty(f, "$faceDetect", { value: o.$container.querySelector(".jessibuca-face") }), Object.defineProperty(f, "$faceDetectActive", { value: o.$container.querySelector(".jessibuca-face-active") }), Object.defineProperty(f, "$contextmenus", { value: o.$container.querySelector(".jessibuca-contextmenus") }), Object.defineProperty(f, "$speedText", { value: o.$container.querySelector(".jessibuca-speed-icon-text") }), Object.defineProperty(f, "$speedMenu", { value: o.$container.querySelector(".jessibuca-speed-menu") }), Object.defineProperty(f, "$speedMenuList", { value: o.$container.querySelector(".jessibuca-speed-menu-list") }), 0 < e._opt.extendOperateBtns.length && e._opt.extendOperateBtns.forEach((E) => {
         this.addExtendBtn(E);
-      }), l = this, Object.defineProperty(l, "controlsRect", { get: () => l.$controls.getBoundingClientRect() }), Object.defineProperty(l, "controlsInnerRect", { get: () => l.$controlsInner.getBoundingClientRect() }), Object.defineProperty(l, "controlsLeftRect", { get: () => l.$controlsLeft.getBoundingClientRect() }), Object.defineProperty(l, "controlsRightRect", { get: () => l.$controlsRight.getBoundingClientRect() }), Object.defineProperty(l, "controlsPlaybackTimeInner", { get: () => l.$playbackTimeInner && l.$playbackTimeInner.getBoundingClientRect() || {} }), Object.defineProperty(l, "controlsPlaybackBtnsRect", { get: () => l.$controlsPlaybackBtns && l.$controlsPlaybackBtns.getBoundingClientRect() || { width: 0 } }), Do(e, this);
+      }), l = this, Object.defineProperty(l, "controlsRect", { get: () => l.$controls.getBoundingClientRect() }), Object.defineProperty(l, "controlsInnerRect", { get: () => l.$controlsInner.getBoundingClientRect() }), Object.defineProperty(l, "controlsLeftRect", { get: () => l.$controlsLeft.getBoundingClientRect() }), Object.defineProperty(l, "controlsRightRect", { get: () => l.$controlsRight.getBoundingClientRect() }), Object.defineProperty(l, "controlsPlaybackTimeInner", { get: () => l.$playbackTimeInner && l.$playbackTimeInner.getBoundingClientRect() || {} }), Object.defineProperty(l, "controlsPlaybackBtnsRect", { get: () => l.$controlsPlaybackBtns && l.$controlsPlaybackBtns.getBoundingClientRect() || { width: 0 } }), Lo(e, this);
       {
         let t = function(r) {
           var { bottom: n, height: a } = s.$volumePanel.getBoundingClientRect(), d = s.$volumeHandle.getBoundingClientRect().height;
@@ -8179,11 +8189,11 @@ const ks = (Ae, Qe) => {
         }), E(s.$controls, "click", (r) => {
           r.stopPropagation();
         }), k.play && (E(s.$pause, "click", (r) => {
-          h.playType === pe && h.playbackConfig.uiUsePlaybackPause ? i.playbackPause = !0 : ft(k.pauseFn) ? k.pauseFn() : i.pause();
+          h.playType === ce && h.playbackConfig.uiUsePlaybackPause ? i.playbackPause = !0 : ft(k.pauseFn) ? k.pauseFn() : i.pause();
         }), E(s.$play, "click", (r) => {
-          h.playType === pe && i.playbackPause ? i.playbackPause = !1 : ft(k.playFn) ? k.playFn() : (i.play(), i.resumeAudioAfterPause());
+          h.playType === ce && i.playbackPause ? i.playbackPause = !1 : ft(k.playFn) ? k.playFn() : (i.play(), i.resumeAudioAfterPause());
         })), E(s.$playBig, "click", (r) => {
-          h.playType === pe && i.playbackPause ? i.playbackPause = !1 : ft(k.playFn) ? k.playFn() : (i.play(), i.resumeAudioAfterPause());
+          h.playType === ce && i.playbackPause ? i.playbackPause = !1 : ft(k.playFn) ? k.playFn() : (i.play(), i.resumeAudioAfterPause());
         }), k.screenshot && E(s.$screenshot, "click", (r) => {
           r.stopPropagation(), ft(k.screenshotFn) ? k.screenshotFn() : i.video.screenshot();
         }), k.audio && (E(s.$volume, "mouseover", () => {
@@ -8218,7 +8228,7 @@ const ks = (Ae, Qe) => {
           }), E(s.$ptzActive, "click", (r) => {
             r.stopPropagation(), ue(s.$ptz, "display", "flex"), ue(s.$ptzActive, "display", "none"), s.$ptzControl.classList.remove("jessibuca-ptz-controls-show");
           }), s.$ptzArrows.forEach((r) => {
-            if (h.ptzClickType === kt) E(r, "click", (n) => {
+            if (h.ptzClickType === xt) E(r, "click", (n) => {
               n.stopPropagation(), n = n.currentTarget.dataset.arrow, s.$ptzBgActive.classList.add("jessibuca-ptz-bg-active-show"), s.$ptzBgActive.classList.add("jessibuca-ptz-bg-active-" + n), s.$ptzControlCircular.classList.add("jessibuca-ptz-control-" + n), i.emit(N.ptz, Aa(n)), setTimeout(() => {
                 s.$ptzBgActive.classList.remove("jessibuca-ptz-bg-active-show"), Is.forEach((a) => {
                   s.$ptzBgActive.classList.remove("jessibuca-ptz-bg-active-" + a), s.$ptzControlCircular.classList.remove("jessibuca-ptz-control-" + a);
@@ -8242,7 +8252,7 @@ const ks = (Ae, Qe) => {
               });
             }
           }), h.ptzZoomShow) {
-            if (h.ptzClickType === kt) E(s.$ptzExpand, "click", (r) => {
+            if (h.ptzClickType === xt) E(s.$ptzExpand, "click", (r) => {
               r.stopPropagation(), i.emit(N.ptz, Ps), setTimeout(() => {
                 i.emit(N.ptz, yi);
               }, 1e3 * h.ptzStopEmitDelay);
@@ -8271,7 +8281,7 @@ const ks = (Ae, Qe) => {
             }
           }
           if (h.ptzApertureShow) {
-            if (h.ptzClickType === kt) E(s.$ptzApertureFar, "click", (r) => {
+            if (h.ptzClickType === xt) E(s.$ptzApertureFar, "click", (r) => {
               r.stopPropagation(), i.emit(N.ptz, Us), setTimeout(() => {
                 i.emit(N.ptz, ei);
               }, 1e3 * h.ptzStopEmitDelay);
@@ -8300,7 +8310,7 @@ const ks = (Ae, Qe) => {
             }
           }
           if (h.ptzFocusShow) {
-            if (h.ptzClickType === kt) E(s.$ptzFocusFar, "click", (r) => {
+            if (h.ptzClickType === xt) E(s.$ptzFocusFar, "click", (r) => {
               r.stopPropagation(), i.emit(N.ptz, Fs), setTimeout(() => {
                 i.emit(N.ptz, ei);
               }, 1e3 * h.ptzStopEmitDelay);
@@ -8354,7 +8364,7 @@ const ks = (Ae, Qe) => {
             r && (clearTimeout(r), r = null);
           };
         }
-        i._opt.playType === pe && (E(s.$playbackNarrow, "click", (r) => {
+        i._opt.playType === ce && (E(s.$playbackNarrow, "click", (r) => {
           r.stopPropagation(), i.playback && i.playback.narrowPrecision();
         }), E(s.$playbackExpand, "click", (r) => {
           r.stopPropagation(), i.playback && i.playback.expandPrecision();
@@ -8433,7 +8443,7 @@ const ks = (Ae, Qe) => {
     }
     destroy() {
       var e;
-      this.$performancePanel && (this.$performancePanel.innerHTML = "", Ct(this.$performancePanel) || (e = this.player.$container.querySelector(".jessibuca-performance-panel")) && this.player.$container && this.player.$container.removeChild(e)), this.$poster && !Ct(this.$poster) && (e = this.player.$container.querySelector(".jessibuca-poster")) && this.player.$container && this.player.$container.removeChild(e), this.$loading && !Ct(this.$loading) && (e = this.player.$container.querySelector(".jessibuca-loading")) && this.player.$container && this.player.$container.removeChild(e), this.$loadingBg && !Ct(this.$loadingBg) && (e = this.player.$container.querySelector(".jessibuca-loading-bg")) && this.player.$container && this.player.$container.removeChild(e), this.$controls && !Ct(this.$controls) && (e = this.player.$container.querySelector(".jessibuca-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$playBig && !Ct(this.$playBig) && (e = this.player.$container.querySelector(".jessibuca-play-big")) && this.player.$container && this.player.$container.removeChild(e), this.$recording && !Ct(this.$recording) && (e = this.player.$container.querySelector(".jessibuca-recording")) && this.player.$container && this.player.$container.removeChild(e), this.$ptzControl && !Ct(this.$ptzControl) && (e = this.player.$container.querySelector(".jessibuca-ptz-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$zoomControls && !Ct(this.$zoomControls) && (e = this.player.$container.querySelector(".jessibuca-zoom-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$contextmenus && (this.$contextmenus.innerHTML = "", Ct(this.$contextmenus) || (e = this.player.$container.querySelector(".jessibuca-contextmenus")) && this.player.$container && this.player.$container.removeChild(e)), this.btnIndex = 0, this.extendBtnList = [], this.kbpsShow = "0 KB/s", this.player.$container && (this.player.$container.classList.remove("jessibuca-controls-show-auto-hide"), this.player.$container.classList.remove("jessibuca-controls-show")), this.player.debug.log("control", "destroy");
+      this.$performancePanel && (this.$performancePanel.innerHTML = "", Lt(this.$performancePanel) || (e = this.player.$container.querySelector(".jessibuca-performance-panel")) && this.player.$container && this.player.$container.removeChild(e)), this.$poster && !Lt(this.$poster) && (e = this.player.$container.querySelector(".jessibuca-poster")) && this.player.$container && this.player.$container.removeChild(e), this.$loading && !Lt(this.$loading) && (e = this.player.$container.querySelector(".jessibuca-loading")) && this.player.$container && this.player.$container.removeChild(e), this.$loadingBg && !Lt(this.$loadingBg) && (e = this.player.$container.querySelector(".jessibuca-loading-bg")) && this.player.$container && this.player.$container.removeChild(e), this.$controls && !Lt(this.$controls) && (e = this.player.$container.querySelector(".jessibuca-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$playBig && !Lt(this.$playBig) && (e = this.player.$container.querySelector(".jessibuca-play-big")) && this.player.$container && this.player.$container.removeChild(e), this.$recording && !Lt(this.$recording) && (e = this.player.$container.querySelector(".jessibuca-recording")) && this.player.$container && this.player.$container.removeChild(e), this.$ptzControl && !Lt(this.$ptzControl) && (e = this.player.$container.querySelector(".jessibuca-ptz-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$zoomControls && !Lt(this.$zoomControls) && (e = this.player.$container.querySelector(".jessibuca-zoom-controls")) && this.player.$container && this.player.$container.removeChild(e), this.$contextmenus && (this.$contextmenus.innerHTML = "", Lt(this.$contextmenus) || (e = this.player.$container.querySelector(".jessibuca-contextmenus")) && this.player.$container && this.player.$container.removeChild(e)), this.btnIndex = 0, this.extendBtnList = [], this.kbpsShow = "0 KB/s", this.player.$container && (this.player.$container.classList.remove("jessibuca-controls-show-auto-hide"), this.player.$container.classList.remove("jessibuca-controls-show")), this.player.debug.log("control", "destroy");
     }
     getBtnIndex() {
       return this.btnIndex++;
@@ -8454,10 +8464,10 @@ const ks = (Ae, Qe) => {
       var e = this.player;
       if (e._opt.loadingBackground && e._opt.heartTimeoutReplayUseLastFrameShow) {
         let u = e.height;
-        var i = e._opt, s = (i.hasControl && !i.controlAutoHide && (u -= i.playType === pe ? 48 : 38), this.$loadingBgImage.width = e.width, this.$loadingBgImage.height = u, i.rotate);
+        var i = e._opt, s = (i.hasControl && !i.controlAutoHide && (u -= i.playType === ce ? 48 : 38), this.$loadingBgImage.width = e.width, this.$loadingBgImage.height = u, i.rotate);
         s !== 270 && s !== 90 || (control.$loadingBgImage.width = u, control.$loadingBgImage.height = e.width), this.$loadingBgImage.src = e._opt.loadingBackground;
         let c = "contain", l = (i.isResize || (c = "fill"), i.isFullResize && (c = "none"), "");
-        i.mirrorRotate === "none" && s && (l += " rotate(" + s + "deg)"), i.mirrorRotate === "level" ? l += " rotateY(180deg)" : i.mirrorRotate === "vertical" && (l += " rotateX(180deg)"), this.$loadingBgImage.style.transform = l, this.$loadingBgImage.style.objectFit = c, ze(this.$loadingBg, "display", "block");
+        i.mirrorRotate === "none" && s && (l += " rotate(" + s + "deg)"), i.mirrorRotate === "level" ? l += " rotateY(180deg)" : i.mirrorRotate === "vertical" && (l += " rotateX(180deg)"), this.$loadingBgImage.style.transform = l, this.$loadingBgImage.style.objectFit = c, Ge(this.$loadingBg, "display", "block");
       }
     }
     _validateExtendBtn(e) {
@@ -8466,7 +8476,7 @@ const ks = (Ae, Qe) => {
     }
     addExtendBtn() {
       let e = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : {};
-      var i = oi(Bn);
+      var i = oi(Pn);
       if (e = Object.assign({}, i, e), this._validateExtendBtn(e)) {
         const s = e.name || "", u = this.$controlsRight, c = e.activeIcon && e.activeClick, l = `
             <div class="jessibuca-controls-item-wrap">
@@ -8484,18 +8494,18 @@ const ks = (Ae, Qe) => {
                             </div>` : ""}
                </div>
             `, o = Array.from(u.children)[e.index], f = (o ? o.insertAdjacentHTML("beforebegin", l) : rn(u, l), e.icon ? u.querySelector(".jessibuca-icon-extend-" + s) : null), _ = e.icon ? u.querySelector(".jessibuca-control-extend-" + s) : null, g = e.activeIcon ? u.querySelector(`.jessibuca-icon-extend-${s}-active`) : null, T = e.activeIcon ? u.querySelector(`.jessibuca-control-extend-${s}-active`) : null, { proxy: E } = this.player.events;
-        e.icon && (ze(f, "background", `url(${e.icon}) no-repeat center`), ze(f, "background-size", "100% 100%"), ze(_, "display", "none"), e.iconHover) && (E(f, "mouseover", () => {
-          ze(f, "background", `url(${e.iconHover}) no-repeat center`), ze(f, "background-size", "100% 100%");
+        e.icon && (Ge(f, "background", `url(${e.icon}) no-repeat center`), Ge(f, "background-size", "100% 100%"), Ge(_, "display", "none"), e.iconHover) && (E(f, "mouseover", () => {
+          Ge(f, "background", `url(${e.iconHover}) no-repeat center`), Ge(f, "background-size", "100% 100%");
         }), E(f, "mouseout", () => {
-          ze(f, "background", `url(${e.icon}) no-repeat center`), ze(f, "background-size", "100% 100%");
-        })), e.activeIcon && (ze(g, "background", `url(${e.activeIcon}) no-repeat center`), ze(g, "background-size", "100% 100%"), ze(T, "display", "none"), e.activeIconHover) && (E(g, "mouseover", () => {
-          ze(g, "background", `url(${e.activeIconHover}) no-repeat center`), ze(g, "background-size", "100% 100%");
+          Ge(f, "background", `url(${e.icon}) no-repeat center`), Ge(f, "background-size", "100% 100%");
+        })), e.activeIcon && (Ge(g, "background", `url(${e.activeIcon}) no-repeat center`), Ge(g, "background-size", "100% 100%"), Ge(T, "display", "none"), e.activeIconHover) && (E(g, "mouseover", () => {
+          Ge(g, "background", `url(${e.activeIconHover}) no-repeat center`), Ge(g, "background-size", "100% 100%");
         }), E(g, "mouseout", () => {
-          ze(g, "background", `url(${e.activeIcon}) no-repeat center`), ze(g, "background-size", "100% 100%");
+          Ge(g, "background", `url(${e.activeIcon}) no-repeat center`), Ge(g, "background-size", "100% 100%");
         })), e.click && f && E(f, "click", (h) => {
-          h.preventDefault(), c && (ze(_, "display", "none"), ze(T, "display", "flex")), e.click.call(this.player, this, h);
+          h.preventDefault(), c && (Ge(_, "display", "none"), Ge(T, "display", "flex")), e.click.call(this.player, this, h);
         }), e.activeClick && g && E(g, "click", (h) => {
-          h.preventDefault(), ze(_, "display", "flex"), ze(T, "display", "none"), e.activeClick.call(this.player, this, h);
+          h.preventDefault(), Ge(_, "display", "flex"), Ge(T, "display", "none"), e.activeClick.call(this.player, this, h);
         }), this.extendBtnList.push({ name: s, $iconWrap: _, $activeIconWrap: T });
       }
     }
@@ -8700,7 +8710,7 @@ const ks = (Ae, Qe) => {
                     and prevPayloadBufferSize is ${this.prevPayloadBufferSize} and payload size is ` + e.byteLength), l === this.prevDts && this.prevPayloadBufferSize === e.byteLength) return void this.player.debug.warn("MediaSource", "decodeVideo dts is equal to prev dts and payload size is equal to prev payload size so drop this frame");
               if (l = this.prevDts + this.player._opt.mseCorrectTimeDuration, this._checkTsIsMaxDiff(i)) return this.player.debug.warn("MediaSource", `decodeVideo is max diff , ts is ${i} and prevTs is ${this.prevTs}, diff is ${this.prevTs - i} and emit replay`), void this.emit(H.mediaSourceTsIsMaxDiff);
             }
-            this._decodeVideo(e, l, s, u, i), this.prevDts = l, this.prevPayloadBufferSize = e.byteLength, this.prevTs = i, this.player.getRenderType() === bt && this.player.video && this.player.video.doAddContentToWatermark();
+            this._decodeVideo(e, l, s, u, i), this.prevDts = l, this.prevPayloadBufferSize = e.byteLength, this.prevTs = i, this.player.getRenderType() === vt && this.player.video && this.player.video.doAddContentToWatermark();
           }
         }
       } else this.player.debug.warn("MediaSource", "decodeVideo isDecodeFirstIIframe false");
@@ -8714,14 +8724,14 @@ const ks = (Ae, Qe) => {
     }
     _decodeConfigurationRecord(e, i, s, u) {
       let c = e.slice(5), l = {};
-      return u === 7 ? l = mr(c) : u === 12 && (l = gr(e)), this.player.recorder && this.player._opt.recordType === Xe && this.player.recorder.initMetaData(e, u), l.codecWidth === 0 && l.codecHeight === 0 ? (this.player.debug.warn("MediaSource", "_decodeConfigurationRecord", l), this.emit(H.mediaSourceDecoderConfigurationError), !1) : (e = { id: 1, type: "video", timescale: 1e3, duration: 0, avcc: c, codecWidth: l.codecWidth, codecHeight: l.codecHeight, videoType: l.videoType }, e = te.generateInitSegment(e), this.isAvc = u === 7, this.appendBuffer(e.buffer), this.sequenceNumber = 0, this.cacheTrack = {}, !(this.timeInit = !1));
+      return u === 7 ? l = mr(c) : u === 12 && (l = gr(e)), this.player.recorder && this.player._opt.recordType === ze && this.player.recorder.initMetaData(e, u), l.codecWidth === 0 && l.codecHeight === 0 ? (this.player.debug.warn("MediaSource", "_decodeConfigurationRecord", l), this.emit(H.mediaSourceDecoderConfigurationError), !1) : (e = { id: 1, type: "video", timescale: 1e3, duration: 0, avcc: c, codecWidth: l.codecWidth, codecHeight: l.codecHeight, videoType: l.videoType }, e = te.generateInitSegment(e), this.isAvc = u === 7, this.appendBuffer(e.buffer), this.sequenceNumber = 0, this.cacheTrack = {}, !(this.timeInit = !1));
     }
     _decodeVideo(h, i, s, u, c) {
       var l = this.player;
       let o = h.slice(5), f = o.byteLength, _ = (/* @__PURE__ */ new Date()).getTime(), g = !1;
       this.prevTimestamp || (this.prevTimestamp = _, g = !0);
       var T, E, h = _ - this.prevTimestamp, h = (((this.decodeDiffTimestamp = h) < 5 || 500 < h) && !g && l.debug.warn("MediaSource", `_decodeVideo now time is ${_} and prev time is ${this.prevTimestamp}, diff time is ${h} ms`), this.$videoElement), k = l._opt.videoBufferDelay + l._opt.videoBuffer;
-      1 < h.buffered.length && (this.removeBuffer(h.buffered.start(0), h.buffered.end(0)), this.timeInit = !1), this.dropping && this.cacheTrack.id && i - this.cacheTrack.dts > k ? (l.debug.warn("MediaSource", "dropping time is ", i - this.cacheTrack.dts), this.dropping = !1, this.cacheTrack = {}) : this.cacheTrack.id && i >= this.cacheTrack.dts ? (k = 8 + this.cacheTrack.size, (T = new Uint8Array(k))[0] = k >>> 24 & 255, T[1] = k >>> 16 & 255, T[2] = k >>> 8 & 255, T[3] = 255 & k, T.set(te.types.mdat, 4), T.set(this.cacheTrack.data, 8), this.cacheTrack.duration = i - this.cacheTrack.dts, this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === Xe && this.player.recorder.handleAddFmp4Track(this.cacheTrack), k = te.moof(this.cacheTrack, this.cacheTrack.dts), (E = new Uint8Array(k.byteLength + T.byteLength)).set(k, 0), E.set(T, k.byteLength), this.appendBuffer(E.buffer), l.emit(N.timeUpdate, c), l.videoTimestamp = c, l.updateStats({ fps: !0, ts: c, mseTs: i, buf: l.demux && l.demux.delay || 0 }), l._times.videoStart || (l._times.videoStart = be(), l.handlePlayToRenderTimes())) : (l.debug.log("MediaSource", `timeInit set false , cacheTrack = {} now dts is ${i}, and ts is ${c} cacheTrack dts is ` + (this.cacheTrack && this.cacheTrack.dts)), this.timeInit = !1, this.cacheTrack = {}), this.cacheTrack || (this.cacheTrack = {}), this.cacheTrack.id = 1, this.cacheTrack.sequenceNumber = ++this.sequenceNumber, this.cacheTrack.size = f, this.cacheTrack.dts = i, this.cacheTrack.cts = u, this.cacheTrack.isKeyframe = s, this.cacheTrack.data = o, this.cacheTrack.flags = { isLeading: 0, dependsOn: s ? 2 : 1, isDependedOn: s ? 1 : 0, hasRedundancy: 0, isNonSync: s ? 0 : 1 }, this.timeInit || h.buffered.length !== 1 || (l.debug.log("MediaSource", "timeInit set true"), this.timeInit = !0, h.currentTime = h.buffered.end(0)), !this.isInitInfo && 0 < h.videoWidth && 0 < h.videoHeight && (l.debug.log("MediaSource", `updateVideoInfo: ${h.videoWidth},` + h.videoHeight), l.video.updateVideoInfo({ width: h.videoWidth, height: h.videoHeight }), l.video.initCanvasViewSize(), this.isInitInfo = !0), l._opt.mseUseCanvasRender && l.video.render({ $video: h, ts: i }), this.prevTimestamp = (/* @__PURE__ */ new Date()).getTime();
+      1 < h.buffered.length && (this.removeBuffer(h.buffered.start(0), h.buffered.end(0)), this.timeInit = !1), this.dropping && this.cacheTrack.id && i - this.cacheTrack.dts > k ? (l.debug.warn("MediaSource", "dropping time is ", i - this.cacheTrack.dts), this.dropping = !1, this.cacheTrack = {}) : this.cacheTrack.id && i >= this.cacheTrack.dts ? (k = 8 + this.cacheTrack.size, (T = new Uint8Array(k))[0] = k >>> 24 & 255, T[1] = k >>> 16 & 255, T[2] = k >>> 8 & 255, T[3] = 255 & k, T.set(te.types.mdat, 4), T.set(this.cacheTrack.data, 8), this.cacheTrack.duration = i - this.cacheTrack.dts, this.player.recorder && this.player.recorder.isRecording && this.player._opt.recordType === ze && this.player.recorder.handleAddFmp4Track(this.cacheTrack), k = te.moof(this.cacheTrack, this.cacheTrack.dts), (E = new Uint8Array(k.byteLength + T.byteLength)).set(k, 0), E.set(T, k.byteLength), this.appendBuffer(E.buffer), l.emit(N.timeUpdate, c), l.videoTimestamp = c, l.updateStats({ fps: !0, ts: c, mseTs: i, buf: l.demux && l.demux.delay || 0 }), l._times.videoStart || (l._times.videoStart = be(), l.handlePlayToRenderTimes())) : (l.debug.log("MediaSource", `timeInit set false , cacheTrack = {} now dts is ${i}, and ts is ${c} cacheTrack dts is ` + (this.cacheTrack && this.cacheTrack.dts)), this.timeInit = !1, this.cacheTrack = {}), this.cacheTrack || (this.cacheTrack = {}), this.cacheTrack.id = 1, this.cacheTrack.sequenceNumber = ++this.sequenceNumber, this.cacheTrack.size = f, this.cacheTrack.dts = i, this.cacheTrack.cts = u, this.cacheTrack.isKeyframe = s, this.cacheTrack.data = o, this.cacheTrack.flags = { isLeading: 0, dependsOn: s ? 2 : 1, isDependedOn: s ? 1 : 0, hasRedundancy: 0, isNonSync: s ? 0 : 1 }, this.timeInit || h.buffered.length !== 1 || (l.debug.log("MediaSource", "timeInit set true"), this.timeInit = !0, h.currentTime = h.buffered.end(0)), !this.isInitInfo && 0 < h.videoWidth && 0 < h.videoHeight && (l.debug.log("MediaSource", `updateVideoInfo: ${h.videoWidth},` + h.videoHeight), l.video.updateVideoInfo({ width: h.videoWidth, height: h.videoHeight }), l.video.initCanvasViewSize(), this.isInitInfo = !0), l._opt.mseUseCanvasRender && l.video.render({ $video: h, ts: i }), this.prevTimestamp = (/* @__PURE__ */ new Date()).getTime();
     }
     appendBuffer(e) {
       const { debug: i, events: { proxy: s } } = this.player;
@@ -8747,7 +8757,7 @@ const ks = (Ae, Qe) => {
       } catch (c) {
         i.warn("MediaSource", "this.sourceBuffer.appendBuffer()", c.code, c), c.code === 22 ? (this.stop(), this.mediaSourceAppendBufferFull = !0, this.emit(H.mediaSourceFull)) : c.code === 11 ? (this.stop(), this.mediaSourceAppendBufferError = !0, this.emit(H.mediaSourceAppendBufferError)) : (i.error("MediaSource", "appendBuffer error", c), this.player.emitError(N.mseSourceBufferError, c));
       }
-      else this.isStateClosed ? this.player.emitError(H.mseSourceBufferError, "mediaSource is not attached to video or mediaSource is closed") : this.isStateEnded ? this.player.emitError(H.mseSourceBufferError, "mediaSource is end") : Ve(this.sourceBuffer.updating) && (i.warn("MediaSource", "mseSourceBufferBusy"), this.player.emit(N.mseSourceBufferBusy));
+      else this.isStateClosed ? this.player.emitError(H.mseSourceBufferError, "mediaSource is not attached to video or mediaSource is closed") : this.isStateEnded ? this.player.emitError(H.mseSourceBufferError, "mediaSource is end") : We(this.sourceBuffer.updating) && (i.warn("MediaSource", "mseSourceBufferBusy"), this.player.emit(N.mseSourceBufferBusy));
     }
     getSourceBufferUpdating() {
       return this.sourceBuffer && this.sourceBuffer.updating;
@@ -8810,8 +8820,8 @@ const ks = (Ae, Qe) => {
       return e *= 1e3, i.playbackRate === 1 ? u < e ? 1.2 : 1 : e <= s ? 1 : i.playbackRate;
     }
   }
-  const ps = () => "wakeLock" in navigator && window.navigator.userAgent.indexOf("Samsung") === -1 && _e(ni());
-  class Io {
+  const ps = () => "wakeLock" in navigator && window.navigator.userAgent.indexOf("Samsung") === -1 && ve(ni());
+  class Ro {
     constructor(e) {
       this.player = e, this.enabled = !1, ps() ? (this.player.debug.log("NoSleep", "Native Wake Lock API supported."), this._wakeLock = null, this.handleVisibilityChange = () => {
         this._wakeLock !== null && document.visibilityState === "visible" && this.enable();
@@ -8854,7 +8864,7 @@ const ks = (Ae, Qe) => {
       ps() ? (this._wakeLock && this._wakeLock.release(), this._wakeLock = null) : this.noSleepVideo && this.noSleepVideo.pause(), this.enabled = !1, this.player.debug.log("wakeLock", "Disabling wake lock.");
     }
   }
-  var Ce = (Di = tr(function(D, e) {
+  var Le = (Di = tr(function(D, e) {
     typeof window < "u" && (D.exports = (() => {
       return s = { "./src/config.ts": (c, f, o) => {
         o.r(f), o.d(f, { enableStreamingMode: () => function(L) {
@@ -12475,7 +12485,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               case z:
                 J && (Z += b[Z] + 1);
                 var W = (function(se, ie, ne, me) {
-                  var ce = { audio: -1, avc: -1, id3: -1, segmentCodec: "aac" }, le = ie + 3 + ((15 & se[ie + 1]) << 8 | se[ie + 2]) - 4;
+                  var pe = { audio: -1, avc: -1, id3: -1, segmentCodec: "aac" }, le = ie + 3 + ((15 & se[ie + 1]) << 8 | se[ie + 2]) - 4;
                   for (ie += 12 + ((15 & se[ie + 10]) << 8 | se[ie + 11]); ie < le; ) {
                     var ge = (31 & se[ie + 1]) << 8 | se[ie + 2];
                     switch (se[ie]) {
@@ -12485,10 +12495,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                           break;
                         }
                       case 15:
-                        ce.audio === -1 && (ce.audio = ge);
+                        pe.audio === -1 && (pe.audio = ge);
                         break;
                       case 21:
-                        ce.id3 === -1 && (ce.id3 = ge);
+                        pe.id3 === -1 && (pe.id3 = ge);
                         break;
                       case 219:
                         if (!me) {
@@ -12496,18 +12506,18 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                           break;
                         }
                       case 27:
-                        ce.avc === -1 && (ce.avc = ge);
+                        pe.avc === -1 && (pe.avc = ge);
                         break;
                       case 3:
                       case 4:
-                        ne.mpeg !== !0 && ne.mp3 !== !0 ? k.logger.log("MPEG audio found, not supported in this browser") : ce.audio === -1 && (ce.audio = ge, ce.segmentCodec = "mp3");
+                        ne.mpeg !== !0 && ne.mp3 !== !0 ? k.logger.log("MPEG audio found, not supported in this browser") : pe.audio === -1 && (pe.audio = ge, pe.segmentCodec = "mp3");
                         break;
                       case 36:
                         k.logger.warn("Unsupported HEVC stream type found");
                     }
                     ie += 5 + ((15 & se[ie + 3]) << 8 | se[ie + 4]);
                   }
-                  return ce;
+                  return pe;
                 })(b, Z, this.typeSupported, v);
                 0 < (U = W.avc) && (L.pid = U), 0 < (F = W.audio) && (B.pid = F, B.segmentCodec = W.segmentCodec), 0 < (M = W.id3) && (A.pid = M), O === null || j || (k.logger.log("unknown PID '" + O + "' in TS found"), O = null, q = K - 188), j = this.pmtParsed = !0;
                 break;
@@ -13442,17 +13452,17 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                   K = parseInt(X);
                   break;
                 case "KEY":
-                  var ce = C(X, B);
-                  if (ce.isSupported()) {
-                    if (ce.method === "NONE") {
+                  var pe = C(X, B);
+                  if (pe.isSupported()) {
+                    if (pe.method === "NONE") {
                       M = void 0;
                       break;
                     }
-                    (M = (M = M || {})[ce.keyFormat] ? n({}, M) : M)[ce.keyFormat] = ce;
+                    (M = (M = M || {})[pe.keyFormat] ? n({}, M) : M)[pe.keyFormat] = pe;
                   } else t.logger.warn('[Keys] Ignoring invalid EXT-X-KEY tag: "' + X + '"');
                   break;
                 case "START":
-                  ce = new k.AttrList(X).decimalFloatingPoint("TIME-OFFSET"), (0, f.isFiniteNumber)(ce) && (w.startTimeOffset = ce);
+                  pe = new k.AttrList(X).decimalFloatingPoint("TIME-OFFSET"), (0, f.isFiniteNumber)(pe) && (w.startTimeOffset = pe);
                   break;
                 case "MAP":
                   var le = new k.AttrList(X);
@@ -13466,8 +13476,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                   le = new k.AttrList(X), w.partTarget = le.decimalFloatingPoint("PART-TARGET");
                   break;
                 case "PART":
-                  var ye = (ye = w.partList) || (w.partList = []), Ee = 0 < z ? ye[ye.length - 1] : void 0, xe = z++, xe = new T.Part(new k.AttrList(X), V, B, xe, Ee);
-                  ye.push(xe), V.duration += xe.duration;
+                  var ye = (ye = w.partList) || (w.partList = []), Ee = 0 < z ? ye[ye.length - 1] : void 0, Ce = z++, Ce = new T.Part(new k.AttrList(X), V, B, Ce, Ee);
+                  ye.push(Ce), V.duration += Ce.duration;
                   break;
                 case "PRELOAD-HINT":
                   Ee = new k.AttrList(X), w.preloadHint = Ee;
@@ -13481,10 +13491,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             } else t.logger.warn("No matches on slow regex match for level playlist!");
           }
           $ && !$.relurl ? (R.pop(), G -= $.duration, w.partList && (w.fragmentHint = $)) : w.partList && (y(V, $), V.cc = K, w.fragmentHint = V);
-          var ke = R.length, Le = R[0], De = R[ke - 1];
-          return 0 < (G += w.skippedSegments * w.targetduration) && ke && De ? (w.averagetargetduration = G / ke, ke = De.sn, w.endSN = ke !== "initSegment" ? ke : 0, w.live || (De.endList = !0), Le && (w.startCC = Le.cc)) : (w.endSN = 0, w.startCC = 0), w.fragmentHint && (G += w.fragmentHint.duration), w.totalduration = G, w.endCC = K, 0 < q && (function(Oe, nt) {
-            for (var tt = Oe[nt], We = nt; We--; ) {
-              var Ne = Oe[We];
+          var ke = R.length, De = R[0], Re = R[ke - 1];
+          return 0 < (G += w.skippedSegments * w.targetduration) && ke && Re ? (w.averagetargetduration = G / ke, ke = Re.sn, w.endSN = ke !== "initSegment" ? ke : 0, w.live || (Re.endList = !0), De && (w.startCC = De.cc)) : (w.endSN = 0, w.startCC = 0), w.fragmentHint && (G += w.fragmentHint.duration), w.totalduration = G, w.endCC = K, 0 < q && (function(Oe, nt) {
+            for (var tt = Oe[nt], $e = nt; $e--; ) {
+              var Ne = Oe[$e];
               if (!Ne) return;
               Ne.programDateTime = tt.programDateTime - 1e3 * Ne.duration, tt = Ne;
             }
@@ -13762,24 +13772,24 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }, l.generateIS = function(y, S, L) {
           var B, A, I, U = y.samples, P = S.samples, F = this.typeSupported, M = {}, w = !(0, f.isFiniteNumber)(this._initPTS), R = "audio/mp4";
           if (w && (I = A = 1 / 0), y.config && U.length && (y.timescale = y.samplerate, y.segmentCodec === "mp3" && (F.mpeg ? (R = "audio/mpeg", y.codec = "") : F.mp3 && (y.codec = "mp3")), M.audio = { id: "audio", container: R, codec: y.codec, initSegment: y.segmentCodec === "mp3" && F.mpeg ? new Uint8Array(0) : g.default.initSegment([y]), metadata: { channelCount: y.channelCount } }, w) && (B = y.inputTimeScale, I = A = U[0].pts - Math.round(B * L)), S.sps && S.pps && P.length && (S.timescale = S.inputTimeScale, M.video = { id: "main", container: "video/mp4", codec: S.codec, initSegment: g.default.initSegment([S]), metadata: { width: S.width, height: S.height } }, w) && (B = S.inputTimeScale, R = this.getVideoStartPts(P), F = Math.round(B * L), A = Math.min(A, m(P[0].dts, R) - F), I = Math.min(I, R - F)), Object.keys(M).length) return this.ISGenerated = !0, w && (this._initPTS = I, this._initDTS = A), { tracks: M, initPTS: I, timescale: B };
-        }, l.remuxVideo = function(y, V, ce, B) {
+        }, l.remuxVideo = function(y, V, pe, B) {
           var A = y.inputTimeScale, I = y.samples, U = [], P = I.length, F = this._initPTS, M = this.nextAvcDts, w = 8, R = this.videoSampleDuration, O = Number.POSITIVE_INFINITY, j = Number.NEGATIVE_INFINITY, z = !1;
-          ce && M !== null || (M = V * A - (I[0].pts - m(I[0].dts, I[0].pts)));
+          pe && M !== null || (M = V * A - (I[0].pts - m(I[0].dts, I[0].pts)));
           for (var G = 0; G < P; G++) {
             var K = I[G];
             K.pts = m(K.pts - F, M), K.dts = m(K.dts - F, M), K.dts < I[0 < G ? G - 1 : G].dts && (z = !0);
           }
-          z && I.sort(function(Ke, vt) {
-            var At = Ke.dts - vt.dts, Ke = Ke.pts - vt.pts;
-            return At || Ke;
+          z && I.sort(function(qe, _t) {
+            var At = qe.dts - _t.dts, qe = qe.pts - _t.pts;
+            return At || qe;
           }), $ = I[0].dts;
           var $, V = I[I.length - 1].dts - $, q = V ? Math.round(V / (P - 1)) : R || y.inputTimeScale / 30;
-          ce && (ce = (V = $ - M) < -1, (le = q < V) || ce) && (le ? h.logger.warn("AVC: " + (0, t.toMsFromMpegTsClock)(V, !0) + " ms (" + V + "dts) hole between fragments detected, filling it") : h.logger.warn("AVC: " + (0, t.toMsFromMpegTsClock)(-V, !0) + " ms (" + V + "dts) overlapping between fragments detected"), !ce || M > I[0].pts) && ($ = M, le = I[0].pts - V, I[0].dts = $, I[0].pts = le, h.logger.log("Video: First PTS/DTS adjusted: " + (0, t.toMsFromMpegTsClock)(le, !0) + "/" + (0, t.toMsFromMpegTsClock)($, !0) + ", delta: " + (0, t.toMsFromMpegTsClock)(V, !0) + " ms")), $ = Math.max(0, $);
+          pe && (pe = (V = $ - M) < -1, (le = q < V) || pe) && (le ? h.logger.warn("AVC: " + (0, t.toMsFromMpegTsClock)(V, !0) + " ms (" + V + "dts) hole between fragments detected, filling it") : h.logger.warn("AVC: " + (0, t.toMsFromMpegTsClock)(-V, !0) + " ms (" + V + "dts) overlapping between fragments detected"), !pe || M > I[0].pts) && ($ = M, le = I[0].pts - V, I[0].dts = $, I[0].pts = le, h.logger.log("Video: First PTS/DTS adjusted: " + (0, t.toMsFromMpegTsClock)(le, !0) + "/" + (0, t.toMsFromMpegTsClock)($, !0) + ", delta: " + (0, t.toMsFromMpegTsClock)(V, !0) + " ms")), $ = Math.max(0, $);
           for (var J = 0, re = 0, Z = 0; Z < P; Z++) {
             for (var W = I[Z], X = W.units, se = X.length, ie = 0, ne = 0; ne < se; ne++) ie += X[ne].data.length;
             re += ie, J += se, W.length = ie, W.dts = Math.max(W.dts, $), O = Math.min(W.pts, O), j = Math.max(W.pts, j);
           }
-          var me, ce = I[P - 1].dts, le = re + 4 * J + 8;
+          var me, pe = I[P - 1].dts, le = re + 4 * J + 8;
           try {
             me = new Uint8Array(le);
           } catch {
@@ -13787,32 +13797,32 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           }
           var ge = new DataView(me.buffer);
           ge.setUint32(0, le), me.set(g.default.types.mdat, 4);
-          for (var ye = !1, Ee = Number.POSITIVE_INFINITY, xe = Number.POSITIVE_INFINITY, ke = Number.NEGATIVE_INFINITY, Le = Number.NEGATIVE_INFINITY, De = 0; De < P; De++) {
-            for (var Oe = I[De], nt = Oe.units, tt = 0, We = 0, Ne = nt.length; We < Ne; We++) {
-              var $e = nt[We], Dt = $e.data, $e = $e.data.byteLength;
-              ge.setUint32(w, $e), w += 4, me.set(Dt, w), w += $e, tt += 4 + $e;
+          for (var ye = !1, Ee = Number.POSITIVE_INFINITY, Ce = Number.POSITIVE_INFINITY, ke = Number.NEGATIVE_INFINITY, De = Number.NEGATIVE_INFINITY, Re = 0; Re < P; Re++) {
+            for (var Oe = I[Re], nt = Oe.units, tt = 0, $e = 0, Ne = nt.length; $e < Ne; $e++) {
+              var Ke = nt[$e], Rt = Ke.data, Ke = Ke.data.byteLength;
+              ge.setUint32(w, Ke), w += 4, me.set(Rt, w), w += Ke, tt += 4 + Ke;
             }
-            var yt, ot = void 0, He = (De < P - 1 ? (R = I[De + 1].dts - Oe.dts, ot = I[De + 1].pts - Oe.pts) : (He = this.config, yt = 0 < De ? Oe.dts - I[De - 1].dts : q, ot = 0 < De ? Oe.pts - I[De - 1].pts : q, He.stretchShortVideoTrack && this.nextAudioPts !== null && Math.floor(He.maxBufferHole * A) < (He = (B ? O + B * A : this.nextAudioPts) - Oe.pts) ? ((R = He - yt) < 0 ? R = yt : ye = !0, h.logger.log("[mp4-remuxer]: It is approximately " + He / 90 + " ms to the next segment; using duration " + R / 90 + " ms for the last video frame.")) : R = yt), Math.round(Oe.pts - Oe.dts)), Ee = Math.min(Ee, R), ke = Math.max(ke, R), xe = Math.min(xe, ot), Le = Math.max(Le, ot);
+            var yt, ot = void 0, He = (Re < P - 1 ? (R = I[Re + 1].dts - Oe.dts, ot = I[Re + 1].pts - Oe.pts) : (He = this.config, yt = 0 < Re ? Oe.dts - I[Re - 1].dts : q, ot = 0 < Re ? Oe.pts - I[Re - 1].pts : q, He.stretchShortVideoTrack && this.nextAudioPts !== null && Math.floor(He.maxBufferHole * A) < (He = (B ? O + B * A : this.nextAudioPts) - Oe.pts) ? ((R = He - yt) < 0 ? R = yt : ye = !0, h.logger.log("[mp4-remuxer]: It is approximately " + He / 90 + " ms to the next segment; using duration " + R / 90 + " ms for the last video frame.")) : R = yt), Math.round(Oe.pts - Oe.dts)), Ee = Math.min(Ee, R), ke = Math.max(ke, R), Ce = Math.min(Ce, ot), De = Math.max(De, ot);
             U.push(new C(Oe.key, R, tt, He));
           }
           if (U.length) {
             if (n) n < 70 && ((V = U[0].flags).dependsOn = 2, V.isNonSync = 0);
-            else if (a && Le - xe < ke - Ee && q / ke < 0.025 && U[0].cts === 0) {
+            else if (a && De - Ce < ke - Ee && q / ke < 0.025 && U[0].cts === 0) {
               h.logger.warn("Found irregular gaps in sample duration. Using PTS instead of DTS to determine MP4 sample duration.");
-              for (var lt = $, Re = 0, je = U.length; Re < je; Re++) {
-                var Er, ji = lt + U[Re].duration, zi = lt + U[Re].cts;
-                Re < je - 1 ? (Er = ji + U[Re + 1].cts, U[Re].duration = Er - zi) : U[Re].duration = Re ? U[Re - 1].duration : q, U[Re].cts = 0, lt = ji;
+              for (var lt = $, Ie = 0, je = U.length; Ie < je; Ie++) {
+                var Er, ji = lt + U[Ie].duration, zi = lt + U[Ie].cts;
+                Ie < je - 1 ? (Er = ji + U[Ie + 1].cts, U[Ie].duration = Er - zi) : U[Ie].duration = Ie ? U[Ie - 1].duration : q, U[Ie].cts = 0, lt = ji;
               }
             }
           }
-          return console.assert(R !== null, "mp4SampleDuration must be computed"), this.nextAvcDts = M = ce + (R = ye || !R ? q : R), this.videoSampleDuration = R, this.isVideoContiguous = !0, le = { data1: g.default.moof(y.sequenceNumber++, $, r({}, y, { samples: U })), data2: me, startPTS: O / A, endPTS: (j + R) / A, startDTS: $ / A, endDTS: M / A, type: "video", hasAudio: !1, hasVideo: !0, nb: U.length, dropped: y.dropped }, y.samples = [], y.dropped = 0, console.assert(me.length, "MDAT length must not be zero"), le;
+          return console.assert(R !== null, "mp4SampleDuration must be computed"), this.nextAvcDts = M = pe + (R = ye || !R ? q : R), this.videoSampleDuration = R, this.isVideoContiguous = !0, le = { data1: g.default.moof(y.sequenceNumber++, $, r({}, y, { samples: U })), data2: me, startPTS: O / A, endPTS: (j + R) / A, startDTS: $ / A, endDTS: M / A, type: "video", hasAudio: !1, hasVideo: !0, nb: U.length, dropped: y.dropped }, y.samples = [], y.dropped = 0, console.assert(me.length, "MDAT length must not be zero"), le;
         }, l.remuxAudio = function(y, S, L, B, A) {
           var I = y.inputTimeScale, U = I / (y.samplerate || I), P = y.segmentCodec === "aac" ? 1024 : 1152, F = P * U, M = this._initPTS, w = y.segmentCodec === "mp3" && this.typeSupported.mpeg, R = [], O = A !== void 0, j = y.samples, z = w ? 0 : 8, G = this.nextAudioPts || -1, K = S * I;
-          if (this.isAudioContiguous = L = L || j.length && 0 < G && (B && Math.abs(K - G) < 9e3 || Math.abs(m(j[0].pts - M, K) - G) < 20 * F), j.forEach(function(De) {
-            De.pts = m(De.pts - M, K);
+          if (this.isAudioContiguous = L = L || j.length && 0 < G && (B && Math.abs(K - G) < 9e3 || Math.abs(m(j[0].pts - M, K) - G) < 20 * F), j.forEach(function(Re) {
+            Re.pts = m(Re.pts - M, K);
           }), !L || G < 0) {
-            if (!(j = j.filter(function(De) {
-              return 0 <= De.pts;
+            if (!(j = j.filter(function(Re) {
+              return 0 <= Re.pts;
             })).length) return;
             G = A === 0 ? 0 : B && !O ? Math.max(0, K) : j[0].pts;
           }
@@ -13829,12 +13839,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             }
             J.pts = q, q += F;
           }
-          for (var me, ce = null, le = null, ge = 0, ye = j.length; ye--; ) ge += j[ye].unit.byteLength;
-          for (var Ee = 0, xe = j.length; Ee < xe; Ee++) {
-            var Le = j[Ee], ke = Le.unit, Le = Le.pts;
-            if (le !== null) R[Ee - 1].duration = Math.round((Le - le) / U);
+          for (var me, pe = null, le = null, ge = 0, ye = j.length; ye--; ) ge += j[ye].unit.byteLength;
+          for (var Ee = 0, Ce = j.length; Ee < Ce; Ee++) {
+            var De = j[Ee], ke = De.unit, De = De.pts;
+            if (le !== null) R[Ee - 1].duration = Math.round((De - le) / U);
             else {
-              if (ce = Le = L && y.segmentCodec === "aac" ? G : Le, !(0 < ge)) return;
+              if (pe = De = L && y.segmentCodec === "aac" ? G : De, !(0 < ge)) return;
               ge += z;
               try {
                 me = new Uint8Array(ge);
@@ -13843,9 +13853,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               }
               w || (new DataView(me.buffer).setUint32(0, ge), me.set(g.default.types.mdat, 4));
             }
-            me.set(ke, z), ke = ke.byteLength, z += ke, R.push(new C(!0, P, ke, 0)), le = Le;
+            me.set(ke, z), ke = ke.byteLength, z += ke, R.push(new C(!0, P, ke, 0)), le = De;
           }
-          if (S = R.length, S) return this.nextAudioPts = G = le + U * R[R.length - 1].duration, A = { data1: w ? new Uint8Array(0) : g.default.moof(y.sequenceNumber++, ce / U, r({}, y, { samples: R })), data2: me, startPTS: A = ce / I, endPTS: B = G / I, startDTS: A, endDTS: B, type: "audio", hasAudio: !0, hasVideo: !(y.samples = []), nb: S }, this.isAudioContiguous = !0, console.assert(me.length, "MDAT length must not be zero"), A;
+          if (S = R.length, S) return this.nextAudioPts = G = le + U * R[R.length - 1].duration, A = { data1: w ? new Uint8Array(0) : g.default.moof(y.sequenceNumber++, pe / U, r({}, y, { samples: R })), data2: me, startPTS: A = pe / I, endPTS: B = G / I, startDTS: A, endDTS: B, type: "audio", hasAudio: !0, hasVideo: !(y.samples = []), nb: S }, this.isAudioContiguous = !0, console.assert(me.length, "MDAT length must not be zero"), A;
         }, l.remuxEmptyAudio = function(y, S, L, B) {
           var A = y.inputTimeScale, I = A / (y.samplerate || A), P = this.nextAudioPts, U = (P !== null ? P : B.startDTS * A) + this._initDTS, P = B.endDTS * A + this._initDTS, F = 1024 * I, M = Math.ceil((P - U) / F), w = _.default.getSilentFrame(y.manifestCodec || y.codec, y.channelCount);
           if (h.logger.warn("[mp4-remuxer]: remux empty Audio"), w) {
@@ -14613,9 +14623,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     return G[K] = z.getAttribute("ttp:" + K) || M[K], G;
                   }, {}), R = z.getAttribute("xml:space") !== "preserve", O = p(d(z, "styling", "style")), j = p(d(z, "layout", "region")), P = d(z, "body", "[begin]"), [].map.call(P, function(X) {
                     var W = (function se(ie, ne) {
-                      return [].slice.call(ie.childNodes).reduce(function(me, ce, le) {
-                        return ce.nodeName === "br" && le ? me + `
-` : (le = ce.childNodes) != null && le.length ? se(ce, ne) : ne ? me + ce.textContent.trim().replace(/\s+/g, " ") : me + ce.textContent;
+                      return [].slice.call(ie.childNodes).reduce(function(me, pe, le) {
+                        return pe.nodeName === "br" && le ? me + `
+` : (le = pe.childNodes) != null && le.length ? se(pe, ne) : ne ? me + pe.textContent.trim().replace(/\s+/g, " ") : me + pe.textContent;
                       }, "");
                     })(X, R);
                     if (!W || !X.hasAttribute("begin")) return null;
@@ -14891,14 +14901,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               return O !== void 0 && (L = O), m(R, ["tfhd"]).map(function(j) {
                 var z = a(j, 4), G = 16777215 & a(j, 0), K = 0, $ = 0, V = 8;
                 z === P && ((1 & G) != 0 && (V += 8), (2 & G) != 0 && (V += 4), (8 & G) != 0 && (K = a(j, V), V += 4), (16 & G) != 0 && ($ = a(j, V), V += 4), (32 & G) != 0 && (V += 4), B.type === "video" && (z = B.codec, F = !!z && ((z = (j = z.indexOf(".")) < 0 ? z : z.substring(0, j)) === "hvc1" || z === "hev1" || z === "dvh1" || z === "dvhe")), m(R, ["trun"]).map(function(q) {
-                  var J = q[0], re = 16777215 & a(q, 0), Z = 0, W = (256 & re) != 0, X = 0, se = (512 & re) != 0, ie = 0, ne = (1024 & re) != 0, me = (2048 & re) != 0, ce = 0, le = a(q, 4), ge = 8;
+                  var J = q[0], re = 16777215 & a(q, 0), Z = 0, W = (256 & re) != 0, X = 0, se = (512 & re) != 0, ie = 0, ne = (1024 & re) != 0, me = (2048 & re) != 0, pe = 0, le = a(q, 4), ge = 8;
                   (1 & re) != 0 && (Z = a(q, ge), ge += 4), (4 & re) != 0 && (ge += 4);
                   for (var ye = Z + w, Ee = 0; Ee < le; Ee++) {
-                    if (W ? (X = a(q, ge), ge += 4) : X = K, se ? (ie = a(q, ge), ge += 4) : ie = $, ne && (ge += 4), me && (ce = (J === 0 ? a : d)(q, ge), ge += 4), B.type === f.ElementaryStreamTypes.VIDEO) for (var xe = 0; xe < ie; ) {
+                    if (W ? (X = a(q, ge), ge += 4) : X = K, se ? (ie = a(q, ge), ge += 4) : ie = $, ne && (ge += 4), me && (pe = (J === 0 ? a : d)(q, ge), ge += 4), B.type === f.ElementaryStreamTypes.VIDEO) for (var Ce = 0; Ce < ie; ) {
                       var ke = a(I, ye);
-                      !(function(Le, De) {
-                        return Le ? (Le = De >> 1 & 63) == 39 || Le == 40 : (31 & De) == 6;
-                      })(F, I[ye += 4]) || v(I.subarray(ye, ye + ke), F ? 2 : 1, L + ce / U, A), ye += ke, xe += ke + 4;
+                      !(function(De, Re) {
+                        return De ? (De = Re >> 1 & 63) == 39 || De == 40 : (31 & Re) == 6;
+                      })(F, I[ye += 4]) || v(I.subarray(ye, ye + ke), F ? 2 : 1, L + pe / U, A), ye += ke, Ce += ke + 4;
                     }
                     L += X / U;
                   }
@@ -15592,7 +15602,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   })) && Di.__esModule && Object.prototype.hasOwnProperty.call(Di, "default") ? Di.default : Di;
   class nn extends Ae {
     constructor(e) {
-      super(), (this.player = e)._opt, this.canVideoPlay = !1, this.$videoElement = null, this.canvasRenderInterval = null, this.bandwidthEstimateInterval = null, this.fpsInterval = null, this.hlsFps = 0, this.hlsPrevFrams = 0, this.isInitInfo = !1, this.eventsDestroy = [], ua() ? (this.$videoElement = this.player.video.$videoElement, this.canVideoPlay = !0) : Ce.isSupported() ? (this.$videoElement = this.player.video.$videoElement, this.hls = new Ce({}), this._initHls(), this._bindEvents()) : this.player.debug.error("HlsDecoder", "init hls error ,not support "), this.player.debug.log("HlsDecoder", "init");
+      super(), (this.player = e)._opt, this.canVideoPlay = !1, this.$videoElement = null, this.canvasRenderInterval = null, this.bandwidthEstimateInterval = null, this.fpsInterval = null, this.hlsFps = 0, this.hlsPrevFrams = 0, this.isInitInfo = !1, this.eventsDestroy = [], ua() ? (this.$videoElement = this.player.video.$videoElement, this.canVideoPlay = !0) : Le.isSupported() ? (this.$videoElement = this.player.video.$videoElement, this.hls = new Le({}), this._initHls(), this._bindEvents()) : this.player.debug.error("HlsDecoder", "init hls error ,not support "), this.player.debug.log("HlsDecoder", "init");
     }
     destroy() {
       return new Promise((e, i) => {
@@ -15645,46 +15655,46 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       var s = i(this.$videoElement, Qi, (u) => {
         this.hls && (u = parseInt(u.timeStamp, 10), e.handleRender(), e.updateStats({ ts: u, dts: u, fps: !0 }), e.emit(N.videoTimeUpdate, u));
       });
-      this.eventsDestroy.push(s), this._startBandwidthEstimateInterval(), this._startFpsInterval(), this.hls.on(Ce.Events.ERROR, (u, c) => {
+      this.eventsDestroy.push(s), this._startBandwidthEstimateInterval(), this._startFpsInterval(), this.hls.on(Le.Events.ERROR, (u, c) => {
         if (c.fatal) switch (c.type) {
-          case Ce.ErrorTypes.NETWORK_ERROR:
+          case Le.ErrorTypes.NETWORK_ERROR:
             this.player.debug.warn("HlsDecoder", "fatal network error encountered, try to recover"), this.hls.startLoad();
             break;
-          case Ce.ErrorTypes.MEDIA_ERROR:
+          case Le.ErrorTypes.MEDIA_ERROR:
             this.player.debug.warn("HlsDecoder", "fatal media error encountered, try to recover"), this.hls.recoverMediaError();
         }
-      }), this.hls.on(Ce.Events.MEDIA_ATTACHING, () => {
-      }), this.hls.on(Ce.Events.MEDIA_ATTACHED, () => {
-      }), this.hls.on(Ce.Events.MEDIA_DETACHING, () => {
-      }), this.hls.on(Ce.Events.MEDIA_DETACHED, () => {
-      }), this.hls.on(Ce.Events.BUFFER_RESET, () => {
-      }), this.hls.on(Ce.Events.BUFFER_CODECS, () => {
-      }), this.hls.on(Ce.Events.BUFFER_CREATED, () => {
-      }), this.hls.on(Ce.Events.BUFFER_APPENDING, (u, c) => {
+      }), this.hls.on(Le.Events.MEDIA_ATTACHING, () => {
+      }), this.hls.on(Le.Events.MEDIA_ATTACHED, () => {
+      }), this.hls.on(Le.Events.MEDIA_DETACHING, () => {
+      }), this.hls.on(Le.Events.MEDIA_DETACHED, () => {
+      }), this.hls.on(Le.Events.BUFFER_RESET, () => {
+      }), this.hls.on(Le.Events.BUFFER_CODECS, () => {
+      }), this.hls.on(Le.Events.BUFFER_CREATED, () => {
+      }), this.hls.on(Le.Events.BUFFER_APPENDING, (u, c) => {
         this.player.debug.log("HlsDecoder", "BUFFER_APPENDING", c);
-      }), this.hls.on(Ce.Events.BUFFER_APPENDED, () => {
-      }), this.hls.on(Ce.Events.BUFFER_EOS, () => {
-      }), this.hls.on(Ce.Events.BUFFER_FLUSHING, () => {
-      }), this.hls.on(Ce.Events.BUFFER_FLUSHED, () => {
-      }), this.hls.on(Ce.Events.MANIFEST_LOADING, () => {
+      }), this.hls.on(Le.Events.BUFFER_APPENDED, () => {
+      }), this.hls.on(Le.Events.BUFFER_EOS, () => {
+      }), this.hls.on(Le.Events.BUFFER_FLUSHING, () => {
+      }), this.hls.on(Le.Events.BUFFER_FLUSHED, () => {
+      }), this.hls.on(Le.Events.MANIFEST_LOADING, () => {
         this.player.debug.log("HlsDecoder", "MANIFEST_LOADING 开始加载playlist m3u8资源");
-      }), this.hls.on(Ce.Events.MANIFEST_LOADED, (u, c) => {
+      }), this.hls.on(Le.Events.MANIFEST_LOADED, (u, c) => {
         this.player.debug.log("HlsDecoder", "MANIFEST_LOADED playlist m3u8文件加载完成", c);
-      }), this.hls.on(Ce.Events.MANIFEST_PARSED, () => {
+      }), this.hls.on(Le.Events.MANIFEST_PARSED, () => {
         this.player.debug.log("HlsDecoder", "MANIFEST_PARSED playlist m3u8解析完成"), e._times.demuxStart || (e._times.demuxStart = be());
-      }), this.hls.on(Ce.Events.LEVEL_LOADING, () => {
-      }), this.hls.on(Ce.Events.LEVEL_LOADED, (u, c) => {
-      }), this.hls.on(Ce.Events.FRAG_LOADING, () => {
-      }), this.hls.on(Ce.Events.FRAG_LOADED, (u, c) => {
+      }), this.hls.on(Le.Events.LEVEL_LOADING, () => {
+      }), this.hls.on(Le.Events.LEVEL_LOADED, (u, c) => {
+      }), this.hls.on(Le.Events.FRAG_LOADING, () => {
+      }), this.hls.on(Le.Events.FRAG_LOADED, (u, c) => {
         e._times.decodeStart || (e._times.decodeStart = be());
-      }), this.hls.on(Ce.Events.BUFFER_APPENDING, () => {
+      }), this.hls.on(Le.Events.BUFFER_APPENDING, () => {
         e._times.videoStart || (e._times.videoStart = be(), e.handlePlayToRenderTimes());
-      }), this.hls.on(Ce.Events.FRAG_DECRYPTED, () => {
-      }), this.hls.on(Ce.Events.KEY_LOADING, () => {
-      }), this.hls.on(Ce.Events.KEY_LOADING, () => {
-      }), this.hls.on(Ce.Events.FPS_DROP, (u) => {
-      }), this.hls.on(Ce.Events.FPS_DROP_LEVEL_CAPPING, (u) => {
-      }), this.hls.on(Ce.Events.FRAG_PARSING_INIT_SEGMENT, (u, c) => {
+      }), this.hls.on(Le.Events.FRAG_DECRYPTED, () => {
+      }), this.hls.on(Le.Events.KEY_LOADING, () => {
+      }), this.hls.on(Le.Events.KEY_LOADING, () => {
+      }), this.hls.on(Le.Events.FPS_DROP, (u) => {
+      }), this.hls.on(Le.Events.FPS_DROP_LEVEL_CAPPING, (u) => {
+      }), this.hls.on(Le.Events.FRAG_PARSING_INIT_SEGMENT, (u, c) => {
         this.player.debug.log("HlsDecoder", "FRAG_PARSING_INIT_SEGMENT", c);
         const l = !!(c && c.tracks && c.tracks.audio), o = !!(c && c.tracks && c.tracks.video);
         if (l && c.tracks.audio) {
@@ -15724,7 +15734,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     loadSource(e) {
       return new Promise((i, s) => {
-        this.canVideoPlay ? (this.initVideoPlay(e), i()) : this.hls.on(Ce.Events.MEDIA_ATTACHED, () => {
+        this.canVideoPlay ? (this.initVideoPlay(e), i()) : this.hls.on(Le.Events.MEDIA_ATTACHED, () => {
           this.hls.loadSource(e), i();
         });
       });
@@ -15784,7 +15794,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   function ms(D, e) {
     return Math.round(8 * D * 1e3 / e / 1024);
   }
-  class Lt extends Error {
+  class Dt extends Error {
     retryCount = 0;
     isTimeout = !1;
     loaderType = Pi;
@@ -15821,13 +15831,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       let y = !1;
       clearTimeout(this._timeoutTimer), i = cn(i, h), e = dn(g), e && (t = E ? E.headers : v.headers = v.headers || (Headers ? new Headers() : {}), Headers && t instanceof Headers ? t.append("Range", e) : t.Range = e), u && (this._timeoutTimer = setTimeout(() => {
         var L;
-        y = !0, this.cancel(), f && ((L = new Lt(i, v, null, "timeout")).isTimeout = !0, f(L, { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }));
+        y = !0, this.cancel(), f && ((L = new Dt(i, v, null, "timeout")).isTimeout = !0, f(L, { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }));
       }, u));
       const S = Date.now();
       return (Be(o) || Be(g)) && this.player.debug.log(this.TAG_NAME, "[fetch load start], index,", o, ",range,", g), new Promise((L, B) => {
         fetch(E || i, E ? void 0 : v).then(async (A) => {
           if (clearTimeout(this._timeoutTimer), this._response = A, !this._aborted && this._running) {
-            if (!(A = T && T(A, i) || A).ok) throw new Lt(i, v, A, "bad network response");
+            if (!(A = T && T(A, i) || A).ok) throw new Dt(i, v, A, "bad network response");
             var I = Date.now();
             let U;
             if (c === "text") U = await A.text(), this._running = !1;
@@ -15843,7 +15853,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             (Be(o) || Be(g)) && this.player.debug.log(this.TAG_NAME, "[fetch load end], index,", o, ",range,", g), L(fs(U, !0, A, A.headers.get("Content-Length"), A.headers.get("age"), S, I, o, g, this._vid, this._priOptions));
           }
         }).catch((A) => {
-          clearTimeout(this._timeoutTimer), this._running = !1, this._aborted && !y || ((A = A instanceof Lt ? A : new Lt(i, v, null, A?.message)).startTime = S, A.endTime = Date.now(), A.isTimeout = y, A.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, B(A));
+          clearTimeout(this._timeoutTimer), this._running = !1, this._aborted && !y || ((A = A instanceof Dt ? A : new Dt(i, v, null, A?.message)).startTime = S, A.endTime = Date.now(), A.isTimeout = y, A.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, B(A));
         });
       });
     }
@@ -15900,7 +15910,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         _();
       } else {
         this._running = !1;
-        const c = new Lt(e.url, "", e, "onProgress of bad response.body.getReader");
+        const c = new Dt(e.url, "", e, "onProgress of bad response.body.getReader");
         c.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, this.reject(c);
       }
     }
@@ -15917,7 +15927,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return !(typeof fetch > "u");
     }
   }
-  class Po {
+  class Io {
     TAG_NAME = "Task";
     constructor(e, i, s) {
       this.promise = (function() {
@@ -15930,7 +15940,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }, l.reject = function() {
           return l.used = !0, c(...arguments);
         }, l;
-      })(), this.alive = !!i.onProgress, this._loaderType = e, this.player = s, this._loader = new (e === Pi && window.fetch ? gs : Bo)(s), this._config = i, this._retryCount = 0, this._retryTimer = null, this._canceled = !1, this._retryCheckFunc = i.retryCheckFunc;
+      })(), this.alive = !!i.onProgress, this._loaderType = e, this.player = s, this._loader = new (e === Pi && window.fetch ? gs : Po)(s), this._config = i, this._retryCount = 0, this._retryTimer = null, this._canceled = !1, this._retryCheckFunc = i.retryCheckFunc;
     }
     exec() {
       const { retry: e, retryDelay: i, onRetryError: s, transformError: u, ...c } = this._config, l = async () => {
@@ -15957,7 +15967,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._loader;
     }
   }
-  class Bo extends Ae {
+  class Po extends Ae {
     _xhr = null;
     _aborted = !1;
     _timeoutTimer = null;
@@ -15994,7 +16004,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return new Promise((s, u) => {
         this._loadCompleteResolve = s, this._loadCompleteReject = u, this._startLoad();
       }).catch((s) => {
-        if (clearTimeout(this._timeoutTimer), this._runing = !1, !this._aborted) throw (s = s instanceof Lt ? s : new Lt(this._url, this._request)).startTime = i, s.endTime = Date.now(), s.options = { index: this._index, vid: this._vid, priOptions: this._priOptions }, s;
+        if (clearTimeout(this._timeoutTimer), this._runing = !1, !this._aborted) throw (s = s instanceof Dt ? s : new Dt(this._url, this._request)).startTime = i, s.endTime = Date.now(), s.options = { index: this._index, vid: this._vid, priOptions: this._priOptions }, s;
       });
     }
     _startLoad() {
@@ -16011,10 +16021,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       try {
         this._startTime = Date.now();
         const i = this._xhr = new XMLHttpRequest(), s = (i.open(this._method || "GET", this._url, !0), i.responseType = this._responseType, this._timeout && (i.timeout = this._timeout), i.withCredentials = this._withCredentials, i.onload = this._onLoad.bind(this), i.onreadystatechange = this._onReadyStatechange.bind(this), i.onerror = (c) => {
-          this._running = !1, c = new Lt(this._url, this._request, c?.currentTarget?.response, "xhr.onerror.status:" + c?.currentTarget?.status + ",statusText," + c?.currentTarget?.statusText), c.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, this._loadCompleteReject(c);
+          this._running = !1, c = new Dt(this._url, this._request, c?.currentTarget?.response, "xhr.onerror.status:" + c?.currentTarget?.status + ",statusText," + c?.currentTarget?.statusText), c.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, this._loadCompleteReject(c);
         }, i.ontimeout = (c) => {
           this.cancel();
-          var l = new Lt(this._url, this._request, { status: 408 }, "timeout");
+          var l = new Dt(this._url, this._request, { status: 408 }, "timeout");
           this._onTimeout && (l.isTimeout = !0, this._onTimeout(l, { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions })), l.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, this._loadCompleteReject(l);
         }, this._headers || {}), u = dn(e);
         u && (s.Range = u), s && Object.keys(s).forEach((c) => {
@@ -16030,7 +16040,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     _onLoad(e) {
       const i = e.target.status;
       if (i < 200 || 299 < i) {
-        const f = new Lt(this._url, null, { ...e.target.response, status: i }, "bad response,status:" + i);
+        const f = new Dt(this._url, null, { ...e.target.response, status: i }, "bad response,status:" + i);
         return f.options = { index: this._index, range: this._range, vid: this._vid, priOptions: this._priOptions }, this._loadCompleteReject(f);
       }
       let s, u = null, c = !1;
@@ -16092,7 +16102,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     load(e) {
       let i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
-      return typeof e != "string" && e ? i = e : i.url = e || i.url || this._config.url, (i = Object.assign({}, this._config, i)).params && (i.params = Object.assign({}, i.params)), i.headers && hn(i.headers) && (i.headers = Object.assign({}, i.headers)), i.body && hn(i.body) && (i.body = Object.assign({}, i.body)), i.transformRequest && (i = i.transformRequest(i) || i), e = new Po(this.type, i, this.player), e.loader.on(Bi, (s) => {
+      return typeof e != "string" && e ? i = e : i.url = e || i.url || this._config.url, (i = Object.assign({}, this._config, i)).params && (i.params = Object.assign({}, i.params)), i.headers && hn(i.headers) && (i.headers = Object.assign({}, i.headers)), i.body && hn(i.body) && (i.body = Object.assign({}, i.body)), i.transformRequest && (i = i.transformRequest(i) || i), e = new Io(this.type, i, this.player), e.loader.on(Bi, (s) => {
         this.emit(Bi, s);
       }), this._queue.push(e), this._queue.length !== 1 || this._currentTask && this._currentTask.running || this._processTask(), e.promise;
     }
@@ -16123,9 +16133,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return new et(e?.isTimeout ? fn : pn, null, e instanceof Error ? e : null, { url: e?.url, response: e?.response, httpCode: e?.response?.status });
     }
   }
-  const Uo = /^#(EXT[^:]*)(?::(.*))?$/, mn = /([^=]+)=(?:"([^"]*)"|([^",]*))(?:,|$)/g, Mo = /^(?:[a-zA-Z0-9+\-.]+:)?\/\//, Fo = /^((?:[a-zA-Z0-9+\-.]+:)?\/\/[^/?#]*)?([^?#]*\/)?/;
+  const Bo = /^#(EXT[^:]*)(?::(.*))?$/, mn = /([^=]+)=(?:"([^"]*)"|([^",]*))(?:,|$)/g, Uo = /^(?:[a-zA-Z0-9+\-.]+:)?\/\//, Mo = /^((?:[a-zA-Z0-9+\-.]+:)?\/\/[^/?#]*)?([^?#]*\/)?/;
   function gn(D) {
-    if (D = D.match(Uo), D && D[1]) return [D[1].replace("EXT-X-", ""), D[2]];
+    if (D = D.match(Bo), D && D[1]) return [D[1].replace("EXT-X-", ""), D[2]];
   }
   function wr(D) {
     var e = {};
@@ -16134,16 +16144,16 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     return e;
   }
   function Ui(D, e) {
-    return e && D && !Mo.test(D) && (e = Fo.exec(e)) ? D[0] === "/" ? e[1] + D : e[1] + e[2] + D : D;
+    return e && D && !Uo.test(D) && (e = Mo.exec(e)) ? D[0] === "/" ? e[1] + D : e[1] + e[2] + D : D;
   }
-  const Oo = { audio: [/^mp4a/, /^vorbis$/, /^opus$/, /^flac$/, /^[ae]c-3$/], video: [/^avc/, /^hev/, /^hvc/, /^vp0?[89]/, /^av1$/], text: [/^vtt$/, /^wvtt/, /^stpp/] };
+  const Fo = { audio: [/^mp4a/, /^vorbis$/, /^opus$/, /^flac$/, /^[ae]c-3$/], video: [/^avc/, /^hev/, /^hvc/, /^vp0?[89]/, /^av1$/], text: [/^vtt$/, /^wvtt/, /^stpp/] };
   function As(D, e) {
-    var i = Oo[D];
+    var i = Fo[D];
     if (i && e && e.length) {
       for (let s = 0; s < i.length; s++) for (let u = 0; u < e.length; u++) if (i[s].test(e[u])) return e[u];
     }
   }
-  class No {
+  class Oo {
     version = 0;
     streams = [];
     isMaster = !0;
@@ -16160,14 +16170,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     segments = [];
     endSN = 0;
   }
-  class jo extends bs {
+  class No extends bs {
     mediaType = "AUDIO";
     channels = 0;
   }
-  class zo extends bs {
+  class jo extends bs {
     mediaType = "SUBTITLE";
   }
-  class Go {
+  class zo {
     id = 0;
     bitrate = 0;
     width = 0;
@@ -16182,7 +16192,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     subtitleStreams = [];
     closedCaptionsStream = [];
   }
-  class Ho {
+  class Go {
     version = 0;
     url = "";
     type = "";
@@ -16243,7 +16253,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     static parse() {
       var e, i = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : "", s = 1 < arguments.length ? arguments[1] : void 0;
       if (i.includes("#EXTM3U")) return e = i.split(/[\r\n]/).map((u) => u.trim()).filter(Boolean), (Mi.isMediaPlaylist(i) ? function(u, c) {
-        var l = new Ho();
+        var l = new Go();
         l.url = c;
         let o, f = new vs(), _ = null, g = null, T = 0, E = 0, h = 0, k = 0, t = !1;
         for (; (o = u[k++]) && !t; ) if (o[0] !== "#") f.sn = E, f.cc = h, f.url = Ui(o, c), g && (f.key = g.clone(E)), _ && (f.initSegment = _), l.segments.push(f), f = new vs(), E++;
@@ -16310,7 +16320,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         const n = l.segments[l.segments.length - 1];
         return n && (l.endSN = n.sn), l.totalDuration = T, l.endCC = h, l;
       } : function(u, c) {
-        var l = new No();
+        var l = new Oo();
         let o, f = 0;
         const _ = [], g = [];
         for (; o = u[f++]; ) {
@@ -16323,17 +16333,17 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               let t;
               switch (k.TYPE) {
                 case "AUDIO":
-                  t = new jo();
+                  t = new No();
                   break;
                 case "SUBTITLES":
-                  t = new zo();
+                  t = new jo();
                   break;
                 default:
                   t = new bs();
               }
               t.url = Ui(k.URI, c), t.default = k.DEFAULT === "YES", t.autoSelect = k.AUTOSELECT === "YES", t.group = k["GROUP-ID"], t.name = k.NAME, t.lang = k.LANGUAGE, k.CHANNELS && (t.channels = Number(k.CHANNELS.split("/")[0]), Number.isNaN(t.channels)) && (t.channels = 0), k.TYPE === "AUDIO" && k.URI && _.push(t), k.TYPE === "SUBTITLES" && g.push(t);
             } else if (T === "STREAM-INF" && E) {
-              const k = new Go(), t = wr(E);
+              const k = new zo(), t = wr(E);
               if (k.bitrate = parseInt(t["AVERAGE-BANDWIDTH"] || t.BANDWIDTH), k.name = t.NAME, k.url = Ui(u[f++], c), t.RESOLUTION) {
                 const [r, n] = t.RESOLUTION.split("x");
                 k.width = parseInt(r), k.height = parseInt(n);
@@ -16364,7 +16374,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return e.includes("#EXTINF:") || e.includes("#EXT-X-TARGETDURATION:");
     }
   }
-  class Vo {
+  class Ho {
     TAG_NAME = "HlsManifestLoader";
     constructor(i) {
       this.hls = i, this.player = i.player, this._timer = null;
@@ -16420,7 +16430,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this.hls.emit($s, { error: et.network(e), retryTime: i });
     };
   }
-  class Wo {
+  class Vo {
     _chunkSpeeds = [];
     _speeds = [];
     addRecord(e, i) {
@@ -16439,9 +16449,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this._chunkSpeeds = [], this._speeds = [];
     }
   }
-  class $o {
+  class Wo {
     constructor(i) {
-      this.hls = i, this.player = i.player, this._bandwidthService = new Wo();
+      this.hls = i, this.player = i.player, this._bandwidthService = new Vo();
       var { retryCount: i, retryDelay: s, loadTimeout: u, fetchOptions: c } = this.hls.config;
       this._segmentLoader = new hi({ ...c, responseType: "arraybuffer", retry: i, retryDelay: s, timeout: u, onRetryError: this._onLoaderRetry }, this.player), this._audioSegmentLoader = new hi({ ...c, responseType: "arraybuffer", retry: i, retryDelay: s, timeout: u, onRetryError: this._onLoaderRetry }, this.player), this._keyLoader = new hi({ ...c, responseType: "arraybuffer", retry: i, retryDelay: s, timeout: u, onRetryError: this._onLoaderRetry }, this.player);
     }
@@ -16584,7 +16594,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       } else i.segments = e.segments;
     }
   }
-  class Ko {
+  class $o {
     streams = [];
     currentStream = null;
     dvrWindow = 0;
@@ -16681,7 +16691,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       s.set(c, u), u += c.byteLength;
     }), s;
   }
-  class qo {
+  class Ko {
     constructor() {
       var e = window.crypto || window.msCrypto;
       this.subtle = e && (e.subtle || e.webkitSubtle), this.externalDecryptor = null;
@@ -16709,7 +16719,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     _videoPid = -1;
     _audioPid = -1;
     _codecType = 7;
-    _audioCodecType = Ye;
+    _audioCodecType = Je;
     _vps = null;
     _sps = null;
     _pps = null;
@@ -16762,7 +16772,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                 const T = (31 & e[_ + 1]) << 8 | e[_ + 2];
                 switch (e[_]) {
                   case 15:
-                    this._audioPid = T, this._audioCodecType = Ye;
+                    this._audioPid = T, this._audioCodecType = Je;
                     break;
                   case 27:
                     this._videoPid = T, this._codecType = 7;
@@ -16887,7 +16897,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         const i = Nt._parsePES(Fi(...this._audioPesData));
         if (i) {
           if (this.player._opt.hasAudio) {
-            if (this.player.updateStats({ abps: i.data.byteLength }), this._audioCodecType === Ye) {
+            if (this.player.updateStats({ abps: i.data.byteLength }), this._audioCodecType === Je) {
               var e = (function(s, u) {
                 var c = s.length;
                 let l = 0;
@@ -16937,7 +16947,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }
         this._resetBaseDtsWhenStreamBreaked(), this._fixAudio(c), this._fixVideo(u);
         let T = u.samples.concat(c.samples);
-        T = T.map((E) => (E.dts = E.dts / 90, E.pts = E.pts / 90, E.cts = E.pts - E.dts, E)).sort((E, h) => E.dts - h.dts), this._allSampleList = this._allSampleList.concat(T), _e(this._hasCalcFps) && (this._hasCalcFps = !0, this._calcDecodeFps(T));
+        T = T.map((E) => (E.dts = E.dts / 90, E.pts = E.pts / 90, E.cts = E.pts - E.dts, E)).sort((E, h) => E.dts - h.dts), this._allSampleList = this._allSampleList.concat(T), ve(this._hasCalcFps) && (this._hasCalcFps = !0, this._calcDecodeFps(T));
       }
     }
     _calculateBaseDts() {
@@ -17074,7 +17084,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._allSampleList.filter((e) => e.type === 2).length;
     }
   }
-  class Yo {
+  class qo {
     _initSegmentId = "";
     TAG_NAME = "HlsTransmuxer";
     constructor(e, i, s) {
@@ -17092,8 +17102,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }
     }
   }
-  class Jo {
-    _decryptor = new qo();
+  class Yo {
+    _decryptor = new Ko();
     _transmuxer = null;
     _mse = null;
     _softVideo = null;
@@ -17129,7 +17139,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._transmuxer?._demuxer?.getSampleVideoListLength();
     }
     createSource(e, i, s, u) {
-      this._sourceCreated || (e = e || i) && (Nt.probe(e) ? this._transmuxer || (this._transmuxer = new Yo(this.hls, !1, !this._softVideo)) : console.error("createSource error: chunk is not ts"));
+      this._sourceCreated || (e = e || i) && (Nt.probe(e) ? this._transmuxer || (this._transmuxer = new qo(this.hls, !1, !this._softVideo)) : console.error("createSource error: chunk is not ts"));
     }
     async appendBuffer(e, i, s, u, c, l, o) {
       if (s?.length || u?.length) return this._needInitSegment, this._transmuxer.transmux(s, u, c, l, o, this._needInitSegment || c), !0;
@@ -17152,7 +17162,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this._needInitSegment = !0;
     }
   }
-  class Qo {
+  class Jo {
     _seiSet = /* @__PURE__ */ new Set();
     constructor(e) {
       (this.emitter = e).on("sei", (i) => {
@@ -17215,7 +17225,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
   }
-  class Xo {
+  class Qo {
     _core = null;
     _samples = [];
     constructor(e) {
@@ -17239,7 +17249,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this._samples = [], this._stats = new An(this._timescale);
     }
   }
-  class Zo extends Ae {
+  class Xo extends Ae {
     config = null;
     _manifestLoader = null;
     _segmentLoader = null;
@@ -17258,7 +17268,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     TAG_NAME = "Hls256";
     constructor(e) {
       var i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
-      super(), this.player = e, this.canVideoPlay = !1, this.$videoElement = null, this.config = { isLive: !0, maxPlaylistSize: 50, retryCount: 3, retryDelay: 1e3, pollRetryCount: 2, loadTimeout: 1e4, preloadTime: 30, softDecode: !1, bufferBehind: 10, maxJumpDistance: 3, startTime: 0, targetLatency: 10, maxLatency: 20, allowedStreamTrackChange: !0, ...i }, this._manifestLoader = new Vo(this), this._segmentLoader = new $o(this), this._playlist = new Ko(this), this._bufferService = new Jo(this), this._seiService = new Qo(this), this._stats = new Xo(this, 9e4), this.player.debug.log(this.TAG_NAME, "init");
+      super(), this.player = e, this.canVideoPlay = !1, this.$videoElement = null, this.config = { isLive: !0, maxPlaylistSize: 50, retryCount: 3, retryDelay: 1e3, pollRetryCount: 2, loadTimeout: 1e4, preloadTime: 30, softDecode: !1, bufferBehind: 10, maxJumpDistance: 3, startTime: 0, targetLatency: 10, maxLatency: 20, allowedStreamTrackChange: !0, ...i }, this._manifestLoader = new Ho(this), this._segmentLoader = new Wo(this), this._playlist = new $o(this), this._bufferService = new Yo(this), this._seiService = new Jo(this), this._stats = new Qo(this, 9e4), this.player.debug.log(this.TAG_NAME, "init");
     }
     async destroy() {
       this.player.debug.log(this.TAG_NAME, "destroy()"), this._playlist.reset(), this._segmentLoader.reset(), this._seiService.reset(), await Promise.all([this._clear(), this._bufferService.destroy()]), this._manifestLoader && (await this._manifestLoader.destroy(), this._manifestLoader = null), this._segmentLoader && (this._segmentLoader.destroy(), this._segmentLoader = null), this._playlist && (this._playlist.destroy(), this._playlist = null), this.player.debug.log(this.TAG_NAME, "destroy end");
@@ -17418,7 +17428,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   class bn extends Ae {
     TAG_NAME = "Hls256Decoder";
     constructor(e) {
-      super(), this.player = e, this.canVideoPlay = !1, this.$videoElement = this.player.video.$videoElement, this.hls = null, this.eventsDestroy = [], this.bandwidthEstimateInterval = null, ua() ? this.canVideoPlay = !0 : (this.hls = new Zo(e), this._bindEvents());
+      super(), this.player = e, this.canVideoPlay = !1, this.$videoElement = this.player.video.$videoElement, this.hls = null, this.eventsDestroy = [], this.bandwidthEstimateInterval = null, ua() ? this.canVideoPlay = !0 : (this.hls = new Xo(e), this._bindEvents());
     }
     async destroy() {
       return this._stopBandwidthEstimateInterval(), this.hls && (await this.hls.destroy(), this.hls = null), this.eventsDestroy.length && (this.eventsDestroy.forEach((e) => e()), this.eventsDestroy = []), this.$videoElement = null, this.player.debug.log(this.TAG_NAME, "destroy"), !0;
@@ -17548,9 +17558,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
   }
-  class el extends Ae {
+  class Zo extends Ae {
     constructor(e, i) {
-      super(), this.player = e, this.player.$container.classList.add("jessibuca-container-playback"), this._showPrecision = null, this._startTime = null, this._playStartTime = null, this._playingTimestamp = null, this._fps = parseInt(i.fps, 10) || e._opt.playbackFps, this._isUseFpsRender = !!Ve(i.isUseFpsRender), this._rate = 1, this._audioTimestamp = 0, this._videoTimestamp = 0, this._currentLocalTimestamp = 0, this._localOneFrameTimestamp = i.localOneFrameTimestamp || 40, this._localCalculateTimeInterval = null, this._isUseLocalCalculateTime = !!Ve(i.isUseLocalCalculateTime), this._isPlaybackPauseClearCache = !_e(i.isPlaybackPauseClearCache), this._isCacheBeforeDecodeForFpsRender = !!Ve(i.isCacheBeforeDecodeForFpsRender), this._startfpsTime = null, this._startFpsTimestamp = null, this._checkStatsInterval = null, this._playbackTs = 0, this._renderFps = 0, this._isUseLocalCalculateTime ? this._startLocalCalculateTime() : this._listen(), this.playbackList = [], this._totalDuration = 0, this.initPlaybackList(i.playList), this.player.on(N.playbackPause, (s) => {
+      super(), this.player = e, this.player.$container.classList.add("jessibuca-container-playback"), this._showPrecision = null, this._startTime = null, this._playStartTime = null, this._playingTimestamp = null, this._fps = parseInt(i.fps, 10) || e._opt.playbackFps, this._isUseFpsRender = !!We(i.isUseFpsRender), this._rate = 1, this._audioTimestamp = 0, this._videoTimestamp = 0, this._currentLocalTimestamp = 0, this._localOneFrameTimestamp = i.localOneFrameTimestamp || 40, this._localCalculateTimeInterval = null, this._isUseLocalCalculateTime = !!We(i.isUseLocalCalculateTime), this._isPlaybackPauseClearCache = !ve(i.isPlaybackPauseClearCache), this._isCacheBeforeDecodeForFpsRender = !!We(i.isCacheBeforeDecodeForFpsRender), this._startfpsTime = null, this._startFpsTimestamp = null, this._checkStatsInterval = null, this._playbackTs = 0, this._renderFps = 0, this._isUseLocalCalculateTime ? this._startLocalCalculateTime() : this._listen(), this.playbackList = [], this._totalDuration = 0, this.initPlaybackList(i.playList), this.player.on(N.playbackPause, (s) => {
         s ? this.pause() : this.resume();
       }), e.debug.log("Playback", "init", { fps: this._fps, isUseFpsRender: this._isUseFpsRender, localOneFrameTimestamp: this._localOneFrameTimestamp, isUseLocalCalculateTime: this._isUseLocalCalculateTime, uiUsePlaybackPause: i.uiUsePlaybackPause, showControl: i.showControl });
     }
@@ -17749,7 +17759,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this.player.debug.log("zoom", `updateVideoElementScale end is ${c}, ${l} style is ` + o), e.style.transform = o;
     }
   }
-  class tl extends Ae {
+  class el extends Ae {
     constructor(e) {
       super(), this.player = e, this.faceDetector = null, this.objectDetector = null, this.initFaceDetector(), this.initObjectDetector(), this.player.debug.log("AiLoader", "init");
     }
@@ -17775,7 +17785,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this.faceDetector && (this.faceDetector.destroy(), this.faceDetector = null), this.objectDetector && (this.objectDetector.destroy(), this.objectDetector = null), this.off();
     }
   }
-  class il extends Ae {
+  class tl extends Ae {
     constructor(e) {
       super(), this.player = e, this.LOG_NAME = "Contextmenu", this.menuList = [], this.$contextmenus = e.control.$contextmenus, ht() ? this.player.debug.warn(this.LOG_NAME, "not support mobile") : this.init(), e.debug.log(this.LOG_NAME, "init");
     }
@@ -17812,7 +17822,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     addMenuItem() {
       let e = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : {};
-      var i, s, u, c, l = oi(Un);
+      var i, s, u, c, l = oi(Bn);
       e = Object.assign({}, l, e), this._validateMenuItem(e) && ({ events: { proxy: l }, debug: i } = this.player, u = `
             <div class="jessibuca-contextmenu jessibuca-contextmenu-${s = rr()}">
                 ${e.content}
@@ -17822,7 +17832,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }), this.menuList.push({ uuid: s, $menuItem: c }));
     }
   }
-  class rl extends Ae {
+  class il extends Ae {
     _opt = {};
     constructor(u) {
       let i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
@@ -17847,15 +17857,15 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                      so set useMSE false`);
         }
       }
-      this._opt.useMSE ? (this._opt.useWCS && this.debug.warn("Player", "useMSE is true and useWCS is true then useWCS set true->false"), this._opt.forceNoOffscreen || this.debug.warn("Player", "useMSE is true and forceNoOffscreen is false then forceNoOffscreen set false->true"), this._opt.useWCS = !1, this._opt.forceNoOffscreen = !0) : this._opt.useWCS, !this._opt.useSIMD && this._opt.decoder.indexOf("-simd") === -1 || (this._opt.useSIMD = WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10, 10, 1, 8, 0, 65, 0, 253, 15, 253, 98, 11])) && _e(/iphone/i.test(navigator.userAgent)), this._opt.useSIMD) || this.debug.warn("Player", "useSIMD is true, but not support so set useSIMD false"), this._opt.useSIMD ? this._opt.decoder.indexOf("-simd") === -1 && (this._opt.decoder = this._opt.decoder.replace("decoder-pro", "decoder-pro-simd")) : this._opt.decoder.indexOf("-simd") !== -1 && (this._opt.decoder = this._opt.decoder.replace("decoder-pro-simd", "decoder-pro")), this._opt.decoder.indexOf("-simd") !== -1 ? this._opt.decoderAudio = this._opt.decoder.replace("decoder-pro-simd", "decoder-pro-audio") : this._opt.decoderAudio = this._opt.decoder.replace("decoder-pro", "decoder-pro-audio"), _e(this._opt.hasAudio) && (this._opt.operateBtns.audio = !1), _e(this._opt.hasVideo) && (this._opt.operateBtns.fullscreen = !1, this._opt.operateBtns.screenshot = !1, this._opt.operateBtns.record = !1, this._opt.operateBtns.ptz = !1, this._opt.operateBtns.quality = !1, this._opt.operateBtns.zoom = !1), this._opt.qualityConfig && this._opt.qualityConfig.length === 0 && this._opt.operateBtns.quality && (this._opt.operateBtns.quality = !1, this.debug.warn("Player", "_opt.qualityConfig is empty, so set operateBtns.quality false")), Ve(this._opt.useWebGPU) && (this._opt.useWebGPU = (function() {
+      this._opt.useMSE ? (this._opt.useWCS && this.debug.warn("Player", "useMSE is true and useWCS is true then useWCS set true->false"), this._opt.forceNoOffscreen || this.debug.warn("Player", "useMSE is true and forceNoOffscreen is false then forceNoOffscreen set false->true"), this._opt.useWCS = !1, this._opt.forceNoOffscreen = !0) : this._opt.useWCS, !this._opt.useSIMD && this._opt.decoder.indexOf("-simd") === -1 || (this._opt.useSIMD = WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10, 10, 1, 8, 0, 65, 0, 253, 15, 253, 98, 11])) && ve(/iphone/i.test(navigator.userAgent)), this._opt.useSIMD) || this.debug.warn("Player", "useSIMD is true, but not support so set useSIMD false"), this._opt.useSIMD ? this._opt.decoder.indexOf("-simd") === -1 && (this._opt.decoder = this._opt.decoder.replace("decoder-pro", "decoder-pro-simd")) : this._opt.decoder.indexOf("-simd") !== -1 && (this._opt.decoder = this._opt.decoder.replace("decoder-pro-simd", "decoder-pro")), this._opt.decoder.indexOf("-simd") !== -1 ? this._opt.decoderAudio = this._opt.decoder.replace("decoder-pro-simd", "decoder-pro-audio") : this._opt.decoderAudio = this._opt.decoder.replace("decoder-pro", "decoder-pro-audio"), ve(this._opt.hasAudio) && (this._opt.operateBtns.audio = !1), ve(this._opt.hasVideo) && (this._opt.operateBtns.fullscreen = !1, this._opt.operateBtns.screenshot = !1, this._opt.operateBtns.record = !1, this._opt.operateBtns.ptz = !1, this._opt.operateBtns.quality = !1, this._opt.operateBtns.zoom = !1), this._opt.qualityConfig && this._opt.qualityConfig.length === 0 && this._opt.operateBtns.quality && (this._opt.operateBtns.quality = !1, this.debug.warn("Player", "_opt.qualityConfig is empty, so set operateBtns.quality false")), We(this._opt.useWebGPU) && (this._opt.useWebGPU = (function() {
         let o = !1;
         return o = "gpu" in navigator ? !0 : o;
-      })(), _e(this._opt.useWebGPU)) && this.debug.warn("Player", "useWebGPU is true, but not support so set useWebGPU false"), this._opt.hasControl = this._hasControl(), this._loading = !1, this._playing = !1, this._playbackPause = !1, this._hasLoaded = !1, this._zooming = !1, this._destroyed = !1, this._checkHeartTimeout = null, this._checkLoadingTimeout = null, this._checkStatsInterval = null, this._checkVisibleHiddenTimeout = null, this._startBpsTime = null, this._isPlayingBeforePageHidden = !1, this._stats = { buf: 0, netBuf: 0, fps: 0, maxFps: 0, dfps: 0, abps: 0, vbps: 0, ts: 0, mseTs: 0, pTs: 0, dts: 0 }, this._allStatsData = {}, this._faceDetectActive = !1, this._objectDetectActive = !1, this._times = { playInitStart: "", playStart: "", streamStart: "", streamResponse: "", demuxStart: "", decodeStart: "", videoStart: "", playTimestamp: "", streamTimestamp: "", streamResponseTimestamp: "", demuxTimestamp: "", decodeTimestamp: "", videoTimestamp: "", allTimestamp: "" }, this._videoTimestamp = 0, this._audioTimestamp = 0, this._videoIframeIntervalTs = 0, this._streamQuality = this._opt.defaultStreamQuality || "", this._visibility = !0, this._lastestVisibilityChangeTimestamp = null, this._tempWorkerStats = null, this._historyFpsList = [], this._isPlayback() && (this._opt.useMSE = !1, this._opt.useWCS = !1), _e(this._opt.useMSE) && _e(this._opt.useWCS) && _e(this._opt.isWebrtc) && !this.isOldHls() && (this._opt.useWasm = !0), (this.isOldHls() || this._opt.isWebrtc) && (this._opt.hasVideo = !0, this._opt.hasAudio = !0), this._opt.hasVideo || (this._opt.useMSE = !1, this._opt.useWCS = !1), this._opt.useWasm && (this._opt.useOffscreen ? this._opt.wasmUseVideoRender = !1 : this._opt.wasmUseVideoRender && (this._opt.wasmUseVideoRender = ea() && bi() && vi(), this._opt.wasmUseVideoRender || this.debug.warn("Player", "use wasm video render, but not support so set wasmUseVideoRender false")), this._opt.useSIMD ? this.debug.log("Player", "use simd wasm") : this.debug.log("Player", "use wasm")), this._opt.useWasm && (this._opt.useFaceDetector && window.JessibucaProFaceDetector || this._opt.useObjectDetector && window.JessibucaProObjectDetector) ? (this.ai = new tl(this), this._opt.useFaceDetector && window.JessibucaProFaceDetector || (this._opt.operateBtns.aiFace = !1), this._opt.useObjectDetector && window.JessibucaProObjectDetector || (this._opt.operateBtns.aiObject = !1)) : (this._opt.operateBtns.aiObject = !1, this._opt.operateBtns.aiFace = !1), !this._opt.useFaceDetector || this._opt.useWasm && window.JessibucaProFaceDetector || this.debug.warn("Player", `use face detector, useWasm is ${this._opt.useWasm} and window.JessibucaProFaceDetector is ` + !!window.JessibucaProFaceDetector), !this._opt.useObjectDetector || this._opt.useWasm && window.JessibucaProObjectDetector || this.debug.warn("Player", `use object detector, useWasm is ${this._opt.useWasm} and window.JessibucaProObjectDetector is ` + !!window.JessibucaProObjectDetector), this._opt.useVideoRender && (this._opt.useWasm && !this._opt.useOffscreen ? (this._opt.wasmUseVideoRender = ea() && bi() && vi(), this._opt.wasmUseVideoRender || this.debug.warn("Player", "use wasm video render, but not support so set wasmUseVideoRender false")) : this._opt.useWCS && !this._opt.useOffscreen && (this._opt.wcsUseVideoRender = bi() && vi(), this._opt.wcsUseVideoRender || this.debug.warn("Player", "use wcs video render, but not support so set wcsUseVideoRender false"))), this._opt.useCanvasRender && (this._opt.useMSE && (this._opt.mseUseCanvasRender = !0), this._opt.useWasm && (this._opt.wasmUseVideoRender = !1), this._opt.useWCS && (this._opt.wcsUseVideoRender = !1), this.isOldHls()) && !Ir() && (this._opt.hlsUseCanvasRender = !0), this._opt.useVideoRender = !1, this._opt.useCanvasRender = !1, this._opt.useWasm ? this._opt.wasmUseVideoRender ? this._opt.useVideoRender = !0 : this._opt.useCanvasRender = !0 : this._opt.useWCS ? this._opt.wcsUseVideoRender ? this._opt.useVideoRender = !0 : this._opt.useCanvasRender = !0 : this._opt.useMSE ? this._opt.mseUseCanvasRender ? this._opt.useCanvasRender = !0 : this._opt.useVideoRender = !0 : this.isOldHls() ? this._opt.hlsUseCanvasRender ? this._opt.useCanvasRender = !0 : this._opt.useVideoRender = !0 : this._opt.isWebrtc && (this._opt.useVideoRender = !0), s = this, Object.defineProperty(s, "rect", { get: () => {
+      })(), ve(this._opt.useWebGPU)) && this.debug.warn("Player", "useWebGPU is true, but not support so set useWebGPU false"), this._opt.hasControl = this._hasControl(), this._loading = !1, this._playing = !1, this._playbackPause = !1, this._hasLoaded = !1, this._zooming = !1, this._destroyed = !1, this._checkHeartTimeout = null, this._checkLoadingTimeout = null, this._checkStatsInterval = null, this._checkVisibleHiddenTimeout = null, this._startBpsTime = null, this._isPlayingBeforePageHidden = !1, this._stats = { buf: 0, netBuf: 0, fps: 0, maxFps: 0, dfps: 0, abps: 0, vbps: 0, ts: 0, mseTs: 0, pTs: 0, dts: 0 }, this._allStatsData = {}, this._faceDetectActive = !1, this._objectDetectActive = !1, this._times = { playInitStart: "", playStart: "", streamStart: "", streamResponse: "", demuxStart: "", decodeStart: "", videoStart: "", playTimestamp: "", streamTimestamp: "", streamResponseTimestamp: "", demuxTimestamp: "", decodeTimestamp: "", videoTimestamp: "", allTimestamp: "" }, this._videoTimestamp = 0, this._audioTimestamp = 0, this._videoIframeIntervalTs = 0, this._streamQuality = this._opt.defaultStreamQuality || "", this._visibility = !0, this._lastestVisibilityChangeTimestamp = null, this._tempWorkerStats = null, this._historyFpsList = [], this._isPlayback() && (this._opt.useMSE = !1, this._opt.useWCS = !1), ve(this._opt.useMSE) && ve(this._opt.useWCS) && ve(this._opt.isWebrtc) && !this.isOldHls() && (this._opt.useWasm = !0), (this.isOldHls() || this._opt.isWebrtc) && (this._opt.hasVideo = !0, this._opt.hasAudio = !0), this._opt.hasVideo || (this._opt.useMSE = !1, this._opt.useWCS = !1), this._opt.useWasm && (this._opt.useOffscreen ? this._opt.wasmUseVideoRender = !1 : this._opt.wasmUseVideoRender && (this._opt.wasmUseVideoRender = ea() && bi() && vi(), this._opt.wasmUseVideoRender || this.debug.warn("Player", "use wasm video render, but not support so set wasmUseVideoRender false")), this._opt.useSIMD ? this.debug.log("Player", "use simd wasm") : this.debug.log("Player", "use wasm")), this._opt.useWasm && (this._opt.useFaceDetector && window.JessibucaProFaceDetector || this._opt.useObjectDetector && window.JessibucaProObjectDetector) ? (this.ai = new el(this), this._opt.useFaceDetector && window.JessibucaProFaceDetector || (this._opt.operateBtns.aiFace = !1), this._opt.useObjectDetector && window.JessibucaProObjectDetector || (this._opt.operateBtns.aiObject = !1)) : (this._opt.operateBtns.aiObject = !1, this._opt.operateBtns.aiFace = !1), !this._opt.useFaceDetector || this._opt.useWasm && window.JessibucaProFaceDetector || this.debug.warn("Player", `use face detector, useWasm is ${this._opt.useWasm} and window.JessibucaProFaceDetector is ` + !!window.JessibucaProFaceDetector), !this._opt.useObjectDetector || this._opt.useWasm && window.JessibucaProObjectDetector || this.debug.warn("Player", `use object detector, useWasm is ${this._opt.useWasm} and window.JessibucaProObjectDetector is ` + !!window.JessibucaProObjectDetector), this._opt.useVideoRender && (this._opt.useWasm && !this._opt.useOffscreen ? (this._opt.wasmUseVideoRender = ea() && bi() && vi(), this._opt.wasmUseVideoRender || this.debug.warn("Player", "use wasm video render, but not support so set wasmUseVideoRender false")) : this._opt.useWCS && !this._opt.useOffscreen && (this._opt.wcsUseVideoRender = bi() && vi(), this._opt.wcsUseVideoRender || this.debug.warn("Player", "use wcs video render, but not support so set wcsUseVideoRender false"))), this._opt.useCanvasRender && (this._opt.useMSE && (this._opt.mseUseCanvasRender = !0), this._opt.useWasm && (this._opt.wasmUseVideoRender = !1), this._opt.useWCS && (this._opt.wcsUseVideoRender = !1), this.isOldHls()) && !Ir() && (this._opt.hlsUseCanvasRender = !0), this._opt.useVideoRender = !1, this._opt.useCanvasRender = !1, this._opt.useWasm ? this._opt.wasmUseVideoRender ? this._opt.useVideoRender = !0 : this._opt.useCanvasRender = !0 : this._opt.useWCS ? this._opt.wcsUseVideoRender ? this._opt.useVideoRender = !0 : this._opt.useCanvasRender = !0 : this._opt.useMSE ? this._opt.mseUseCanvasRender ? this._opt.useCanvasRender = !0 : this._opt.useVideoRender = !0 : this.isOldHls() ? this._opt.hlsUseCanvasRender ? this._opt.useCanvasRender = !0 : this._opt.useVideoRender = !0 : this._opt.isWebrtc && (this._opt.useVideoRender = !0), s = this, Object.defineProperty(s, "rect", { get: () => {
         var o = s.$container.getBoundingClientRect();
         return o.width = Math.max(o.width, s.$container.clientWidth), o.height = Math.max(o.height, s.$container.clientHeight), o;
       } }), ["bottom", "height", "left", "right", "top", "width"].forEach((o) => {
         Object.defineProperty(s, o, { get: () => s.rect[o] });
-      }), this.events = new hr(this), this._opt.hasVideo && (this.video = new pr(this), this.recorder = new Jr(this)), this.isOldHls() ? (this.hlsDecoder = new nn(this), this.loaded = !0) : this._opt.isWebrtc ? (this._opt.isWebrtcForZLM ? this.webrtc = new _n(this) : this.webrtc = new vn(this), this.loaded = !0) : (this.isUseHls265() && (this.hlsDecoder = new bn(this)), or(this._opt) ? this.loaded = !0 : this.decoderWorker = new Na(this)), this._opt.hasAudio && (this.audio = new fr(this)), this.stream = null, this.demux = null, this._lastVolume = null, this._isInZoom = !1, this._playingStartTimestamp = null, this._opt.useWCS && (this.webcodecsDecoder = new en(this), this._opt.hasAudio || (this.loaded = !0)), this._opt.useMSE && (this.mseDecoder = new an(this), this._opt.hasAudio || (this.loaded = !0)), this.control = new Ro(this), 0 < this._opt.contextmenuBtns.length && (this.contextmenu = new il(this)), this._isPlayback() && (this.playback = new el(this, this._opt.playbackConfig)), this._opt.operateBtns.zoom && (this.zoom = new wn(this)), /(iphone|ipad|ipod|ios|android)/i.test(window.navigator.userAgent.toLowerCase()) && _e(this._opt.supportLockScreenPlayAudio && ni()) && (this.keepScreenOn = new Io(this));
+      }), this.events = new hr(this), this._opt.hasVideo && (this.video = new pr(this), this.recorder = new Jr(this)), this.isOldHls() ? (this.hlsDecoder = new nn(this), this.loaded = !0) : this._opt.isWebrtc ? (this._opt.isWebrtcForZLM ? this.webrtc = new _n(this) : this.webrtc = new vn(this), this.loaded = !0) : (this.isUseHls265() && (this.hlsDecoder = new bn(this)), or(this._opt) ? this.loaded = !0 : this.decoderWorker = new Na(this)), this._opt.hasAudio && (this.audio = new fr(this)), this.stream = null, this.demux = null, this._lastVolume = null, this._isInZoom = !1, this._playingStartTimestamp = null, this._opt.useWCS && (this.webcodecsDecoder = new en(this), this._opt.hasAudio || (this.loaded = !0)), this._opt.useMSE && (this.mseDecoder = new an(this), this._opt.hasAudio || (this.loaded = !0)), this.control = new Do(this), 0 < this._opt.contextmenuBtns.length && (this.contextmenu = new tl(this)), this._isPlayback() && (this.playback = new Zo(this, this._opt.playbackConfig)), this._opt.operateBtns.zoom && (this.zoom = new wn(this)), /(iphone|ipad|ipod|ios|android)/i.test(window.navigator.userAgent.toLowerCase()) && ve(this._opt.supportLockScreenPlayAudio && ni()) && (this.keepScreenOn = new Ro(this));
       var c = this;
       try {
         const o = (f) => {
@@ -18006,12 +18016,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._videoTimestamp;
     }
     get isDebug() {
-      return Ve(this._opt.debug);
+      return We(this._opt.debug);
     }
     get scaleType() {
       var i = this._opt, e = i.isResize, i = i.isFullResize;
       let s = 0;
-      return _e(i) && _e(e) ? s = 0 : _e(i) && Ve(e) ? s = 1 : Ve(i) && Ve(e) && (s = 2), s;
+      return ve(i) && ve(e) ? s = 0 : ve(i) && We(e) ? s = 1 : We(i) && We(e) && (s = 2), s;
     }
     set visibility(e) {
       this._visibility !== e && (this._visibility = e, this.emit(N.visibilityChange, e), this._lastestVisibilityChangeTimestamp = be(), e ? this.clearVisibilityHiddenTimeout() : this.startVisibilityHiddenTimeout());
@@ -18044,7 +18054,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._objectDetectActive;
     }
     get isUseWorkerDemuxAndDecode() {
-      return this.stream && this.stream.getStreamType() === ve;
+      return this.stream && this.stream.getStreamType() === _e;
     }
     isDestroyed() {
       return this._destroyed;
@@ -18173,21 +18183,21 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }), (this._opt.showBandwidth || i) && (e = !0), e = this._isPlayback() && this._opt.playbackConfig.showControl ? !0 : e;
     }
     _isPlayback() {
-      return this._opt.playType === pe;
+      return this._opt.playType === ce;
     }
     useWasmDecode() {
-      return _e(this._opt.useMSE) && _e(this._opt.useWCS);
+      return ve(this._opt.useMSE) && ve(this._opt.useWCS);
     }
     canVideoTrackWritter() {
       var e = this._opt;
-      return !this.isOldHls() && _e(e.isWebrtc) && _e(e.useMSE) && (e.useWCS && _e(e.useOffscreen) && e.wcsUseVideoRender || this.useWasmDecode());
+      return !this.isOldHls() && ve(e.isWebrtc) && ve(e.useMSE) && (e.useWCS && ve(e.useOffscreen) && e.wcsUseVideoRender || this.useWasmDecode());
     }
     checkHeart() {
       this.clearCheckHeartTimeout(), this.checkHeartTimeout();
     }
     checkHeartTimeout() {
       this._checkHeartTimeout = setTimeout(() => {
-        _e(this.playbackPause) && this.playing ? this.isDestroyed() ? this.debug && this.debug.warn("player", "checkHeartTimeout but player is destroyed") : this._stats.fps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout but fps is " + this._stats.fps) : _e(this.visibility) && this._stats.vbps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout but page is not visibility and vbps is " + this._stats.vbps) : (this.debug.warn("player", `checkHeartTimeout and
+        ve(this.playbackPause) && this.playing ? this.isDestroyed() ? this.debug && this.debug.warn("player", "checkHeartTimeout but player is destroyed") : this._stats.fps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout but fps is " + this._stats.fps) : ve(this.visibility) && this._stats.vbps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout but page is not visibility and vbps is " + this._stats.vbps) : (this.debug.warn("player", `checkHeartTimeout and
                 pause and emit delayTimeout event and
                 current vbps is ${this._stats.vbps} and
                 current fps is ${this._stats.fps} and
@@ -18196,7 +18206,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     checkHeartTimeout$2() {
       var e;
-      _e(this.playbackPause) && this.playing ? this.isDestroyed() ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but player is destroyed") : _e(this.isHistoryFpsListAllZero()) ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but fps is not all zero") : this._stats.fps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but fps is " + this._stats.fps) : _e(this.visibility) && this._stats.vbps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but page is not visibility and vbps is " + this._stats.vbps) : (e = this._historyFpsList.join(","), this.debug.warn("player", `checkHeartTimeout$2 and
+      ve(this.playbackPause) && this.playing ? this.isDestroyed() ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but player is destroyed") : ve(this.isHistoryFpsListAllZero()) ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but fps is not all zero") : this._stats.fps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but fps is " + this._stats.fps) : ve(this.visibility) && this._stats.vbps !== 0 ? this.debug && this.debug.warn("player", "checkHeartTimeout$2 but page is not visibility and vbps is " + this._stats.vbps) : (e = this._historyFpsList.join(","), this.debug.warn("player", `checkHeartTimeout$2 and
                 pause and emit delayTimeout event and
                 current vbps is ${this._stats.vbps} and
                 current fps is ${this._stats.fps} and
@@ -18271,10 +18281,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this._opt;
     }
     isPlayer() {
-      return this._opt.playType === Ie;
+      return this._opt.playType === xe;
     }
     isPlayback() {
-      return this._opt.playType === pe;
+      return this._opt.playType === ce;
     }
     isDemuxSetCodecInit() {
       let e = !0, i = this._opt;
@@ -18376,7 +18386,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     sendWebsocketMessage(e) {
       var i = this.getStreamType();
-      i === Ge || i === ve + " " + Ge ? this.stream.sendMessage(e) : this.debug.warn("player", "sendWebsocketMessage: stream type is not websocket, current stream type is " + this.getStreamType());
+      i === Ve || i === _e + " " + Ve ? this.stream.sendMessage(e) : this.debug.warn("player", "sendWebsocketMessage: stream type is not websocket, current stream type is " + this.getStreamType());
     }
     checkIsInRender() {
       var e = this._stats;
@@ -18424,13 +18434,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return e;
     }
     isUseHls265() {
-      return Ve(this._opt.isHls) && Ve(this._opt.supportHls265);
+      return We(this._opt.isHls) && We(this._opt.supportHls265);
     }
     isOldHls() {
-      return Ve(this._opt.isHls) && _e(this._opt.supportHls265);
+      return We(this._opt.isHls) && ve(this._opt.supportHls265);
     }
   }
-  class sl {
+  class rl {
     constructor(i) {
       var { fromSampleRate: i, toSampleRate: s, channels: u, inputBufferSize: c } = i;
       if (!i || !s || !u) throw new Error("Invalid settings specified for the resampler.");
@@ -18512,9 +18522,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     for (let s = 0; s < i; s++) if (D <= e[s]) return s;
     return i;
   }
-  class al extends Ae {
+  class sl extends Ae {
     constructor(s) {
-      var i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {}, s = (super(), s && (this.player = s), this.tag = "talk", oi(Pn));
+      var i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {}, s = (super(), s && (this.player = s), this.tag = "talk", oi(In));
       this._opt = Object.assign({}, s, i), this._opt.sampleRate = parseInt(this._opt.sampleRate, 10), this._opt.sampleBitsWidth = parseInt(this._opt.sampleBitsWidth, 10), this.audioContext = null, this.gainNode = null, this.recorder = null, this.workletRecorder = null, this.biquadFilter = null, this.userMediaStream = null, this.bufferSize = 512, this._opt.audioBufferLength = this.calcAudioBufferLength(), this.audioBufferList = [], this.socket = null, this.socketStatus = de, this.mediaStreamSource = null, this.heartInterval = null, this.checkGetUserMediaTimeout = null, this.wsUrl = null, this.startTimestamp = 0, this.sequenceId = 0, this.tempTimestamp = null, this.tempRtpBufferList = [], this.events = new hr(this), this._initTalk(), this.player || (this.debug = new er(this)), this.log(this.tag, "init", this._opt);
     }
     destroy() {
@@ -18581,7 +18591,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this._initMethods(), this._opt.engine === Ws ? this._initWorklet() : this._opt.engine === "script" && this._initScriptProcessor(), this.log(this.tag, "audioContext samplerate", this.audioContext.sampleRate);
     }
     _initMethods() {
-      this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48e3 }), this.gainNode = this.audioContext.createGain(), this.gainNode.gain.value = 1, this.biquadFilter = this.audioContext.createBiquadFilter(), this.biquadFilter.type = "lowpass", this.biquadFilter.frequency.value = 3e3, this.resampler = new sl({ fromSampleRate: this.audioContext.sampleRate, toSampleRate: this._opt.sampleRate, channels: this._opt.numberChannels, inputBufferSize: this.bufferSize });
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48e3 }), this.gainNode = this.audioContext.createGain(), this.gainNode.gain.value = 1, this.biquadFilter = this.audioContext.createBiquadFilter(), this.biquadFilter.type = "lowpass", this.biquadFilter.frequency.value = 3e3, this.resampler = new rl({ fromSampleRate: this.audioContext.sampleRate, toSampleRate: this._opt.sampleRate, channels: this._opt.numberChannels, inputBufferSize: this.bufferSize });
     }
     _initScriptProcessor() {
       var e = this.audioContext.createScriptProcessor || this.audioContext.createJavaScriptNode;
@@ -18753,7 +18763,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return this.gainNode ? parseFloat(100 * this.gainNode.gain.value).toFixed(0) : null;
     }
   }
-  class nl {
+  class al {
     constructor(e) {
       this.player = e, this.globalSetting = null, e = rr(), this.defaultSettings = { watermark_id: "JessibucaPro_" + e, watermark_prefix: "JessibucaPro_mask_" + e, watermark_txt: "JessibucaPro 测试水印", watermark_x: 0, watermark_y: 0, watermark_rows: 0, watermark_cols: 0, watermark_x_space: 0, watermark_y_space: 0, watermark_font: "微软雅黑", watermark_color: "black", watermark_fontsize: "18px", watermark_alpha: 0.15, watermark_width: 150, watermark_height: 100, watermark_angle: 15, watermark_parent_width: 0, watermark_parent_height: 0, watermark_parent_node: null }, this.player.debug.log("Watermark", "int");
     }
@@ -18808,10 +18818,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       if (c.nodeName === "CANVAS" || c.nodeName === "VIDEO") throw this.debug.error("JbPro", `JbPro container type can not be ${c.nodeName} type`), new Error(`JbPro container type can not be ${c.nodeName} type`);
       if (u.videoBuffer >= u.heartTimeout) throw this.debug.error("JbPro", `JbPro videoBuffer ${u.videoBuffer}s must be less than heartTimeout ${u.heartTimeout}s`), new Error(`JbPro videoBuffer ${u.videoBuffer}s must be less than heartTimeout ${u.heartTimeout}s`);
       if (this._checkHasCreated(c)) throw this.debug.error("JbPro", "JbPro container has been created and can not be created again", c), new Error("JbPro container has been created and can not be created again", c);
-      if (c.classList.add("jessibuca-container"), i = c, s = rr(), i && (i.dataset ? i.dataset.jbprov = s : i.setAttribute("data-jbprov", s)), _e(u.isLive)) {
+      if (c.classList.add("jessibuca-container"), i = c, s = rr(), i && (i.dataset ? i.dataset.jbprov = s : i.setAttribute("data-jbprov", s)), ve(u.isLive)) {
         const l = document.createElement("video");
         l.muted = !0, l.setAttribute("controlsList", "nodownload"), l.disablePictureInPicture = "disablePictureInPicture", l.style.position = "absolute", l.style.top = 0, l.style.left = 0, l.style.height = "100%", l.style.width = "100%", c.appendChild(l), this.$videoElement = l, this.$container = c, this._opt = u;
-      } else delete u.container, Be(u.videoBuffer) && (u.videoBuffer = 1e3 * Number(u.videoBuffer)), Be(u.videoBufferDelay) && (u.videoBufferDelay = 1e3 * Number(u.videoBufferDelay)), Be(u.networkDelay) && (u.networkDelay = 1e3 * Number(u.networkDelay)), Be(u.timeout) && (_i(u.loadingTimeout) && (u.loadingTimeout = u.timeout), _i(u.heartTimeout)) && (u.heartTimeout = u.timeout), this._opt = u, this._destroyed = !1, this.$container = c, this._loadingTimeoutReplayTimes = 0, this._heartTimeoutReplayTimes = 0, this.events = new hr(this), this.watermark = new nl(this), this._initPlayer(c, u), this._initWatermark(), this.debug.log("JbPro", 'init success and version is "6-25-2023"'), console.log('JbPro version is "6-25-2023"');
+      } else delete u.container, Be(u.videoBuffer) && (u.videoBuffer = 1e3 * Number(u.videoBuffer)), Be(u.videoBufferDelay) && (u.videoBufferDelay = 1e3 * Number(u.videoBufferDelay)), Be(u.networkDelay) && (u.networkDelay = 1e3 * Number(u.networkDelay)), Be(u.timeout) && (_i(u.loadingTimeout) && (u.loadingTimeout = u.timeout), _i(u.heartTimeout)) && (u.heartTimeout = u.timeout), this._opt = u, this._destroyed = !1, this.$container = c, this._loadingTimeoutReplayTimes = 0, this._heartTimeoutReplayTimes = 0, this.events = new hr(this), this.watermark = new al(this), this._initPlayer(c, u), this._initWatermark(), this.debug.log("JbPro", 'init success and version is "6-25-2023"'), console.log('JbPro version is "6-25-2023"');
     }
     destroy() {
       return new Promise((e, i) => {
@@ -18834,11 +18844,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this._opt = ga();
     }
     _initPlayer(e, i) {
-      this.player = new rl(e, i), this.debug.log("JbPro", "_initPlayer", this.player.getOption()), this._bindEvents();
+      this.player = new il(e, i), this.debug.log("JbPro", "_initPlayer", this.player.getOption()), this._bindEvents();
     }
     _initTalk() {
       var e = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : {};
-      this.talk && (this.talk.destroy(), this.talk = null), this.player && (e.debug = this.player._opt.debug), this.talk = new al(this.player, e), this.debug.log("JbPro", "_initTalk", this.talk.getOption()), this._bindTalkEvents();
+      this.talk && (this.talk.destroy(), this.talk = null), this.player && (e.debug = this.player._opt.debug), this.talk = new sl(this.player, e), this.debug.log("JbPro", "_initTalk", this.talk.getOption()), this._bindTalkEvents();
     }
     _resetPlayer() {
       let e = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : {};
@@ -18938,12 +18948,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
     clearView() {
-      this.debug.log("JbPro", "clearView()"), this.player && this.player.video ? this.getRenderType() === Et ? this.player.video.clearView() : this.debug.warn("JbPro", "clearView", "render type is video, not support clearView, please use canvas render type") : this.debug.warn("JbPro", "clearView", "player is null");
+      this.debug.log("JbPro", "clearView()"), this.player && this.player.video ? this.getRenderType() === Tt ? this.player.video.clearView() : this.debug.warn("JbPro", "clearView", "render type is video, not support clearView, please use canvas render type") : this.debug.warn("JbPro", "clearView", "player is null");
     }
     play() {
       let e = 0 < arguments.length && arguments[0] !== void 0 ? arguments[0] : "", i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
       return new Promise((s, u) => {
-        if (this.debug.log("JbPro", "play() " + e), e || this._opt.url) if (e = e && ("" + e).trim(), _e(this._opt.isLive)) this.$videoElement.controls = "controls", this.$videoElement.muted = !1, this.$videoElement.src = e, this.$videoElement.play(), s(this.$videoElement);
+        if (this.debug.log("JbPro", "play() " + e), e || this._opt.url) if (e = e && ("" + e).trim(), ve(this._opt.isLive)) this.$videoElement.controls = "controls", this.$videoElement.muted = !1, this.$videoElement.src = e, this.$videoElement.play(), s(this.$videoElement);
         else {
           if (this._opt.isCrypto) {
             var c, l = i.cryptoKey || this._opt.playOptions.cryptoKey, o = i.cryptoIV || this._opt.playOptions.cryptoIV;
@@ -19036,9 +19046,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     playback(e) {
       let i = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
       return new Promise((s, u) => {
-        if (this.debug.log("JbPro", "playback() " + e), _e(this._opt.isLive)) return u("this._opt.isLive is false, can not playback");
+        if (this.debug.log("JbPro", "playback() " + e), ve(this._opt.isLive)) return u("this._opt.isLive is false, can not playback");
         var c = Fr(), c = Object.assign({}, c.playbackConfig, this._opt.playbackConfig, i);
-        c.isUseFpsRender || c.isCacheBeforeDecodeForFpsRender && (c.isCacheBeforeDecodeForFpsRender = !1, this.debug.warn("JbPro", "playbackConfig.isUseFpsRender is false, isCacheBeforeDecodeForFpsRender can not be ture, isCacheBeforeDecodeForFpsRender is set to false")), c.rateConfig.length === 0 && c.showRateBtn && (c.showRateBtn = !1, this.debug.warn("JbPro", "playbackConfig.rateConfig.length is 0, showRateBtn can not be ture, showRateBtn is set to false")), this._resetPlayer({ videoBuffer: 0, playbackConfig: c, playType: pe, openWebglAlignment: !0, useMSE: !1, useWCS: !1, useSIMD: !0 }).then(() => {
+        c.isUseFpsRender || c.isCacheBeforeDecodeForFpsRender && (c.isCacheBeforeDecodeForFpsRender = !1, this.debug.warn("JbPro", "playbackConfig.isUseFpsRender is false, isCacheBeforeDecodeForFpsRender can not be ture, isCacheBeforeDecodeForFpsRender is set to false")), c.rateConfig.length === 0 && c.showRateBtn && (c.showRateBtn = !1, this.debug.warn("JbPro", "playbackConfig.rateConfig.length is 0, showRateBtn can not be ture, showRateBtn is set to false")), this._resetPlayer({ videoBuffer: 0, playbackConfig: c, playType: ce, openWebglAlignment: !0, useMSE: !1, useWCS: !1, useSIMD: !0 }).then(() => {
           this.play(e).then(() => {
             s();
           }).catch((l) => {
@@ -19051,9 +19061,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     playbackPause() {
       let e = 0 < arguments.length && arguments[0] !== void 0 && arguments[0];
-      return this.debug.log("JbPro", "playbackPause() " + e), this._opt.playType === Ie ? Promise.reject("playType is player, can not call playbackPause method") : new Promise((i, s) => {
+      return this.debug.log("JbPro", "playbackPause() " + e), this._opt.playType === xe ? Promise.reject("playType is player, can not call playbackPause method") : new Promise((i, s) => {
         if (!this.player) return s("player is null");
-        Ve(e) ? this.pause().then(() => {
+        We(e) ? this.pause().then(() => {
           i();
         }).catch((u) => {
           s(u);
@@ -19061,13 +19071,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
     playbackResume() {
-      return this.debug.log("JbPro", "playbackResume()"), this._opt.playType === Ie ? Promise.reject("playType is player, can not call playbackResume method") : new Promise((e, i) => {
+      return this.debug.log("JbPro", "playbackResume()"), this._opt.playType === xe ? Promise.reject("playType is player, can not call playbackResume method") : new Promise((e, i) => {
         if (!this.player) return i();
         this.player.playbackPause = !1, e();
       });
     }
     forward(e) {
-      return this.debug.log("JbPro", "forward() " + e), _e(this._opt.isLive) || this._opt.playType === Ie ? Promise.reject("forward() method only just for playback type") : he(Number(e)) ? new Promise((i, s) => {
+      return this.debug.log("JbPro", "forward() " + e), ve(this._opt.isLive) || this._opt.playType === xe ? Promise.reject("forward() method only just for playback type") : he(Number(e)) ? new Promise((i, s) => {
         this.player ? (e = pt(Number(e), 0.1, 32), this.player.decoderWorker && this.player.decoderWorker.updateWorkConfig({ key: "playbackRate", value: e }), this.player.playback.setRate(e), this.player.video && this.player.video.setRate(e), this.player.audio && this.player.audio.setRate(e), i()) : s("player is null");
       }) : Promise.reject(`forward() params "rate": ${e} must be number type`);
     }
@@ -19107,7 +19117,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         let c = !1;
         this._opt.url && this._opt.url !== e && (c = !0), this._opt.url = e, this._opt.playOptions = i;
         var l = e.indexOf("http") === 0, o = e.indexOf("webrtc") === 0, f = e.indexOf("wt") === 0, _ = !o && e.indexOf(".m3u8") !== -1, g = !o && e.indexOf(".flv") !== -1, T = !o && e.indexOf(".fmp4") !== -1 || !o && e.indexOf(".mp4") !== -1, E = !o && e.indexOf(".mpeg4") !== -1, h = !o && e.indexOf(".h264") !== -1 || !o && e.indexOf(".h265") !== -1;
-        if (g && !this._opt.isFlv && (this._opt.isFlv = !0, this._opt.isFmp4 = !1, this._opt.isMpeg4 = !1, this._opt.isNakedFlow = !1), T && !this._opt.isFmp4 && (this._opt.isFmp4 = !0, this._opt.isFlv = !1, this._opt.isMpeg4 = !1, this._opt.isNakedFlow = !1), E && !this._opt.isMpeg4 && (this._opt.isMpeg4 = !0, this._opt.isFlv = !1, this._opt.isFmp4 = !1, this._opt.isNakedFlow = !1), h && !this._opt.isNakedFlow && (this._opt.isNakedFlow = !0, this._opt.isFlv = !1, this._opt.isFmp4 = !1, this._opt.isMpeg4 = !1), T = l ? _ ? 3 : 2 : f ? 5 : o ? 4 : 1, h = this._opt.isNakedFlow ? wt : this._opt.isFmp4 ? Ht : this._opt.isMpeg4 ? St : l && !_ || g || this._opt.isFlv ? _t : _ ? "hls" : o ? "webrtc" : f ? It : "m7s", !T || !h) return u(`play protocol is ${T}, demuxType is ` + h);
+        if (g && !this._opt.isFlv && (this._opt.isFlv = !0, this._opt.isFmp4 = !1, this._opt.isMpeg4 = !1, this._opt.isNakedFlow = !1), T && !this._opt.isFmp4 && (this._opt.isFmp4 = !0, this._opt.isFlv = !1, this._opt.isMpeg4 = !1, this._opt.isNakedFlow = !1), E && !this._opt.isMpeg4 && (this._opt.isMpeg4 = !0, this._opt.isFlv = !1, this._opt.isFmp4 = !1, this._opt.isNakedFlow = !1), h && !this._opt.isNakedFlow && (this._opt.isNakedFlow = !0, this._opt.isFlv = !1, this._opt.isFmp4 = !1, this._opt.isMpeg4 = !1), T = l ? _ ? 3 : 2 : f ? 5 : o ? 4 : 1, h = this._opt.isNakedFlow ? St : this._opt.isFmp4 ? Ht : this._opt.isMpeg4 ? Et : l && !_ || g || this._opt.isFlv ? wt : _ ? "hls" : o ? "webrtc" : f ? It : "m7s", !T || !h) return u(`play protocol is ${T}, demuxType is ` + h);
         const k = () => {
           this.player.once(H.webglAlignmentError, (t) => {
             this.emit(N.crashLog, this.getCrashLog(H.webglAlignmentError, t)), this.pause().then(() => {
@@ -19622,7 +19632,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             });
           });
         };
-        _ && _e(this._opt.supportHls265) || o || c || E ? (this.debug.log("JbPro", "need reset player"), this._resetPlayer({ protocol: T, demuxType: h, isHls: _, isWebrtc: o, url: e }).then(() => {
+        _ && ve(this._opt.supportHls265) || o || c || E ? (this.debug.log("JbPro", "need reset player"), this._resetPlayer({ protocol: T, demuxType: h, isHls: _, isWebrtc: o, url: e }).then(() => {
           k();
         }).catch((t) => {
           u("reset player error");
@@ -19685,21 +19695,21 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     isPlaying() {
       let e = !1;
-      return this.player && (this._opt.playType === Ie ? e = this.player.playing : this._opt.playType === pe && (e = _e(this.player.playbackPause) && this.player.playing)), e;
+      return this.player && (this._opt.playType === xe ? e = this.player.playing : this._opt.playType === ce && (e = ve(this.player.playbackPause) && this.player.playing)), e;
     }
     isLoading() {
       return !!this.player && this.player.loading;
     }
     isPause() {
       let e = !1;
-      return this._opt.playType === Ie ? e = !this.isPlaying() && !this.isLoading() : this._opt.playType === pe && this.player && (e = this.player.playbackPause), e;
+      return this._opt.playType === xe ? e = !this.isPlaying() && !this.isLoading() : this._opt.playType === ce && this.player && (e = this.player.playbackPause), e;
     }
     isPaused() {
       return this.isPause();
     }
     isPlaybackPause() {
       let e = !1;
-      return e = this._opt.playType === pe && this.player ? this.player.playbackPause : e;
+      return e = this._opt.playType === ce && this.player ? this.player.playbackPause : e;
     }
     isMute() {
       let e = !0;
@@ -19735,7 +19745,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return e = this.player ? this.player.loading ? "loading" : this.player.playing ? "playing" : "paused" : e;
     }
     getPlayType() {
-      return this.player ? this.player._opt.playType : Ie;
+      return this.player ? this.player._opt.playType : xe;
     }
     togglePerformancePanel(e) {
       this.debug.log("JbPro", "togglePerformancePanel() " + e);
@@ -19837,7 +19847,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }
     }
     updateDebugLevel(e) {
-      this.debug.log("JbPro", "updateDebugLevel()", e), this.player ? e !== Tt && e !== Pt ? this.debug.warn("JbPro", "updateDebugLevel() level is not valid, level: " + e) : e === this.player._opt.debugLevel ? this.debug.warn("JbPro", "updateDebugLevel() level is same, level: " + e) : (this.player.updateOption({ debugLevel: e }), this.player.decoderWorker && this.player.decoderWorker.updateWorkConfig({ key: "debugLevel", value: e })) : this.debug.warn("JbPro", "updateDebugLevel() player is not init");
+      this.debug.log("JbPro", "updateDebugLevel()", e), this.player ? e !== kt && e !== Pt ? this.debug.warn("JbPro", "updateDebugLevel() level is not valid, level: " + e) : e === this.player._opt.debugLevel ? this.debug.warn("JbPro", "updateDebugLevel() level is same, level: " + e) : (this.player.updateOption({ debugLevel: e }), this.player.decoderWorker && this.player.decoderWorker.updateWorkConfig({ key: "debugLevel", value: e })) : this.debug.warn("JbPro", "updateDebugLevel() player is not init");
     }
     updateWatermark(e) {
       this.debug.log("JbPro", "updateWatermark()", e), this.player ? this.player.updateWatermark(e) : this.debug.warn("JbPro", "updateWatermark() player is not init");
@@ -19911,7 +19921,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       super(), Object.keys(e).forEach((u) => {
         if (e[u] === void 0) throw new Error(`Jessibuca-pro-multi option "${u}" can not be undefined`);
       });
-      var i = oi(Mn);
+      var i = oi(Un);
       this._opt = Object.assign({}, i, e), this.LOG_TAG = "jessibucaProMulti";
       let s = e.container;
       if (!(s = typeof e.container == "string" ? document.querySelector(e.container) : s)) throw new Error("Jessibuca-pro-multi need container option");
@@ -20474,9 +20484,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       }), delete this.e;
     }
   }
-  const Qe = "debug", Ge = "warn", ve = "talkGetUserMediaSuccess", Ie = "talkGetUserMediaFail", Rt = "talkGetUserMediaTimeout", pe = "talkStreamClose", Xe = "talkStreamError", Gt = "talkStreamInactive", _t = { talkStreamClose: pe, talkStreamError: Xe, talkStreamInactive: Gt, talkGetUserMediaTimeout: Rt }, It = "open", wt = "g711a", Ht = "g711u", St = "rtp", rt = "worklet", Et = { encType: wt, packetType: St, rtpSsrc: "0000000000", numberChannels: 1, sampleRate: 8e3, sampleBitsWidth: 16, debug: !1, debugLevel: Ge, testMicrophone: !1, audioBufferLength: 160, engine: rt, checkGetUserMediaTimeout: !1, getUserMediaTimeout: 1e4 };
-  var bt;
-  function Tt() {
+  const Xe = "debug", Ve = "warn", _e = "talkGetUserMediaSuccess", xe = "talkGetUserMediaFail", bt = "talkGetUserMediaTimeout", ce = "talkStreamClose", ze = "talkStreamError", Gt = "talkStreamInactive", wt = { talkStreamClose: ce, talkStreamError: ze, talkStreamInactive: Gt, talkGetUserMediaTimeout: bt }, It = "open", St = "g711a", Ht = "g711u", Et = "rtp", rt = "worklet", Tt = { encType: St, packetType: Et, rtpSsrc: "0000000000", numberChannels: 1, sampleRate: 8e3, sampleBitsWidth: 16, debug: !1, debugLevel: Ve, testMicrophone: !1, audioBufferLength: 160, engine: rt, checkGetUserMediaTimeout: !1, getUserMediaTimeout: 1e4 };
+  var vt;
+  function kt() {
     return (/* @__PURE__ */ new Date()).getTime();
   }
   function Pt(Se) {
@@ -20528,11 +20538,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     } }, isEnabled: { enumerable: !0, get: function() {
       return !!Y[N.fullscreenEnabled];
     } } }), Q ? Se.exports = oe : window.screenfull = oe) : Q ? Se.exports = { isEnabled: !1 } : window.screenfull = { isEnabled: !1 };
-  })(bt = { exports: {} }), bt.exports.isEnabled;
+  })(vt = { exports: {} }), vt.exports.isEnabled;
   try {
     if (typeof WebAssembly == "object" && typeof WebAssembly.instantiate == "function") {
-      var kt = new WebAssembly.Module(Uint8Array.of(0, 97, 115, 109, 1, 0, 0, 0));
-      kt instanceof WebAssembly.Module && new WebAssembly.Instance(kt) instanceof WebAssembly.Instance;
+      var xt = new WebAssembly.Module(Uint8Array.of(0, 97, 115, 109, 1, 0, 0, 0));
+      xt instanceof WebAssembly.Module && new WebAssembly.Instance(xt) instanceof WebAssembly.Instance;
     }
   } catch {
   }
@@ -20580,32 +20590,32 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     multiTap() {
       this.resampler = (Y) => {
-        let Q, N, ae, oe, H, de, fe, we, Te, Pe, Fe, qe = Y.length, Ye = this.channels;
-        if (qe % Ye != 0) throw new Error("Buffer was of incorrect sample length.");
-        if (qe <= 0) return [];
-        for (Q = this.outputBufferSize, N = [], ae = this.ratioWeight, oe = 0, de = 0, we = !this.tailExists, this.tailExists = !1, Te = this.outputBuffer, Pe = 0, Fe = 0, H = 0; H < Ye; ++H) N[H] = 0;
+        let Q, N, ae, oe, H, de, fe, we, Te, Pe, Fe, Ye = Y.length, Je = this.channels;
+        if (Ye % Je != 0) throw new Error("Buffer was of incorrect sample length.");
+        if (Ye <= 0) return [];
+        for (Q = this.outputBufferSize, N = [], ae = this.ratioWeight, oe = 0, de = 0, we = !this.tailExists, this.tailExists = !1, Te = this.outputBuffer, Pe = 0, Fe = 0, H = 0; H < Je; ++H) N[H] = 0;
         do {
-          if (we) for (oe = ae, H = 0; H < Ye; ++H) N[H] = 0;
+          if (we) for (oe = ae, H = 0; H < Je; ++H) N[H] = 0;
           else {
-            for (oe = this.lastWeight, H = 0; H < Ye; ++H) N[H] = this.lastOutput[H];
+            for (oe = this.lastWeight, H = 0; H < Je; ++H) N[H] = this.lastOutput[H];
             we = !0;
           }
-          for (; 0 < oe && de < qe; ) {
+          for (; 0 < oe && de < Ye; ) {
             if (fe = 1 + de - Fe, !(oe >= fe)) {
-              for (H = 0; H < Ye; ++H) N[H] += Y[de + (0 < H ? H : 0)] * oe;
+              for (H = 0; H < Je; ++H) N[H] += Y[de + (0 < H ? H : 0)] * oe;
               Fe += oe, oe = 0;
               break;
             }
-            for (H = 0; H < Ye; ++H) N[H] += Y[de++] * fe;
+            for (H = 0; H < Je; ++H) N[H] += Y[de++] * fe;
             Fe = de, oe -= fe;
           }
           if (oe !== 0) {
-            for (this.lastWeight = oe, H = 0; H < Ye; ++H) this.lastOutput[H] = N[H];
+            for (this.lastWeight = oe, H = 0; H < Je; ++H) this.lastOutput[H] = N[H];
             this.tailExists = !0;
             break;
           }
-          for (H = 0; H < Ye; ++H) Te[Pe++] = N[H] / ae;
-        } while (de < qe && Pe < Q);
+          for (H = 0; H < Je; ++H) Te[Pe++] = N[H] / ae;
+        } while (de < Ye && Pe < Q);
         return this.bufferSlice(Pe);
       };
     }
@@ -20621,13 +20631,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   class Zt {
     constructor(Y) {
       this.log = function(Q) {
-        if (Y._opt.debug && Y._opt.debugLevel == Qe) {
+        if (Y._opt.debug && Y._opt.debugLevel == Xe) {
           const H = Y._opt.debugUuid ? `[${Y._opt.debugUuid}]` : "";
           for (var N = arguments.length, ae = new Array(1 < N ? N - 1 : 0), oe = 1; oe < N; oe++) ae[oe - 1] = arguments[oe];
           console.log(`JbPro${H}:[✅✅✅][${Q}]`, ...ae);
         }
       }, this.warn = function(Q) {
-        if (Y._opt.debug && (Y._opt.debugLevel == Qe || Y._opt.debugLevel == Ge)) {
+        if (Y._opt.debug && (Y._opt.debugLevel == Xe || Y._opt.debugLevel == Ve)) {
           const H = Y._opt.debugUuid ? `[${Y._opt.debugUuid}]` : "";
           for (var N = arguments.length, ae = new Array(1 < N ? N - 1 : 0), oe = 1; oe < N; oe++) ae[oe - 1] = arguments[oe];
           console.log(`JbPro${H}:[❗❗❗][${Q}]`, ...ae);
@@ -20659,7 +20669,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   }
   class pi extends Ae {
     constructor(N) {
-      var Q = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {}, N = (super(), N && (this.player = N), this.tag = "talk", Pt(Et));
+      var Q = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {}, N = (super(), N && (this.player = N), this.tag = "talk", Pt(Tt));
       this._opt = Object.assign({}, N, Q), this._opt.sampleRate = parseInt(this._opt.sampleRate, 10), this._opt.sampleBitsWidth = parseInt(this._opt.sampleBitsWidth, 10), this.audioContext = null, this.gainNode = null, this.recorder = null, this.workletRecorder = null, this.biquadFilter = null, this.userMediaStream = null, this.bufferSize = 512, this._opt.audioBufferLength = this.calcAudioBufferLength(), this.audioBufferList = [], this.socket = null, this.socketStatus = "notConnect", this.mediaStreamSource = null, this.heartInterval = null, this.checkGetUserMediaTimeout = null, this.wsUrl = null, this.startTimestamp = 0, this.sequenceId = 0, this.tempTimestamp = null, this.tempRtpBufferList = [], this.events = new ci(this), this._initTalk(), this.player || (this.debug = new Zt(this)), this.log(this.tag, "init", this._opt);
     }
     destroy() {
@@ -20714,9 +20724,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }), N(this.socket, "message", (ae) => {
           this.log(this.tag, "websocket message", ae.data);
         }), N(this.socket, "close", (ae) => {
-          this.socketStatus = "close", this.log(this.tag, "websocket close"), this.emit(pe), Q(ae);
+          this.socketStatus = "close", this.log(this.tag, "websocket close"), this.emit(ce), Q(ae);
         }), N(this.socket, "error", (ae) => {
-          this.socketStatus = "error", this.error(this.tag, "websocket error", ae), this.emit(Xe, ae), Q(ae);
+          this.socketStatus = "error", this.error(this.tag, "websocket error", ae), this.emit(ze, ae), Q(ae);
         });
       });
     }
@@ -20777,12 +20787,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           return de;
         })(N)), ae.buffer !== null) {
           let oe = null;
-          this._opt.encType === wt ? oe = (function(de) {
+          this._opt.encType === St ? oe = (function(de) {
             const fe = [];
             return Array.prototype.slice.call(de).forEach((we, Te) => {
               fe[Te] = (function(Pe) {
-                let Fe, qe, Ye;
-                return 0 <= Pe ? Fe = 213 : (Fe = 85, (Pe = -Pe - 1) < 0 && (Pe = 32767)), 8 <= (qe = ui(Pe, Wt, 8)) ? 127 ^ Fe : (Ye = qe << 4, (Ye |= qe < 2 ? Pe >> 4 & 15 : Pe >> qe + 3 & 15) ^ Fe);
+                let Fe, Ye, Je;
+                return 0 <= Pe ? Fe = 213 : (Fe = 85, (Pe = -Pe - 1) < 0 && (Pe = 32767)), 8 <= (Ye = ui(Pe, Wt, 8)) ? 127 ^ Fe : (Je = Ye << 4, (Je |= Ye < 2 ? Pe >> 4 & 15 : Pe >> Ye + 3 & 15) ^ Fe);
               })(we);
             }), fe;
           })(ae) : this._opt.encType === Ht && (oe = (function(de) {
@@ -20791,8 +20801,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               fe[Te] = (function(Pe) {
                 let Fe = 0;
                 Fe = Pe < 0 ? (Pe = 132 - Pe, 127) : (Pe += 132, 255);
-                var qe = ui(Pe, Wt, 8);
-                return 8 <= qe ? 127 ^ Fe : (qe << 4 | Pe >> qe + 3 & 15) ^ Fe;
+                var Ye = ui(Pe, Wt, 8);
+                return 8 <= Ye ? 127 ^ Fe : (Ye << 4 | Pe >> Ye + 3 & 15) ^ Fe;
               })(we);
             }), fe;
           })(ae));
@@ -20806,12 +20816,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     _parseAudioMsg(Y) {
       let Q = null;
-      return this._opt.packetType !== St || this._opt.encType !== wt && this._opt.encType !== Ht ? this._opt.packetType === "opus" ? Q = this.opusPacket(Y) : this._opt.packetType === "empty" && (Q = Y) : Q = this.rtpPacket(Y), Q;
+      return this._opt.packetType !== Et || this._opt.encType !== St && this._opt.encType !== Ht ? this._opt.packetType === "opus" ? Q = this.opusPacket(Y) : this._opt.packetType === "empty" && (Q = Y) : Q = this.rtpPacket(Y), Q;
     }
     rtpPacket(Y) {
       var Q = [];
       let N = 0, ae, oe;
-      var H = this._opt.rtpSsrc, de = Y.length, de = (this._opt.encType === wt ? N = 8 : this._opt.encType === Ht && (N = 0), this.startTimestamp || (this.startTimestamp = Tt()), oe = Tt() - this.startTimestamp, ae = this._getSequenceId(), de + 12), fe = (Q[0] = 255 & de >> 8, Q[1] = 255 & de >> 0, Q[2] = 128, Q[3] = 128 + N, Q[4] = ae / 256, Q[5] = ae % 256, Q[6] = oe / 65536 / 256, Q[7] = oe / 65536 % 256, Q[8] = oe % 65536 / 256, Q[9] = oe % 65536 % 256, Q[10] = H / 65536 / 256, Q[11] = H / 65536 % 256, Q[12] = H % 65536 / 256, Q[13] = H % 65536 % 256, Q.concat([...Y])), we = new Uint8Array(fe.length);
+      var H = this._opt.rtpSsrc, de = Y.length, de = (this._opt.encType === St ? N = 8 : this._opt.encType === Ht && (N = 0), this.startTimestamp || (this.startTimestamp = kt()), oe = kt() - this.startTimestamp, ae = this._getSequenceId(), de + 12), fe = (Q[0] = 255 & de >> 8, Q[1] = 255 & de >> 0, Q[2] = 128, Q[3] = 128 + N, Q[4] = ae / 256, Q[5] = ae % 256, Q[6] = oe / 65536 / 256, Q[7] = oe / 65536 % 256, Q[8] = oe % 65536 / 256, Q[9] = oe % 65536 % 256, Q[10] = H / 65536 / 256, Q[11] = H / 65536 % 256, Q[12] = H % 65536 / 256, Q[13] = H % 65536 % 256, Q.concat([...Y])), we = new Uint8Array(fe.length);
       for (let Te = 0; Te < fe.length; Te++) we[Te] = fe[Te];
       return we;
     }
@@ -20819,9 +20829,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       return Y;
     }
     _sendTalkMsg(Y) {
-      this.tempTimestamp === null && (this.tempTimestamp = Tt());
-      var Q = Tt(), N = Q - this.tempTimestamp, ae = this._parseAudioMsg(Y);
-      this.log(this.tag, `'send talk msg and diff is ${N} and byteLength is ${ae.byteLength} and length is ${ae.length}, and g711 length is ` + Y.length), this._opt.packetType === St && this.addRtpToBuffer(ae), ae && (this.socketStatusOpen ? this.socket.send(ae.buffer) : this.emit("tallWebsocketClosedByError")), this.tempTimestamp = Q;
+      this.tempTimestamp === null && (this.tempTimestamp = kt());
+      var Q = kt(), N = Q - this.tempTimestamp, ae = this._parseAudioMsg(Y);
+      this.log(this.tag, `'send talk msg and diff is ${N} and byteLength is ${ae.byteLength} and length is ${ae.length}, and g711 length is ` + Y.length), this._opt.packetType === Et && this.addRtpToBuffer(ae), ae && (this.socketStatusOpen ? this.socket.send(ae.buffer) : this.emit("tallWebsocketClosedByError")), this.tempTimestamp = Q;
     }
     _doTalk() {
       this._getUserMedia();
@@ -20833,11 +20843,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           Q.call(navigator, Y, N, ae);
         }) : Promise.reject(new Error("getUserMedia is not implemented in this browser"));
       }), this._opt.checkGetUserMediaTimeout && this._startCheckGetUserMediaTimeout(), window.navigator.mediaDevices.getUserMedia({ audio: { latency: !0, noiseSuppression: !0, autoGainControl: !0, echoCancellation: !0, sampleRate: 48e3, channelCount: 1 }, video: !1 }).then((Y) => {
-        this.log(this.tag, "getUserMedia success"), this.userMediaStream = Y, this.mediaStreamSource = this.audioContext.createMediaStreamSource(Y), this.mediaStreamSource.connect(this.biquadFilter), this.recorder ? (this.biquadFilter.connect(this.recorder), this.recorder.connect(this.gainNode)) : this.workletRecorder && (this.biquadFilter.connect(this.workletRecorder), this.workletRecorder.connect(this.gainNode)), this.gainNode.connect(this.audioContext.destination), this.emit(ve), Y.oninactive === null && (Y.oninactive = (Q) => {
+        this.log(this.tag, "getUserMedia success"), this.userMediaStream = Y, this.mediaStreamSource = this.audioContext.createMediaStreamSource(Y), this.mediaStreamSource.connect(this.biquadFilter), this.recorder ? (this.biquadFilter.connect(this.recorder), this.recorder.connect(this.gainNode)) : this.workletRecorder && (this.biquadFilter.connect(this.workletRecorder), this.workletRecorder.connect(this.gainNode)), this.gainNode.connect(this.audioContext.destination), this.emit(_e), Y.oninactive === null && (Y.oninactive = (Q) => {
           this._handleStreamInactive(Q);
         });
       }).catch((Y) => {
-        this.error(this.tag, "getUserMedia error", Y.toString()), this.emit(Ie, Y.toString());
+        this.error(this.tag, "getUserMedia error", Y.toString()), this.emit(xe, Y.toString());
       }).finally(() => {
         this.log(this.tag, "getUserMedia finally"), this._stopCheckGetUserMediaTimeout();
       });
@@ -20861,7 +20871,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     _startCheckGetUserMediaTimeout() {
       this._stopCheckGetUserMediaTimeout(), this.checkGetUserMediaTimeout = setTimeout(() => {
-        this.log(this.tag, "check getUserMedia timeout"), this.emit(Rt);
+        this.log(this.tag, "check getUserMedia timeout"), this.emit(bt);
       }, this._opt.getUserMediaTimeout);
     }
     _stopCheckGetUserMediaTimeout() {
@@ -20884,9 +20894,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         return ae = oe ? (ae = !(!oe.mediaDevices || !oe.mediaDevices.getUserMedia)) || !!(oe.getUserMedia || oe.webkitGetUserMedia || oe.mozGetUserMedia || oe.msGetUserMedia) : ae;
       })() ? (this.wsUrl = Y, this._opt.testMicrophone ? (this._doTalk(), Q()) : (this._createWebSocket().catch((ae) => {
         N(ae);
-      }), this.once(Ie, () => {
+      }), this.once(xe, () => {
         N("getUserMedia fail");
-      }), void this.once(ve, () => {
+      }), void this.once(_e, () => {
         Q();
       }))) : N("not support getUserMedia"));
     }
@@ -20915,8 +20925,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       this.talk = new pi(null, Y), this.debug.log(this.LOG_TAG, "_initTalk", this.talk.getOption()), this._bindTalkEvents();
     }
     _bindTalkEvents() {
-      Object.keys(_t).forEach((Y) => {
-        this.talk.on(_t[Y], (Q) => {
+      Object.keys(wt).forEach((Y) => {
+        this.talk.on(wt[Y], (Q) => {
           this.emit(Y, Q);
         });
       });
@@ -20925,10 +20935,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       let Q = 1 < arguments.length && arguments[1] !== void 0 ? arguments[1] : {};
       return new Promise((N, ae) => {
         this.debug.log(this.LOG_TAG, "startTalk", Y, JSON.stringify(Q)), this._initTalk(Q), this.talk.startTalk(Y).then(() => {
-          N(), this.talk.once(pe, () => {
+          N(), this.talk.once(ce, () => {
             this.debug.warn(this.LOG_TAG, "talkStreamClose"), this.stopTalk().catch((oe) => {
             });
-          }), this.talk.once(Xe, (oe) => {
+          }), this.talk.once(ze, (oe) => {
             this.debug.error(this.LOG_TAG, "talkStreamError"), this.stopTalk().catch((H) => {
             });
           }), this.talk.once(Gt, () => {
@@ -20961,13 +20971,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
   }
-  Ue.EVENTS = _t, window.JessibucaProTalk = Ue, window.WebPlayerProTalk = Ue;
+  Ue.EVENTS = wt, window.JessibucaProTalk = Ue, window.WebPlayerProTalk = Ue;
 });
-const vl = {
+const _l = {
   install(Ae) {
-    Ae.component("VideoPlayer", Al);
+    Ae.component("VideoPlayer", bl);
   }
 };
 export {
-  vl as default
+  _l as default
 };
